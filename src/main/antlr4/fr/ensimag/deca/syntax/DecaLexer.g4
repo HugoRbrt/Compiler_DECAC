@@ -12,5 +12,51 @@ options {
 }
 
 // Deca lexer rules.
-DUMMY_TOKEN: .; // A FAIRE : Règle bidon qui reconnait tous les caractères.
-                // A FAIRE : Il faut la supprimer et la remplacer par les vraies règles.
+
+// End of line
+fragment EOL: '\n' | '\t';
+
+// Any character
+fragment STRING_CAR: ~('"' | '\\' | '\n' | '\t');
+
+fragment DIGIT: '0'..'9';
+
+INT: DIGIT+;
+
+// Special symbols
+COMMA: ',';
+
+OBRACE: '{';
+
+CBRACE: '}';
+
+OPARENT: '(';
+
+CPARENT: ')';
+
+OR: '||';
+
+SEMI: ';';
+
+// Whitespace
+WS: ' ' | EOL | '\r' {skip();};
+
+// Keywords
+PRINT: 'print';
+
+PRINTLN: 'println';
+
+// Commment
+SEP_COMMENT_PARA: '/*' .*? '*/' {skip();};
+
+// Single-line comment
+SEP_COMMENT_LINE:  '//' .*? (EOL | EOF) {skip();};
+
+// String
+STRING: '"' (STRING_CAR | '\\"' | '\\\\')* '"';
+
+
+
+
+
+
