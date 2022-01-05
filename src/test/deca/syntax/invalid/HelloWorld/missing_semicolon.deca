@@ -1,5 +1,5 @@
 // Description:
-//    tests de programme lexicalement incorrect.
+//    tests de programme dont une instruction n'a pas de semicolon
 //
 // Resultats:
 //    Ligne 13 : Erreur de syntaxe.
