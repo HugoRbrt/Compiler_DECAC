@@ -1,5 +1,6 @@
 package fr.ensimag.deca;
 
+import com.sun.tools.doclint.Env;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
 import fr.ensimag.deca.tools.DecacInternalError;
@@ -17,6 +18,7 @@ import java.io.PrintStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.log4j.Logger;
+import fr.ensimag.deca.context.EnvironmentExp;
 
 /**
  * Decac compiler instance.
@@ -41,10 +43,13 @@ public class DecacCompiler {
      */
     private static final String nl = System.getProperty("line.separator", "\n");
 
+    private EnvironmentExp envTypes;
+
     public DecacCompiler(CompilerOptions compilerOptions, File source) {
         super();
         this.compilerOptions = compilerOptions;
         this.source = source;
+        this.envTypes = null; // TODO: changer quand on fini HelloWorld
     }
 
     /**
@@ -60,6 +65,13 @@ public class DecacCompiler {
      */
     public CompilerOptions getCompilerOptions() {
         return compilerOptions;
+    }
+
+    /**
+     * environnement types associated with the program
+     */
+    public EnvironmentExp getEnvTypes() {
+        return envTypes;
     }
 
     /**
