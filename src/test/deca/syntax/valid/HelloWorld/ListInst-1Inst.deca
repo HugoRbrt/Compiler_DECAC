@@ -1,13 +1,11 @@
 // Description:
-//    tests de programme dont une instruction n'a pas de semicolon
+//    tests de programme vide.
 //
 // Resultats:
-//    Ligne 13 : Erreur de syntaxe.
 //    test_lex ne doit pas donner d'erreur.
 //
 // Historique:
 //    cree le 05/01/2022
 
-{
-println("Hello")
+{ println("only one instruction here");
 }

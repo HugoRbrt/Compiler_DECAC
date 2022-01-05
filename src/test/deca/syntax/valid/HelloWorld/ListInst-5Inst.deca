@@ -1,0 +1,17 @@
+// Description:
+//    Test on a list_inst -> (inst)* with several inst.
+//
+// Expected Results:
+//    test_lex OK
+//    test_synt OK
+//
+// History:
+//    created on 05/01/2022
+
+{
+    println("1st");
+    println("2nd");
+    println("3rd");
+    println("4th");
+    println("5th");
+}

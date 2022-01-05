@@ -1,11 +1,11 @@
 // Description:
-//    tests de programme vide.
+//    Test on an empty program.
 //
-// Resultats:
-//    test_lex ne doit pas donner d'erreur.
+// Results:
+//    test_lex should not give anything.
+//    test_synt should work too.
 //
-// Historique:
-//    cree le 05/01/2022
+// History:
+//    created on 05/01/2022
 
-{
-}
+// nothing here!!

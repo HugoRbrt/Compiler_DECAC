@@ -1,0 +1,12 @@
+// Description:
+//    Test on a empty list of instructions.
+//
+// Results:
+//    test_lex should work.
+//    test_synt should work too.
+//
+// History:
+//    created on 05/01/2022
+
+{ /* No instruction to see here */
+}
