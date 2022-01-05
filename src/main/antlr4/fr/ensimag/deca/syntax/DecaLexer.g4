@@ -39,7 +39,7 @@ OR: '||';
 SEMI: ';';
 
 // Whitespace
-WS: ' ' | EOL | '\r' {skip();};
+WS: (' ' | EOL | '\r') {skip();};
 
 // Keywords
 PRINT: 'print';
