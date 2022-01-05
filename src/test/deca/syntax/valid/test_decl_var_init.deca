@@ -1,6 +1,6 @@
 // Description:
 //    Programme minimaliste utilisant une déclaration de variable
-//    sans initialisation.
+//    avec initialisation.
 //
 // Resultats:
 //    (void)
@@ -9,5 +9,5 @@
 //    cree le 01/01/2022
 
 {
-        int x;
+        int x = 3;
 }

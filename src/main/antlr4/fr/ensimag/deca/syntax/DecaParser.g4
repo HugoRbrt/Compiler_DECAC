@@ -90,16 +90,19 @@ list_decl_var[ListDeclVar l, AbstractIdentifier t]
 
 decl_var[AbstractIdentifier t] returns[AbstractDeclVar tree]
 @init   {
+            $tree = null;
         }
     : i=ident {
+            setLocation($i.tree, $i.start);
         }
       (EQUALS e=expr {
             $tree = new DeclVar($t, $i.tree, new Initialization($e.tree));
-            setLocation($tree, $i.start);
-            LOG.trace($tree);
+            setLocation($tree.getInit(), $e.start); // Doesn't give the correct starting position (pos of '=')
         }
       )? {
-            $tree = new DeclVar($t, $i.tree, new NoInitialization());
+            if ($tree == null) {
+                $tree = new DeclVar($t, $i.tree, new NoInitialization());
+            }
             setLocation($tree, $i.start);
             LOG.trace($tree);
         }
@@ -125,6 +128,7 @@ inst returns[AbstractInst tree]
     | PRINT OPARENT list_expr CPARENT SEMI {
             assert($list_expr.tree != null);
             $tree = new Print(false, $list_expr.tree);
+            setLocation($tree, $list_expr.start);
         }
     | PRINTLN OPARENT list_expr CPARENT SEMI {
             assert($list_expr.tree != null);
@@ -330,6 +334,7 @@ select_expr returns[AbstractExpr tree]
     | e1=select_expr DOT i=ident {
             assert($e1.tree != null);
             assert($i.tree != null);
+            // Class-related
         }
         (o=OPARENT args=list_expr CPARENT {
             // we matched "e1.i(args)"
@@ -358,6 +363,7 @@ primary_expr returns[AbstractExpr tree]
         }
     | NEW ident OPARENT CPARENT {
             assert($ident.tree != null);
+            // Class-related
         }
     | cast=OPARENT type CPARENT OPARENT expr CPARENT {
             assert($type.tree != null);
@@ -375,6 +381,7 @@ type returns[AbstractIdentifier tree]
     : ident {
             assert($ident.tree != null);
             $tree = $ident.tree;
+            setLocation($tree, $ident.start);
             LOG.trace($tree);
         }
     ;
@@ -401,7 +408,7 @@ literal returns[AbstractExpr tree]
         LOG.trace($tree);
         }
     | THIS {
-        // Non utilisé en non-objet
+        // Class-related
         }
     | NULL {
         $tree = null;
@@ -456,7 +463,7 @@ visibility
     : /* epsilon */ {
         }
     | PROTECTED {
-        // Non utilisé en non-objet
+        // Class-related
         }
     ;
 

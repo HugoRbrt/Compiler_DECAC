@@ -30,6 +30,9 @@ public class DeclVar extends AbstractDeclVar {
     }
 
     @Override
+    public AbstractInitialization getInit() { return initialization; }
+
+    @Override
     protected void verifyDeclVar(DecacCompiler compiler,
             EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
