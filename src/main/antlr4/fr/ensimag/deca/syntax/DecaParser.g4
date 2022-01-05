@@ -26,6 +26,7 @@ options {
 @header {
     import fr.ensimag.deca.tree.*;
     import java.io.PrintStream;
+    import fr.ensimag.deca.tools.*;
     import org.apache.log4j.Logger;
 }
 
@@ -34,6 +35,8 @@ options {
     protected AbstractProgram parseProgram() {
         return prog().tree;
     }
+
+    protected SymbolTable symbT = new SymbolTable();
 }
 
 prog returns[AbstractProgram tree]
@@ -91,8 +94,14 @@ decl_var[AbstractIdentifier t] returns[AbstractDeclVar tree]
     : i=ident {
         }
       (EQUALS e=expr {
+            $tree = new DeclVar($t, $i.tree, new Initialization($e.tree));
+            setLocation($tree, $i.start);
+            LOG.trace($tree);
         }
       )? {
+            $tree = new DeclVar($t, $i.tree, new NoInitialization());
+            setLocation($tree, $i.start);
+            LOG.trace($tree);
         }
     ;
 
@@ -365,30 +374,45 @@ primary_expr returns[AbstractExpr tree]
 type returns[AbstractIdentifier tree]
     : ident {
             assert($ident.tree != null);
+            $tree = $ident.tree;
+            LOG.trace($tree);
         }
     ;
 
 literal returns[AbstractExpr tree]
     : INT {
+        $tree = new IntLiteral(Integer.parseInt($INT.text));
+        LOG.trace($tree);
         }
     | fd=FLOAT {
+        $tree = new FloatLiteral(Float.parseFloat($fd.text));
+        LOG.trace($tree);
         }
     | STRING {
         $tree = new StringLiteral($STRING.text);
         LOG.trace($tree);
     }
     | TRUE {
+        $tree = new BooleanLiteral(Boolean.valueOf($TRUE.text));
+        LOG.trace($tree);
         }
     | FALSE {
+        $tree = new BooleanLiteral(Boolean.valueOf($FALSE.text));
+        LOG.trace($tree);
         }
     | THIS {
+        // Non utilisé en non-objet
         }
     | NULL {
+        $tree = null;
+        LOG.trace($tree);
         }
     ;
 
 ident returns[AbstractIdentifier tree]
     : IDENT {
+            $tree = new Identifier(symbT.create($IDENT.text));
+            LOG.trace($tree);
         }
     ;
 
@@ -432,6 +456,7 @@ visibility
     : /* epsilon */ {
         }
     | PROTECTED {
+        // Non utilisé en non-objet
         }
     ;
 

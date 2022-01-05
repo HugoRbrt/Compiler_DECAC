@@ -1,0 +1,12 @@
+// Description:
+//    Programme minimaliste utilisant une déclaration de variable.
+//
+// Resultats:
+//    Hello
+//
+// Historique:
+//    cree le 01/01/2022
+
+{
+        int x;
+}

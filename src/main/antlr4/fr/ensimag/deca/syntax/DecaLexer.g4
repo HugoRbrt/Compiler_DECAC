@@ -21,10 +21,48 @@ fragment STRING_CAR: ~('"' | '\\' | '\n' | '\t');
 
 fragment DIGIT: '0'..'9';
 
-INT: DIGIT+;
+fragment LETTER: ('a'..'z') | ('A'..'Z');
+
+// Floats
+fragment NUM: DIGIT+;
+
+fragment SIGN: '+' | '-' | /* epsilon */;
+
+fragment EXP: ('E' | 'e') SIGN NUM;
+
+fragment DEC: NUM '.' NUM;
+
+fragment FLOATDEC: (DEC | DEC EXP) ('F' | 'f' | /* epsilon */);
+
+fragment DIGITHEX: ('0'..'9') | ('A'..'F') | ('a'..'f');
+
+fragment NUMHEX: DIGITHEX+;
+
+fragment FLOATHEX: ('0x' | '0X') NUMHEX '.' NUMHEX ('P' | 'p') SIGN NUM ('F' | 'f' | /* epsilon */);
+
+FLOAT: FLOATDEC | FLOATHEX;
+
+// Integers
+fragment POSITIVE_DIGIT: '1'..'9';
+
+INT: '0' | (POSITIVE_DIGIT DIGIT*);
 
 // Special symbols
 COMMA: ',';
+
+EQUALS: '=';
+
+EQEQ: '==';
+
+GEQ: '>=';
+
+LEQ: '<=';
+
+GT: '>';
+
+LT: '<';
+
+NEQ: '!=';
 
 OBRACE: '{';
 
@@ -34,6 +72,20 @@ OPARENT: '(';
 
 CPARENT: ')';
 
+PLUS: '+';
+
+MINUS: '-';
+
+TIMES: '*';
+
+SLASH: '/';
+
+PERCENT: '%';
+
+EXCLAM: '!';
+
+AND: '&&';
+
 OR: '||';
 
 SEMI: ';';
@@ -42,9 +94,34 @@ SEMI: ';';
 WS: (' ' | EOL | '\r') {skip();};
 
 // Keywords
+ASM: 'asm';
+
+ELSE: 'else';
+
+FALSE: 'false';
+
+IF: 'if';
+
+NULL: 'null';
+
 PRINT: 'print';
 
 PRINTLN: 'println';
+
+PRINTX: 'printx';
+
+PRINTLNX: 'printlnx';
+
+READINT: 'readInt';
+
+READFLOAT: 'readFloat';
+
+TRUE: 'true';
+
+WHILE: 'while';
+
+// Identifier
+IDENT: (LETTER | '$' | '_')(LETTER | DIGIT | '$' | '_')*;
 
 // Commment
 SEP_COMMENT_PARA: '/*' .*? '*/' {skip();};
@@ -54,6 +131,14 @@ SEP_COMMENT_LINE:  '//' .*? (EOL | EOF) {skip();};
 
 // String
 STRING: '"' (STRING_CAR | '\\"' | '\\\\')* '"';
+
+// Multi-line String
+MULTI_LINE_STRING: '"' (STRING_CAR | EOL | '\\"' | '\\\\')* '"';
+
+// File inclusion
+fragment FILENAME: (LETTER | DIGIT | '.' | '-' | '_')+;
+
+INCLUDE: '#include' (' ')* '"' FILENAME '"';
 
 
 
