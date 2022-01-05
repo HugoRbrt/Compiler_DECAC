@@ -2,8 +2,7 @@
 //    Test on a list_inst -> (inst)* with several inst.
 //
 // Expected Results:
-//    test_lex OK
-//    test_synt OK
+//    1st\n2nd\n3rd\n4th\n5th
 //
 // History:
 //    created on 05/01/2022

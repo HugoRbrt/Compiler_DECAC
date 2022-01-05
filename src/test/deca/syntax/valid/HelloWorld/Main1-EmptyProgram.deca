@@ -2,8 +2,7 @@
 //    Test on an empty program.
 //
 // Results:
-//    test_lex should not give anything.
-//    test_synt should work too.
+//    Nothing
 //
 // History:
 //    created on 05/01/2022
