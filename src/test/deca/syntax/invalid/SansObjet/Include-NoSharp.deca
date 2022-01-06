@@ -1,0 +1,11 @@
+// Description:
+//    Test of a badly written include on a good file.
+//
+// Results:
+//    test_lex is OK
+//    test_synt should throw a Syntax Error on line 10.
+//
+// History:
+//    created on 06/01/2022
+
+include  "TestFile4Include.deca"
