@@ -25,9 +25,7 @@ public abstract class AbstractDecaParser extends Parser {
 
     private DecacCompiler decacCompiler;
 
-    protected DecacCompiler getDecacCompiler() {
-        return decacCompiler;
-    }
+    protected DecacCompiler getDecacCompiler() { return decacCompiler; }
 
     public void setDecacCompiler(DecacCompiler decacCompiler) {
         this.decacCompiler = decacCompiler;

@@ -26,7 +26,6 @@ options {
 @header {
     import fr.ensimag.deca.tree.*;
     import java.io.PrintStream;
-    import fr.ensimag.deca.tools.*;
     import org.apache.log4j.Logger;
 }
 
@@ -35,8 +34,6 @@ options {
     protected AbstractProgram parseProgram() {
         return prog().tree;
     }
-
-    protected SymbolTable symbT = new SymbolTable();
 }
 
 prog returns[AbstractProgram tree]
@@ -505,7 +502,7 @@ literal returns[AbstractExpr tree]
 
 ident returns[AbstractIdentifier tree]
     : IDENT {
-            $tree = new Identifier(symbT.create($IDENT.text));
+            $tree = new Identifier(this.getDecacCompiler().getSymbTable().create($IDENT.text));
             LOG.trace($tree);
         }
     ;
