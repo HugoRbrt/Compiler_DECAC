@@ -40,3 +40,22 @@ else
     exit 1
 fi
 
+# Test missing_bracket
+if test_lex src/test/deca/syntax/invalid/HelloWorld/missing_bracket.deca 2>&1 \
+    | head -n 1 | grep -q 'simple_lex.deca:[0-9]'
+then
+    echo "Echec inattendu de test_lex pour missing_bracket"
+    exit 1
+else
+    echo "OK"
+fi
+
+# Test missing_semicolon;
+if test_lex src/test/deca/syntax/invalid/HelloWorld/missing_bracket.deca 2>&1 \
+    | head -n 1 | grep -q 'simple_lex.deca:[0-9]'
+then
+    echo "Echec inattendu de test_lex pour missing_semicolon"
+    exit 1
+else
+    echo "OK"
+fi
