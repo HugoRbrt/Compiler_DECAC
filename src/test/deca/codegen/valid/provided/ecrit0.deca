@@ -10,7 +10,7 @@
 
 {
    println("ok") ; 
-   print("ok") ; 
+   print("ok") ;
    println() ; 
 }
 
