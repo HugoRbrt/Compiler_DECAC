@@ -138,7 +138,7 @@ MULTI_LINE_STRING: '"' (STRING_CAR | EOL | '\\"' | '\\\\')* '"';
 // File inclusion
 fragment FILENAME: (LETTER | DIGIT | '.' | '-' | '_')+;
 
-INCLUDE: '#include' (' ')* '"' FILENAME '"';
+INCLUDE: '#include' (' ')* '"' FILENAME '"' {doInclude(getText());};
 
 
 
