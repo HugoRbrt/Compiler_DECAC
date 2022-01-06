@@ -36,13 +36,13 @@ public abstract class AbstractPrint extends AbstractInst {
             throws ContextualError {
         // throw new UnsupportedOperationException("not yet implemented");
         for (AbstractExpr expr : arguments.getList()) {
-            if (!(expr.getType() instanceof FloatType) || !(expr.getType() instanceof IntType
-                    || !(expr.getType() instanceof StringType))) {
-                throw new ContextualError("Type non imprimable ", expr.getLocation());
-            }
+            expr.verifyExpr(compiler, localEnv, currentClass);
         }
     }
-
+//if (!(expr.getType() instanceof FloatType) || !(expr.getType() instanceof IntType
+//                    || !(expr.getType() instanceof StringType))) {
+//        throw new ContextualError("Type non imprimable ", expr.getLocation());
+//    }
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
         for (AbstractExpr a : getArguments().getList()) {

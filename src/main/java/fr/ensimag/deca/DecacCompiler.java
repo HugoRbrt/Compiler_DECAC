@@ -1,10 +1,15 @@
 package fr.ensimag.deca;
 
 import com.sun.tools.doclint.Env;
+import fr.ensimag.deca.context.ExpDefinition;
+import fr.ensimag.deca.context.TypeDefinition;
+import fr.ensimag.deca.context.VoidType;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
 import fr.ensimag.deca.tools.DecacInternalError;
+import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.deca.tree.AbstractProgram;
+import fr.ensimag.deca.tree.Location;
 import fr.ensimag.deca.tree.LocationException;
 import fr.ensimag.ima.pseudocode.AbstractLine;
 import fr.ensimag.ima.pseudocode.IMAProgram;
@@ -15,10 +20,14 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.log4j.Logger;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.tools.SymbolTable.Symbol;
 
 /**
  * Decac compiler instance.
@@ -43,13 +52,27 @@ public class DecacCompiler {
      */
     private static final String nl = System.getProperty("line.separator", "\n");
 
-    private EnvironmentExp envTypes;
+    private EnvironmentExp envExp = new EnvironmentExp(null);
+    private SymbolTable symbTable = new SymbolTable();
+    private Map<Symbol, TypeDefinition> envTypes = new HashMap<>();
 
     public DecacCompiler(CompilerOptions compilerOptions, File source) {
         super();
         this.compilerOptions = compilerOptions;
         this.source = source;
-        this.envTypes = null; // TODO: changer quand on fini HelloWorld
+        // initializing builtin types
+        envTypes.put(this.symbTable.create("void"),
+                new TypeDefinition(new VoidType(this.symbTable.create("void")), Location.BUILTIN));
+        envTypes.put(this.symbTable.create("boolean"),
+                new TypeDefinition(new VoidType(this.symbTable.create("boolean")), Location.BUILTIN));
+        envTypes.put(this.symbTable.create("float"),
+                new TypeDefinition(new VoidType(this.symbTable.create("float")), Location.BUILTIN));
+        envTypes.put(this.symbTable.create("int"),
+                new TypeDefinition(new VoidType(this.symbTable.create("int")), Location.BUILTIN));
+        envTypes.put(this.symbTable.create("string"),
+                new TypeDefinition(new VoidType(this.symbTable.create("string")), Location.BUILTIN));
+        envTypes.put(this.symbTable.create("null"),
+                new TypeDefinition(new VoidType(this.symbTable.create("null")), Location.BUILTIN));
     }
 
     /**
@@ -68,10 +91,24 @@ public class DecacCompiler {
     }
 
     /**
-     * environnement types associated with the program
+     * Environment expressions associated with the program
      */
-    public EnvironmentExp getEnvTypes() {
+    public EnvironmentExp getEnvExp() {
+        return envExp;
+    }
+
+    /**
+     * Environment types associated with the program
+     */
+    public Map<Symbol, TypeDefinition> getEnvTypes() {
         return envTypes;
+    }
+
+    /**
+     * Symbols associated with the program
+     */
+    public SymbolTable getSymbTable() {
+        return symbTable;
     }
 
     /**
@@ -137,7 +174,13 @@ public class DecacCompiler {
      */
     public boolean compile() {
         String sourceFile = source.getAbsolutePath();
-        String destFile = null;
+        String[] tmp = sourceFile.split("\\.");
+        String destFile = tmp[0];
+        for (int i = 1; i < tmp.length-1; i++) {
+            destFile += "." +tmp[i];
+        }
+        destFile += ".ass";
+        LOG.info(" dest:"+ destFile);
         // A FAIRE: calculer le nom du fichier .ass à partir du nom du
         // A FAIRE: fichier .deca.
         PrintStream err = System.err;
