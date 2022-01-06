@@ -2,7 +2,7 @@
 //    tests de commentaire avec sous-commentaire lexicalement incorrect.
 //
 // Resultats:
-//    test_lex donne une erreur sur le second '*/' ligne 11.
+//    test_lex donne une erreur sur le second '*/' ligne 10.
 //    test_synt donne une erreur à travers test_lex.
 // Historique:
 //    cree le 05/01/2022
