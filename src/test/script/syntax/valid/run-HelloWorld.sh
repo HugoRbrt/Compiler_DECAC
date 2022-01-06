@@ -25,13 +25,13 @@ NC='\033[0m'
 # temporary result repository
 test_synt_valid () {
     # $1 = first argument : name of files without extension
-    echo $(test_synt "$1") 
-    if test_synt "$1" 2>&1 | head -n 1 | grep -q "$1.deca"
+    echo $(test_synt $TESTPATH/$1.deca) 
+    if test_synt $TESTPATH/$1.deca 2>&1 | head -n 1 | grep -q "$1.deca"
         then # abnormal success
             echo "${RED}[KO] : $1 ${NC}"
             exit 1
         else # normal success : we store the new result in a tmp file
-            test_synt "$1".deca 1> "$TMP"/"$1".listmp 2>> "$TMP"/"$1".listmp
+            test_synt $TESTPATH/$1.deca 1> $TMP/$1.listmp 2>> $TMP/$1.listmp
             echo "${GREEN}[OK] : $1 ${NC}"
     fi
 }
@@ -48,12 +48,9 @@ no_regression_test () {
     fi
 }
 
-./src/test/script/basic-synt.sh
-
 # looping on all the targeted paths
 for cas_de_test in "$TESTPATH"/*.deca
 do	
-    cat $cas_de_test
     file=$(basename "$cas_de_test" ".deca")
     test_synt_valid "$file"
 done
