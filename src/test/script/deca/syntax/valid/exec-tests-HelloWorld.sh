@@ -7,7 +7,7 @@
 # for the HelloWorld step.
 # Associated results will be found in ../../tmp
 # under the suffixes .listmp
-cd "$(dirname "$0")"/../../../../../ || exit 1
+cd "$(dirname "$0")"/../../../../../../ || exit 1
 
 # We change the paths to execute the tests from the project root.
 PATH=src/test/script/launchers:"$PATH"

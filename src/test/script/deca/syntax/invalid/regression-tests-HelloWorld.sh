@@ -8,7 +8,7 @@
 # one found in ../../../results/deca/syntax/valid/HelloWorld
 # If we find a difference, then we must identify the regression
 # source.
-cd "$(dirname "$0")"/../../../../../ || exit 1
+cd "$(dirname "$0")"/../../../../../../ || exit 1
 
 # We change the paths to execute the tests from the project root.
 PATH=src/test/script/launchers:"$PATH"
