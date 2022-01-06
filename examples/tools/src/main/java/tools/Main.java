@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
  *
  * A FAIRE : Alice et Bob rajoutent leurs noms sur la ligne suivante
  *
- * @author ... and ...
+ * @author Alice and Bob
  * @date 01/01/2022
  */
 public class Main {
@@ -29,7 +29,8 @@ public class Main {
             LOG.debug("Nous allons parler français");
             sayHello = new DireBonjour();
             // Oops, forgot to set the variable 'name' :-(
-            // name = "Pierre Dupont";
+            // It's set now
+            name = args[0];
         }
         LOG.info("object sayHello instanciated");
         sayHello.sayIt();
@@ -40,6 +41,7 @@ public class Main {
         // A FAIRE : n'est pas null. Dans la version anglaise, la précondition
         // A FAIRE : est vérifiée, mais pas dans la version française. Vérifiez
         // A FAIRE : que l'exception est bien levée dans ce cas :
+        LOG.info("name variable is set : " + !name.isEmpty());
         sayHello.sayItTo(name);
 
         computeAnswer();
