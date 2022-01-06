@@ -25,7 +25,8 @@ NC='\033[0m'
 # temporary result repository
 test_synt_valid () {
     # $1 = first argument : name of files without extension
-    echo $(test_synt $TESTPATH/$1.deca) 
+
+    # echo $(test_synt $TESTPATH/$1.deca)  
     if test_synt $TESTPATH/$1.deca 2>&1 | head -n 1 | grep -q "$1.deca"
         then # abnormal success
             echo "${RED}[KO] : $1 ${NC}"
