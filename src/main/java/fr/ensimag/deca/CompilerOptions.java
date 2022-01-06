@@ -66,8 +66,10 @@ public class CompilerOptions {
         } else {
             logger.info("Java assertions disabled");
         }
+        // A FAIRE: modifier pour le cas general
+        sourceFiles.add(new File(args[0]));
 
-        throw new UnsupportedOperationException("not yet implemented");
+        //throw new UnsupportedOperationException("not yet implemented");
     }
 
     protected void displayUsage() {

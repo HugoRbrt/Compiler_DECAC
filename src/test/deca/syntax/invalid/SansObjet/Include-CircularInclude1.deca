@@ -1,0 +1,11 @@
+// Description:
+//    Test of a circular include (file n°1)
+//
+// Results:
+//    test_lex is OK
+//    test_synt should throw a CircularIncludeError
+//
+// History:
+//    created on 06/01/2022
+
+#include "Include-CircularInclude2.deca"
