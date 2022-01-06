@@ -12,11 +12,11 @@ cd "$(dirname "$0")"/../../../../../ || exit 1
 PATH=./src/test/script/launchers:"$PATH"
 TESTPATH=./src/test/deca/syntax/valid/HelloWorld
 LISPATH=./src/test/results/syntax/valid
-TMP=./src/test/results/tmp
+TMP=./src/test/tmp
 
-RED='tput setaf 1'
-GREEN='tput setaf 2'
-NC='tput sgr0'
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m'
 # we will use two LISPATH repository : one with already saved
 # files and another with the newly created results
 
@@ -25,32 +25,32 @@ NC='tput sgr0'
 # temporary result repository
 test_synt_valid () {
     # $1 = first argument
-    echo '"$1".deca' # log
-    if test_synt "$1".deca 2>&1 | head -n 1 | grep -q '"$1".deca'
+    if test_synt "$1" 2>&1 | head -n 1 | grep -q "$1.deca"
         then # abnormal success
-            echo "${RED}$1 : KO${NC}"
+            echo "${RED}[KO] : $1 ${NC}"
             exit 1
-        else # normal success : we store the new result in a tmp repo
-            touch "$TMP"/"$1".lis-new
-            test_synt "$1".deca 1> "$TMP"/"$1".lis-new 2> "$TMP"/"$1".lis-new
-            echo "${GREEN}$1 : OK${NC}"
+        else # normal success : we store the new result in a tmp file
+            touch "$TMP"/"$1".listmp
+            test_synt "$1".deca 1> "$TMP"/"$1".listmp 2>> "$TMP"/"$1".listmp
+            echo "${GREEN}[OK] : $1 ${NC}"
     fi
 }
 
 # function to verify that there was no regression between old results
 # and new ones
 no_regression_test () {
-    if [ diff $LISPATH/$1.lis $TMP/$1.lis-new ]
+    if [ diff $LISPATH/$1.lis $TMP/$1.tmp ]
         then
-            echo "${RED}$1 : REGRESSION${NC}"
+            echo "${RED}[REGRESSION] : $1 ${NC}"
             exit 1
         else
-            echo "${GREEN}$1 : NO-REGRESSION${NC}"
+            echo "${GREEN}[NO-REGRESSION] : $1 ${NC}"
     fi
 }
 
 # looping on all the targeted paths
 for cas_de_test in "$TESTPATH"/*.deca
 do
-    test_synt_valid "$cas_de_test"
+    file=$(basename "$cas_de_test" ".deca")
+    test_synt_valid "$file"
 done
