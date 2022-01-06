@@ -1,5 +1,5 @@
 // Description:
-//    tests de programme dont une instruction n'a pas de semicolon
+//    tests de println sans parenthèse ouverte.
 //
 // Resultats:
 //    Ligne 13 : Erreur de syntaxe.
