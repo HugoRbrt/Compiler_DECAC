@@ -1,6 +1,6 @@
 package fr.ensimag.deca;
 
-import com.sun.tools.doclint.Env;
+//import com.sun.tools.doclint.Env;
 import fr.ensimag.deca.context.ExpDefinition;
 import fr.ensimag.deca.context.TypeDefinition;
 import fr.ensimag.deca.context.VoidType;
