@@ -4,5 +4,5 @@
       +> ListDeclVar [List with 0 elements]
       `> ListInst [List with 1 elements]
          []> [10, 10] Println
-             `> [10, 10] ListExpr [List with 1 elements]
+             `> ListExpr [List with 1 elements]
                 []> [10, 10] StringLiteral (Hello, World)

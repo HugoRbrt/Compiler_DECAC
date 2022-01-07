@@ -4,17 +4,17 @@
       +> ListDeclVar [List with 0 elements]
       `> ListInst [List with 5 elements]
          []> [11, 12] Println
-         ||  `> [11, 12] ListExpr [List with 1 elements]
+         ||  `> ListExpr [List with 1 elements]
          ||     []> [11, 12] StringLiteral (1st)
          []> [12, 12] Println
-         ||  `> [12, 12] ListExpr [List with 1 elements]
+         ||  `> ListExpr [List with 1 elements]
          ||     []> [12, 12] StringLiteral (2nd)
          []> [13, 12] Println
-         ||  `> [13, 12] ListExpr [List with 1 elements]
+         ||  `> ListExpr [List with 1 elements]
          ||     []> [13, 12] StringLiteral (3rd)
          []> [14, 12] Println
-         ||  `> [14, 12] ListExpr [List with 1 elements]
+         ||  `> ListExpr [List with 1 elements]
          ||     []> [14, 12] StringLiteral (4th)
          []> [15, 12] Println
-             `> [15, 12] ListExpr [List with 1 elements]
+             `> ListExpr [List with 1 elements]
                 []> [15, 12] StringLiteral (5th)
