@@ -1,7 +1,5 @@
 package fr.ensimag.deca;
 
-import com.sun.tools.doclint.Env;
-import fr.ensimag.deca.context.ExpDefinition;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
@@ -25,7 +23,6 @@ import java.util.Map;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.log4j.Logger;
-import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 
 /**
@@ -45,7 +42,7 @@ import fr.ensimag.deca.tools.SymbolTable.Symbol;
  */
 public class DecacCompiler {
     private static final Logger LOG = Logger.getLogger(DecacCompiler.class);
-    
+
     /**
      * Portable newline character.
      */
@@ -53,7 +50,7 @@ public class DecacCompiler {
 
     private EnvironmentExp envExp = new EnvironmentExp(null);
     private SymbolTable symbTable = new SymbolTable();
-    private EnvironmentType envTypes = EnvironmentType.getEnvTypes();
+    private Map<Symbol, TypeDefinition> envTypes = new HashMap<>();
 
     public DecacCompiler(CompilerOptions compilerOptions, File source) {
         super();
@@ -100,7 +97,7 @@ public class DecacCompiler {
      * Environment types associated with the program
      */
     public Map<Symbol, TypeDefinition> getEnvTypes() {
-        return envTypes.get();
+        return envTypes;
     }
 
     /**
@@ -149,22 +146,22 @@ public class DecacCompiler {
     public void addInstruction(Instruction instruction, String comment) {
         program.addInstruction(instruction, comment);
     }
-    
+
     /**
-     * @see 
+     * @see
      * fr.ensimag.ima.pseudocode.IMAProgram#display()
      */
     public String displayIMAProgram() {
         return program.display();
     }
-    
+
     private final CompilerOptions compilerOptions;
     private final File source;
     /**
      * The main program. Every instruction generated will eventually end up here.
      */
     private final IMAProgram program = new IMAProgram();
- 
+
 
     /**
      * Run the compiler (parse source file, generate code)
@@ -180,8 +177,6 @@ public class DecacCompiler {
         }
         destFile += ".ass";
         LOG.info(" dest:"+ destFile);
-        // A FAIRE: calculer le nom du fichier .ass à partir du nom du
-        // A FAIRE: fichier .deca.
         PrintStream err = System.err;
         PrintStream out = System.out;
         LOG.debug("Compiling file " + sourceFile + " to assembly file " + destFile);
@@ -222,7 +217,7 @@ public class DecacCompiler {
      * @return true on error
      */
     private boolean doCompile(String sourceName, String destName,
-            PrintStream out, PrintStream err)
+                              PrintStream out, PrintStream err)
             throws DecacFatalError, LocationException {
         AbstractProgram prog = doLexingAndParsing(sourceName, err);
 
@@ -231,10 +226,21 @@ public class DecacCompiler {
             return true;
         }
         assert(prog.checkAllLocations());
+        // Decompile
+        if (this.compilerOptions.getParse()) {
+            LOG.info("Output decompiled program is: " + destName);
+            prog.decompile(out);
+            return false;
+        }
 
 
         prog.verifyProgram(this);
         assert(prog.checkAllDecorations());
+
+        if (this.compilerOptions.getVerification()) {
+            LOG.info("Verification is done ");
+            return false;
+        }
 
         addComment("start main program");
         prog.codeGenProgram(this);
