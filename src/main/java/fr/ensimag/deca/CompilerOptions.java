@@ -35,7 +35,26 @@ public class CompilerOptions {
     public List<File> getSourceFiles() {
         return Collections.unmodifiableList(sourceFiles);
     }
+    
+    public boolean getParse() {
+        return parse;
+    }
 
+    public boolean getVerification() {
+        return verification;
+    }
+    
+    public boolean getNoCheck() {
+        return noCheck;
+    }
+    
+    public int getRegisters() {
+        return registers;
+    }
+    
+    public boolean getWarnings() {
+        return warnings;
+    }
     private int debug = 0;
     private boolean parallel = false;
     private boolean printBanner = false;
@@ -45,17 +64,18 @@ public class CompilerOptions {
     private boolean verification = false;
     private boolean noCheck = false;
     private int registers = 16;
+    private boolean warnings = false;
     
     public void parseArgs(String[] args) throws CLIException {
         
-        for (k = 0; k < args.length; k++) {
+        for (int k = 0; k < args.length; k++) {
             
             if ( args[k].equals("-r") && ( k+1 < args.length ) ) {
-                // we verify is the next argument is a correct number
-                // of registers
+                // we try to associate the next argument to a number of
+                // registers
                 checkRegisters(args[k+1]);
             } else if ( args[k].equals("-r") && ( k+1 >= args.length )) {
-                // no number of registers can be recognized
+                // no number of registers will be recognized
                 displayUsage();
             } else {
                 processArg(args, k);
@@ -85,14 +105,14 @@ public class CompilerOptions {
             logger.info("Java assertions disabled");
         }
         // A FAIRE: modifier pour le cas general
-        sourceFiles.add(new File(args[0]));
+        // sourceFiles.add(new File(args[0]));
 
         //throw new UnsupportedOperationException("not yet implemented");
     }
 
     protected void displayUsage() {
-        throw new IllegalArgumentException("decac [[-p | -v] [-n] \
-			[-r X] [-d]* [-P] [-w] <fichier deca>...] | [-b]");
+        throw new IllegalArgumentException("decac [[-p | -v] [-n]" +
+			"[-r X] [-d]* [-P] [-w] <fichier deca>...] | [-b]");
     }
 
     // private function to process the arguments (except -r X)
@@ -101,28 +121,70 @@ public class CompilerOptions {
         
         if (arg.equals("-p")) {
             // -p and -v are uncompatible
-	    if (verification) { displayUsage(); } else { parse = true; }
+	    if (verification) {
+                displayUsage();
+            } else {
+                parse = true;
+            }
         }
-        }
-        if (arg.equals("-v")) {
+        
+        else if (arg.equals("-v")) {
             // -v and -p are uncompatible
-            if (parse) { displayUsage(); } else { verification = true; }
+            if (parse) {
+                displayUsage();
+            } else {
+                verification = true;
+            }
         }
-        if (arg.equals("-n")) {
+        
+        else if (arg.equals("-n")) {
             noCheck = true;
         }
 
-        
-            
+        else if (arg.equals("-d")) {
+            debug++;
+            // no higher log level than TRACE
+            if (debug > TRACE) {
+                debug = TRACE;
+            }
         }
+        
+        else if (arg.equals("-P")) {
+            parallel = true;
+        }
+        
+        // we only accept files ending with the extension .deca
+        else if (arg.endsWith(".deca")) {
+            // if the file is already present
+            // do not add it again
+            File decaFile = new File(arg);
+            if (! sourceFiles.contains(decaFile)) {
+                sourceFiles.add(decaFile);
+            }
+        }
+        
+        else if (arg.equals("-w")) {
+            warnings = true;
+        }
+        
+        else {
+            displayUsage();
+        }
+        
     }
         
     // Treats the argument following "-r" to get the correct number of registers
-    private void checkRegisters(String nbRegisterString) {
-        if String.isNumeric(nbRegistersString) {
-            registers = Integer.parseInt(nbRegistersString);
-        } else {
+    private void checkRegisters(String nbRegistersString) {
+        int nbRegisters = -1;
+        try {
+            nbRegisters = Integer.parseInt(nbRegistersString);
+        } catch (NumberFormatException nfe) {
             displayUsage();
+        }
+        if ((nbRegisters < 4) || (nbRegisters > 16)) {
+                displayUsage();
+        } else {
+            registers = nbRegisters;
         }
     }
 
