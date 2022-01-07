@@ -2,8 +2,7 @@ package fr.ensimag.deca;
 
 import com.sun.tools.doclint.Env;
 import fr.ensimag.deca.context.ExpDefinition;
-import fr.ensimag.deca.context.TypeDefinition;
-import fr.ensimag.deca.context.VoidType;
+import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
 import fr.ensimag.deca.tools.DecacInternalError;
@@ -66,13 +65,13 @@ public class DecacCompiler {
         envTypes.put(this.symbTable.create("boolean"),
                 new TypeDefinition(new BooleanType(this.symbTable.create("boolean")), Location.BUILTIN));
         envTypes.put(this.symbTable.create("float"),
-                new TypeDefinition(new VoidType(this.symbTable.create("float")), Location.BUILTIN));
+                new TypeDefinition(new FloatType(this.symbTable.create("float")), Location.BUILTIN));
         envTypes.put(this.symbTable.create("int"),
-                new TypeDefinition(new VoidType(this.symbTable.create("int")), Location.BUILTIN));
+                new TypeDefinition(new IntType(this.symbTable.create("int")), Location.BUILTIN));
         envTypes.put(this.symbTable.create("string"),
-                new TypeDefinition(new VoidType(this.symbTable.create("string")), Location.BUILTIN));
+                new TypeDefinition(new StringType(this.symbTable.create("string")), Location.BUILTIN));
         envTypes.put(this.symbTable.create("null"),
-                new TypeDefinition(new VoidType(this.symbTable.create("null")), Location.BUILTIN));
+                new TypeDefinition(new NullType(this.symbTable.create("null")), Location.BUILTIN));
     }
 
     /**
