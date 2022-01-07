@@ -1,0 +1,12 @@
+// Description:
+//    Variable assignment without prior declaration; not detected by parser.
+//
+// Results:
+//    (void)
+//
+// Historique:
+//    cree le 07/01/2022
+
+{
+        x = 3;
+}
