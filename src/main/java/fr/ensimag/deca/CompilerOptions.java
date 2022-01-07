@@ -81,6 +81,8 @@ public class CompilerOptions {
                 processArg(args, k);
             }
         }
+        
+
 
         Logger logger = Logger.getRootLogger();
         // map command-line debug option to log4j's level.
@@ -106,6 +108,17 @@ public class CompilerOptions {
         }
         // A FAIRE: modifier pour le cas general
         // sourceFiles.add(new File(args[0]));
+
+        // if no file was written
+        if (sourceFiles.size() == 0) {
+            if (!(printBanner && ( parallel || (debug != 0) || parse ||
+                    verification || noCheck || warnings || 
+                    (registers != 16) ) )) {
+                // if printBanner was written but no other options
+                displayUsage();
+            }
+            // else no problem : we have -b   
+        }
 
         //throw new UnsupportedOperationException("not yet implemented");
     }
@@ -187,5 +200,23 @@ public class CompilerOptions {
             registers = nbRegisters;
         }
     }
+    
+    @Override
+    public String toString() {
+        String s = "CompilerOptions[\n";
+        s += "-b (printBanner) :" + Boolean.toString(printBanner) + "\n";
+        s += "-d (debug) :" + Integer.toString(debug) + "\n";
+        s += "-P (parallel) :" + Boolean.toString(parallel) + "\n";
+        s += "-v (verification) :" + Boolean.toString(verification) + "\n";
+        s += "-p (parse) :" + Boolean.toString(parse) + "\n";
+        s += "-n (noCheck) :" + Boolean.toString(noCheck) + "\n";
+        s += "-w (warnings) :" + Boolean.toString(warnings) + "\n";
+        s += "-r (registers) :" + Integer.toString(registers) + "\n";
+        s += "-files : " + sourceFiles.toString() + "\n";
+        s += "]";
+        
+        return s;
+    }
+    
 
 }
