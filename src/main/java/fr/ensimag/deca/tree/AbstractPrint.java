@@ -39,10 +39,7 @@ public abstract class AbstractPrint extends AbstractInst {
             expr.verifyExpr(compiler, localEnv, currentClass);
         }
     }
-//if (!(expr.getType() instanceof FloatType) || !(expr.getType() instanceof IntType
-//                    || !(expr.getType() instanceof StringType))) {
-//        throw new ContextualError("Type non imprimable ", expr.getLocation());
-//    }
+
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
         for (AbstractExpr a : getArguments().getList()) {
@@ -56,7 +53,11 @@ public abstract class AbstractPrint extends AbstractInst {
 
     @Override
     public void decompile(IndentPrintStream s) {
-        s.print("Print" + getSuffix());
+        s.print("print" + getSuffix() + "(");
+        for (AbstractExpr expr : arguments.getList()) {
+            expr.decompile(s);
+        }
+        s.print(")");
     }
 
     @Override
