@@ -160,7 +160,6 @@ list_expr returns[ListExpr tree]
         }
     : (e1=expr {
         $tree.add($e1.tree);
-        setLocation($tree, $e1.start);
         }
        (COMMA e2=expr {
         }
