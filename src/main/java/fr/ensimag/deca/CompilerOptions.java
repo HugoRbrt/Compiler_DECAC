@@ -40,10 +40,14 @@ public class CompilerOptions {
     private boolean parallel = false;
     private boolean printBanner = false;
     private List<File> sourceFiles = new ArrayList<File>();
-
+    private boolean parse = false;
+    private boolean 
     
     public void parseArgs(String[] args) throws CLIException {
-        // A FAIRE : parcourir args pour positionner les options correctement.
+	for each (String arg : args) {
+
+
+
         Logger logger = Logger.getRootLogger();
         // map command-line debug option to log4j's level.
         switch (getDebug()) {
@@ -75,4 +79,16 @@ public class CompilerOptions {
     protected void displayUsage() {
         throw new UnsupportedOperationException("not yet implemented");
     }
+
+    private void processArg(String arg) {
+        if (arg.equals("-p")) {
+	    if !(verification) {
+		parse = true;
+	    } else {
+	        displayUsage();
+		throw UnsupportedOperationException("-v and -p are uncompatible");
+	    }
+        }
+    }
+
 }
