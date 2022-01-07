@@ -64,7 +64,7 @@ public class DecacCompiler {
         envTypes.put(this.symbTable.create("void"),
                 new TypeDefinition(new VoidType(this.symbTable.create("void")), Location.BUILTIN));
         envTypes.put(this.symbTable.create("boolean"),
-                new TypeDefinition(new VoidType(this.symbTable.create("boolean")), Location.BUILTIN));
+                new TypeDefinition(new BooleanType(this.symbTable.create("boolean")), Location.BUILTIN));
         envTypes.put(this.symbTable.create("float"),
                 new TypeDefinition(new VoidType(this.symbTable.create("float")), Location.BUILTIN));
         envTypes.put(this.symbTable.create("int"),
