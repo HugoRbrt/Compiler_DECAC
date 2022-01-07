@@ -1,0 +1,13 @@
+// Description:
+//    Declaration of three variables, two with initialization and
+//    one without.
+//
+// Results:
+//    (void)
+//
+// Historique:
+//    cree le 01/01/2022
+
+{
+        int x = 3, y, z = 4;
+}
