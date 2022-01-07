@@ -2,7 +2,7 @@
 //    Program using lexically incorrect characters. 
 //
 // Results:
-//    Line 12 : Syntax error
+//    Line 11 : token recognition error
 //
 // History:
 //    cree le 05/01/2022
