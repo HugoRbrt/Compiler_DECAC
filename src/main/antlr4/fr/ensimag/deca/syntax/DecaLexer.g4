@@ -16,12 +16,7 @@ options {
 // End of line
 fragment EOL: '\n' | '\t';
 
-// Any character
-fragment STRING_CAR: ~('"' | '\\' | '\n' | '\t');
-
 fragment DIGIT: '0'..'9';
-
-fragment LETTER: ('a'..'z') | ('A'..'Z');
 
 // Floats
 fragment NUM: DIGIT+;
@@ -121,6 +116,8 @@ TRUE: 'true';
 WHILE: 'while';
 
 // Identifier
+fragment LETTER: ('a'..'z') | ('A'..'Z');
+
 IDENT: (LETTER | '$' | '_')(LETTER | DIGIT | '$' | '_')*;
 
 // Commment
@@ -130,6 +127,8 @@ SEP_COMMENT_PARA: '/*' .*? '*/' {skip();};
 SEP_COMMENT_LINE:  '//' .*? (EOL | EOF) {skip();};
 
 // String
+fragment STRING_CAR: ~('"' | '\\' | '\n' | '\t');
+
 STRING: '"' (STRING_CAR | '\\"' | '\\\\')* '"';
 
 // Multi-line String

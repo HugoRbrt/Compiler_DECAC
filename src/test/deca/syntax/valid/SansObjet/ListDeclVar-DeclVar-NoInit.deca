@@ -1,0 +1,12 @@
+// Description:
+//    Declaration of a single variable without initialization.
+//
+// Results:
+//    (void)
+//
+// Historique:
+//    cree le 01/01/2022
+
+{
+        int x;
+}

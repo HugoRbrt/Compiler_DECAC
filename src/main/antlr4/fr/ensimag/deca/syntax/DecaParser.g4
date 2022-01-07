@@ -93,9 +93,9 @@ decl_var[AbstractIdentifier t] returns[AbstractDeclVar tree]
     : i=ident {
             setLocation($i.tree, $i.start);
         }
-      (EQUALS e=expr {
+      (eq=EQUALS e=expr {
             $tree = new DeclVar($t, $i.tree, new Initialization($e.tree));
-            setLocation($tree.getInit(), $e.start); // Doesn't give the correct starting position (pos of '=')
+            setLocation($tree.getInit(), $eq);
             LOG.trace($tree);
         }
       )? {
