@@ -1,0 +1,1 @@
+src/test/deca/syntax/invalid/HelloWorld/DoubleComment-OCO.deca:10:16: token recognition error at: '*'

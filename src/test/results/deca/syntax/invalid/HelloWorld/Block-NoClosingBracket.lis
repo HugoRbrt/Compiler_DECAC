@@ -1,0 +1,1 @@
+src/test/deca/syntax/invalid/HelloWorld/Block-NoClosingBracket.deca:13:0: missing '}' at '<EOF>'
