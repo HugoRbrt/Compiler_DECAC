@@ -67,22 +67,30 @@ public class CompilerOptions {
     private boolean warnings = false;
     
     public void parseArgs(String[] args) throws CLIException {
-        
+
         for (int k = 0; k < args.length; k++) {
             
             if ( args[k].equals("-r") && ( k+1 < args.length ) ) {
                 // we try to associate the next argument to a number of
                 // registers
-                checkRegisters(args[k+1]);
+                try{
+                    checkRegisters(args[k+1]);
+                } catch (CLIException e) {
+                    throw e;
+                }
+                
             } else if ( args[k].equals("-r") && ( k+1 >= args.length )) {
                 // no number of registers will be recognized
-                displayUsage();
+                throw CLIException();
             } else {
-                processArg(args, k);
+                try{
+                    processArg(args, k);
+                } catch {CLIException e) {
+                    throw e;
+                }
             }
+            
         }
-        
-
 
         Logger logger = Logger.getRootLogger();
         // map command-line debug option to log4j's level.
@@ -108,14 +116,19 @@ public class CompilerOptions {
         }
         // A FAIRE: modifier pour le cas general
         // sourceFiles.add(new File(args[0]));
-
+        
+        // if no arguments were seen, we explain how decac should be used
+        if (args.length == 0) {
+            throw CLIException();
+        }
+        
         // if no file was written
         if (sourceFiles.size() == 0) {
             if (!(printBanner && ( parallel || (debug != 0) || parse ||
                     verification || noCheck || warnings || 
                     (registers != 16) ) )) {
                 // if printBanner was written but no other options
-                displayUsage();
+                throw CLIException();
             }
             // else no problem : we have -b   
         }
@@ -124,18 +137,40 @@ public class CompilerOptions {
     }
 
     protected void displayUsage() {
-        throw new IllegalArgumentException("decac [[-p | -v] [-n]" +
+        System.out.println("Usage : decac [[-p | -v] [-n]" +
 			"[-r X] [-d]* [-P] [-w] <fichier deca>...] | [-b]");
+        
+        System.out.println("-b  (banner): prints the team banner");
+        System.out.println("-p  (parse): stops at the tree building step and " +
+                "displays its decompilation (i.e. one source file should " +
+                "output a syntaxically correct deca program");
+        System.out.println("-v  (verification): stops decac " +
+                "after the verification test");
+        System.out.println("-n  (no check): deletes programs that" +
+                "are incorrect, or correct but cannot be executed" +
+                " due to machine performances");
+        System.out.println("-r X (registers) : limits the number of " +
+                "registers to R0 ... R{X-1} with 4 <= X <= 16");
+        System.out.println("-d (debug) : activates debug traces. " +
+                "Repeat several time for diferent traces level: " +
+                "INFO, DEBUG, TRACE");
+        System.out.println("-P  (parallel) : if several source files "+
+                "are given, starts their parallel compilations");
+        System.out.println("-w  (warnings) : enables warning messages during "+
+                "compilation")
     }
 
-    // private function to process the arguments (except -r X)
-    private void processArg(String[] args, int k) {
+
+    // function to process the arguments (except -r X)
+    private void processArg(String[] args, int k)
+        throws CLIException {
+        
         String arg = args[k];
         
         if (arg.equals("-p")) {
             // -p and -v are uncompatible
 	    if (verification) {
-                displayUsage();
+                throw CLIException();
             } else {
                 parse = true;
             }
@@ -144,7 +179,7 @@ public class CompilerOptions {
         else if (arg.equals("-v")) {
             // -v and -p are uncompatible
             if (parse) {
-                displayUsage();
+                throw CLIException();
             } else {
                 verification = true;
             }
@@ -181,26 +216,29 @@ public class CompilerOptions {
         }
         
         else {
-            displayUsage();
+            throw CLIException();
         }
         
     }
         
     // Treats the argument following "-r" to get the correct number of registers
-    private void checkRegisters(String nbRegistersString) {
+    private void checkRegisters(String nbRegistersString)
+        throw CLIException {
+        
         int nbRegisters = -1;
         try {
             nbRegisters = Integer.parseInt(nbRegistersString);
         } catch (NumberFormatException nfe) {
-            displayUsage();
+            throw CLIException();
         }
         if ((nbRegisters < 4) || (nbRegisters > 16)) {
-                displayUsage();
+                throw CLIException();
         } else {
             registers = nbRegisters;
         }
     }
     
+    // debug function
     @Override
     public String toString() {
         String s = "CompilerOptions[\n";
