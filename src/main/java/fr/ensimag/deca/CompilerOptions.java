@@ -66,6 +66,9 @@ public class CompilerOptions {
     private int registers = 16;
     private boolean warnings = false;
     
+    // ugly way to get rid of the case -b -r 16 
+    private boolean optionRSpotted = false;
+    
     public void parseArgs(String[] args) throws CLIException {
 
         for (int k = 0; k < args.length; k++) {
@@ -74,6 +77,7 @@ public class CompilerOptions {
                 // we try to associate the next argument to a number of
                 // registers
                 try{
+                    optionRSpotted = true;
                     k++; // go to next token
                     checkRegisters(args[k]);
                 } catch (CLIException e) {
@@ -123,16 +127,20 @@ public class CompilerOptions {
             throw new CLIException("No option nor file given");
         }
         
-        // if no file was written
         if (sourceFiles.size() == 0) {
-            if (!(printBanner && ( parallel || (debug != 0) || parse ||
+            // if no file was detected
+            if ( printBanner && ( parallel || (debug != 0) || parse ||
                     verification || noCheck || warnings || 
-                    (registers != 16) ) )) {
-                // if printBanner was written but no other options
+                    optionRSpotted ) ) {
+                // if printBanner was written but other options too
                 throw new CLIException("-b is uncompatible with" +
-                        "the rest of options and files");
+                        "other options");
+            }   
+        } else {
+            // a file is given so -b cannot be an option
+            if ( printBanner ) {
+                throw new CLIException("-b in uncompatible with files");
             }
-            // else no problem : we have -b   
         }
 
         //throw new UnsupportedOperationException("not yet implemented");
@@ -176,7 +184,7 @@ public class CompilerOptions {
         else if (arg.equals("-p")) {
             // -p and -v are uncompatible
 	    if (verification) {
-                throw new CLIException("-p written with -v");
+                throw new CLIException("-p uncompatible with -v");
             } else {
                 parse = true;
             }
@@ -185,7 +193,7 @@ public class CompilerOptions {
         else if (arg.equals("-v")) {
             // -v and -p are uncompatible
             if (parse) {
-                throw new CLIException("-v written with -p");
+                throw new CLIException("-v uncompatible with -p");
             } else {
                 verification = true;
             }
@@ -248,14 +256,14 @@ public class CompilerOptions {
     @Override
     public String toString() {
         String s = "CompilerOptions[\n";
-        s += "-b (printBanner) :" + Boolean.toString(printBanner) + "\n";
-        s += "-d (debug) :" + Integer.toString(debug) + "\n";
-        s += "-P (parallel) :" + Boolean.toString(parallel) + "\n";
-        s += "-v (verification) :" + Boolean.toString(verification) + "\n";
-        s += "-p (parse) :" + Boolean.toString(parse) + "\n";
-        s += "-n (noCheck) :" + Boolean.toString(noCheck) + "\n";
-        s += "-w (warnings) :" + Boolean.toString(warnings) + "\n";
-        s += "-r (registers) :" + Integer.toString(registers) + "\n";
+        s += "-b (printBanner): " + Boolean.toString(printBanner) + "\n";
+        s += "-d (debug):" + Integer.toString(debug) + "\n";
+        s += "-P (parallel):" + Boolean.toString(parallel) + "\n";
+        s += "-v (verification):" + Boolean.toString(verification) + "\n";
+        s += "-p (parse):" + Boolean.toString(parse) + "\n";
+        s += "-n (noCheck):" + Boolean.toString(noCheck) + "\n";
+        s += "-w (warnings):" + Boolean.toString(warnings) + "\n";
+        s += "-r (registers):" + Integer.toString(registers) + "\n";
         s += "-files : " + sourceFiles.toString() + "\n";
         s += "]";
         
