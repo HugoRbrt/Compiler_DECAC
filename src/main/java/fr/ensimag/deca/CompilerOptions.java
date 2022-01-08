@@ -81,11 +81,11 @@ public class CompilerOptions {
                 
             } else if ( args[k].equals("-r") && ( k+1 >= args.length )) {
                 // no number of registers will be recognized
-                throw CLIException();
+                throw new CLIException("");
             } else {
                 try{
                     processArg(args, k);
-                } catch {CLIException e) {
+                } catch (CLIException e) {
                     throw e;
                 }
             }
@@ -119,7 +119,7 @@ public class CompilerOptions {
         
         // if no arguments were seen, we explain how decac should be used
         if (args.length == 0) {
-            throw CLIException();
+            throw new CLIException("");
         }
         
         // if no file was written
@@ -128,7 +128,7 @@ public class CompilerOptions {
                     verification || noCheck || warnings || 
                     (registers != 16) ) )) {
                 // if printBanner was written but no other options
-                throw CLIException();
+                throw new CLIException("");
             }
             // else no problem : we have -b   
         }
@@ -157,7 +157,7 @@ public class CompilerOptions {
         System.out.println("-P  (parallel) : if several source files "+
                 "are given, starts their parallel compilations");
         System.out.println("-w  (warnings) : enables warning messages during "+
-                "compilation")
+                "compilation");
     }
 
 
@@ -170,7 +170,7 @@ public class CompilerOptions {
         if (arg.equals("-p")) {
             // -p and -v are uncompatible
 	    if (verification) {
-                throw CLIException();
+                throw new CLIException("");
             } else {
                 parse = true;
             }
@@ -179,7 +179,7 @@ public class CompilerOptions {
         else if (arg.equals("-v")) {
             // -v and -p are uncompatible
             if (parse) {
-                throw CLIException();
+                throw new CLIException("");
             } else {
                 verification = true;
             }
@@ -216,23 +216,23 @@ public class CompilerOptions {
         }
         
         else {
-            throw CLIException();
+            throw new CLIException("");
         }
         
     }
         
     // Treats the argument following "-r" to get the correct number of registers
     private void checkRegisters(String nbRegistersString)
-        throw CLIException {
+        throws CLIException {
         
         int nbRegisters = -1;
         try {
             nbRegisters = Integer.parseInt(nbRegistersString);
         } catch (NumberFormatException nfe) {
-            throw CLIException();
+            throw new CLIException("");
         }
         if ((nbRegisters < 4) || (nbRegisters > 16)) {
-                throw CLIException();
+                throw new CLIException("");
         } else {
             registers = nbRegisters;
         }
