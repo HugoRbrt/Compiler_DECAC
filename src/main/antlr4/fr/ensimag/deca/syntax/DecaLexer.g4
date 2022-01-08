@@ -111,6 +111,8 @@ READINT: 'readInt';
 
 READFLOAT: 'readFloat';
 
+RETURN: 'return';
+
 TRUE: 'true';
 
 WHILE: 'while';

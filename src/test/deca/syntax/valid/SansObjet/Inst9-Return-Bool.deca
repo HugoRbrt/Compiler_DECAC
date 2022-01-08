@@ -1,0 +1,12 @@
+// Description:
+//    Return boolean operation.
+//
+// Results:
+//    (void)
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+        return sum == 33;
+}
