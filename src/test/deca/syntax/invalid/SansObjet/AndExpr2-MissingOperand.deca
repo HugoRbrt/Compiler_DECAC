@@ -1,5 +1,5 @@
 // Description:
-//    Or expression with missing operand.
+//    And expression with missing operand.
 //
 // Results:
 //    12:12 mismatched input ';' expecting {FLOAT, INT, '(', '-', '!', 'false',
@@ -9,5 +9,5 @@
 //    cree le 08/01/2022
 
 {
-        x ||;
+        x &&;
 }

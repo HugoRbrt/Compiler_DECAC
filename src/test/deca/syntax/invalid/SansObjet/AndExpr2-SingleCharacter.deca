@@ -1,0 +1,12 @@
+// Description:
+//    And expression with single '&' character instead of two.
+//
+// Results:
+//    11:10 token recognition error at: '& '
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+        x & y;
+}

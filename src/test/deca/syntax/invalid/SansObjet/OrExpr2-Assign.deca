@@ -1,0 +1,12 @@
+// Description:
+//    Or expression with assignment.
+//
+// Results:
+//    11:8 left-hand side of assignment is not an lvalue
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+        x || 3 = y;
+}
