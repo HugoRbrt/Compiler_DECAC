@@ -1,0 +1,14 @@
+// Description:
+//    Declaration of a single variable and assignment with a unary plus.
+//
+// Results:
+//    Syntax error
+//    13:16 extraneous input '+' expecting {FLOAT, INT, '(', '-', '!', 'false',
+//    'null', 'readInt', 'readFloat', 'true', IDENT, STRING, NEW, THIS}
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+        int x = +3;
+}
