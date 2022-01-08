@@ -1,0 +1,1 @@
+src/test/deca/syntax/invalid/HelloWorld/Println-MultLine.deca:12:8: extraneous input '"Hello\nWorld"' expecting ')'

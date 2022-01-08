@@ -1,10 +1,10 @@
 // Description:
 //    tests de programme vide.
 //
-// Resultats:
+// Results:
 //    only one instruction here
 //
-// Historique:
+// History:
 //    cree le 05/01/2022
 
 { println("only one instruction here");

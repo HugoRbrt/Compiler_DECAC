@@ -1,0 +1,13 @@
+// Description:
+//    String with five escape chars
+//
+// Results:
+//    test_lex : error line 12 on the whole string
+//
+//
+// History:
+//    cree le 08/01/2022
+
+{
+println("\\\\\");
+}

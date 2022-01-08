@@ -1,0 +1,14 @@
+// Description:
+//    multi line string in println statement
+//
+// Results:
+//    test_lex : no errors
+//    test_synt : line 12 error on whole string (after adding multi line string in lex)
+//
+// History:
+//    cree le 08/01/2022
+
+{
+println("Hello
+World");
+}

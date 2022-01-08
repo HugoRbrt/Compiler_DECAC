@@ -1,0 +1,13 @@
+// Description:
+//    String with extra quote in end
+//
+// Results:
+//    test_lex : error line 12 on third quote
+//
+//
+// History:
+//    cree le 08/01/2022
+
+{
+println("Hello"");
+}

@@ -1,10 +1,10 @@
 // Description:
-//    ouverture d'un main sans accolade fermante
+//    Main without closing bracket
 //
-// Resultats:
+// Results:
 //    test_lex OK
-//    test_synt donne une erreur ligne 11
-// Historique:
+//    test_synt: error on line 11
+// History:
 //    cree le 06/01/2022
 
 {

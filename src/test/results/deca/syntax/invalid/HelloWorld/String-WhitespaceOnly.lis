@@ -1,0 +1,1 @@
+src/test/deca/syntax/invalid/HelloWorld/String-WhitespaceOnly.deca:13:12: token recognition error at: '"\n'

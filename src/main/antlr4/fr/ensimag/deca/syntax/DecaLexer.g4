@@ -14,7 +14,7 @@ options {
 // Deca lexer rules.
 
 // End of line
-fragment EOL: '\n' | '\t';
+fragment EOL: '\n' ;
 
 fragment DIGIT: '0'..'9';
 
@@ -86,7 +86,7 @@ OR: '||';
 SEMI: ';';
 
 // Whitespace
-WS: (' ' | EOL | '\r') {skip();};
+WS: (' ' | EOL | '\r' | '\t') {skip();};
 
 // Keywords
 ASM: 'asm';

@@ -1,8 +1,6 @@
 package fr.ensimag.deca;
 
 import fr.ensimag.deca.CompilerOptions;
-import static org.junit.Assert.*;
-import org.junit.Test;
 
 /**
  * Junit class to test the parsing of the different options we can give to
@@ -12,165 +10,136 @@ import org.junit.Test;
 
 public class CompilerOptionsTest{
 
-    @Test
-    public void testNoBCompleteOptions() {
-        String[] args = { "-w", "-d", "-d", "-n"
-                + "-P", "-r", "4", "-v", "oui.deca", "yes.deca" };
+    public static void testNoBCompleteOptions() throws CLIException {
+        String[] args = { "-w", "-d", "-d", "-n",
+                "-P", "-r", "4", "-v", "oui.deca", "yes.deca", "oui.deca"};
         CompilerOptions compOpt = new CompilerOptions();
-        compOpt.parseArgs(args);
-        print(comptOpt);
-        assertEquals("printBanner :", compOpt.getPrintBanner(), false);
-        // Checks that we detected -r with 13
-        assertEquals("registers :", compOpt.getRegisters(), 4);
-        assertEquals("parse :", compOpt.getDebug(), false);
-        assertEquals("debug :", compOpt.getDebug(), 2);
-        assertEquals("parallel :", compOpt.getParallel(), true);
-        assertEquals("no check :", compOpt.getNoCheck(), true);
-        assertEquals("verification :", compOpt.getVerification(), true);
-        assertEquals("warnings :", compOpt.getWarnings(), true);
-        assertEquals("number of files", compOpt.size(), 2);
+        try{compOpt.parseArgs(args);} catch (CLIException e) {e.printStackTrace();};
+        System.out.println(compOpt);
+        
     }
     
-    @Test
-    public void testOnlyB() {
+    public static void testOnlyB() throws CLIException {
         String[] args = { "-b" };
         CompilerOptions compOpt = new CompilerOptions();
         compOpt.parseArgs(args);
-        print(comptOpt);
-        // Checks that we detected the -b
-        assertEquals("printBanner :", compOpt.getPrintBanner(), true);
-        // Checks that we did not detect anyother options
-        assertEquals("registers :", compOpt.getRegisters(), 16);
-        assertEquals("debug :", compOpt.getDebug(), 0);
-        assertEquals("parse :", compOpt.getDebug(), false);
-        assertEquals("parallel :", compOpt.getParallel(), false);
-        assertEquals("no check :", compOpt.getNoCheck(), false);
-        assertEquals("verification :", compOpt.getVerification(), false);
-        assertEquals("warnings :", compOpt.getWarnings(), false);
-        assertEquals("number of files", compOpt.size(), 0);
+        System.out.println(compOpt);
     }
     
 
-    @Test
-    public void testValidR() {
+    public static void testValidR() throws CLIException {
         String[] args = { "-r", "13", "oui.deca" };
         CompilerOptions compOpt = new CompilerOptions();
-        compOpt.parseArgs(args);
-        print(comptOpt);
-        assertEquals("printBanner :", compOpt.getPrintBanner(), false);
-        // Checks that we detected -r with 13
-        assertEquals("registers :", compOpt.getRegisters(), 13);
-        assertEquals("debug :", compOpt.getDebug(), false);
-        assertEquals("parse :", compOpt.getDebug(), 0);
-        assertEquals("parallel :", compOpt.getParallel(), false);
-        assertEquals("no check :", compOpt.getNoCheck(), false);
-        assertEquals("verification :", compOpt.getVerification(), false);
-        assertEquals("warnings :", compOpt.getWarnings(), false);
-        assertEquals("number of files", compOpt.size(), 1);
+        try{compOpt.parseArgs(args);} catch (CLIException e) {e.printStackTrace();};
+        System.out.println(compOpt);
     }
     
-    
-    @Test
-    public void testValidPm() {
+
+    public static void testValidPm() throws CLIException {
         String[] args = { "-p", "-n", "oui.deca" };
         CompilerOptions compOpt = new CompilerOptions();
-        compOpt.parseArgs(args);
-        print(comptOpt);
-        assertEquals("printBanner :", compOpt.getPrintBanner(), false);
-        // Checks that we detected -r with 13
-        assertEquals("registers :", compOpt.getRegisters(), 13);
-        assertEquals("debug :", compOpt.getDebug(), 0);
-        assertEquals("parse :", compOpt.getDebug(), true);
-        assertEquals("parallel :", compOpt.getParallel(), false);
-        assertEquals("no check :", compOpt.getNoCheck(), false);
-        assertEquals("verification :", compOpt.getVerification(), false);
-        assertEquals("warnings :", compOpt.getWarnings(), false);
-        assertEquals("number of files", compOpt.size(), 1);
+        try{compOpt.parseArgs(args);} catch (CLIException e) {e.printStackTrace();}
+        System.out.println(compOpt);
     }
     
-    @Test
-    public void testNoBCompleteOptions() {
-        String[] args = { "-d", "-d", "-d", "-d", "-d", 
-            "oui.deca", "yes.deca" };
+    public static void testLimitD() throws CLIException {
+        String[] args = { "-d", "-d", "yes.deca", "-d", "-d", "-d", 
+            "oui.deca" };
         CompilerOptions compOpt = new CompilerOptions();
-        compOpt.parseArgs(args);
-        print(comptOpt);
-        assertEquals("printBanner :", compOpt.getPrintBanner(), false);
-        // Checks that -d is limited to level 3
-        assertEquals("registers :", compOpt.getRegisters(), 4);
-        assertEquals("parse :", compOpt.getDebug(), false);
-        assertEquals("debug :", compOpt.getDebug(), 3);
-        assertEquals("parallel :", compOpt.getParallel(), false);
-        assertEquals("no check :", compOpt.getNoCheck(), false);
-        assertEquals("verification :", compOpt.getVerification(), false);
-        assertEquals("warnings :", compOpt.getWarnings(), false);
-        assertEquals("number of files", compOpt.size(), 2);
+        try{compOpt.parseArgs(args);} catch (CLIException e) {e.printStackTrace();};
+        System.out.println(compOpt);
     }
     
-    @Test(expected = IllegalArgumentException.class)
-    public void testBandP() {
+    //@Test(expected = CLIException.class)
+    public static void testBandP() throws CLIException {
         // checks that -b is uncompatible with other options
         String[] args = { "-b", "-P" };
         CompilerOptions compOpt = new CompilerOptions();
-        compOpt.parseArgs(args); 
+        try{compOpt.parseArgs(args);} catch (CLIException e) {e.printStackTrace();}; 
     }
     
-    @Test(expected = IllegalArgumentException.class)
-    public void testBandFile {
+    //@Test(expected = CLIException.class)
+    public static void testBandFile() throws CLIException {
         // checks that -b is uncompatible with a file
         String[] args = { "oui.deca", "-b"};
         CompilerOptions compOpt = new CompilerOptions();
-        compOpt.parseArgs(args);
+        try{compOpt.parseArgs(args);} catch (CLIException e) {e.printStackTrace();};
     }
     
     
-    @Test(expected = IllegalArgumentException.class)
-    public void testVandPm(){
+    //@Test(expected = CLIException.class)
+    public static void testVandPm() throws CLIException {
         // checks that -v and -p are uncompatible
         String[] args = { "-v", "-n", "-p" };
         CompilerOptions compOpt = new CompilerOptions();
-        compOpt.parseArgs(args);
+        try{compOpt.parseArgs(args);} catch (CLIException e) {e.printStackTrace();};
     }
     
     
-    @Test(expected = IllegalArgumentException.class)
-    public void testInvalidRValue {
+    //@Test(expected = CLIException.class)
+    public static void testInvalidRValue() throws CLIException {
         // checks that -r X must respect 4 <= X <= 16 
         String[] args = { "-r", "3" };
         CompilerOptions compOpt = new CompilerOptions();
-        compOpt.parseArgs(args);
+        try{compOpt.parseArgs(args);} catch (CLIException e) {e.printStackTrace();};
     }
     
-    @Test(expected = IllegalArgumentException.class)
-    public void testInvalidRString {
+    //@Test(expected = CLIException.class)
+    public static void testInvalidRString() throws CLIException {
         // checks that -r must be followed by an integer
         String[] args = { "-r", "oui.deca" };
         CompilerOptions compOpt = new CompilerOptions();
-        compOpt.parseArgs(args);
+        try{compOpt.parseArgs(args);} catch (CLIException e) {e.printStackTrace();};
     }
     
-    @Test(expected = IllegalArgumentException.class)
-    public void testInvalidREmpty {
+    //@Test(expected = CLIException.class)
+    public static void testInvalidREmpty() throws CLIException {
         // checks that -r should not be the final string
         String[] args = { "-v", "-r" };
         CompilerOptions compOpt = new CompilerOptions();
-        compOpt.parseArgs(args);
+        try{compOpt.parseArgs(args);} catch (CLIException e) {e.printStackTrace();};
     }
     
-    @Test(expected = IllegalArgumentException.class)
-    public void testInvalidFile {
+    //@Test(expected = CLIException.class)
+    public static void testInvalidFile() throws CLIException {
         // checks that a file ending differently than .deca is not accepted
         String[] args = { "oui.ass" };
         CompilerOptions compOpt = new CompilerOptions();
-        compOpt.parseArgs(args);
+        try{compOpt.parseArgs(args);} catch (CLIException e) {e.printStackTrace();};
     }
     
-    @Test(expected = IllegalArgumentException.class)
-    public void testNoArgs() {
+    //@Test(expected = CLIException.class)
+    public static void testNoArgs() throws CLIException {
         // checks that no argument throw an exception
         String[] args = {};
         CompilerOptions compOpt = new CompilerOptions();
-        compOpt.parseArgs(args);
-        print(comptOpt);
+        try{compOpt.parseArgs(args);} catch (CLIException e) {e.printStackTrace();};
+    }
+    
+    // last tests to get rid to test -b -r 16
+    public static void testBandRegisters() throws CLIException {
+        String[] args = { "-b", "-r", "16"};
+        CompilerOptions compOpt = new CompilerOptions();
+        try{compOpt.parseArgs(args); System.out.println(compOpt);
+        } catch (CLIException e) {e.printStackTrace();};
+
+        
+    }
+    
+    public static void main(String[] args) throws CLIException {
+        testNoBCompleteOptions();
+        testOnlyB();
+        testValidR();
+        testValidPm();
+        testLimitD();
+        testBandP();
+        testBandFile();
+        testVandPm();
+        testInvalidRValue();
+        testInvalidRString();
+        testInvalidREmpty();
+        testInvalidFile();
+        testNoArgs();
+        testBandRegisters();
     }
 }

@@ -1,0 +1,1 @@
+src/test/deca/syntax/invalid/HelloWorld/Println-DblEscpQuote.deca:12:17: token recognition error at: '");\n}'
