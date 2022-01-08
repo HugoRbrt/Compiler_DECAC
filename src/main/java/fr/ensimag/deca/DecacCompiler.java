@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.lang.Runnable;
 
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -40,7 +41,7 @@ import fr.ensimag.deca.tools.SymbolTable.Symbol;
  * @author gl49
  * @date 01/01/2022
  */
-public class DecacCompiler {
+public class DecacCompiler implements Runnable {
     private static final Logger LOG = Logger.getLogger(DecacCompiler.class);
 
     /**
@@ -203,6 +204,13 @@ public class DecacCompiler {
             err.println("Internal compiler error while compiling file " + sourceFile + ", sorry.");
             return true;
         }
+    }
+    /**
+     * function that makes the class to implements Runnable interface
+     * by calling compile() function (usefull for -p decac option )
+     */
+    public void run(){
+        compile();
     }
 
     /**

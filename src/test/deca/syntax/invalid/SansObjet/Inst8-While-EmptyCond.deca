@@ -1,0 +1,14 @@
+// Description:
+//    While structure with empty condition.
+//
+// Results:
+//    Syntax error
+//    12:15 mismatched input ')' expecting {FLOAT, INT, '(', '-', '!', 'false',
+//    'null', 'readInt', 'readFloat', 'true', IDENT, STRING, NEW, THIS}
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+        while () {}
+}

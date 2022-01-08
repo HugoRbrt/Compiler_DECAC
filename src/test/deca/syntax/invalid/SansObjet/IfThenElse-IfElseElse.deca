@@ -1,0 +1,17 @@
+// Description:
+//    If with else branch followed by another else.
+//
+// Results:
+//    Syntax Error
+//    14:8 mismatched input 'else' expecting {FLOAT, INT, '}', '(', '-', '!',
+//    ';', 'false', 'if', 'null', 'print', 'println', 'printx', 'printlnx',
+//    'readInt', 'readFloat', 'true', 'while', IDENT, STRING, RETURN, NEW, THIS}
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+        if (x > 3) {}
+        else {}
+        else {}
+}

@@ -139,6 +139,9 @@ fragment FILENAME: (LETTER | DIGIT | '.' | '-' | '_')+;
 
 INCLUDE: '#include' (' ')* '"' FILENAME '"' {doInclude(getText());};
 
+//Antlr codegen causes compilation error
+// DEFAULT: '.' {throw new DecaRecognitionException(this, this.getInputStream());};
+
 
 
 

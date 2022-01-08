@@ -1,0 +1,16 @@
+// Description:
+//    While structure with multiple instructions.
+//
+// Results:
+//    (void)
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+        while (x) {
+            y = z;
+            u = v;
+            s = t;
+        }
+}
