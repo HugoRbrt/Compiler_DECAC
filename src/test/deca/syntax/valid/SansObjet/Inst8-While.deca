@@ -1,0 +1,12 @@
+// Description:
+//    While structure with no instructions.
+//
+// Results:
+//    (void)
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+        while (x) {}
+}

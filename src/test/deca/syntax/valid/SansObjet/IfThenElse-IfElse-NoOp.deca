@@ -1,0 +1,13 @@
+// Description:
+//    If with else branch and one no op instruction.
+//
+// Results:
+//    (void)
+//
+// Historique:
+//    cree le 07/01/2022
+
+{
+        if (x > 3) {}
+        else {;}
+}

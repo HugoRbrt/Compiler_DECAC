@@ -1,0 +1,14 @@
+// Description:
+//    If with else if branch and no condition.
+//
+// Results:
+//    Syntax Error
+//    12:16 mismatched input '{' expecting '('
+//
+// Historique:
+//    cree le 07/01/2022
+
+{
+        if (x > 3) {}
+        else if {}
+}

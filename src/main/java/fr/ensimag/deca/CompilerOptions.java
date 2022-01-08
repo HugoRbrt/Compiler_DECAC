@@ -99,6 +99,9 @@ public class CompilerOptions {
 
         Logger logger = Logger.getRootLogger();
         // map command-line debug option to log4j's level.
+        if(warnings){
+            logger.setLevel(Level.WARN);
+        }
         switch (getDebug()) {
         case QUIET: break; // keep default
         case INFO:

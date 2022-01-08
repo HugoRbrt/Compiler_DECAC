@@ -1,0 +1,12 @@
+// Description:
+//    If with no else branches and no instructions.
+//
+// Results:
+//    (void)
+//
+// Historique:
+//    cree le 07/01/2022
+
+{
+        if (x > 3) {}
+}
