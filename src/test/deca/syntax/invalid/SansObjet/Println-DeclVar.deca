@@ -1,0 +1,13 @@
+// Description:
+//    Printing a comparison
+//
+// Results:
+//    test-lex: no error
+//    test-synt: error on line 12 on token x
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+        println(int x);
+}
