@@ -1,0 +1,12 @@
+// Description:
+//    simple program to check that we get a decorated abstract tree
+//
+// Results:
+//    Hello
+//
+// History:
+//    cree le 01/01/2022
+
+{
+    println("I'm a string");
+}
