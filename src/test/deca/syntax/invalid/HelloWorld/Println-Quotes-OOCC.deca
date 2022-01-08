@@ -1,0 +1,14 @@
+// Description:
+//    String with double quotes
+//
+// Results:
+//    test_lex : no error
+//    test-synt: line 13 error after the first empty quotes
+//
+//
+// History:
+//    cree le 08/01/2022
+
+{
+println(""Hello"");
+}

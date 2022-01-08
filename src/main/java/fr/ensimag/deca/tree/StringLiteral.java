@@ -25,7 +25,7 @@ public class StringLiteral extends AbstractStringLiteral {
 
     public StringLiteral(String value) {
         Validate.notNull(value);
-        value = value.replaceAll("\"", "");
+        value = value.replaceAll("^\"|\"$", "");
         this.value = value;
     }
 

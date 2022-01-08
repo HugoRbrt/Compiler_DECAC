@@ -1,11 +1,11 @@
 // Description:
-//    tests de programme incorrect dont l'instruction n'est pas fermée par }
+//    Program without closing bracket
 //
-// Resultats:
-//    Ligne 13 : Erreur de syntaxe.
-//    test_lex ne doit pas donner d'erreur.
+// Results:
+//    Line 13 : syntax error.
+//    test_lex : no error.
 //
-// Historique:
+// History:
 //    cree le 05/01/2022
 
 {

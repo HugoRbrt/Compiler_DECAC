@@ -1,10 +1,10 @@
 // Description:
-//    test de commentaire avec sous-commentaire lexicalement correct.
+//    Comment with a sub comment which is lexically correct.
 //
-// Resultats:
-//    arbre vide
+// Results:
+//    empty tree
 //
-// Historique:
+// History:
 //    cree le 05/01/2022
 
 /* foo /*

@@ -1,11 +1,11 @@
 // Description:
 //    tests de programme dont une instruction n'a pas de semicolon
 //
-// Resultats:
-//    Ligne 13 : Erreur de syntaxe.
-//    test_lex ne doit pas donner d'erreur.
+// Results:
+//    Line 13 : syntax error.
+//    test_lex: no error.
 //
-// Historique:
+// History:
 //    cree le 05/01/2022
 
 {

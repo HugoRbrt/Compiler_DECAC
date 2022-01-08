@@ -1,0 +1,13 @@
+// Description:
+//    Print a rejected token
+//
+// Results:
+//    test_lex : error line 12 on the ~
+//
+//
+// History:
+//    cree le 08/01/2022
+
+{
+println(~);
+}
