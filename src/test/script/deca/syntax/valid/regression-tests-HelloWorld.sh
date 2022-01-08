@@ -31,7 +31,6 @@ regression_test () {
     if [ ! -f $LISPATH/$1.lis ]
         then
             echo "${RED}[NO OLD] : $1 ${NC}"
-	    exit 2
     fi
 
     # Checks if a new result file was created.
@@ -39,7 +38,6 @@ regression_test () {
     if [ ! -f $TMP/$1.listmp ]
         then
            echo "${RED}[NO NEW] : $1 ${NC}"
-	   exit 3
     fi
 		
     DIFF=$(diff $LISPATH/$1.lis $TMP/$1.listmp)
