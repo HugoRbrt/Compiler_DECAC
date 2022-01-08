@@ -1,0 +1,40 @@
+# Gitlab ci/cd file configuration 
+
+stages:
+    - compiling
+    - testing
+    - cleanup
+
+compile_job:
+    stage: compiling
+    script:
+        - echo "C'est le moment de compiler"
+
+test_compile_job:
+    stage: compiling
+    script:
+        -echo "C'est maintenant qu'on compile les tests"
+
+script_execution_job:
+    dependencies:
+        - compile_job
+        - test_compile_job
+    stage: testing
+    script:
+        - echo "A ce niveau là, on devrait réussir à lancer les tests"
+        
+no_regression_job:
+    dependencies:
+        - compile_job
+        - test_compile_job
+    stage: testing
+    script:
+        - echo "A ce niveau là, on devrait pouvoir lancer les tests de non-régression"
+
+
+
+cleanup_job:
+    stage: cleanup
+    script:
+        - mvn clean
+    when: on_failure
