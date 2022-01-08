@@ -120,7 +120,7 @@ public class CompilerOptions {
         
         // if no arguments were seen, we explain how decac should be used
         if (args.length == 0) {
-            throw new CLIException("");
+            throw new CLIException("No option nor file given");
         }
         
         // if no file was written
@@ -129,7 +129,8 @@ public class CompilerOptions {
                     verification || noCheck || warnings || 
                     (registers != 16) ) )) {
                 // if printBanner was written but no other options
-                throw new CLIException("");
+                throw new CLIException("-b is uncompatible with" +
+                        "the rest of options and files");
             }
             // else no problem : we have -b   
         }
@@ -168,7 +169,11 @@ public class CompilerOptions {
         
         String arg = args[k];
         
-        if (arg.equals("-p")) {
+        if (arg.equals("-b")) {
+            printBanner = true;
+        }
+        
+        else if (arg.equals("-p")) {
             // -p and -v are uncompatible
 	    if (verification) {
                 throw new CLIException("-p written with -v");
@@ -217,7 +222,7 @@ public class CompilerOptions {
         }
         
         else {
-            throw new CLIException("option or file not recognized");
+            throw new CLIException("option or file not recognized: " + arg);
         }
         
     }
