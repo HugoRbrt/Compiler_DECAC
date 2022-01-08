@@ -74,14 +74,15 @@ public class CompilerOptions {
                 // we try to associate the next argument to a number of
                 // registers
                 try{
-                    checkRegisters(args[k+1]);
+                    k++; // go to next token
+                    checkRegisters(args[k]);
                 } catch (CLIException e) {
                     throw e;
                 }
                 
             } else if ( args[k].equals("-r") && ( k+1 >= args.length )) {
                 // no number of registers will be recognized
-                throw new CLIException("");
+                throw new CLIException("Nothing after -r");
             } else {
                 try{
                     processArg(args, k);
@@ -170,7 +171,7 @@ public class CompilerOptions {
         if (arg.equals("-p")) {
             // -p and -v are uncompatible
 	    if (verification) {
-                throw new CLIException("");
+                throw new CLIException("-p written with -v");
             } else {
                 parse = true;
             }
@@ -179,7 +180,7 @@ public class CompilerOptions {
         else if (arg.equals("-v")) {
             // -v and -p are uncompatible
             if (parse) {
-                throw new CLIException("");
+                throw new CLIException("-v written with -p");
             } else {
                 verification = true;
             }
@@ -216,7 +217,7 @@ public class CompilerOptions {
         }
         
         else {
-            throw new CLIException("");
+            throw new CLIException("option or file not recognized");
         }
         
     }
@@ -229,10 +230,10 @@ public class CompilerOptions {
         try {
             nbRegisters = Integer.parseInt(nbRegistersString);
         } catch (NumberFormatException nfe) {
-            throw new CLIException("");
+            throw new CLIException("-r X has not X as a number");
         }
         if ((nbRegisters < 4) || (nbRegisters > 16)) {
-                throw new CLIException("");
+                throw new CLIException("-r X does not match 4 <= X <= 16");
         } else {
             registers = nbRegisters;
         }
