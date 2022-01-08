@@ -1,7 +1,7 @@
 #! /bin/sh
 
-# Author : gl49, Paul
-# Initial version : 06/01/2022
+# Author : gl49, Paul, Teimur
+# Initial version : 08/01/2022
 
 # This program is able to execute all the valid syntax tests
 # for the HelloWorld step and compare them with the validated
@@ -12,8 +12,8 @@ cd "$(dirname "$0")"/../../../../../../ || exit 1
 
 # We change the paths to execute the tests from the project root.
 PATH=src/test/script/launchers:"$PATH"
-TESTPATH=src/test/deca/syntax/valid/HelloWorld
-LISPATH=src/test/results/deca/syntax/valid/HelloWorld
+TESTPATH=src/test/deca/context/valid/HelloWorld
+LISPATH=src/test/results/deca/context/valid/HelloWorld
 TMP=src/test/tmp
 
 # Coloring for the script.
@@ -31,6 +31,7 @@ regression_test () {
     if [ ! -f $LISPATH/$1.lis ]
         then
             echo "${RED}[NO OLD] : $1 ${NC}"
+	    exit 2
     fi
 
     # Checks if a new result file was created.
@@ -38,6 +39,7 @@ regression_test () {
     if [ ! -f $TMP/$1.listmp ]
         then
            echo "${RED}[NO NEW] : $1 ${NC}"
+	   exit 3
     fi
 		
     DIFF=$(diff $LISPATH/$1.lis $TMP/$1.listmp)

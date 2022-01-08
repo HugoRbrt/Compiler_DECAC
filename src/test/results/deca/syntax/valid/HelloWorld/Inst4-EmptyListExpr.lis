@@ -3,5 +3,5 @@
    `> [10, 0] Main
       +> ListDeclVar [List with 0 elements]
       `> ListInst [List with 1 elements]
-         []> [11, 12] Println
+         []> [11, 4] Println
              `> ListExpr [List with 0 elements]

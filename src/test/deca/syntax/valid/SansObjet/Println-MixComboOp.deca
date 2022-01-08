@@ -1,0 +1,12 @@
+// Description:
+//    Printing oprations between integers and variables
+//
+// Results:
+//    tree with all variables and intergers as branch of println
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+        println(x + 2 - z - 5 * k / l % t );
+}

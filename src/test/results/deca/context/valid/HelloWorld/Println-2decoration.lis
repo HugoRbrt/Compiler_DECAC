@@ -1,0 +1,17 @@
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:38) - verify program: start
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:33) - verify Main: start
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:40) - verify Main: end
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:44) - verify program: end
+`> [10, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [10, 0] Main
+      +> ListDeclVar [List with 0 elements]
+      `> ListInst [List with 2 elements]
+         []> [11, 8] Println
+         ||  `> ListExpr [List with 1 elements]
+         ||     []> [11, 16] StringLiteral (I'm a string)
+         ||         type: string
+         []> [12, 8] Println
+             `> ListExpr [List with 1 elements]
+                []> [12, 16] StringLiteral (I'm a string too)
+                    type: string
