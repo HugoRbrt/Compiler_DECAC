@@ -1,5 +1,5 @@
 // Description:
-//    Declaration of a type without an associated variable.
+//    While structure with single instruction.
 //
 // Results:
 //    (void)
@@ -8,5 +8,5 @@
 //    cree le 08/01/2022
 
 {
-        int;
+        while (x) { y = z; }
 }

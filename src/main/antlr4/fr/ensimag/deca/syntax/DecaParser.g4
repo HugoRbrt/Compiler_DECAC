@@ -151,11 +151,11 @@ inst returns[AbstractInst tree]
             $tree = $if_then_else.tree;
             LOG.trace($tree);
         }
-    | WHILE OPARENT condition=expr CPARENT OBRACE body=list_inst CBRACE {
+    | wh=WHILE OPARENT condition=expr CPARENT OBRACE body=list_inst CBRACE {
             assert($condition.tree != null);
             assert($body.tree != null);
             $tree = new While($condition.tree, $body.tree);
-            setLocation($tree, $condition.start);
+            setLocation($tree, $wh);
             LOG.trace($tree);
         }
     | RETURN expr SEMI {
