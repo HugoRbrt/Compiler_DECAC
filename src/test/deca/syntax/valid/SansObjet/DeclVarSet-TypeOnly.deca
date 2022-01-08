@@ -1,0 +1,12 @@
+// Description:
+//    Declaration of a type without an associated variable.
+//
+// Results:
+//    (void)
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+        int;
+}

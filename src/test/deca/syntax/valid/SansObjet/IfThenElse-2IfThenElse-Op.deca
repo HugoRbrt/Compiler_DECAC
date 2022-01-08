@@ -1,0 +1,15 @@
+// Description:
+//    Two successive if-then-else structures with instructions.
+//
+// Results:
+//    (void)
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+        if (x > 3) { y = 3; }
+        else { y = z * 4; }
+        if (x < 3) { y = 2; }
+        else { y = z / 4; }
+}
