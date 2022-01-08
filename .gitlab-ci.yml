@@ -13,7 +13,7 @@ compile_job:
 test_compile_job:
     stage: compiling
     script:
-        -echo "C'est maintenant qu'on compile les tests"
+        - echo "C'est maintenant qu'on compile les tests"
 
 script_execution_job:
     dependencies:
