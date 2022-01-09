@@ -8,12 +8,13 @@ stages:
 compile_job:
     stage: compiling
     script:
-        - echo "C'est le moment de compiler"
+        - echo "Trying to compile src files..."
+        - mvn compile
 
 test_compile_job:
     stage: compiling
     script:
-        - echo "C'est maintenant qu'on compile les tests"
+        - echo "Trying to compile test files..."
 
 script_execution_job:
     dependencies:
