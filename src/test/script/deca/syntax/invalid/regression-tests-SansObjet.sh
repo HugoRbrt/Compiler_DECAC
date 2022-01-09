@@ -12,8 +12,8 @@ cd "$(dirname "$0")"/../../../../../../ || exit 1
 
 # We change the paths to execute the tests from the project root.
 PATH=src/test/script/launchers:"$PATH"
-TESTPATH=src/test/deca/syntax/valid/SansObjet
-LISPATH=src/test/results/deca/syntax/valid/SansObjet
+TESTPATH=src/test/deca/syntax/invalid/SansObjet
+LISPATH=src/test/results/deca/syntax/invalid/SansObjet
 TMP=src/test/tmp
 
 # Coloring for the script.
@@ -31,6 +31,7 @@ regression_test () {
     if [ ! -f $LISPATH/$1.lis ]
         then
             echo "${RED}[NO OLD] : $1 ${NC}"
+	    exit 2
     fi
 
     # Checks if a new result file was created.
@@ -38,12 +39,14 @@ regression_test () {
     if [ ! -f $TMP/$1.listmp ]
         then
            echo "${RED}[NO NEW] : $1 ${NC}"
+	   exit 3
     fi
 		
     DIFF=$(diff $LISPATH/$1.lis $TMP/$1.listmp)
     if [ "$DIFF" != "" ]
         then
             echo "${RED}[REGRESSION] : $1 ${NC}"
+            exit 1
         else
             echo "${GREEN}[NO-REGRESSION] : $1 ${NC}"
     fi
