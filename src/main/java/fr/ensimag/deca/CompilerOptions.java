@@ -55,6 +55,12 @@ public class CompilerOptions {
     public boolean getWarnings() {
         return warnings;
     }
+
+    public boolean getArmBool() {
+        return armBool;
+    }
+
+
     private int debug = 0;
     private boolean parallel = false;
     private boolean printBanner = false;
@@ -65,6 +71,9 @@ public class CompilerOptions {
     private boolean noCheck = false;
     private int registers = 16;
     private boolean warnings = false;
+
+    // new argument to check if we want an ARM program
+    private boolean armBool = false;
     
     // ugly way to get rid of the case -b -r 16 
     private boolean optionRSpotted = false;
@@ -134,7 +143,7 @@ public class CompilerOptions {
             // if no file was detected
             if ( printBanner && ( parallel || (debug != 0) || parse ||
                     verification || noCheck || warnings || 
-                    optionRSpotted ) ) {
+                    optionRSpotted || armBool ) ) {
                 // if printBanner was written but other options too
                 throw new CLIException("-b is uncompatible with" +
                         "other options");
@@ -171,6 +180,8 @@ public class CompilerOptions {
                 "are given, starts their parallel compilations");
         System.out.println("-w  (warnings) : enables warning messages during "+
                 "compilation");
+	System.out.println("-a (arm target) : produces a .s file instead of a"+
+                " regular .ass file");
     }
 
 
@@ -231,6 +242,10 @@ public class CompilerOptions {
         else if (arg.equals("-w")) {
             warnings = true;
         }
+
+	else if (arg.equals("-a")) {
+            armBool = true;
+        }
         
         else {
             throw new CLIException("option or file not recognized: " + arg);
@@ -260,14 +275,15 @@ public class CompilerOptions {
     public String toString() {
         String s = "CompilerOptions[\n";
         s += "-b (printBanner): " + Boolean.toString(printBanner) + "\n";
-        s += "-d (debug):" + Integer.toString(debug) + "\n";
-        s += "-P (parallel):" + Boolean.toString(parallel) + "\n";
-        s += "-v (verification):" + Boolean.toString(verification) + "\n";
-        s += "-p (parse):" + Boolean.toString(parse) + "\n";
-        s += "-n (noCheck):" + Boolean.toString(noCheck) + "\n";
-        s += "-w (warnings):" + Boolean.toString(warnings) + "\n";
-        s += "-r (registers):" + Integer.toString(registers) + "\n";
-        s += "-files : " + sourceFiles.toString() + "\n";
+        s += "-d (debug): " + Integer.toString(debug) + "\n";
+        s += "-P (parallel): " + Boolean.toString(parallel) + "\n";
+        s += "-v (verification): " + Boolean.toString(verification) + "\n";
+        s += "-p (parse): " + Boolean.toString(parse) + "\n";
+        s += "-n (noCheck): " + Boolean.toString(noCheck) + "\n";
+        s += "-w (warnings): " + Boolean.toString(warnings) + "\n";
+        s += "-r (registers): " + Integer.toString(registers) + "\n";
+	s += "-a (armBool): " + Boolean.toString(armBool) + "\n";
+        s += "-files: " + sourceFiles.toString() + "\n";
         s += "]";
         
         return s;
