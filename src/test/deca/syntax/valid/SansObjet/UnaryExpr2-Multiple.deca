@@ -1,0 +1,12 @@
+// Description:
+//    Multiple not expressions.
+//
+// Results:
+//    (void)
+//
+// Historique:
+//    cree le 09/01/2022
+
+{
+       !!!x;
+}

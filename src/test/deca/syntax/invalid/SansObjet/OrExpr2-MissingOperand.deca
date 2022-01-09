@@ -2,7 +2,7 @@
 //    Or expression with missing operand.
 //
 // Results:
-//    11:12 mismatched input ';' expecting {FLOAT, INT, '(', '-', '!', 'false',
+//    12:12 mismatched input ';' expecting {FLOAT, INT, '(', '-', '!', 'false',
 //    'null', 'readInt', 'readFloat', 'true', IDENT, STRING, NEW, THIS}
 //
 // Historique:

@@ -32,7 +32,6 @@ test_synt_invalid () {
             echo "${GREEN}[KO] : $1 ${NC}"
         else # unexpected success
             echo "${RED}[OK] : $1 ${NC}"
-	    exit 1
     fi
 }
 

@@ -1,0 +1,12 @@
+// Description:
+//    Printing an addition
+//
+// Results:
+//    tree with x and y as branches of println
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+        println(x + y);
+}

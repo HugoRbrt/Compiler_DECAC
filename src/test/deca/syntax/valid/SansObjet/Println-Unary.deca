@@ -1,0 +1,15 @@
+// Description:
+//    Printing unary expressions
+//
+// Results:
+//    tree with all variables as branch of println
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+        println(!x);
+        println(-x);
+        println(-x, !x);
+        println(!5, -5);
+}

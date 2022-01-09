@@ -1,0 +1,12 @@
+// Description:
+//    Minus expression.
+//
+// Results:
+//    (void)
+//
+// Historique:
+//    cree le 09/01/2022
+
+{
+       x - y;
+}

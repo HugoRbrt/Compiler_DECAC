@@ -1,0 +1,16 @@
+// Description:
+//    Printing operations between integers
+//
+// Results:
+//    tree with all variables as branch of println
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+        println(5 + 3);
+        println(5 - 3);
+        println(5 / 3);
+        println(5 % 3);
+        println(5 * 3);
+}

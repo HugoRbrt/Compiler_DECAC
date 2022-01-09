@@ -1,0 +1,13 @@
+// Description:
+//    And expression with incorrect right operand (inst).
+//
+// Results:
+//    12:13 extraneous input 'print' expecting {FLOAT, INT, '(', '-', '!',
+//    'false', 'null', 'readInt', 'readFloat', 'true', IDENT, STRING, NEW, THIS}
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+        x && print("Hello");
+}

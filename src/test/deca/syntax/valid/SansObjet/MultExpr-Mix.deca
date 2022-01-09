@@ -1,0 +1,12 @@
+// Description:
+//    Multiple multiply expressions.
+//
+// Results:
+//    (void)
+//
+// Historique:
+//    cree le 09/01/2022
+
+{
+        u % v*w /x * y/  z;
+}

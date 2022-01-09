@@ -1,0 +1,14 @@
+// Description:
+//    Lower or equal expression with missing left operand.
+//
+// Results:
+//    13:8 mismatched input '=' expecting {FLOAT, INT, '}', '(', '-', '!', ';',
+//    'false', 'if', 'null', 'print', 'println', 'printx', 'printlnx', 'readInt',
+//    'readFloat', 'return', 'true', 'while', IDENT, STRING, NEW, THIS}
+//
+// Historique:
+//    cree le 09/01/2022
+
+{
+        => x;
+}

@@ -1,0 +1,13 @@
+// Description:
+//    And expression with missing operand.
+//
+// Results:
+//    12:12 mismatched input ';' expecting {FLOAT, INT, '(', '-', '!', 'false',
+//    'null', 'readInt', 'readFloat', 'true', IDENT, STRING, NEW, THIS}
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+        x &&;
+}

@@ -1,0 +1,12 @@
+// Description:
+//    Expression with parenthesis.
+//
+// Results:
+//    (void)
+//
+// Historique:
+//    cree le 09/01/2022
+
+{
+       ((v - ((w + x) * y)) % z);
+}

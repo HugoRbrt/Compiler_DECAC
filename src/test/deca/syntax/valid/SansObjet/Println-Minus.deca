@@ -1,0 +1,12 @@
+// Description:
+//    Printing a subtraction
+//
+// Results:
+//    tree with all variables as branch of println
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+        println(x - y);
+}

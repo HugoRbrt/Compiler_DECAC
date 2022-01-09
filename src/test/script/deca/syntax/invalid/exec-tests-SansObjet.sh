@@ -26,21 +26,19 @@ test_synt_invalid () {
     # $1 = first argument : name of files without extension
 
     # echo $(test_synt $TESTPATH/$1.deca)
-    if test_synt $TESTPATH/$1.deca 2>&1 | head -n 1 | grep -q "$1.deca"
-        then 	# unexpected fail
-            echo "${RED}[KO] : $1 ${NC}"
-            exit 1
-        else 	# normal success : we store the new result in a tmp file
+    if test_synt $TESTPATH/$1.deca 2>&1 | grep -q -e "$1.deca:[0-9][0-9]*:"
+        then # normal fail
             test_synt $TESTPATH/$1.deca 1> $TMP/$1.listmp 2>> $TMP/$1.listmp
-            echo "${GREEN}[OK] : $1 ${NC}"
+            echo "${GREEN}[KO] : $1 ${NC}"
+        else # unexpected success
+            echo "${RED}[OK] : $1 ${NC}"
     fi
 }
 
 
-# Looping on all the targeted paths.
+# looping on all the targeted paths
 for cas_de_test in "$TESTPATH"/*.deca
 do
-# we get the filename without its extension for further use
     file=$(basename "$cas_de_test" ".deca")
     test_synt_invalid "$file"
 done
