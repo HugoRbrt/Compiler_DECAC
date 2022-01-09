@@ -29,11 +29,17 @@ public abstract class AbstractInst extends Tree {
             EnvironmentExp localEnv, ClassDefinition currentClass, Type returnType) throws ContextualError;
 
     /**
-     * Generate assembly code for the instruction.
+     * Generate assembly code for the IMA instruction.
      * 
      * @param compiler
      */
     protected abstract void codeGenInst(DecacCompiler compiler);
+    /**
+     * Generate assembly code for the ARM instruction.
+     *
+     * @param compiler
+     */
+    protected abstract void codeGenInstARM(DecacCompiler compiler);
 
 
     /**

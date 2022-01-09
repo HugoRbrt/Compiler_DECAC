@@ -121,6 +121,20 @@ public abstract class AbstractExpr extends AbstractInst {
     protected void codeGenInst(DecacCompiler compiler) {
         throw new UnsupportedOperationException("not yet implemented");
     }
+
+    /**
+     * Generate code to print the expression
+     *
+     * @param compiler
+     */
+    protected void codeGenPrintARM(DecacCompiler compiler) {
+        throw new UnsupportedOperationException("not yet implemented");
+    }
+
+    @Override
+    protected void codeGenInstARM(DecacCompiler compiler) {
+        throw new UnsupportedOperationException("not yet implemented");
+    }
     
 
     @Override
