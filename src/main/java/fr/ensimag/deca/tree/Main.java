@@ -45,9 +45,9 @@ public class Main extends AbstractMain {
 
     @Override
     protected void codeGenMain(DecacCompiler compiler) {
-        /* Paul, le 6/1 : cette partie du code est à décommenter pour plus tard 
+        /* Paul, le 9/1 : cette partie du code est à décommenter pour plus tard
         compiler.addComment("Beginning of variables declaration");
-        declVariables.codeListDeclVar(compiler); */
+        declVariables.codeGenListDeclVar(compiler); */
         compiler.addComment("Beginning of main instructions:");
         insts.codeGenListInst(compiler);
     }
