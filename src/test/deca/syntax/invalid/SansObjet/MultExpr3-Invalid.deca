@@ -1,0 +1,12 @@
+// Description:
+//    Divide expression with invalid syntax.
+//
+// Results:
+//    12:0 no viable alternative at input '}'
+//
+// Historique:
+//    cree le 09/01/2022
+
+{
+        x // 3;
+}

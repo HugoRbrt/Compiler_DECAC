@@ -1,0 +1,12 @@
+// Description:
+//    Not Equal To expression.
+//
+// Results:
+//    (void)
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+        x != 3;
+}

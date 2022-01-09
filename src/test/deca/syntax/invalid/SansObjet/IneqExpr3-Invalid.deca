@@ -1,0 +1,13 @@
+// Description:
+//    Greater or equal expression with invalid syntax.
+//
+// Results:
+//    12:11 extraneous input '>' expecting {FLOAT, INT, '(', '-', '!', 'false',
+//    'null', 'readInt', 'readFloat', 'true', IDENT, STRING, NEW, THIS}
+//
+// Historique:
+//    cree le 09/01/2022
+
+{
+        x => 3;
+}

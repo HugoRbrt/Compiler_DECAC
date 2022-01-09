@@ -1,0 +1,13 @@
+// Description:
+//    Equals expression with typo.
+//
+// Results:
+//    12:12 extraneous input '=' expecting {FLOAT, INT, '(', '-', '!', 'false',
+//    'null', 'readInt', 'readFloat', 'true', IDENT, STRING, NEW, THIS}
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+        x === 3;
+}
