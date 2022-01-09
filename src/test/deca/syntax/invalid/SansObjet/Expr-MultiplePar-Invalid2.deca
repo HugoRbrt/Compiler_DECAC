@@ -1,0 +1,12 @@
+// Description:
+//    Expression with incorrect parenthesis.
+//
+// Results:
+//    11:32 extraneous input ')' expecting ';'
+//
+// Historique:
+//    cree le 09/01/2022
+
+{
+       ((v - ((w + x) * y)) % z));
+}
