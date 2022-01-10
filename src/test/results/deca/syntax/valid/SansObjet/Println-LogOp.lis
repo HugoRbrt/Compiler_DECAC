@@ -1,0 +1,45 @@
+`> [10, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [10, 0] Main
+      +> ListDeclVar [List with 0 elements]
+      `> ListInst [List with 4 elements]
+         []> [11, 8] Println
+         ||  `> ListExpr [List with 1 elements]
+         ||     []> [11, 18] And
+         ||         +> [11, 16] Identifier (x)
+         ||         `> [11, 21] Int (5)
+         []> [12, 8] Println
+         ||  `> ListExpr [List with 1 elements]
+         ||     []> [12, 22] Or
+         ||         +> [12, 18] Plus
+         ||         |  +> [12, 16] Int (5)
+         ||         |  `> [12, 20] Int (3)
+         ||         `> [12, 27] Plus
+         ||            +> [12, 25] Int (2)
+         ||            `> [12, 29] Int (18)
+         []> [13, 8] Println
+         ||  `> ListExpr [List with 1 elements]
+         ||     []> [13, 22] Or
+         ||         +> [13, 18] Plus
+         ||         |  +> [13, 16] Int (5)
+         ||         |  `> [13, 20] Int (3)
+         ||         `> [13, 37] And
+         ||            +> [13, 32] And
+         ||            |  +> [13, 27] Plus
+         ||            |  |  +> [13, 25] Int (2)
+         ||            |  |  `> [13, 29] Int (18)
+         ||            |  `> [13, 35] Identifier (x)
+         ||            `> [13, 40] Int (5)
+         []> [14, 8] Println
+             `> ListExpr [List with 1 elements]
+                []> [14, 39] And
+                    +> [14, 34] And
+                    |  +> [14, 23] Or
+                    |  |  +> [14, 19] Plus
+                    |  |  |  +> [14, 17] Int (5)
+                    |  |  |  `> [14, 21] Int (3)
+                    |  |  `> [14, 28] Plus
+                    |  |     +> [14, 26] Identifier (y)
+                    |  |     `> [14, 30] Int (18)
+                    |  `> [14, 37] Identifier (x)
+                    `> [14, 42] Int (5)

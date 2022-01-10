@@ -1,0 +1,10 @@
+`> [10, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [10, 0] Main
+      +> ListDeclVar [List with 0 elements]
+      `> ListInst [List with 1 elements]
+         []> [11, 15] Equals
+             +> [11, 10] Equals
+             |  +> [11, 8] Identifier (x)
+             |  `> [11, 13] Int (3)
+             `> [11, 18] Float (2.5)

@@ -1,0 +1,9 @@
+`> [10, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [10, 0] Main
+      +> ListDeclVar [List with 0 elements]
+      `> ListInst [List with 1 elements]
+         []> [11, 7] Not
+             `> [11, 8] Not
+                `> [11, 9] Not
+                   `> [11, 10] Identifier (x)

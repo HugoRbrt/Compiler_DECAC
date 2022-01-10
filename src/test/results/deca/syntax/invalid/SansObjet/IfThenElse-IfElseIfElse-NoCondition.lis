@@ -1,0 +1,1 @@
+src/test/deca/syntax/invalid/SansObjet/IfThenElse-IfElseIfElse-NoCondition.deca:13:16: mismatched input '{' expecting '('

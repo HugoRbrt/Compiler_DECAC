@@ -1,0 +1,33 @@
+`> [10, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [10, 0] Main
+      +> ListDeclVar [List with 0 elements]
+      `> ListInst [List with 2 elements]
+         []> IfThenElse
+         ||  +> [11, 14] Greater
+         ||  |  +> [11, 12] Identifier (x)
+         ||  |  `> [11, 16] Int (3)
+         ||  +> ListInst [List with 1 elements]
+         ||  |  []> [11, 23] Assign
+         ||  |      +> [11, 21] Identifier (y)
+         ||  |      `> [11, 25] Int (3)
+         ||  `> ListInst [List with 1 elements]
+         ||     []> [12, 17] Assign
+         ||         +> [12, 15] Identifier (y)
+         ||         `> [12, 21] Multiply
+         ||            +> [12, 19] Identifier (z)
+         ||            `> [12, 23] Int (4)
+         []> IfThenElse
+             +> [13, 14] Lower
+             |  +> [13, 12] Identifier (x)
+             |  `> [13, 16] Int (3)
+             +> ListInst [List with 1 elements]
+             |  []> [13, 23] Assign
+             |      +> [13, 21] Identifier (y)
+             |      `> [13, 25] Int (2)
+             `> ListInst [List with 1 elements]
+                []> [14, 17] Assign
+                    +> [14, 15] Identifier (y)
+                    `> [14, 21] Divide
+                       +> [14, 19] Identifier (z)
+                       `> [14, 23] Int (4)

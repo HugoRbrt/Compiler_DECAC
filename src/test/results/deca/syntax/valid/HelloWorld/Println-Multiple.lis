@@ -1,0 +1,11 @@
+`> [10, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [10, 0] Main
+      +> ListDeclVar [List with 0 elements]
+      `> ListInst [List with 1 elements]
+         []> [11, 8] Println
+             `> ListExpr [List with 4 elements]
+                []> [11, 16] StringLiteral (Hello)
+                []> [11, 25] StringLiteral (second)
+                []> [11, 35] StringLiteral (third)
+                []> [11, 44] StringLiteral (fourth)

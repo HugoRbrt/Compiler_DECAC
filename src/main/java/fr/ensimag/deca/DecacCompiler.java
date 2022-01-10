@@ -1,5 +1,6 @@
 package fr.ensimag.deca;
 
+import com.sun.tools.doclint.Env;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
@@ -51,7 +52,7 @@ public class DecacCompiler implements Runnable {
 
     private EnvironmentExp envExp = new EnvironmentExp(null);
     private SymbolTable symbTable = new SymbolTable();
-    private Map<Symbol, TypeDefinition> envTypes = new HashMap<>();
+    private EnvironmentType envTypes = EnvironmentType.getEnvTypes();
 
     public DecacCompiler(CompilerOptions compilerOptions, File source) {
         super();
@@ -98,7 +99,7 @@ public class DecacCompiler implements Runnable {
      * Environment types associated with the program
      */
     public Map<Symbol, TypeDefinition> getEnvTypes() {
-        return envTypes;
+        return envTypes.get();
     }
 
     /**

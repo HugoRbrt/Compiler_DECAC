@@ -1,0 +1,13 @@
+`> [10, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [10, 0] Main
+      +> ListDeclVar [List with 0 elements]
+      `> ListInst [List with 1 elements]
+         []> [11, 17] Plus
+             +> [11, 13] Minus
+             |  +> [11, 9] Plus
+             |  |  +> [11, 7] Identifier (w)
+             |  |  `> [11, 11] Identifier (x)
+             |  `> [11, 15] Identifier (y)
+             `> [11, 19] UnaryMinus
+                `> [11, 21] Identifier (z)

@@ -1,0 +1,19 @@
+`> [10, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [10, 0] Main
+      +> ListDeclVar [List with 0 elements]
+      `> ListInst [List with 1 elements]
+         []> [11, 8] While
+             +> [11, 21] Or
+             |  +> [11, 17] Plus
+             |  |  +> [11, 15] Identifier (x)
+             |  |  `> [11, 19] Int (3)
+             |  `> [11, 34] And
+             |     +> [11, 26] Lower
+             |     |  +> [11, 24] Int (8)
+             |     |  `> [11, 30] Multiply
+             |     |     +> [11, 28] Identifier (z)
+             |     |     `> [11, 32] Int (4)
+             |     `> [11, 37] Int (2)
+             `> ListInst [List with 1 elements]
+                []> [11, 42] NoOperation

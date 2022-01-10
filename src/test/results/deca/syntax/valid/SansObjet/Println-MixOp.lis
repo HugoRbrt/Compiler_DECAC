@@ -1,0 +1,30 @@
+`> [10, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [10, 0] Main
+      +> ListDeclVar [List with 0 elements]
+      `> ListInst [List with 5 elements]
+         []> [11, 8] Println
+         ||  `> ListExpr [List with 1 elements]
+         ||     []> [11, 18] Plus
+         ||         +> [11, 16] Identifier (x)
+         ||         `> [11, 20] Int (3)
+         []> [12, 8] Println
+         ||  `> ListExpr [List with 1 elements]
+         ||     []> [12, 18] Minus
+         ||         +> [12, 16] Int (5)
+         ||         `> [12, 20] Identifier (x)
+         []> [13, 8] Println
+         ||  `> ListExpr [List with 1 elements]
+         ||     []> [13, 18] Divide
+         ||         +> [13, 16] Identifier (y)
+         ||         `> [13, 20] Int (3)
+         []> [14, 8] Println
+         ||  `> ListExpr [List with 1 elements]
+         ||     []> [14, 18] Modulo
+         ||         +> [14, 16] Int (5)
+         ||         `> [14, 20] Identifier (k)
+         []> [15, 8] Println
+             `> ListExpr [List with 1 elements]
+                []> [15, 18] Multiply
+                    +> [15, 16] Int (5)
+                    `> [15, 20] Identifier (m)

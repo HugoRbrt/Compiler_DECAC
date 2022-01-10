@@ -17,7 +17,8 @@ public class ListDeclVar extends TreeList<AbstractDeclVar> {
     @Override
     public void decompile(IndentPrintStream s) {
         for (AbstractDeclVar decl: this.getList()) {
-            decl.decompile();
+            decl.decompile(s);
+            s.println(";");
         }
     }
 

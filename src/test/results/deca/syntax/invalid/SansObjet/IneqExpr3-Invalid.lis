@@ -1,0 +1,1 @@
+src/test/deca/syntax/invalid/SansObjet/IneqExpr3-Invalid.deca:12:11: extraneous input '>' expecting {FLOAT, INT, '(', '-', '!', 'false', 'null', 'readInt', 'readFloat', 'true', IDENT, STRING, NEW, THIS}
