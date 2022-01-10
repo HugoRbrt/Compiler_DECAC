@@ -18,7 +18,7 @@ public class ManualTestGencodeHelloWorldARM {
     public static AbstractProgram initTestHelloWorld() {
         ListInst linst = new ListInst();
         AbstractProgram source =
-            new Program(
+            new ARMProgram(
                 new ListDeclClass(),
                 new Main(new ListDeclVar(),linst));
         ListExpr lexp1 = new ListExpr();
@@ -29,7 +29,7 @@ public class ManualTestGencodeHelloWorldARM {
     
     public static String gencodeSource(AbstractProgram source) {
         DecacCompiler compiler = new DecacCompiler(null,null);
-        source.codeGenProgramARM(compiler);
+        source.codeGenProgram(compiler);
         return compiler.displayProgram();
     }
 

@@ -17,7 +17,7 @@ public class ManualTestGencodeEmptyBlockARM {
     public static AbstractProgram initTestEmptyBlock() {
         ListInst linst = new ListInst();
         AbstractProgram source =
-                new Program(
+                new ARMProgram(
                         new ListDeclClass(),
                         new Main(new ListDeclVar(),linst));
         return source;
@@ -25,7 +25,7 @@ public class ManualTestGencodeEmptyBlockARM {
 
     public static String gencodeSource(AbstractProgram source) {
         DecacCompiler compiler = new DecacCompiler(null,null);
-        source.codeGenProgramARM(compiler);
+        source.codeGenProgram(compiler);
         return compiler.displayProgram();
     }
 
