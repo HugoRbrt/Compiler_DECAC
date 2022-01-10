@@ -25,6 +25,13 @@ public class Println extends AbstractPrint {
     }
 
     @Override
+    protected void codeGenInstARM(DecacCompiler compiler) {
+        StringLiteral newLine = new StringLiteral("\\n");
+        getArguments().add(newLine);
+        super.codeGenInstARM(compiler);
+    }
+
+    @Override
     String getSuffix() {
         return "ln";
     }
