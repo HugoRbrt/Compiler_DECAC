@@ -6,7 +6,9 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.CompilerOptions;
 import org.apache.commons.lang.Validate;
+import fr.ensimag.deca.CLIException;
 
 /**
  *
@@ -18,7 +20,7 @@ public class ManualTestGencodeHelloWorldARM {
     public static AbstractProgram initTestHelloWorld() {
         ListInst linst = new ListInst();
         AbstractProgram source =
-            new ARMProgram(
+            new Program(
                 new ListDeclClass(),
                 new Main(new ListDeclVar(),linst));
         ListExpr lexp1 = new ListExpr();
@@ -28,8 +30,17 @@ public class ManualTestGencodeHelloWorldARM {
     }
     
     public static String gencodeSource(AbstractProgram source) {
-        DecacCompiler compiler = new DecacCompiler(null,null);
-        source.codeGenProgram(compiler);
+        CompilerOptions compilerOptions = new CompilerOptions();
+        String [] s = { "-a" };
+        try{
+            compilerOptions.parseArgs(s);
+        }
+        catch(CLIException e){
+
+        }
+
+        DecacCompiler compiler = new DecacCompiler(compilerOptions,null);
+        source.codeGenProgramARM(compiler);
         return compiler.displayProgram();
     }
 
