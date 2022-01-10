@@ -1,6 +1,6 @@
 package fr.ensimag.deca;
 
-import com.sun.tools.doclint.Env;
+//import com.sun.tools.doclint.Env;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
@@ -297,7 +297,7 @@ public class DecacCompiler implements Runnable {
         }
 
         addComment("start main program");
-        prog.codeGenProgramARM(this);
+        prog.codeGenProgram(this);
         addComment("end main program");
         LOG.debug("Generated assembly code:" + nl + program.display());
         LOG.info("Output file assembly file is: " + destName);
