@@ -57,7 +57,7 @@ public class Main extends AbstractMain {
         compiler.addComment("Beginning of variables declaration");
         declVariables.codeListDeclVar(compiler); */
         compiler.addARMComment("Beginning of main ARM instructions:");
-        compiler.addOther("_start:");
+        compiler.addARMBlock("_start:");
         ARMRegister R = (ARMRegister) compiler.getListRegister();
         insts.codeGenListInstARM(compiler);
         compiler.addInstruction(new mov(R.r0,0));

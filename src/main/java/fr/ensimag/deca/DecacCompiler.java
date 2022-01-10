@@ -155,8 +155,8 @@ public class DecacCompiler implements Runnable {
      * @see
      * fr.ensimag.ima.pseudocode.IMAProgram#addOther(fr.ensimag.ima.pseudocode.Instruction)
      */
-    public void addOther(String other) {
-        program.addOther(other);
+    public void addARMBlock(String other) {
+        program.addARMBlock(other);
     }
 
 
@@ -173,17 +173,10 @@ public class DecacCompiler implements Runnable {
      * @see
      * fr.ensimag.ima.pseudocode.IMAProgram#display()
      */
-    public String displayIMAProgram() {
+    public String displayProgram() {
         return program.display();
     }
 
-    /**
-     * @see
-     * fr.ensimag.ima.pseudocode.IMAProgram#display()
-     */
-    public String displayARMProgram() {
-        return program.ARMdisplay();
-    }
 
     private final CompilerOptions compilerOptions;
     private final File source;
