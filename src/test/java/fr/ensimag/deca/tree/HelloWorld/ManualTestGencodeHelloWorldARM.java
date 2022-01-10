@@ -45,7 +45,6 @@ public class ManualTestGencodeHelloWorldARM {
                 "// Beginning of main ARM instructions:\n" +
                 ".text\n" +
                 ".global_start\n" +
-                        
                 "_start:\n" +
                 "   mov r0, #1\n" +
                 "   ldr r1, =msg0\n" +
