@@ -57,6 +57,7 @@ public class StringLiteral extends AbstractStringLiteral {
         String lenMsgName = "len"+i;
         i++;
         ARMRegister R = (ARMRegister) compiler.getListRegister();
+        compiler.addInstruction(new mov(R.r0,1));
         compiler.addInstruction(new ldr(R.ARMUseFirstAvailableRegister(), "="+msgName));
         compiler.addInstruction(new ldr(R.ARMUseFirstAvailableRegister(), "="+lenMsgName));
         //we add instruction at the end of the file :
