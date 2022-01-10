@@ -13,7 +13,7 @@ import org.apache.commons.lang.Validate;
  * @author Ensimag
  * @date 01/01/2022
  */
-public class ManualTestGencodeHelloWorld {
+public class ManualTestGencodeHelloWorldARM {
     
     public static AbstractProgram initTestHelloWorld() {
         ListInst linst = new ListInst();
@@ -30,7 +30,7 @@ public class ManualTestGencodeHelloWorld {
     public static String gencodeSource(AbstractProgram source) {
         DecacCompiler compiler = new DecacCompiler(null,null);
         source.codeGenProgram(compiler);
-        return compiler.displayIMAProgram();
+        return compiler.displayProgram();
     }
 
     public static void testHelloWorld() {
@@ -41,10 +41,41 @@ public class ManualTestGencodeHelloWorld {
         String result = gencodeSource(source);
         System.out.println(result);
         Validate.isTrue(result.equals(
-                "; Main program\n" +
-                "; Beginning of main instructions:\n" +
-                "	WSTR \"HelloWorld\"\n" +
-                "	HALT\n"));
+                "// Main ARM program\n" +
+                "// Beginning of main ARM instructions:\n" +
+                ".text\n" +
+                ".global_start\n" +
+                        
+                "_start:\n" +
+                "   mov r0, #1\n" +
+                "   ldr r1, =msg0\n" +
+                "   ldr r2, =len0:\n" +
+                "   mov r7, #4\n" +
+                "   svc #0\n" +
+                        
+                ".data\n" +
+                "msg0:\n" +
+                "-ascii \"Hello\"\n"+
+                "-len0 = . - msg0\n" +
+                        
+                ".text\n" +
+                ".global_start\n" +
+                "   mov r0, #1\n" +
+                "   ldr r1, =msg1\n" +
+                "   ldr r2, =len1:\n" +
+                "   mov r7, #4\n" +
+                "   svc #0\n" +
+                        
+                ".data\n" +
+                "msg1:\n" +
+                "-ascii \"\\n\"\n" +
+                "-len1 = . - msg1\n" +   
+                        
+                ".text\n" +
+                ".global_start\n" +
+                "mov r0, #0\n" +
+                "mov r7, #1\n" +
+                "svc #0\n"));
     }
 
 

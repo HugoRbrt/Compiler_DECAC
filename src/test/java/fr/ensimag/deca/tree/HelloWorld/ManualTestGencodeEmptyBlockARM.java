@@ -12,7 +12,7 @@ import org.apache.commons.lang.Validate;
  * @author Ensimag
  * @date 01/01/2022
  */
-public class ManualTestGencodeEmptyBlock {
+public class ManualTestGencodeEmptyBlockARM {
 
     public static AbstractProgram initTestEmptyBlock() {
         ListInst linst = new ListInst();
@@ -26,7 +26,7 @@ public class ManualTestGencodeEmptyBlock {
     public static String gencodeSource(AbstractProgram source) {
         DecacCompiler compiler = new DecacCompiler(null,null);
         source.codeGenProgram(compiler);
-        return compiler.displayARMProgram();
+        return compiler.displayProgram();
     }
 
     public static void testEmptyBlock() {
@@ -42,7 +42,6 @@ public class ManualTestGencodeEmptyBlock {
                 ".text\n" +
                 ".global_start\n" +
                 "_start:\n" +
-                "mov r0, #0\n" +
                 "mov r7, #1\n" +
                 "svc #0\n"));
     }
