@@ -34,6 +34,10 @@ public class EnvironmentType {
         return envTypes.get(s);
     }
 
+    public TypeDefinition get(Symbol s) {
+        return envTypes.get(s);
+    }
+
     public void put(Symbol symb, TypeDefinition type) {
         envTypes.put(symb, type);
     }

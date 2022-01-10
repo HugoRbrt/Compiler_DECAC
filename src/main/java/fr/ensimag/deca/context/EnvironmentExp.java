@@ -42,6 +42,7 @@ public class EnvironmentExp {
     /**
      * Return the definition of the symbol in the environment, or null if the
      * symbol is undefined.
+     * @return
      */
     public ExpDefinition get(Symbol key) {
         if (environment.containsKey(key)) {
@@ -76,4 +77,12 @@ public class EnvironmentExp {
         environment.put(name, def);
     }
 
+    @Override
+    public String toString() {
+        String s = "";
+        for (Symbol symb: environment.keySet()) {
+            s += symb + " " + environment.get(symb).getType();
+        }
+        return s;
+    }
 }

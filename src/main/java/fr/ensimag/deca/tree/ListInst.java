@@ -30,7 +30,6 @@ public class ListInst extends TreeList<AbstractInst> {
         for (AbstractInst inst : this.getList()) {
             inst.verifyInst(compiler, localEnv, currentClass, returnType);
         }
-        //throw new UnsupportedOperationException("not yet implemented");
     }
 
     public void codeGenListInst(DecacCompiler compiler) {

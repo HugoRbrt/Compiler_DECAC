@@ -33,9 +33,9 @@ public class FloatLiteral extends AbstractExpr {
 
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
-            ClassDefinition currentClass) throws ContextualError {
-        setType(compiler.getEnvTypes().get(compiler.getSymbTable().create("float"), Location.BUILTIN).getType());
-        return compiler.getEnvTypes().get(compiler.getSymbTable().create("float"), Location.BUILTIN).getType();
+            ClassDefinition currentClass) {
+        setType(compiler.getEnvTypes().get(compiler.getSymbTable().create("float")).getType());
+        return compiler.getEnvTypes().get(compiler.getSymbTable().create("float")).getType();
     }
 
 

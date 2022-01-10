@@ -1,0 +1,14 @@
+// Description:
+//    If with no instruction block.
+//
+// Results:
+//    Syntax Error
+//    13:0 missing '{' at '}'
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+        boolean x = false;
+        if (!x) {}
+}

@@ -15,6 +15,7 @@ import org.apache.commons.lang.Validate;
  * @date 01/01/2022
  */
 public abstract class AbstractExpr extends AbstractInst {
+
     /**
      * @return true if the expression does not correspond to any concrete token
      * in the source code (and should be decompiled to the empty string).
@@ -79,8 +80,10 @@ public abstract class AbstractExpr extends AbstractInst {
             EnvironmentExp localEnv, ClassDefinition currentClass, 
             Type expectedType)
             throws ContextualError {
-        this.verifyExpr(compiler, localEnv, currentClass);
-
+        Type type2 = this.verifyExpr(compiler, localEnv, currentClass);
+        if (!ContextTools.assignCompatible(compiler.getEnvTypes(), expectedType, type2)) {
+            throw new ContextualError("Incompatible type assignment", getLocation());
+        }
         return this;
     }
     
@@ -89,7 +92,7 @@ public abstract class AbstractExpr extends AbstractInst {
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass, Type returnType)
             throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        this.verifyExpr(compiler, localEnv, currentClass);
     }
 
     /**
@@ -104,7 +107,10 @@ public abstract class AbstractExpr extends AbstractInst {
      */
     void verifyCondition(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+            Type currentType = this.verifyExpr(compiler, localEnv, currentClass);
+        if (!currentType.isBoolean()) {
+            throw new ContextualError("Condition must be a boolean expression.", getLocation());
+        }
     }
 
     /**
