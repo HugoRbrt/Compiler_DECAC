@@ -23,7 +23,7 @@ public class IMAProgram {
 
     public void addARMComment(String s) {
         String v = "/*" + s + "*/";
-        lines.add(new Line(v));
+        lines.add(new ARMLine(v));
     }
 
     public void addLabel(Label l) {
