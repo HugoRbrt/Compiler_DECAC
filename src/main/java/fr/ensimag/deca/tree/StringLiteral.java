@@ -41,9 +41,8 @@ public class StringLiteral extends AbstractStringLiteral {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-        setType(compiler.getEnvTypes().get(compiler.getSymbTable().create("string")).getType());
-        return compiler.getEnvTypes().get(compiler.getSymbTable().create("string")).getType();
-        // throw new UnsupportedOperationException("not yet implemented");
+        setType(compiler.getEnvTypes().get(compiler.getSymbTable().create("string"), Location.BUILTIN).getType());
+        return compiler.getEnvTypes().get(compiler.getSymbTable().create("string"), Location.BUILTIN).getType();
     }
 
     @Override

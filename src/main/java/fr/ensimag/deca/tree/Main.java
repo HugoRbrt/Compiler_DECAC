@@ -38,7 +38,7 @@ public class Main extends AbstractMain {
         // (mais ce n'est à priori pas nécessaire).
         declVariables.verifyListDeclVariable(compiler, compiler.getEnvExp(), null);
         insts.verifyListInst(compiler, compiler.getEnvExp(), null,
-                compiler.getEnvTypes().get(compiler.getSymbTable().create("void")).getType());
+                compiler.getEnvTypes().get(compiler.getSymbTable().create("void"), Location.BUILTIN).getType());
         LOG.debug("verify Main: end");
         //throw new UnsupportedOperationException("not yet implemented");
     }

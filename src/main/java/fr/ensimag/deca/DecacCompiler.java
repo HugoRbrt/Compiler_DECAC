@@ -102,9 +102,7 @@ public class DecacCompiler implements Runnable {
     /**
      * Environment types associated with the program
      */
-    public Map<Symbol, TypeDefinition> getEnvTypes() {
-        return envTypes.get();
-    }
+    public EnvironmentType getEnvTypes() { return envTypes; }
 
     /**
      * Symbols associated with the program

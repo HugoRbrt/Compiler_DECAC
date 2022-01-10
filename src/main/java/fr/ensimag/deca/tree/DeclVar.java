@@ -36,6 +36,11 @@ public class DeclVar extends AbstractDeclVar {
     protected void verifyDeclVar(DecacCompiler compiler,
             EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
+        Type currentType = type.verifyType(compiler);
+        if (currentType.isNull()) {
+            throw new ContextualError("Variable cannot be void type.", type.getLocation());
+        }
+        initialization.verifyInitialization(compiler, currentType, localEnv, currentClass);
     }
 
     

@@ -1,6 +1,7 @@
 package fr.ensimag.deca.context;
 
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.deca.tree.Location;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,8 +27,11 @@ public class EnvironmentType {
         return instance;
     }
 
-    public Map<Symbol, TypeDefinition> get() {
-        return envTypes;
+    public TypeDefinition get(Symbol s, Location location) throws ContextualError {
+        if (!envTypes.containsKey(s)) {
+            throw new ContextualError("Type does not exist.", location);
+        }
+        return envTypes.get(s);
     }
 
     public void put(Symbol symb, TypeDefinition type) {
