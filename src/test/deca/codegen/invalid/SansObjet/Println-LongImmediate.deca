@@ -1,0 +1,13 @@
+// Description:
+//    Trying an immediate overflow for IMA
+//
+// Results:
+//    Error
+//
+//
+// History:
+//    cree le 09/01/2022
+
+{
+println("Hello, bonjour, guten tag, buenos dias, ni hao, hay");
+}
