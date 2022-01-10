@@ -1,6 +1,6 @@
 package fr.ensimag.deca;
 
-import com.sun.tools.doclint.Env;
+//import com.sun.tools.doclint.Env;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
@@ -153,17 +153,10 @@ public class DecacCompiler implements Runnable {
      * @see
      * fr.ensimag.ima.pseudocode.IMAProgram#addOther(fr.ensimag.ima.pseudocode.Instruction)
      */
-    public void addOther(String other) {
-        program.addOther(other);
+    public void addARMBlock(String other) {
+        program.addARMBlock(other);
     }
 
-    /**
-     * @see
-     * fr.ensimag.ima.pseudocode.IMAProgram#addListInstruction(fr.ensimag.ima.pseudocode.Instruction)
-     */
-    public void addListInstruction(LinkedList<AbstractLine> l) {
-        program.addListInstruction(l);
-    }
 
     /**
      * @see
@@ -178,17 +171,10 @@ public class DecacCompiler implements Runnable {
      * @see
      * fr.ensimag.ima.pseudocode.IMAProgram#display()
      */
-    public String displayIMAProgram() {
+    public String displayProgram() {
         return program.display();
     }
 
-    /**
-     * @see
-     * fr.ensimag.ima.pseudocode.IMAProgram#display()
-     */
-    public String displayARMProgram() {
-        return program.ARMdisplay();
-    }
 
     private final CompilerOptions compilerOptions;
     private final File source;
@@ -295,7 +281,7 @@ public class DecacCompiler implements Runnable {
         }
 
         addComment("start main program");
-        prog.codeGenProgramARM(this);
+        prog.codeGenProgram(this);
         addComment("end main program");
         LOG.debug("Generated assembly code:" + nl + program.display());
         LOG.info("Output file assembly file is: " + destName);

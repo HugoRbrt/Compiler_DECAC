@@ -32,9 +32,7 @@ public class DecacMain {
         if (options.getPrintBanner()) {
             System.out.println("g9/gl49");
         }
-        if (options.getSourceFiles().isEmpty()) {
-            System.out.println(options.toString());
-        }
+
         if (options.getParallel()) {
             ExecutorService executor = Executors.newFixedThreadPool( Runtime.getRuntime().availableProcessors());
             LinkedList<Future> listFuture = new LinkedList<Future>();
