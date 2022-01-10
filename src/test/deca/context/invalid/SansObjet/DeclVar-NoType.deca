@@ -9,6 +9,6 @@
 //    cree le 08/01/2022
 
 {
-        boolean x = false;
-        if (!x) {}
+        int x;
+        x = 3;
 }
