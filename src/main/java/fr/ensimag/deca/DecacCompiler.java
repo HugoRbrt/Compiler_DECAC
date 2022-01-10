@@ -159,13 +159,6 @@ public class DecacCompiler implements Runnable {
         program.addOther(other);
     }
 
-    /**
-     * @see
-     * fr.ensimag.ima.pseudocode.IMAProgram#addListInstruction(fr.ensimag.ima.pseudocode.Instruction)
-     */
-    public void addListInstruction(LinkedList<AbstractLine> l) {
-        program.addListInstruction(l);
-    }
 
     /**
      * @see
