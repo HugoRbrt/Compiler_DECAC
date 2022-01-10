@@ -147,7 +147,13 @@ public class CompilerOptions {
                 // if printBanner was written but other options too
                 throw new CLIException("-b is uncompatible with" +
                         "other options");
-            }   
+            } else if ( ( parallel || (debug != 0) || parse ||
+                    verification || noCheck || warnings || 
+                    optionRSpotted || armBool ) ) {
+                // options were given without file
+                throw new CLIException("no file given");
+            }
+                // if we get here : all good
         } else {
             // a file is given so -b cannot be an option
             if ( printBanner ) {
@@ -160,7 +166,7 @@ public class CompilerOptions {
 
     protected void displayUsage() {
         System.out.println("Usage : decac [[-p | -v] [-n]" +
-			"[-r X] [-d]* [-P] [-w] <fichier deca>...] | [-b]");
+			" [-r X] [-d]* [-P] [-w] <fichier deca>...] | [-b]");
         
         System.out.println("-b  (banner): prints the team banner");
         System.out.println("-p  (parse): stops at the tree building step and " +
@@ -168,19 +174,19 @@ public class CompilerOptions {
                 "output a syntaxically correct deca program");
         System.out.println("-v  (verification): stops decac " +
                 "after the verification test");
-        System.out.println("-n  (no check): deletes programs that" +
+        System.out.println("-n  (no check): deletes programs that " +
                 "are incorrect, or correct but cannot be executed" +
                 " due to machine performances");
-        System.out.println("-r X (registers) : limits the number of " +
+        System.out.println("-r X (registers): limits the number of " +
                 "registers to R0 ... R{X-1} with 4 <= X <= 16");
-        System.out.println("-d (debug) : activates debug traces. " +
+        System.out.println("-d (debug): activates debug traces. " +
                 "Repeat several time for diferent traces level: " +
                 "INFO, DEBUG, TRACE");
-        System.out.println("-P  (parallel) : if several source files "+
+        System.out.println("-P  (parallel): if several source files "+
                 "are given, starts their parallel compilations");
-        System.out.println("-w  (warnings) : enables warning messages during "+
+        System.out.println("-w  (warnings): enables warning messages during "+
                 "compilation");
-	System.out.println("-a (arm target) : produces a .s file instead of a"+
+	System.out.println("-a  (arm target): produces a .s file instead of a"+
                 " regular .ass file");
     }
 
