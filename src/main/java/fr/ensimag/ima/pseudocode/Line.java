@@ -44,9 +44,9 @@ public class Line extends AbstractLine {
             throw new IMAInternalError("Comment '" + s + "'contains carriage return character");
         }
     }
-    private Instruction instruction;
-    private String comment;
-    private Label label;
+    protected Instruction instruction;
+    protected String comment;
+    protected Label label;
 
     @Override
     void display(PrintStream s) {
@@ -66,6 +66,28 @@ public class Line extends AbstractLine {
                             s.print("\t");
                         }
             s.print("; " + comment);
+        }
+        s.println();
+    }
+
+    @Override
+    void ARMdisplay(PrintStream s) {
+        boolean tab = false;
+        if (label != null) {
+            s.print(label);
+            s.print(":");
+            tab = true;
+        }
+        if (instruction != null) {
+            s.print("\t");
+            instruction.display(s);
+            tab = true;
+        }
+        if (comment != null) {
+            if (tab) {
+                s.print("\t");
+            }
+            s.print(comment);
         }
         s.println();
     }

@@ -13,11 +13,15 @@ import fr.ensimag.ima.pseudocode.AbstractLine;
 import fr.ensimag.ima.pseudocode.IMAProgram;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.DVal;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.ARMRegister;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.LinkedList;
 import java.util.HashMap;
 import java.util.Map;
 import java.lang.Runnable;
@@ -125,6 +129,13 @@ public class DecacCompiler implements Runnable {
     }
 
     /**
+     * @see fr.ensimag.ima.pseudocode.IMAProgram#addARMComment(java.lang.String)
+     */
+    public void addARMComment(String comment) {
+        program.addARMComment(comment);
+    }
+
+    /**
      * @see
      * fr.ensimag.ima.pseudocode.IMAProgram#addLabel(fr.ensimag.ima.pseudocode.Label)
      */
@@ -138,6 +149,22 @@ public class DecacCompiler implements Runnable {
      */
     public void addInstruction(Instruction instruction) {
         program.addInstruction(instruction);
+    }
+
+    /**
+     * @see
+     * fr.ensimag.ima.pseudocode.IMAProgram#addOther(fr.ensimag.ima.pseudocode.Instruction)
+     */
+    public void addOther(String other) {
+        program.addOther(other);
+    }
+
+    /**
+     * @see
+     * fr.ensimag.ima.pseudocode.IMAProgram#addListInstruction(fr.ensimag.ima.pseudocode.Instruction)
+     */
+    public void addListInstruction(LinkedList<AbstractLine> l) {
+        program.addListInstruction(l);
     }
 
     /**
@@ -157,8 +184,26 @@ public class DecacCompiler implements Runnable {
         return program.display();
     }
 
+    /**
+     * @see
+     * fr.ensimag.ima.pseudocode.IMAProgram#display()
+     */
+    public String displayARMProgram() {
+        return program.ARMdisplay();
+    }
+
     private final CompilerOptions compilerOptions;
     private final File source;
+    private Register ListRegister;
+
+    public void setListRegister(Register list){
+        ListRegister = list;
+    }
+
+    public Register getListRegister() {
+        return ListRegister;
+    }
+
     /**
      * The main program. Every instruction generated will eventually end up here.
      */
@@ -252,7 +297,7 @@ public class DecacCompiler implements Runnable {
         }
 
         addComment("start main program");
-        prog.codeGenProgram(this);
+        prog.codeGenProgramARM(this);
         addComment("end main program");
         LOG.debug("Generated assembly code:" + nl + program.display());
         LOG.info("Output file assembly file is: " + destName);

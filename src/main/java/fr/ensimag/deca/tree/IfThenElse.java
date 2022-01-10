@@ -42,6 +42,11 @@ public class IfThenElse extends AbstractInst {
     }
 
     @Override
+    protected void codeGenInstARM(DecacCompiler compiler) {
+        throw new UnsupportedOperationException("not yet implemented");
+    }
+
+    @Override
     public void decompile(IndentPrintStream s) {
         throw new UnsupportedOperationException("not yet implemented");
     }

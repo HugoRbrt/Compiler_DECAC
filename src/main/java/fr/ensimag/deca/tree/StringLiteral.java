@@ -5,6 +5,14 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.ImmediateString;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
+import fr.ensimag.ima.pseudocode.instructionsARM.ldr;
+import fr.ensimag.ima.pseudocode.instructionsARM.mov;
+import fr.ensimag.ima.pseudocode.instructionsARM.svc;
+import fr.ensimag.ima.pseudocode.ARMRegister;
+import fr.ensimag.ima.pseudocode.ARMLine;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.AbstractLine;
+import java.util.LinkedList;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 
@@ -15,6 +23,7 @@ import org.apache.commons.lang.Validate;
  * @date 01/01/2022
  */
 public class StringLiteral extends AbstractStringLiteral {
+    private static int i;
 
     @Override
     public String getValue() {
@@ -40,6 +49,27 @@ public class StringLiteral extends AbstractStringLiteral {
     @Override
     protected void codeGenPrint(DecacCompiler compiler) {
         compiler.addInstruction(new WSTR(new ImmediateString(value)));
+    }
+
+    @Override
+    protected void codeGenPrintARM(DecacCompiler compiler) {
+        String msgName = "msg"+i;
+        String lenMsgName = "len"+i;
+        i++;
+        ARMRegister R = (ARMRegister) compiler.getListRegister();
+        compiler.addInstruction(new ldr(R.ARMUseFirstAvailableRegister(), "="+msgName));
+        compiler.addInstruction(new ldr(R.ARMUseFirstAvailableRegister(), "="+lenMsgName));
+        //we add instruction at the end of the file :
+        LinkedList<AbstractLine> l = new LinkedList<AbstractLine>();
+        l.add(new ARMLine(msgName+":"));
+        l.add(new ARMLine(".ascii " +"\"" +value + "\""));
+        l.add(new ARMLine(lenMsgName+" = . - "+msgName));
+        compiler.addListInstruction(l);
+        //end of the list at the end of the file
+        compiler.addInstruction(new mov(R.ARMUseSpecificRegister(7),4));
+        compiler.addInstruction(new svc(0));
+        R.ARMreleaseRegister();
+        R.ARMreleaseRegister();
     }
 
     @Override

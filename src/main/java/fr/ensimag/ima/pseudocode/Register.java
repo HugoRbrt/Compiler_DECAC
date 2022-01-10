@@ -7,9 +7,12 @@ package fr.ensimag.ima.pseudocode;
  * @date 01/01/2022
  */
 public class Register extends DVal {
+    protected int occupiedRegister;
     private String name;
+
     protected Register(String name) {
         this.name = name;
+        occupiedRegister=1;
     }
 
     @Override
@@ -33,7 +36,7 @@ public class Register extends DVal {
      * General Purpose Registers. Array is private because Java arrays cannot be
      * made immutable, use getR(i) to access it.
      */
-    private static final GPRegister[] R = initRegisters();
+    protected static final GPRegister[] R = initRegisters();
     /**
      * General Purpose Registers
      */
@@ -54,5 +57,13 @@ public class Register extends DVal {
             res[i] = new GPRegister("R" + i, i);
         }
         return res;
+    }
+
+    public GPRegister UseFirstAvailableRegister(){
+        occupiedRegister++;
+        return R[occupiedRegister-1];
+    }
+    public void releaseRegister(){
+        occupiedRegister--;
     }
 }

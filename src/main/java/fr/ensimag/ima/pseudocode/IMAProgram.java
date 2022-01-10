@@ -11,26 +11,43 @@ import java.util.LinkedList;
  * @date 01/01/2022
  */
 public class IMAProgram {
-    private final LinkedList<AbstractLine> lines = new LinkedList<AbstractLine>();
+    protected final LinkedList<LinkedList<AbstractLine>> lines = new LinkedList<LinkedList<AbstractLine>>();
+
+    protected void initLines() {
+        if(lines.isEmpty()){
+            lines.add(new LinkedList<AbstractLine>());
+        }
+    }
 
     public void add(AbstractLine line) {
-        lines.add(line);
+        initLines();
+        lines.get(0).add(line);
     }
 
     public void addComment(String s) {
-        lines.add(new Line(s));
+        initLines();
+        lines.get(0).add(new Line(s));
+    }
+
+    public void addARMComment(String s) {
+        String v = "/*" + s + "*/";
+        initLines();
+        lines.get(0).add(new Line(v));
     }
 
     public void addLabel(Label l) {
-        lines.add(new Line(l));
+        initLines();
+        lines.get(0).add(new Line(l));
     }
 
     public void addInstruction(Instruction i) {
-        lines.add(new Line(i));
+        initLines();
+        lines.get(0).add(new Line(i));
     }
 
     public void addInstruction(Instruction i, String s) {
-        lines.add(new Line(null, i, s));
+        initLines();
+        lines.get(0).add(new Line(null, i, s));
     }
 
     /**
@@ -39,22 +56,55 @@ public class IMAProgram {
      * used anymore after calling this function.
      */
     public void append(IMAProgram p) {
-        lines.addAll(p.lines);
+        LinkedList<AbstractLine> result = new LinkedList<AbstractLine>();
+        p.lines.forEach(result::addAll);
+        initLines();
+        lines.get(0).addAll(result);
     }
-    
+
     /**
      * Add a line at the front of the program.
      */
     public void addFirst(Line l) {
-        lines.addFirst(l);
+        initLines();
+        lines.get(0).addFirst(l);
     }
+
+    /**
+     * Add a line at the end of the program.
+     */
+    public void addOther(String s) {
+        initLines();
+        lines.get(0).add(new ARMLine(s));
+    }
+
+    /**
+     * Add a line at the end of the program.
+     */
+    public void addListInstruction(LinkedList<AbstractLine> l) {
+        lines.addLast(l);
+    }
+
 
     /**
      * Display the program in a textual form readable by IMA to stream s.
      */
     public void display(PrintStream s) {
-        for (AbstractLine l: lines) {
-            l.display(s);
+        for(LinkedList<AbstractLine> listline : lines){
+            for (AbstractLine l: listline) {
+                l.display(s);
+            }
+        }
+    }
+
+    /**
+     * Display the program in a textual form readable by IMA to stream s.
+     */
+    public void ARMdisplay(PrintStream s) {
+        for(LinkedList<AbstractLine> listline : lines){
+            for (AbstractLine l: listline) {
+                l.ARMdisplay(s);
+            }
         }
     }
 
@@ -68,11 +118,17 @@ public class IMAProgram {
         return out.toString();
     }
 
+    /**
+     * Return the program in a textual form readable by ARM as a String.
+     */
+    public String ARMdisplay() {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        PrintStream s = new PrintStream(out);
+        ARMdisplay(s);
+        return out.toString();
+    }
+
     public void addFirst(Instruction i) {
         addFirst(new Line(i));
-    }
-    
-    public void addFirst(Instruction i, String comment) {
-        addFirst(new Line(null, i, comment));
     }
 }

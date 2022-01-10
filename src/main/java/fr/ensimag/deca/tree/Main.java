@@ -10,6 +10,8 @@ import java.io.PrintStream;
 import fr.ensimag.deca.tools.SymbolTable;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
+import fr.ensimag.ima.pseudocode.*;
+import fr.ensimag.ima.pseudocode.instructionsARM.*;
 
 /**
  * @author gl49
@@ -43,11 +45,26 @@ public class Main extends AbstractMain {
 
     @Override
     protected void codeGenMain(DecacCompiler compiler) {
-        /* Paul, le 6/1 : cette partie du code est à décommenter pour plus tard 
+        /* Paul, le 9/1 : cette partie du code est à décommenter pour plus tard 
         compiler.addComment("Beginning of variables declaration");
-        declVariables.codeListDeclVar(compiler); */
+        declVariables.codeGenListDeclVar(compiler); */
         compiler.addComment("Beginning of main instructions:");
         insts.codeGenListInst(compiler);
+    }
+    @Override
+    protected void codeGenMainARM(DecacCompiler compiler) {
+        /* Paul, le 6/1 : cette partie du code est à décommenter pour plus tard
+        compiler.addComment("Beginning of variables declaration");
+        declVariables.codeListDeclVar(compiler); */
+        compiler.addARMComment("Beginning of main ARM instructions:");
+        compiler.addOther("_start:");
+        ARMRegister R = (ARMRegister) compiler.getListRegister();
+        compiler.addInstruction(new mov(R.r0,1));
+        insts.codeGenListInstARM(compiler);
+        compiler.addInstruction(new mov(R.r0,0));
+        compiler.addInstruction(new mov(R.ARMUseSpecificRegister(7),1));
+        compiler.addInstruction(new svc(0));
+
     }
     
     @Override
