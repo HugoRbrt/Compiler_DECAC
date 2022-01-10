@@ -56,6 +56,7 @@ public class Program extends AbstractProgram {
 
     public void codeGenProgramARM(DecacCompiler compiler) {
         // A FAIRE: compléter ce squelette très rudimentaire de code
+        compiler.addARMBlock(".text");
         compiler.addARMBlock(".global _start");
         compiler.addARMComment("ARM program");
         //creation of ARM Register
