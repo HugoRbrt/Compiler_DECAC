@@ -36,4 +36,11 @@ public abstract class AbstractDeclVar extends Tree {
      *      the concrete class's AbstractInitialization field
      */
     public abstract AbstractInitialization getInit();
+
+    /**
+     * Generate assembly code for the IMA instruction.
+     *
+     * @param compiler
+     */
+    protected abstract void codeGenDeclVar(DecacCompiler compiler);
 }

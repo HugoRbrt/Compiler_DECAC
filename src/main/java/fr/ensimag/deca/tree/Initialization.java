@@ -6,6 +6,10 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
+
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 
@@ -36,6 +40,16 @@ public class Initialization extends AbstractInitialization {
             EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
         expression.verifyRValue(compiler, localEnv, currentClass, t);
+    }
+
+    protected void codeGenDeclVar(DecacCompiler compiler){/*
+    //pas encore fonctionnel, codegen de abstractexpr doit etre entierement realisé avant
+    //RegistreRetourExpr correspond au registre contenant la valeur calculé de expr
+        GPRegister R = compiler.getListRegister().UseFirstAvailableRegister();
+        expression.codeGenInst(compiler);
+        RegistreRetourExpr =
+        compiler.addInstruction(new LOAD(RegistreRetourExpr, R));
+        compiler.addInstruction(new PUSH(R));*/
     }
 
 

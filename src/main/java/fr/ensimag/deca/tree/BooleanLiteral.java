@@ -6,6 +6,10 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
+import fr.ensimag.deca.tree.StringLiteral;
+import fr.ensimag.ima.pseudocode.ImmediateFloat;
 import java.io.PrintStream;
 
 /**
@@ -32,6 +36,16 @@ public class BooleanLiteral extends AbstractExpr {
         return compiler.getEnvTypes().get(compiler.getSymbTable().create("boolean")).getType();
     }
 
+    @Override
+    protected void codeGenPrint(DecacCompiler compiler) {
+        StringLiteral s;
+        if(value){
+            s = new StringLiteral("true");
+        }else{
+            s = new StringLiteral("false");
+        }
+        s.codeGenPrint(compiler);
+    }
 
     @Override
     public void decompile(IndentPrintStream s) {

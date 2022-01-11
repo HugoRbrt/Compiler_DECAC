@@ -6,6 +6,8 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.instructions.ADDSP;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import java.io.PrintStream;
 
 /**
@@ -24,6 +26,9 @@ public class NoInitialization extends AbstractInitialization {
         // NO OP
     }
 
+    protected void codeGenDeclVar(DecacCompiler compiler){
+        compiler.addInstruction(new ADDSP(new ImmediateInteger(1)));
+    }
 
     /**
      * Node contains no real information, nothing to check.
