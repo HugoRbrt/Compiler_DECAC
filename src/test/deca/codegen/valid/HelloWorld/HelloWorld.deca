@@ -1,0 +1,10 @@
+// Description:
+//    The famous "Hello World" program.
+//
+// Expected Results:
+//    Hello, World
+//
+// History:
+//    created on 05/01/2022
+
+{ println("Hello, World"); }
