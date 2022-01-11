@@ -1,0 +1,11 @@
+{
+    int x;
+    x = 1;
+    //println(x);
+
+    int y;
+
+    int z = 8;
+    y = 2;
+
+ }
