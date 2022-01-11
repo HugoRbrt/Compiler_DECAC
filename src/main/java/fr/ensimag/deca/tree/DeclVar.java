@@ -3,6 +3,8 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.instructions.ADDSP;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 
@@ -58,6 +60,11 @@ public class DeclVar extends AbstractDeclVar {
         initialization.decompile(s);
     }
 
+    protected void codeGenDeclVar(DecacCompiler compiler){
+        compiler.getstackTable().put(varName.getName(), compiler.getListRegister().GB);
+        initialization.codeGenDeclVar(compiler);
+    }
+    
     @Override
     protected
     void iterChildren(TreeFunction f) {

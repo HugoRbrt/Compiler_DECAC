@@ -1,0 +1,14 @@
+// Description:
+//    Declaration of a float variable using * operation between a int variable and float .
+// 
+// Results:
+//     nothing
+// 
+// Historique: 
+//    cree le 11/01/2022 
+
+{
+    int x =  20; 
+    float y = 1.5; 
+    float z = 20 * 1.5; 
+}

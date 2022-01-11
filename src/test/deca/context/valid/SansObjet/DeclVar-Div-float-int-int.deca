@@ -1,0 +1,14 @@
+// Description:
+//    Declaration of a float variable using / operation between a int variable and int .
+// 
+// Results:
+//     nothing
+// 
+// Historique: 
+//    cree le 11/01/2022 
+
+{
+    int x =  17; 
+    int y = 2; 
+    float z = 17 / 2; 
+}

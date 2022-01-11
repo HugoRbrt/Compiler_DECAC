@@ -1,0 +1,12 @@
+// Description:
+//    Declaration of a float variable with initialization.
+// 
+// Results:
+//     Incompatible type asignement error
+// 
+// Historique: 
+//    cree le 11/01/2022 
+
+{
+    float x = true ;
+}

@@ -1,0 +1,12 @@
+// Description:
+//    Declaration of a float variable with initialization.
+// 
+// Results:
+//     nothing
+// 
+// Historique: 
+//    cree le 11/01/2022 
+
+{
+    float x = 2.5 ;
+}

@@ -1,0 +1,14 @@
+// Description:
+//    Declaration of a boolean variable using == operation between a float variable and float .
+// 
+// Results:
+//     nothing
+// 
+// Historique: 
+//    cree le 11/01/2022 
+
+{
+    float x =  10.01; 
+    float y = 10.01; 
+    boolean z = 10.01 == 10.01; 
+}

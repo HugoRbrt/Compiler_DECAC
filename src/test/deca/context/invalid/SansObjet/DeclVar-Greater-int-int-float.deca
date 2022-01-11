@@ -1,0 +1,15 @@
+// Description:
+//    Declaration of a int variable using > operation between a int variable and float .
+// 
+// Results:
+//     Contextual error
+//     Line 14: (RULE 3.28) Incompatible type assignment
+// 
+// Historique: 
+//    cree le 11/01/2022 
+
+{
+    int x =  2; 
+    float y = 10.01; 
+    int z = 2 > 10.01; 
+}

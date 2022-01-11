@@ -1,0 +1,15 @@
+// Description:
+//    instructions in between variable declarations
+//
+// Results:
+//    Parser error on 'u' line 14
+//
+// Historique:
+//    cree le 11/01/2022
+
+{
+        float z;
+        z = 2.0;
+        u = true;
+        boolean u;
+}

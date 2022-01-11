@@ -1,0 +1,15 @@
+// Description:
+//    Declaration of a int variable using > operation between a string variable and boolean .
+// 
+// Results:
+//     Contextual error
+//     Line 14: (RULE 3.33) Illegal operand type.
+// 
+// Historique: 
+//    cree le 11/01/2022 
+
+{
+    string x =  "Hello"; 
+    boolean y = true; 
+    int z = "Hello" > true; 
+}

@@ -1,0 +1,14 @@
+// Description:
+//    Declaration of a boolean variable using != operation between a float variable and float .
+// 
+// Results:
+//     nothing
+// 
+// Historique: 
+//    cree le 11/01/2022 
+
+{
+    float x =  1.5; 
+    float y = 1.5; 
+    boolean z = 1.5 != 1.5; 
+}

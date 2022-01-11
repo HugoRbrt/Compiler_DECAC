@@ -1,0 +1,15 @@
+// Description:
+//    Declaration of a float variable using == operation between a float variable and int .
+// 
+// Results:
+//     Contextual error
+//     Line 14: (RULE 3.28) Incompatible type assignment
+// 
+// Historique: 
+//    cree le 11/01/2022 
+
+{
+    float x =  2.5; 
+    int y = 10; 
+    float z = 2.5 == 10; 
+}

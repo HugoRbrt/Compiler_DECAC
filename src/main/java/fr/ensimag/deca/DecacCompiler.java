@@ -6,6 +6,8 @@ import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.SymbolTable;
+import fr.ensimag.deca.tools.StackHashTableSymbol;
+import fr.ensimag.deca.tools.StackHashTableSymbol;
 import fr.ensimag.deca.tree.AbstractProgram;
 import fr.ensimag.deca.tree.Location;
 import fr.ensimag.deca.tree.LocationException;
@@ -60,6 +62,7 @@ public class DecacCompiler implements Runnable {
     private EnvironmentExp envExp = new EnvironmentExp(null);
     private SymbolTable symbTable = new SymbolTable();
     private EnvironmentType envTypes = EnvironmentType.getEnvTypes();
+    private StackHashTableSymbol stackTable = new StackHashTableSymbol();
 
     public DecacCompiler(CompilerOptions compilerOptions, File source) {
         super();
@@ -117,6 +120,13 @@ public class DecacCompiler implements Runnable {
      */
     public SymbolTable getSymbTable() {
         return symbTable;
+    }
+
+    /**
+     * Symbols associated with the stack adresse
+     */
+    public StackHashTableSymbol getstackTable() {
+        return stackTable;
     }
 
     /**
