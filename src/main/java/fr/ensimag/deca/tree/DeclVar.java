@@ -36,14 +36,14 @@ public class DeclVar extends AbstractDeclVar {
         Type currentType = type.verifyType(compiler);
         type.setDefinition(compiler.getEnvTypes().get(type.getName(), Location.BUILTIN));
         if (currentType.isNull()) {
-            throw new ContextualError("Variable cannot be void type.", type.getLocation());
+            throw new ContextualError("(RULE 3.17) Variable cannot be void type.", type.getLocation());
         }
         initialization.verifyInitialization(compiler, currentType, localEnv, currentClass);
         try {
             localEnv.declare(varName.getName(), new VariableDefinition(currentType, varName.getLocation()));
         }
         catch (EnvironmentExp.DoubleDefException e) {
-            throw new ContextualError("Variable has already been declared.", varName.getLocation());
+            throw new ContextualError("(RULE 3.17) Variable has already been declared.", varName.getLocation());
         }
         varName.setDefinition(localEnv.get(varName.getName()));
     }

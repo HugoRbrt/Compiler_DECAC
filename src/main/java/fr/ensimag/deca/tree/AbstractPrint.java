@@ -3,9 +3,11 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.ima.pseudocode.Label;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
+import sun.jvm.hotspot.oops.Symbol;
 
 /**
  * Print statement (print, println, ...).
@@ -32,11 +34,13 @@ public abstract class AbstractPrint extends AbstractInst {
 
     @Override
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
-            ClassDefinition currentClass, Type returnType)
-            throws ContextualError {
-        // throw new UnsupportedOperationException("not yet implemented");
+            ClassDefinition currentClass, Type returnType) throws ContextualError {
         for (AbstractExpr expr : arguments.getList()) {
-            expr.verifyExpr(compiler, localEnv, currentClass);
+            Type currentType = expr.verifyExpr(compiler, localEnv, currentClass);
+            if (!(currentType.isInt() || currentType.isFloat() || currentType.isString())) {
+                throw new ContextualError(
+                        "(RULE 3.31) Cannot print " + currentType.getName() + " type.", getLocation());
+            }
         }
     }
 

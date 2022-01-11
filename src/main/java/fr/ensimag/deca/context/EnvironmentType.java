@@ -29,7 +29,7 @@ public class EnvironmentType {
 
     public TypeDefinition get(Symbol s, Location location) throws ContextualError {
         if (!envTypes.containsKey(s)) {
-            throw new ContextualError("Type does not exist.", location);
+            throw new ContextualError("(RULE 0.2) Type does not exist.", location);
         }
         return envTypes.get(s);
     }

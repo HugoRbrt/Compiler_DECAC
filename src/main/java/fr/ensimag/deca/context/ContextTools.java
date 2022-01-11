@@ -37,7 +37,7 @@ public class ContextTools {
         if ((t1.isInt() || t1.isFloat()) && (t2.isInt() || t2.isFloat())) {
             return compiler.getEnvTypes().get(compiler.getSymbTable().create("float")).getType();
         }
-        throw new ContextualError("Illegal operand type.", location);
+        throw new ContextualError("(RULE 3.33) Illegal operand type.", location);
     }
 
     public static Type typeArithModulo(DecacCompiler compiler, Type t1, Type t2,
@@ -45,13 +45,13 @@ public class ContextTools {
         if (t1.isInt() && t2.isInt()) {
             return t1;
         }
-        throw new ContextualError("Illegal operand type.", location);
+        throw new ContextualError("(RULE 3.33) Illegal operand type.", location);
     }
 
     public static Type typeBoolOp(DecacCompiler compiler, Type t1, Type t2,
                                    Location location) throws ContextualError {
         if (!(t1.isBoolean() && t2.isBoolean())) {
-            throw new ContextualError("Illegal operand type.", location);
+            throw new ContextualError("(RULE 3.33) Illegal operand type.", location);
         }
         return compiler.getEnvTypes().get(compiler.getSymbTable().create("boolean")).getType();
     }
@@ -63,11 +63,11 @@ public class ContextTools {
         }
         if (op.equals("==") || op.equals("!=")) {
             if (!(t1.isBoolean() && t2.isBoolean())) {
-                throw new ContextualError("Illegal operand type.", location);
+                throw new ContextualError("(RULE 3.33) Illegal operand type.", location);
             }
             return compiler.getEnvTypes().get(compiler.getSymbTable().create("boolean")).getType();
         }
-        throw new ContextualError("Illegal operand type.", location);
+        throw new ContextualError("(RULE 3.33) Illegal operand type.", location);
     }
 
     public static Type typeUnaryMinus(DecacCompiler compiler, Type t1,
@@ -78,7 +78,7 @@ public class ContextTools {
         if (t1.isFloat()) {
             return compiler.getEnvTypes().get(compiler.getSymbTable().create("float")).getType();
         }
-        throw new ContextualError("Illegal operand type.", location);
+        throw new ContextualError("(RULE 3.37) Illegal operand type.", location);
     }
 
     public static Type typeUnaryNot(DecacCompiler compiler, Type t1,
@@ -86,6 +86,6 @@ public class ContextTools {
         if (t1.isBoolean()) {
             return compiler.getEnvTypes().get(compiler.getSymbTable().create("boolean")).getType();
         }
-        throw new ContextualError("Illegal operand type.", location);
+        throw new ContextualError("(RULE 3.37) Illegal operand type.", location);
     }
 }
