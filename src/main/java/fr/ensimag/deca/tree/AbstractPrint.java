@@ -6,6 +6,8 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.ima.pseudocode.Label;
 import java.io.PrintStream;
+import java.util.Iterator;
+
 import org.apache.commons.lang.Validate;
 import sun.jvm.hotspot.oops.Symbol;
 
@@ -65,10 +67,13 @@ public abstract class AbstractPrint extends AbstractInst {
     @Override
     public void decompile(IndentPrintStream s) {
         s.print("print" + getSuffix() + "(");
-        for (AbstractExpr expr : arguments.getList()) {
-            expr.decompile(s);
+        for (Iterator<AbstractExpr> it = arguments.getList().iterator(); it.hasNext();) {
+            it.next().decompile(s);
+            if (it.hasNext()) {
+                s.print(", ");
+            }
         }
-        s.print(")");
+        s.print(");");
     }
 
     @Override
