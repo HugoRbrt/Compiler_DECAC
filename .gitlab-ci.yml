@@ -1,19 +1,24 @@
 # Gitlab ci/cd file configuration 
 
 stages:
+    - build-image
     - compiling
     - testing
     - cleanup
 
-services:
-    - docker:dind
+build-image:
+    image: docker 
+    services: docker:dind
+    script:
+        - echo $CI_REGISTRY_PASSWORD | docker login -u  $CI_REGISTRY_USER $CI_REGISTRY gitlab.ensimag.fr:5050 --password-stdin
+        - docker build -t gitlab.ensimag.fr:5050/gl2022/g9/gl49 .
+        - docker push gitlab.ensimag.fr:5050/gl2022/g9/gl49
 
 compile_job:
     stage: compiling
-    image: docker:dind
+    image: gitlab.ensimag.fr:5050/gl2022/g9/gl49
     script:
         - echo "Trying to compile src files..."
-        - docker build .
         - mvn compile
 
 test_compile_job:
