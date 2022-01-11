@@ -1,0 +1,15 @@
+// Description:
+//    Declaration of a boolean variable using + operation between a int variable and int .
+// 
+// Results:
+//     Contextual error
+//     Line 14: (RULE 3.28) Incompatible type assignment
+// 
+// Historique: 
+//    cree le 11/01/2022 
+
+{
+    int x =  10; 
+    int y = 20; 
+    boolean z = 10 + 20; 
+}

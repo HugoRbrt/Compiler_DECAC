@@ -1,0 +1,15 @@
+// Description:
+//    Variable declarations and then instructions
+//
+// Results:
+//    nothing
+//
+// Historique:
+//    cree le 11/01/2022
+
+{
+        int x;
+        boolean u;
+        x = 1;
+        u = true;
+}

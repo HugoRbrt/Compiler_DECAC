@@ -1,0 +1,15 @@
+// Description:
+//    Declaration of a float variable using && operation between a int variable and string .
+// 
+// Results:
+//     Contextual error
+//     Line 14: (RULE 3.33) Illegal operand type.
+// 
+// Historique: 
+//    cree le 11/01/2022 
+
+{
+    int x =  2; 
+    string y = "Hello"; 
+    float z = 2 && "Hello"; 
+}

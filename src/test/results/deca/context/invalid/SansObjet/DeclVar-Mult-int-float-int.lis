@@ -1,0 +1,4 @@
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:40) - verify program: start
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:35) - verify Main: start
+DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:41) - 
+src/test/deca/context/invalid/SansObjet/DeclVar-Mult-int-float-int.deca:14:16: (RULE 3.28) Incompatible type assignment

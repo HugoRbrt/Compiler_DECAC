@@ -1,0 +1,15 @@
+// Description:
+//    Declaration of a float variable using <= operation between a float variable and float .
+// 
+// Results:
+//     Contextual error
+//     Line 14: (RULE 3.28) Incompatible type assignment
+// 
+// Historique: 
+//    cree le 11/01/2022 
+
+{
+    float x =  0.1; 
+    float y = 0.1; 
+    float z = 0.1 <= 0.1; 
+}

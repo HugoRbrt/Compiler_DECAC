@@ -1,0 +1,15 @@
+// Description:
+//    Declaration of a float variable using != operation between a float variable and float .
+// 
+// Results:
+//     Contextual error
+//     Line 14: (RULE 3.28) Incompatible type assignment
+// 
+// Historique: 
+//    cree le 11/01/2022 
+
+{
+    float x =  10.01; 
+    float y = 3.14; 
+    float z = 10.01 != 3.14; 
+}

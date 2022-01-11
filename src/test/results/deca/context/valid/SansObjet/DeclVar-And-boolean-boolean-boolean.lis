@@ -1,0 +1,39 @@
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:40) - verify program: start
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:35) - verify Main: start
+DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:41) - 
+DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:45) - z booleany booleanx boolean
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:42) - verify Main: end
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:46) - verify program: end
+`> [10, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [10, 0] Main
+      +> ListDeclVar [List with 3 elements]
+      |  []> [11, 12] DeclVar
+      |  ||  +> [11, 4] Identifier (boolean)
+      |  ||  |  definition: type (builtin), type=boolean
+      |  ||  +> [11, 12] Identifier (x)
+      |  ||  |  definition: variable defined at [11, 12], type=boolean
+      |  ||  `> [11, 14] Initialization
+      |  ||     `> [11, 17] BooleanLiteral (true)
+      |  ||        type: boolean
+      |  []> [12, 12] DeclVar
+      |  ||  +> [12, 4] Identifier (boolean)
+      |  ||  |  definition: type (builtin), type=boolean
+      |  ||  +> [12, 12] Identifier (y)
+      |  ||  |  definition: variable defined at [12, 12], type=boolean
+      |  ||  `> [12, 14] Initialization
+      |  ||     `> [12, 16] BooleanLiteral (false)
+      |  ||        type: boolean
+      |  []> [13, 12] DeclVar
+      |      +> [13, 4] Identifier (boolean)
+      |      |  definition: type (builtin), type=boolean
+      |      +> [13, 12] Identifier (z)
+      |      |  definition: variable defined at [13, 12], type=boolean
+      |      `> [13, 14] Initialization
+      |         `> [13, 21] And
+      |            type: boolean
+      |            +> [13, 16] BooleanLiteral (true)
+      |            |  type: boolean
+      |            `> [13, 24] BooleanLiteral (false)
+      |               type: boolean
+      `> ListInst [List with 0 elements]

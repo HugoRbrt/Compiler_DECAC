@@ -1,0 +1,15 @@
+// Description:
+//    Declaration of a string variable using - operation between a float variable and int .
+// 
+// Results:
+//     Contextual error
+//     Line 14: (RULE 3.28) Incompatible type assignment
+// 
+// Historique: 
+//    cree le 11/01/2022 
+
+{
+    float x =  10.01; 
+    int y = 10; 
+    string z = 10.01 - 10; 
+}

@@ -1,0 +1,29 @@
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:40) - verify program: start
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:35) - verify Main: start
+DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:41) - 
+DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:45) - z intx int
+DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:42) - verify Main: end
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:46) - verify program: end
+`> [11, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [11, 0] Main
+      +> ListDeclVar [List with 2 elements]
+      |  []> [12, 8] DeclVar
+      |  ||  +> [12, 4] Identifier (int)
+      |  ||  |  definition: type (builtin), type=int
+      |  ||  +> [12, 8] Identifier (x)
+      |  ||  |  definition: variable defined at [12, 8], type=int
+      |  ||  `> [12, 10] Initialization
+      |  ||     `> [12, 13] Int (10)
+      |  ||        type: int
+      |  []> [13, 8] DeclVar
+      |      +> [13, 4] Identifier (int)
+      |      |  definition: type (builtin), type=int
+      |      +> [13, 8] Identifier (z)
+      |      |  definition: variable defined at [13, 8], type=int
+      |      `> [13, 10] Initialization
+      |         `> [13, 12] UnaryMinus
+      |            type: int
+      |            `> [13, 13] Int (10)
+      |               type: int
+      `> ListInst [List with 0 elements]
