@@ -38,7 +38,7 @@ public class Main extends AbstractMain {
         // (mais ce n'est à priori pas nécessaire).
         declVariables.verifyListDeclVariable(compiler, compiler.getEnvExp(), null);
         insts.verifyListInst(compiler, compiler.getEnvExp(), null,
-                compiler.getEnvTypes().get(compiler.getSymbTable().create("void")).getType());
+                compiler.getEnvTypes().get(compiler.getSymbTable().create("void"), Location.BUILTIN).getType());
         LOG.debug("verify Main: end");
         //throw new UnsupportedOperationException("not yet implemented");
     }
@@ -57,7 +57,7 @@ public class Main extends AbstractMain {
         compiler.addComment("Beginning of variables declaration");
         declVariables.codeListDeclVar(compiler); */
         compiler.addARMComment("Beginning of main ARM instructions:");
-        compiler.addOther("_start:");
+        compiler.addARMBlock("_start:");
         ARMRegister R = (ARMRegister) compiler.getListRegister();
         insts.codeGenListInstARM(compiler);
         compiler.addInstruction(new mov(R.r0,0));

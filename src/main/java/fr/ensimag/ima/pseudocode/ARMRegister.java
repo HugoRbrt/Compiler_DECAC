@@ -42,13 +42,23 @@ public class ARMRegister extends Register {
         return r[i];
     }
     /**
-     * Convenience shortcut for x[0]
+     * Convenience shortcut for r[0]
      */
     public static final ARMGPRegister r0 = r[0];
     /**
-     * Convenience shortcut for x[1]
+     * Convenience shortcut for r[1]
      */
     public static final ARMGPRegister r1 = r[1];
+    /**
+     * Convenience shortcut for r[2]
+     */
+    public static final ARMGPRegister r2 = r[2];
+
+
+    /**
+     * Convenience shortcut for r[2]
+     */
+    public static final ARMGPRegister r7 = r[7];
     static private ARMGPRegister[] initRegisters() {
         ARMGPRegister [] res = new ARMGPRegister[16];
         for (int i = 0; i <= 15; i++) {

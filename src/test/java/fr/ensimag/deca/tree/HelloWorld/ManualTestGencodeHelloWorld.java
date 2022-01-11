@@ -30,7 +30,7 @@ public class ManualTestGencodeHelloWorld {
     public static String gencodeSource(AbstractProgram source) {
         DecacCompiler compiler = new DecacCompiler(null,null);
         source.codeGenProgram(compiler);
-        return compiler.displayIMAProgram();
+        return compiler.displayProgram();
     }
 
     public static void testHelloWorld() {

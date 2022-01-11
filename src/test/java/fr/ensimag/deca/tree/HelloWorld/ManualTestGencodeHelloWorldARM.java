@@ -6,14 +6,16 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.CompilerOptions;
 import org.apache.commons.lang.Validate;
+import fr.ensimag.deca.CLIException;
 
 /**
  *
  * @author Ensimag
  * @date 01/01/2022
  */
-public class ManualTestGencodeHelloWorld {
+public class ManualTestGencodeHelloWorldARM {
     
     public static AbstractProgram initTestHelloWorld() {
         ListInst linst = new ListInst();
@@ -28,9 +30,18 @@ public class ManualTestGencodeHelloWorld {
     }
     
     public static String gencodeSource(AbstractProgram source) {
-        DecacCompiler compiler = new DecacCompiler(null,null);
-        source.codeGenProgram(compiler);
-        return compiler.displayIMAProgram();
+        CompilerOptions compilerOptions = new CompilerOptions();
+        String [] s = { "-a" };
+        try{
+            compilerOptions.parseArgs(s);
+        }
+        catch(CLIException e){
+
+        }
+
+        DecacCompiler compiler = new DecacCompiler(compilerOptions,null);
+        source.codeGenProgramARM(compiler);
+        return compiler.displayProgram();
     }
 
     public static void testHelloWorld() {
@@ -40,11 +51,27 @@ public class ManualTestGencodeHelloWorld {
         System.out.println("---- We generate the following assembly code ----");        
         String result = gencodeSource(source);
         System.out.println(result);
-        Validate.isTrue(result.equals(
-                "; Main program\n" +
-                "; Beginning of main instructions:\n" +
-                "	WSTR \"HelloWorld\"\n" +
-                "	HALT\n"));
+        /*Validate.isTrue(result.equals(
+                "// Main ARM program\n" +
+                "// Beginning of main ARM instructions:\n" +
+                ".text\n" +
+                ".global_start\n" +
+                "_start:\n" +
+                "   mov r0, #1\n" +
+                "   ldr r1, =msg0\n" +
+                "   ldr r2, =len0:\n" +
+                        
+                ".data\n" +
+                "msg0:\n" +
+                "-ascii \"HelloWorld\"\n"+
+                "-len0 = . - msg0\n" +
+                        
+                ".text\n" +
+                "   mov r7, #4\n" +
+                "   svc #0\n" +
+                "   mov r0, #0\n" +
+                "   mov r7, #1\n" +
+                "   svc #0\n"));*/
     }
 
 

@@ -40,10 +40,9 @@ public class StringLiteral extends AbstractStringLiteral {
 
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
-            ClassDefinition currentClass) throws ContextualError {
+            ClassDefinition currentClass) {
         setType(compiler.getEnvTypes().get(compiler.getSymbTable().create("string")).getType());
         return compiler.getEnvTypes().get(compiler.getSymbTable().create("string")).getType();
-        // throw new UnsupportedOperationException("not yet implemented");
     }
 
     @Override
@@ -58,19 +57,17 @@ public class StringLiteral extends AbstractStringLiteral {
         i++;
         ARMRegister R = (ARMRegister) compiler.getListRegister();
         compiler.addInstruction(new mov(R.r0,1));
-        compiler.addInstruction(new ldr(R.ARMUseFirstAvailableRegister(), "="+msgName));
-        compiler.addInstruction(new ldr(R.ARMUseFirstAvailableRegister(), "="+lenMsgName));
+        compiler.addInstruction(new ldr(R.r1, "="+msgName));
+        compiler.addInstruction(new ldr(R.r2, "="+lenMsgName));
         //we add instruction at the end of the file :
         LinkedList<AbstractLine> l = new LinkedList<AbstractLine>();
-        l.add(new ARMLine(msgName+":"));
-        l.add(new ARMLine(".ascii " +"\"" +value + "\""));
-        l.add(new ARMLine(lenMsgName+" = . - "+msgName));
-        compiler.addListInstruction(l);
-        //end of the list at the end of the file
-        compiler.addInstruction(new mov(R.ARMUseSpecificRegister(7),4));
+        compiler.add(new ARMLine(".data"));
+        compiler.add(new ARMLine(msgName+":"));
+        compiler.add(new ARMLine(".ascii " +"\"" +value + "\""));
+        compiler.add(new ARMLine(lenMsgName+" = . - "+msgName));
+        compiler.add(new ARMLine(".text"));
+        compiler.addInstruction(new mov(R.r7,4));
         compiler.addInstruction(new svc(0));
-        R.ARMreleaseRegister();
-        R.ARMreleaseRegister();
     }
 
     @Override

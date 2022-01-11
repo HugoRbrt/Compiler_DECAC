@@ -26,7 +26,7 @@ public class ManualTestGencodeEmptyBlock {
     public static String gencodeSource(AbstractProgram source) {
         DecacCompiler compiler = new DecacCompiler(null,null);
         source.codeGenProgram(compiler);
-        return compiler.displayIMAProgram();
+        return compiler.displayProgram();
     }
 
     public static void testEmptyBlock() {
