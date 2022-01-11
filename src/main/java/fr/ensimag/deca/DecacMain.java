@@ -37,7 +37,8 @@ public class DecacMain {
             ExecutorService executor = Executors.newFixedThreadPool( Runtime.getRuntime().availableProcessors());
             LinkedList<Future> listFuture = new LinkedList<Future>();
             for (File source : options.getSourceFiles()){
-                listFuture.add(executor.submit(new DecacCompiler(options, source)));
+                DecacCompiler compiler = new DecacCompiler(options, source);
+                listFuture.add(executor.submit(compiler));
             }
             for(Future future : listFuture){
                 try{

@@ -19,7 +19,7 @@ import fr.ensimag.ima.pseudocode.*;
  */
 public class Program extends AbstractProgram {
     private static final Logger LOG = Logger.getLogger(Program.class);
-    
+
     public Program(ListDeclClass classes, AbstractMain main) {
         Validate.notNull(classes);
         Validate.notNull(main);
@@ -32,8 +32,8 @@ public class Program extends AbstractProgram {
     public AbstractMain getMain() {
         return main;
     }
-    private ListDeclClass classes;
-    private AbstractMain main;
+    protected ListDeclClass classes;
+    protected AbstractMain main;
 
     @Override
     public void verifyProgram(DecacCompiler compiler) throws ContextualError {

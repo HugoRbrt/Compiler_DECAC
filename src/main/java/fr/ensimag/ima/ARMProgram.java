@@ -10,10 +10,18 @@ import java.util.LinkedList;
  * @author Ensimag
  * @date 01/01/2022
  */
-public class IMAProgram  extends GenericProgram{
+public class ARMProgram extends GenericProgram{
 
     @Override
     public void addComment(String s) {
-        lines.add(new Line(s));
+        String v = "/*" + s + "*/";
+        lines.add(new ARMLine(v));
+    }
+
+    /**
+     * Add a name block
+     */
+    public void addARMBlock(String s) {
+        lines.add(new ARMLine(s));
     }
 }

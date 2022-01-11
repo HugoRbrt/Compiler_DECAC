@@ -11,6 +11,8 @@ import fr.ensimag.deca.tree.Location;
 import fr.ensimag.deca.tree.LocationException;
 import fr.ensimag.ima.pseudocode.AbstractLine;
 import fr.ensimag.ima.pseudocode.IMAProgram;
+import fr.ensimag.ima.pseudocode.ARMProgram;
+import fr.ensimag.ima.pseudocode.GenericProgram;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.DVal;
@@ -21,6 +23,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.Objects;
 import java.util.LinkedList;
 import java.util.HashMap;
 import java.util.Map;
@@ -61,6 +64,11 @@ public class DecacCompiler implements Runnable {
     public DecacCompiler(CompilerOptions compilerOptions, File source) {
         super();
         this.compilerOptions = compilerOptions;
+        if(Objects.isNull(this.compilerOptions) || !this.compilerOptions.getArmBool()){
+            program = new IMAProgram();
+        }else{
+            program = new ARMProgram();
+        }
         this.source = source;
         // initializing builtin types
         envTypes.put(this.symbTable.create("void"),
@@ -130,7 +138,7 @@ public class DecacCompiler implements Runnable {
      * @see fr.ensimag.ima.pseudocode.IMAProgram#addARMComment(java.lang.String)
      */
     public void addARMComment(String comment) {
-        program.addARMComment(comment);
+        program.addComment(comment);
     }
 
     /**
@@ -154,7 +162,8 @@ public class DecacCompiler implements Runnable {
      * fr.ensimag.ima.pseudocode.IMAProgram#addOther(fr.ensimag.ima.pseudocode.Instruction)
      */
     public void addARMBlock(String other) {
-        program.addARMBlock(other);
+        ARMProgram armP = (ARMProgram)program;
+        armP.addARMBlock(other);
     }
 
 
@@ -191,7 +200,7 @@ public class DecacCompiler implements Runnable {
     /**
      * The main program. Every instruction generated will eventually end up here.
      */
-    private final IMAProgram program = new IMAProgram();
+    private final GenericProgram program;
 
 
     /**
@@ -206,7 +215,11 @@ public class DecacCompiler implements Runnable {
         for (int i = 1; i < tmp.length-1; i++) {
             destFile += "." +tmp[i];
         }
-        destFile += ".ass";
+        if(Objects.isNull(this.compilerOptions) || !this.compilerOptions.getArmBool()){
+            destFile += ".ass";
+        }else{
+            destFile += ".s";
+        }
         LOG.info(" dest:"+ destFile);
         PrintStream err = System.err;
         PrintStream out = System.out;
@@ -281,7 +294,11 @@ public class DecacCompiler implements Runnable {
         }
 
         addComment("start main program");
-        prog.codeGenProgram(this);
+        if(Objects.isNull(this.compilerOptions) || !this.compilerOptions.getArmBool()){
+            prog.codeGenProgram(this);
+        }else{
+            prog.codeGenProgramARM(this);
+        }
         addComment("end main program");
         LOG.debug("Generated assembly code:" + nl + program.display());
         LOG.info("Output file assembly file is: " + destName);
