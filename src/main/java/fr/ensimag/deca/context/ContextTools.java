@@ -50,7 +50,7 @@ public class ContextTools {
 
     public static Type typeBoolOp(DecacCompiler compiler, Type t1, Type t2,
                                    Location location) throws ContextualError {
-        if (!(t1.isBoolean() && t1.isBoolean())) {
+        if (!(t1.isBoolean() && t2.isBoolean())) {
             throw new ContextualError("Illegal operand type.", location);
         }
         return compiler.getEnvTypes().get(compiler.getSymbTable().create("boolean")).getType();
