@@ -9,6 +9,7 @@ compile_job:
     stage: compiling
     script:
         - echo "Trying to compile src files..."
+        - docker build docker/
         - mvn compile
 
 test_compile_job:
