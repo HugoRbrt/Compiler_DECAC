@@ -4,7 +4,10 @@ gl49, 01/01/2022.
 ## Mise en place de l'environnement
 
 Le PATH doit être bien positionné sur le répertoire ```src/main/bin/```
-et sur ```src/test/script/```
+et sur ```src/test/script/```.
+
+On pourra installer l'émulateur de ARM choisi avec la commande suivante:
+```sudo apt-get arm-linux-gnueabihf```.
 
 ## Utilisation du compilateur
 
