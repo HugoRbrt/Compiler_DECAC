@@ -16,8 +16,25 @@ public class ARMGPRegister extends ARMRegister {
 
     private int number;
 
+    private boolean availability;
+
     ARMGPRegister(String name, int number) {
         super(name);
         this.number = number;
     }
+
+    public boolean available(){
+        return availability;
+    }
+
+    public void use(){
+        assert(availability);
+        availability=false;
+    }
+
+    public void liberate(){
+        assert(!availability);
+        availability=true;
+    }
+
 }

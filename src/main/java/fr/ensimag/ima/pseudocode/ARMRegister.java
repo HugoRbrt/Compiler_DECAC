@@ -78,12 +78,15 @@ public class ARMRegister extends Register {
         }
         return res;
     }
-    public ARMGPRegister ARMUseFirstAvailableRegister(){
-        super.occupiedRegister++;
-        return r[occupiedRegister-1];
-    }
-    public void ARMreleaseRegister(){
-        super.releaseRegister();
+
+    public GPRegister UseFirstAvailableRegister(){//we need to complete implementation of this function
+        for(int i=2;i<16;i++){
+            if(R[i].available()){
+                R[i].use();
+                return R[i];
+            }
+        }
+        throw new IllegalArgumentException("no Register Available");
     }
     public ARMGPRegister ARMUseSpecificRegister(int i){
         return r[i];

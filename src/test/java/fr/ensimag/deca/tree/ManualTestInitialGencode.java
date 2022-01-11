@@ -23,11 +23,11 @@ public class ManualTestInitialGencode {
         ListExpr lexp1 = new ListExpr(), lexp2 = new ListExpr();
         linst.add(new Print(false,lexp1));
         linst.add(new Println(false,lexp2));
-        lexp1.add(new FloatLiteral(3.F));
-        lexp2.add(new BooleanLiteral(true));
+        lexp1.add(new StringLiteral("Hello "));
+        lexp2.add(new StringLiteral("everybody !"));
         return source;
     }
-    
+
     public static String gencodeSource(AbstractProgram source) {
         DecacCompiler compiler = new DecacCompiler(null,null);
         source.codeGenProgram(compiler);
