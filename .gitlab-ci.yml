@@ -16,7 +16,7 @@ build-image:
 
 compile_job:
     stage: compiling
-    image: gitlab.ensimag.fr:5050/gl2022/g9/gl49
+    image: $CI_REGISTRY_IMAGE
     script:
         - echo "Trying to compile src files..."
         - mvn compile
