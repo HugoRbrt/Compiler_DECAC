@@ -43,7 +43,6 @@ public class Initialization extends AbstractInitialization {
     public void decompile(IndentPrintStream s) {
         s.print(" = ");
         getExpression().decompile(s);
-        //throw new UnsupportedOperationException("Not yet implemented");
     }
 
     @Override

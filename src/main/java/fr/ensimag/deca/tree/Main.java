@@ -73,6 +73,7 @@ public class Main extends AbstractMain {
         declVariables.decompile(s);
         insts.decompile(s);
         s.unindent();
+        s.println();
         s.println("}");
     }
 

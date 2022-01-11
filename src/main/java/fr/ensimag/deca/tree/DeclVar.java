@@ -56,7 +56,6 @@ public class DeclVar extends AbstractDeclVar {
         varName.decompile(s);
         s.print(" ");
         initialization.decompile(s);
-        //throw new UnsupportedOperationException("not yet implemented");
     }
 
     @Override

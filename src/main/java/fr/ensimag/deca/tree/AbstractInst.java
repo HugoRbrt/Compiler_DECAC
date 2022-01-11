@@ -49,6 +49,5 @@ public abstract class AbstractInst extends Tree {
      */
     protected void decompileInst(IndentPrintStream s) {
         decompile(s);
-        s.print(";");
     }
 }

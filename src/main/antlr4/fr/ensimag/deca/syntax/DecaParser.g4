@@ -150,6 +150,7 @@ inst returns[AbstractInst tree]
     | if_then_else {
             assert($if_then_else.tree != null);
             $tree = $if_then_else.tree;
+            setLocation($tree, $start);
             LOG.trace($tree);
         }
     | WHILE OPARENT condition=expr CPARENT OBRACE body=list_inst CBRACE {
