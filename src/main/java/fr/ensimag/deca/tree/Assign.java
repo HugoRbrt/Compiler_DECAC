@@ -6,6 +6,7 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.Definition;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.tools.IndentPrintStream;
 
 /**
  * Assignment, i.e. lvalue = expr.
@@ -35,6 +36,20 @@ public class Assign extends AbstractBinaryExpr {
         return currentType;
     }
 
+    /**
+     * The AbstractBinaryExpr class's decompile method must be overloaded in order
+     * to add a space on each side of the operator.
+     *
+     * @param s The stream to which the method writes.
+     */
+    @Override
+    public void decompile(IndentPrintStream s) {
+        s.print("(");
+        getLeftOperand().decompile(s);
+        s.print(" " + getOperatorName() + " ");
+        getRightOperand().decompile(s);
+        s.print(")");
+    }
 
     @Override
     protected String getOperatorName() {
