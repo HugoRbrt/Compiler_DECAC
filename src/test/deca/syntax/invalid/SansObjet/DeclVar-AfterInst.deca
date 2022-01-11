@@ -1,9 +1,9 @@
 // Description:
-//    If with no instruction block.
+//    Variable declaration after an instruction.
 //
 // Results:
 //    Syntax Error
-//    13:0 missing '{' at '}'
+//    14:12 no viable alternative at input 'y'
 //
 // Historique:
 //    cree le 08/01/2022
@@ -11,4 +11,5 @@
 {
         int x;
         x = 3;
+        int y;
 }

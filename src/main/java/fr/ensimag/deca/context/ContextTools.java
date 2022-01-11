@@ -3,7 +3,21 @@ package fr.ensimag.deca.context;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tree.Location;
 
+/**
+ * Tools for checking the validity of binary operation types.
+ *
+ * @author Teimur, Troy
+ * @date 10/01/2022
+ */
 public class ContextTools {
+    /**
+     *
+     *
+     * @param envType
+     * @param t1
+     * @param t2
+     * @return
+     */
     public static boolean assignCompatible(EnvironmentType envType, Type t1, Type t2) {
         return (t1.isFloat() && t2.isInt()) || subtype(envType, t2, t1);
     }
