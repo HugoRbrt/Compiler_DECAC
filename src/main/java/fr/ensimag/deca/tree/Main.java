@@ -49,6 +49,7 @@ public class Main extends AbstractMain {
         compiler.addComment("Beginning of variables declaration");
         declVariables.codeGenListDeclVar(compiler); */
         compiler.addComment("Beginning of main instructions:");
+        declVariables.codeGenListDeclVar(compiler);
         insts.codeGenListInst(compiler);
     }
     @Override
