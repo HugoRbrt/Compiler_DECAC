@@ -64,6 +64,20 @@ public class TestContextTools {
     }
 
     @Test
+    public void testTypeArithModulo() throws ContextualError {
+        when(t1.isInt()).thenReturn(true);
+        when(t2.isInt()).thenReturn(true);
+        assertTrue(ContextTools.typeArithModulo(compiler, t1, t2, null).isInt());
+    }
+
+    @Test
+    public void testTypeArithModuloFloat() {
+        when(t1.isInt()).thenReturn(true);
+        when(t2.isFloat()).thenReturn(true);
+        assertThrows(ContextualError.class, ()-> {ContextTools.typeArithModulo(compiler, t1, t2, null);});
+    }
+
+    @Test
     public void testTypeCmpInt() throws ContextualError {
         String op = "";
         when(t1.isInt()).thenReturn(true);
@@ -123,5 +137,35 @@ public class TestContextTools {
         when(t1.isBoolean()).thenReturn(true);
         when(t2.isInt()).thenReturn(true);
         assertThrows(ContextualError.class, ()-> {ContextTools.typeBoolOp(compiler, t1, t2, null);});
+    }
+
+    @Test
+    public void testTypeUnaryMinusInt() throws ContextualError {
+        when(t1.isInt()).thenReturn(true);
+        assertTrue(ContextTools.typeUnaryMinus(compiler, t1, null).isInt());
+    }
+
+    @Test
+    public void testTypeUnaryMinusFloat() throws ContextualError {
+        when(t1.isFloat()).thenReturn(true);
+        assertTrue(ContextTools.typeUnaryMinus(compiler, t1, null).isFloat());
+    }
+
+    @Test
+    public void testTypeUnaryMinusBool() {
+        when(t1.isBoolean()).thenReturn(true);
+        assertThrows(ContextualError.class, ()-> {ContextTools.typeUnaryMinus(compiler, t1, null);});
+    }
+
+    @Test
+    public void testTypeUnaryNot() throws ContextualError {
+        when(t1.isBoolean()).thenReturn(true);
+        assertTrue(ContextTools.typeUnaryNot(compiler, t1, null).isBoolean());
+    }
+
+    @Test
+    public void testTypeUnaryNotInt() {
+        when(t1.isInt()).thenReturn(true);
+        assertThrows(ContextualError.class, ()-> {ContextTools.typeUnaryNot(compiler, t1, null);});
     }
 }
