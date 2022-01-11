@@ -5,8 +5,12 @@ stages:
     - testing
     - cleanup
 
+services:
+    - docker:dind
+
 compile_job:
     stage: compiling
+    image: docker:dind
     script:
         - echo "Trying to compile src files..."
         - docker build .
