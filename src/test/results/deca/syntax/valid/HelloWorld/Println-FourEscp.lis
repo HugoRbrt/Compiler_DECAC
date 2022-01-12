@@ -5,4 +5,4 @@
       `> ListInst [List with 1 elements]
          []> [12, 0] Println
              `> ListExpr [List with 1 elements]
-                []> [12, 8] StringLiteral (\\\\)
+                []> [12, 8] StringLiteral (\\)
