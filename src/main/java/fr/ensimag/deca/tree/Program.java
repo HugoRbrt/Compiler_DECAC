@@ -50,7 +50,7 @@ public class Program extends AbstractProgram {
         // A FAIRE: compléter ce squelette très rudimentaire de code
 
         //creation of Register
-        compiler.setListRegister(new Register("List of Register"));
+        compiler.setListRegister(new Register());
         compiler.addComment("Main program");
         main.codeGenMain(compiler);
         compiler.addInstruction(new HALT());
@@ -62,7 +62,7 @@ public class Program extends AbstractProgram {
         compiler.addARMBlock(".global _start");
         compiler.addARMComment("ARM program");
         //creation of ARM Register
-        compiler.setListRegister(new ARMRegister("List of ARMRegister"));
+        compiler.setListRegister(new ARMRegister());
         main.codeGenMainARM(compiler);
     }
 
