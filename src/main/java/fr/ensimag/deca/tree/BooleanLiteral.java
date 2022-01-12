@@ -37,14 +37,14 @@ public class BooleanLiteral extends AbstractExpr {
     }
 
     @Override
-    protected void codeGenPrint(DecacCompiler compiler) {
+    protected void codeGenPrint(DecacCompiler compiler, boolean printHex) {
         StringLiteral s;
         if(value){
             s = new StringLiteral("true");
         }else{
             s = new StringLiteral("false");
         }
-        s.codeGenPrint(compiler);
+        s.codeGenPrint(compiler, printHex);
     }
 
     @Override
