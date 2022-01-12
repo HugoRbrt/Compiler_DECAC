@@ -93,18 +93,6 @@ public class Register extends DVal {
         return res;
     }
 
-    /**
-    * @return the first available register
-    */
-    public GPRegister UseFirstAvailableRegister(){
-        for(int i=currentIndex; i <= maxIndex; i++){
-            if(R[i].available()){
-                R[i].use();
-                return R[i];
-            }
-        }
-        throw new IllegalArgumentException("no Register Available");
-    }
     
     /**
      * @return a register. This register is taken as the first available
@@ -132,18 +120,6 @@ public class Register extends DVal {
         R[maxIndex-1].setNeedPush(true);
         
         return R[maxIndex-1];
-    }
-
-    /**
-     * @return true if a register in the bench is available, else false
-     */
-    public boolean OneRegisterAvailable(){
-        for(int i=2;i<maxIndex;i++){
-            if(R[i].available()){
-                return true;
-            }
-        }
-        return false;
     }
     
     /**
