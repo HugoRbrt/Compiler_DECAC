@@ -148,7 +148,11 @@ public class Register extends DVal {
         } else {
             // we do not need to pop and just make it free
             usedRegister.free();
-            currentIndex = usedRegister.getNumber();
+            // we update the index of an available register
+            int regNb = usedRegister.getNumber();
+            if (regNb < currentIndex) {
+                currentIndex = regNb;
+            }
         }
         usedRegister.setNeedPush(false);
     }
