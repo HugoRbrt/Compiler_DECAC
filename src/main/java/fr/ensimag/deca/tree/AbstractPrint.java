@@ -9,7 +9,6 @@ import java.io.PrintStream;
 import java.util.Iterator;
 
 import org.apache.commons.lang.Validate;
-import sun.jvm.hotspot.oops.Symbol;
 
 /**
  * Print statement (print, println, ...).

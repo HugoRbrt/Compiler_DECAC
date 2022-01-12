@@ -39,7 +39,7 @@ public class StringLiteral extends AbstractStringLiteral {
         RemoveBackslash();
     }
 
-    public void RemoveBackslash() {
+    private void RemoveBackslash() {
         boolean found = false;
         String newstr = "";
         for (int i = 0; i < value.length(); i++) {
