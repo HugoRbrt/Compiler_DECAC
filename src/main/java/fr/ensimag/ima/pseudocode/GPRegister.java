@@ -16,7 +16,7 @@ public class GPRegister extends Register {
 
     private int number;
 
-    private boolean availability;
+    private boolean availability = true;
 
     GPRegister(String name, int number) {
         super(name);
