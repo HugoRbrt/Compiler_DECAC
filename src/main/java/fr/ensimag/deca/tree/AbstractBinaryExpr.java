@@ -8,6 +8,10 @@ import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.POP;
+import fr.ensimag.ima.pseudocode.instructions.WINT;
+import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
+import fr.ensimag.deca.tree.FloatLiteral;
+import fr.ensimag.deca.tree.IntLiteral;
 
 /**
  * Binary expressions.
@@ -50,8 +54,8 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
     protected void codeGenInst(DecacCompiler compiler){
         boolean oneRegisterAvailable = compiler.getListRegister().OneRegisterAvailable();
         GPRegister usedRegister;
-        //calcul de l'operand gauche
-        leftOperand.codeGenInst(compiler);
+        //calcul de l'operand droit
+        rightOperand.codeGenInst(compiler);
         //on recupère un registre dont on aura besoin plus tard
         if(!oneRegisterAvailable){
             //si aucun registre dispo au debut: on recupere R2 avec push(R2)
@@ -61,7 +65,7 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
         }
         //on sauvegarde le resultat dans le registre disponible alloué
         compiler.addInstruction(new LOAD(compiler.getListRegister().R0, usedRegister));
-        rightOperand.codeGenInst(compiler);
+        leftOperand.codeGenInst(compiler);
         //il ne manque plus qu'a faire l'operation entre les deux et liberer usedRegister
         this.codeGenOperations(usedRegister, compiler.getListRegister().R0, compiler);
         //on libère usedRegister
@@ -71,6 +75,15 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
             usedRegister.liberate();
         }
         compiler.addInstruction(new LOAD(compiler.getListRegister().R0, compiler.getListRegister().R1));
+    }
+
+    protected void codeGenPrint(DecacCompiler compiler){
+        if(leftOperand instanceof FloatLiteral|| rightOperand instanceof FloatLiteral){
+            compiler.addInstruction(new WFLOAT());
+        }
+        else if(leftOperand instanceof IntLiteral|| rightOperand instanceof IntLiteral){
+            compiler.addInstruction(new WINT());
+        }
     }
 
     abstract void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler);

@@ -1,7 +1,9 @@
 package fr.ensimag.deca.tree;
 
+import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.ima.pseudocode.instructions.SUB;
 
 /**
  * @author gl49
@@ -12,6 +14,10 @@ public class Minus extends AbstractOpArith {
         super(leftOperand, rightOperand);
     }
 
+    protected void codeGenPrint(DecacCompiler compiler){
+        codeGenInst(compiler);
+        super.codeGenPrint(compiler);
+    }
 
     @Override
     protected String getOperatorName() {
@@ -19,6 +25,6 @@ public class Minus extends AbstractOpArith {
     }
 
     public void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler){
-        throw new UnsupportedOperationException("not yet implemented");
+        compiler.addInstruction(new SUB(Reg1, storedRegister));
     }
 }

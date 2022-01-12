@@ -3,7 +3,6 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.instructions.ADD;
-import fr.ensimag.ima.pseudocode.instructions.WINT;
 
 /**
  * @author gl49
@@ -24,7 +23,7 @@ public class Plus extends AbstractOpArith {
 
     protected void codeGenPrint(DecacCompiler compiler){
         codeGenInst(compiler);
-        compiler.addInstruction(new WINT());
+        super.codeGenPrint(compiler);
     }
 
     @Override
