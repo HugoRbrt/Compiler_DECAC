@@ -41,6 +41,7 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
     }
 
     protected void codeGenPrint(DecacCompiler compiler){
+        codeGenInst(compiler);
         super.codeGenPrint(compiler);
     }
 

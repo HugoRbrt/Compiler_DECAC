@@ -13,17 +13,8 @@ public class Plus extends AbstractOpArith {
         super(leftOperand, rightOperand);
     }
 
-    protected void codeGenInst(DecacCompiler compiler){
-        super.codeGenInst(compiler);
-    }
-
     public void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler){
         compiler.addInstruction(new ADD(Reg1, storedRegister));
-    }
-
-    protected void codeGenPrint(DecacCompiler compiler){
-        codeGenInst(compiler);
-        super.codeGenPrint(compiler);
     }
 
     @Override
