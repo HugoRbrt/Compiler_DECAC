@@ -10,6 +10,7 @@ import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.POP;
 import fr.ensimag.ima.pseudocode.instructions.WINT;
 import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
+import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
 import fr.ensimag.deca.tree.FloatLiteral;
 import fr.ensimag.deca.tree.IntLiteral;
 
@@ -77,9 +78,14 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
         compiler.addInstruction(new LOAD(compiler.getListRegister().R0, compiler.getListRegister().R1));
     }
 
-    protected void codeGenPrint(DecacCompiler compiler){
+    protected void codeGenPrint(DecacCompiler compiler, boolean printHex){
         if(leftOperand instanceof FloatLiteral|| rightOperand instanceof FloatLiteral){
-            compiler.addInstruction(new WFLOAT());
+            if(printHex){
+                compiler.addInstruction(new WFLOATX());
+            }
+            else{
+                compiler.addInstruction(new WFLOAT());
+            }
         }
         else if(leftOperand instanceof IntLiteral|| rightOperand instanceof IntLiteral){
             compiler.addInstruction(new WINT());
