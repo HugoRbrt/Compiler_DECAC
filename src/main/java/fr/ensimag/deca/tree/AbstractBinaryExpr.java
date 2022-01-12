@@ -70,6 +70,7 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
         }else{
             usedRegister.liberate();
         }
+        compiler.addInstruction(new LOAD(compiler.getListRegister().R0, compiler.getListRegister().R1));
     }
 
     abstract void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler);
