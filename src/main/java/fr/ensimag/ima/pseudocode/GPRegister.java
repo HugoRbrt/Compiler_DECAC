@@ -10,7 +10,16 @@ public class GPRegister extends Register {
     
     private int number;
 
+    /**
+     * Available if not used for saving a result
+     */
     private boolean availability = true;
+    
+    /**
+     * Accessed by push if the register was used in a PUSH expression
+     * With this, we can keep track of the future POP
+     */
+    private boolean accessedByPush = false;
 
     /**
      * @return the number of the register, e.g. 12 for R12.
@@ -19,6 +28,9 @@ public class GPRegister extends Register {
         return number;
     }
     
+    public void setAccessedByPush(boolean accessByPush) {
+        accessedByPush = accessByPush;
+    }
     /**
      * @return true if the register is available for use, else false
      */
@@ -46,6 +58,7 @@ public class GPRegister extends Register {
     public void liberate(){
         assert(!availability);
         availability=true;
-    }
+    }   
+    
 
 }
