@@ -9,7 +9,7 @@
 //    cree le 11/01/2022 
 
 {
-    int x =  17; 
+    int x =  5; 
     float y = 1.5; 
-    int z = 17 >= 1.5; 
+    int z = x >= y ; 
 }

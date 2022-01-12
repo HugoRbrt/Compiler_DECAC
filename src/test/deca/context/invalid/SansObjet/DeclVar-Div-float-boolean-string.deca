@@ -10,6 +10,6 @@
 
 {
     boolean x =  true; 
-    string y = "World"; 
-    float z = true / "World"; 
+    string y = "Hello"; 
+    float z = x / y ; 
 }

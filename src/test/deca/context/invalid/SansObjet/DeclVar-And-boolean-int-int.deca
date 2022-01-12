@@ -10,6 +10,6 @@
 
 {
     int x =  20; 
-    int y = 3; 
-    boolean z = 20 && 3; 
+    int y = 5; 
+    boolean z = x && y ; 
 }

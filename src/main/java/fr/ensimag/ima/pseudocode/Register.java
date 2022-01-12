@@ -12,11 +12,51 @@ import fr.ensimag.ima.pseudocode.instructions.POP;
  * @date 01/01/2022
  */
 public class Register extends DVal {
-    private String name;
-
-    public Register(String name) {
-        this.name = name;
+    private String name; 
+    /**
+     * number of given registers (16 by default)
+     */
+    private static int maxIndex = 16;
+    
+    /**
+     * current index for a supposedly available register
+    */
+    private int currentIndex = 2;
+    
+    /**
+     * stackAnalyzer to operate increments on
+    *
+    * private StackAnalyzer stackAnalyzer;
+    *
+    *public setStackAnalyzer(StackAnalyzer stackAnalyzer) {
+    *    this.stackAnalyzer = stackAnalyzer;
+    *}
+    */
+    
+    /**
+    * public constructor to access them more easily
+    */
+    public Register() {
+        this(16);
     }
+    
+    /**
+     * @param maxIndex : total number of registers
+     */
+    public Register(int maxIndex) {
+        this("Register Bench", maxIndex);
+    }
+    
+    protected Register(String name) {
+        this(name, 16);
+    }
+    
+    protected Register(String name, int maxIndex) {
+        this.name = name;
+        this.maxIndex = maxIndex;
+    }
+       
+
 
     @Override
     public String toString() {
@@ -56,44 +96,66 @@ public class Register extends DVal {
     public static final GPRegister R1 = R[1];
 
     static private GPRegister[] initRegisters() {
-        GPRegister [] res = new GPRegister[16];
-        for (int i = 0; i <= 15; i++) {
+        GPRegister [] res = new GPRegister[maxIndex];
+        for (int i = 0; i <= maxIndex; i++) {
             res[i] = new GPRegister("R" + i, i);
         }
         return res;
     }
 
-    public GPRegister UseFirstAvailableRegister(){
-        for(int i=2;i<16;i++){
-            if(R[i].available()){
-                R[i].use();
-                return R[i];
+    
+    /**
+     * @return a register. This register is taken as the first available
+     * register. If no such register is found, we return the last one
+     * and indicate that it will need to be pushed
+     */
+    public GPRegister getRegister(DecacCompiler compiler){
+        
+        for (int k = currentIndex; k <= maxIndex; k++) {
+            // if the register is available
+            if (R[k].available()) {
+                // we make it unavailable and say that we do not need to push it
+                R[k].use();
+                R[k].setNeedPush(false);
+                // we update the index for a supposedly free register
+                currentIndex = k+1;
+                return R[k];
             }
         }
-        throw new IllegalArgumentException("no Register Available");
+        
+        // if we arrive here, no available register was found
+        // in this case, we take the last register and push it
+        // before using it
+        GPRegister pushedRegister = R[maxIndex-1]; // for now
+        assert !(pushedRegister.available());
+        pushedRegister.setNeedPush(true);
+        
+        compiler.addInstruction(new PUSH(pushedRegister));
+        /* stackAnalyzer.incrCountPush(1) */
+        
+        return R[maxIndex-1];
     }
-
-    public boolean OneRegisterAvailable(){
-        for(int i=2;i<16;i++){
-            if(R[i].available()){
-                return true;
+    
+    /**
+     * free register given in argument and set its needPush field to false
+     */
+    public void freeRegister(GPRegister usedRegister, DecacCompiler compiler) {
+        
+        if (usedRegister.getNeedPush()) {
+            // we POP the register but this register still contains info
+            compiler.addInstruction(new POP(usedRegister));
+            /* stackAnalyzer.incrCountPop(1) */
+        } else {
+            // we do not need to pop and just make it free
+            usedRegister.free();
+            // we update the index of an available register
+            int regNb = usedRegister.getNumber();
+            if (regNb < currentIndex) {
+                currentIndex = regNb;
             }
         }
-        return false;
+        usedRegister.setNeedPush(false);
     }
 
-    public GPRegister StoreRegister(int i,DecacCompiler compiler){
-        if(i<2 || i>15){
-            throw new IllegalArgumentException("You have to Store a GPRegister (between R2 and R15)");
-        }
-        if(R[i].available()){
-            throw new IllegalArgumentException("You have to Store a GPRegister which is unavailable");
-        }
-        compiler.addInstruction(new PUSH(R[i]));
-        return R[i];
-    }
 
-    public void PopOnRegister(GPRegister R,DecacCompiler compiler){
-        compiler.addInstruction(new POP(R));
-    }
 }

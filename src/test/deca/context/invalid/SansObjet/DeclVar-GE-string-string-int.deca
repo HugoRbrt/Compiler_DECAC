@@ -9,7 +9,7 @@
 //    cree le 11/01/2022 
 
 {
-    string x =  "World"; 
-    int y = 3; 
-    string z = "World" >= 3; 
+    string x =  "Everyone"; 
+    int y = 10; 
+    string z = x >= y ; 
 }

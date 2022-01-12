@@ -11,5 +11,5 @@
 {
     boolean x =  true; 
     float y = 2.5; 
-    string z = true - 2.5; 
+    string z = x - y ; 
 }

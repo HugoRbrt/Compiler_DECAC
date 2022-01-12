@@ -10,6 +10,6 @@
 
 {
     int x =  17; 
-    float y = 10.01; 
-    string z = 17 == 10.01; 
+    float y = 0.1; 
+    string z = x == y ; 
 }

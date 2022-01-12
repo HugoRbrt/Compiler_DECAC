@@ -11,5 +11,5 @@
 {
     string x =  "Everyone"; 
     int y = 3; 
-    boolean z = "Everyone" + 3; 
+    boolean z = x + y ; 
 }

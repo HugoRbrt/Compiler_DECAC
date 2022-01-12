@@ -10,6 +10,6 @@
 
 {
     string x =  "Hello"; 
-    string y = "World"; 
-    string z = "Hello" == "World"; 
+    string y = "Everyone"; 
+    string z = x == y ; 
 }

@@ -11,5 +11,5 @@
 {
     string x =  "Everyone"; 
     float y = 10.01; 
-    int z = "Everyone" != 10.01; 
+    int z = x != y ; 
 }

@@ -10,6 +10,6 @@
 
 {
     int x =  17; 
-    boolean y = true; 
-    string z = 17 && true; 
+    boolean y = false; 
+    string z = x && y ; 
 }

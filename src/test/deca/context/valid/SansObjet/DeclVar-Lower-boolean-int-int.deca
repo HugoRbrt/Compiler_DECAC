@@ -9,6 +9,6 @@
 
 {
     int x =  5; 
-    int y = 17; 
-    boolean z = 5 < 17; 
+    int y = 20; 
+    boolean z = x < y ; 
 }

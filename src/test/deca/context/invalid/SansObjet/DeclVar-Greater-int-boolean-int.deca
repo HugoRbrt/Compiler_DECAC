@@ -10,6 +10,6 @@
 
 {
     boolean x =  false; 
-    int y = 20; 
-    int z = false > 20; 
+    int y = 2; 
+    int z = x > y ; 
 }

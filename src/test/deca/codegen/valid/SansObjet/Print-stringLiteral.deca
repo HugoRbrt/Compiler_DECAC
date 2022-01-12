@@ -1,0 +1,12 @@
+// Description:
+//    Printing string literal .
+// 
+// Results:
+//     "Hello"
+// 
+// Historique: 
+//    cree le 12/01/2022 
+
+{
+    print( "Hello" ) ; 
+}

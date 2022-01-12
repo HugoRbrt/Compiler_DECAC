@@ -1,9 +1,9 @@
-DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:40) - verify program: start
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:39) - verify program: start
 DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:35) - verify Main: start
 DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:41) - 
-DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:45) - y intz floatx float
+DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:45) - x floatz floaty int
 DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:42) - verify Main: end
-DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:46) - verify program: end
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:45) - verify program: end
 `> [10, 0] Program
    +> ListDeclClass [List with 0 elements]
    `> [10, 0] Main
@@ -14,7 +14,7 @@ DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:46) - verify progr
       |  ||  +> [11, 10] Identifier (x)
       |  ||  |  definition: variable defined at [11, 10], type=float
       |  ||  `> [11, 12] Initialization
-      |  ||     `> [11, 15] Float (2.5)
+      |  ||     `> [11, 15] Float (1.5)
       |  ||        type: float
       |  []> [12, 8] DeclVar
       |  ||  +> [12, 4] Identifier (int)
@@ -22,7 +22,7 @@ DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:46) - verify progr
       |  ||  +> [12, 8] Identifier (y)
       |  ||  |  definition: variable defined at [12, 8], type=int
       |  ||  `> [12, 10] Initialization
-      |  ||     `> [12, 12] Int (20)
+      |  ||     `> [12, 12] Int (5)
       |  ||        type: int
       |  []> [13, 10] DeclVar
       |      +> [13, 4] Identifier (float)
@@ -30,12 +30,12 @@ DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:46) - verify progr
       |      +> [13, 10] Identifier (z)
       |      |  definition: variable defined at [13, 10], type=float
       |      `> [13, 12] Initialization
-      |         `> [13, 18] Divide
+      |         `> [13, 16] Divide
       |            type: float
-      |            +> [13, 14] Float (2.5)
-      |            |  type: float
+      |            +> [13, 14] Identifier (x)
+      |            |  definition: variable defined at [11, 10], type=float
       |            `> ConvFloat
       |               type: float
-      |               `> [13, 20] Int (20)
-      |                  type: int
+      |               `> [13, 18] Identifier (y)
+      |                  definition: variable defined at [12, 8], type=int
       `> ListInst [List with 0 elements]

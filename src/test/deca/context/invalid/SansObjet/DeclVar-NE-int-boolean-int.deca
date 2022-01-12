@@ -11,5 +11,5 @@
 {
     boolean x =  true; 
     int y = 2; 
-    int z = true != 2; 
+    int z = x != y ; 
 }

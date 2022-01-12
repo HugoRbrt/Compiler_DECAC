@@ -10,6 +10,6 @@
 
 {
     string x =  "Everyone"; 
-    float y = 10.01; 
-    boolean z = "Everyone" <= 10.01; 
+    float y = 3.14; 
+    boolean z = x <= y ; 
 }

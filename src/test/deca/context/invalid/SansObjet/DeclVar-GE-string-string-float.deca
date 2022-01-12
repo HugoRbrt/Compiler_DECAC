@@ -11,5 +11,5 @@
 {
     string x =  "World"; 
     float y = 0.1; 
-    string z = "World" >= 0.1; 
+    string z = x >= y ; 
 }

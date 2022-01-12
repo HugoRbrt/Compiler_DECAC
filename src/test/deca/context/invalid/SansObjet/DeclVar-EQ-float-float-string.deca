@@ -11,5 +11,5 @@
 {
     float x =  3.14; 
     string y = "World"; 
-    float z = 3.14 == "World"; 
+    float z = x == y ; 
 }

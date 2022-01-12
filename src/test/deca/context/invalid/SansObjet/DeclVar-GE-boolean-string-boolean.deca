@@ -10,6 +10,6 @@
 
 {
     string x =  "World"; 
-    boolean y = false; 
-    boolean z = "World" >= false; 
+    boolean y = true; 
+    boolean z = x >= y ; 
 }

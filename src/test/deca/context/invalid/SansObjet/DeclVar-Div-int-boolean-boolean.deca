@@ -11,5 +11,5 @@
 {
     boolean x =  true; 
     boolean y = false; 
-    int z = true / false; 
+    int z = x / y ; 
 }

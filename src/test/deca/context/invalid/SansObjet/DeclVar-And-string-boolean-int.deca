@@ -9,7 +9,7 @@
 //    cree le 11/01/2022 
 
 {
-    boolean x =  true; 
-    int y = 10; 
-    string z = true && 10; 
+    boolean x =  false; 
+    int y = 5; 
+    string z = x && y ; 
 }

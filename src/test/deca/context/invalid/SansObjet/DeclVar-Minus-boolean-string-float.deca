@@ -11,5 +11,5 @@
 {
     string x =  "Hello"; 
     float y = 3.14; 
-    boolean z = "Hello" - 3.14; 
+    boolean z = x - y ; 
 }

@@ -220,4 +220,12 @@ public class Identifier extends AbstractIdentifier {
         }
     }
 
+    //protected void codeGenPrint(DecacCompiler compiler){
+        // if(getDefinition().isExpression())
+        //     compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), Register.R1));
+        // if(definition.getType().isInt())
+        //     compiler.addInstruction(new WINT());
+        // else
+        //     compiler.addInstruction(new WFLOAT());
+    //}
 }

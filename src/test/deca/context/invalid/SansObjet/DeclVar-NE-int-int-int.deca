@@ -10,6 +10,6 @@
 
 {
     int x =  3; 
-    int y = 3; 
-    int z = 3 != 3; 
+    int y = 17; 
+    int z = x != y ; 
 }

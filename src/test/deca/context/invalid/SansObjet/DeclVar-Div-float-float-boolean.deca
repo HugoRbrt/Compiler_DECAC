@@ -11,5 +11,5 @@
 {
     float x =  10.01; 
     boolean y = false; 
-    float z = 10.01 / false; 
+    float z = x / y ; 
 }

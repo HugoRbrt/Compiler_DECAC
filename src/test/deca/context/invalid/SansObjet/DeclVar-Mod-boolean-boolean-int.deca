@@ -9,7 +9,7 @@
 //    cree le 11/01/2022 
 
 {
-    boolean x =  true; 
-    int y = 2; 
-    boolean z = true % 2; 
+    boolean x =  false; 
+    int y = 17; 
+    boolean z = x % y ; 
 }

@@ -10,6 +10,6 @@
 
 {
     float x =  1.5; 
-    string y = "World"; 
-    string z = 1.5 >= "World"; 
+    string y = "Hello"; 
+    string z = x >= y ; 
 }

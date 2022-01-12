@@ -10,5 +10,5 @@
 {
     float x =  3.14; 
     int y = 20; 
-    boolean z = 3.14 != 20; 
+    boolean z = x != y ; 
 }

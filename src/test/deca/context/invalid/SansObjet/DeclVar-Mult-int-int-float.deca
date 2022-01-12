@@ -10,6 +10,6 @@
 
 {
     int x =  17; 
-    float y = 0.1; 
-    int z = 17 * 0.1; 
+    float y = 1.5; 
+    int z = x * y ; 
 }

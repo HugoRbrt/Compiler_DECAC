@@ -8,7 +8,10 @@ import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
 
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
@@ -42,14 +45,13 @@ public class Initialization extends AbstractInitialization {
         expression.verifyRValue(compiler, localEnv, currentClass, t);
     }
 
-    protected void codeGenDeclVar(DecacCompiler compiler){/*
+    @Override
+    protected void codeGenDeclVar(DecacCompiler compiler, AbstractIdentifier varName){
     //pas encore fonctionnel, codegen de abstractexpr doit etre entierement realisé avant
     //RegistreRetourExpr correspond au registre contenant la valeur calculé de expr
-        GPRegister R = compiler.getListRegister().UseFirstAvailableRegister();
         expression.codeGenInst(compiler);
-        RegistreRetourExpr =
-        compiler.addInstruction(new LOAD(RegistreRetourExpr, R));
-        compiler.addInstruction(new PUSH(R));*/
+        RegisterOffset r = compiler.getstackTable().get(varName.getName());
+        compiler.addInstruction(new STORE(compiler.getListRegister().R0, r));
     }
 
 
