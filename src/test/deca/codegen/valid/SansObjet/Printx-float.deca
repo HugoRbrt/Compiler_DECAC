@@ -1,0 +1,16 @@
+// Description:
+//    Printing of a float under hexadecimal representation
+// 
+// Results:
+//     (Signe:0
+//     Exposant:1
+//     Mantisse:1.01)
+//     
+// 
+// History: 
+//    created on 11/01/2022 
+
+{
+    float x = 2.5 ;
+    printx(x);
+}

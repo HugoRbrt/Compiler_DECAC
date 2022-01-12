@@ -16,8 +16,25 @@ public class GPRegister extends Register {
 
     private int number;
 
+    private boolean availability;
+
     GPRegister(String name, int number) {
         super(name);
         this.number = number;
     }
+
+    public boolean available(){
+        return availability;
+    }
+
+    public void use(){
+        assert(availability);
+        availability=false;
+    }
+
+    public void liberate(){
+        assert(!availability);
+        availability=true;
+    }
+
 }

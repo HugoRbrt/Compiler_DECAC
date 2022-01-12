@@ -2,6 +2,7 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.ima.pseudocode.Register;
 
 /**
  *
@@ -24,4 +25,7 @@ public abstract class AbstractOpBool extends AbstractBinaryExpr {
         return resType;
     }
 
+    public void codeGenOperations(Register Reg1, Register storedRegister){
+        throw new UnsupportedOperationException("not yet implemented");
+    }
 }

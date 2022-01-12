@@ -2,6 +2,8 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.ima.pseudocode.Register;
 
 /**
  * Arithmetic binary operations (+, -, /, ...)
@@ -33,4 +35,10 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
         setType(resType);
         return resType;
     }
+
+    protected void codeGenInst(DecacCompiler compiler){
+        super.codeGenInst(compiler);
+    }
+
+    abstract void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler);
 }

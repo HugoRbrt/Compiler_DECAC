@@ -3,13 +3,12 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.ima.pseudocode.instructions.*;
-import fr.ensimag.ima.pseudocode.instructionsARM.*;
+import fr.ensimag.ima.pseudocode.instructions.HALT;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
-import fr.ensimag.deca.context.*;
-import fr.ensimag.ima.pseudocode.*;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.ARMRegister;
 
 /**
  * Deca complete program (class definition plus main block)
@@ -49,6 +48,9 @@ public class Program extends AbstractProgram {
     @Override
     public void codeGenProgram(DecacCompiler compiler) {
         // A FAIRE: compléter ce squelette très rudimentaire de code
+
+        //creation of Register
+        compiler.setListRegister(new Register("List of Register"));
         compiler.addComment("Main program");
         main.codeGenMain(compiler);
         compiler.addInstruction(new HALT());

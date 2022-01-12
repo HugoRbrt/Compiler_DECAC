@@ -1,0 +1,15 @@
+// Description:
+//    Declaration of a float variable with initialization of an int.
+// 
+// Results:
+//     (Sign:0
+//     Mantisse:1
+//     Exposant:1)
+// 
+// Historique: 
+//    cree le 11/01/2022 
+
+{
+    float x = 2 ;
+    printx(x);
+}

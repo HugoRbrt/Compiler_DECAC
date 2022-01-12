@@ -7,6 +7,7 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.Definition;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.Register;
 
 /**
  * Assignment, i.e. lvalue = expr.
@@ -56,4 +57,7 @@ public class Assign extends AbstractBinaryExpr {
         return "=";
     }
 
+    public void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler){
+        throw new UnsupportedOperationException("not yet implemented");
+    }
 }

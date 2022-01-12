@@ -8,7 +8,7 @@ package fr.ensimag.ima.pseudocode;
  * @date 01/01/2022
  */
 public class BinaryInstructionDValToReg extends BinaryInstruction {
-    public BinaryInstructionDValToReg(DVal op1, GPRegister op2) {
+    public BinaryInstructionDValToReg(DVal op1, Register op2) {
         super(op1, op2);
     }
 }
