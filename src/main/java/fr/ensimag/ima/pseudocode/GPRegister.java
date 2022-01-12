@@ -19,7 +19,7 @@ public class GPRegister extends Register {
      * Accessed by push if the register was used in a PUSH expression
      * With this, we can keep track of the future POP
      */
-    private boolean accessedByPush = false;
+    private boolean needPush = false;
 
     /**
      * @return the number of the register, e.g. 12 for R12.
@@ -28,9 +28,15 @@ public class GPRegister extends Register {
         return number;
     }
     
-    public void setAccessedByPush(boolean accessByPush) {
-        accessedByPush = accessByPush;
+    public void setNeedPush(boolean needPush) {
+        this.needPush = needPush;
     }
+    
+    public boolean getNeedPush() {
+        return needPush;
+    }
+    
+    
     /**
      * @return true if the register is available for use, else false
      */

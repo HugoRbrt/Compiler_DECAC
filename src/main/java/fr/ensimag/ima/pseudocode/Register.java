@@ -12,23 +12,41 @@ import fr.ensimag.ima.pseudocode.instructions.POP;
  * @date 01/01/2022
  */
 public class Register extends DVal {
-    private String name;
+    private String name; 
+    /**
+     * number of given registers (16 by default)
+     */
+    private static int maxIndex = 16;
     
     /**
-    * number of the first supposedly available register in the bench
+     * current index for a supposedly available register
     */
-    private int firstAvailable = 2;
+    private int currentIndex = 2;
+
+        /**
+    * public constructor to access them more easily
+    */
+    public Register() {
+        this(16);
+    }
+    
+    /**
+     * @param maxIndex : total number of registers
+     */
+    public Register(int maxIndex) {
+        this("Register Bench", maxIndex);
+    }
     
     protected Register(String name) {
         this.name = name;
     }
     
-    /*
-    * public constructor to access them more easily
-    */
-    public Register() {
-        this("Register Bench");
+    protected Register(String name, int maxIndex) {
+        this.name = name;
+        this.maxIndex = maxIndex;
     }
+       
+
 
     @Override
     public String toString() {
@@ -68,8 +86,8 @@ public class Register extends DVal {
     public static final GPRegister R1 = R[1];
 
     static private GPRegister[] initRegisters() {
-        GPRegister [] res = new GPRegister[16];
-        for (int i = 0; i <= 15; i++) {
+        GPRegister [] res = new GPRegister[maxIndex];
+        for (int i = 0; i <= maxIndex; i++) {
             res[i] = new GPRegister("R" + i, i);
         }
         return res;
@@ -79,14 +97,40 @@ public class Register extends DVal {
     * @return the first available register
     */
     public GPRegister UseFirstAvailableRegister(){
-        for(int i=firstAvailable; i <= 15; i++){
+        for(int i=currentIndex; i <= maxIndex; i++){
             if(R[i].available()){
                 R[i].use();
-                firstAvailable++;
                 return R[i];
             }
         }
         throw new IllegalArgumentException("no Register Available");
+    }
+    
+    /**
+     * @return a register. This register is taken as the first available
+     * register. If no such register is found, we return the last one
+     * and indicate that it will need to be pushed
+     */
+    public GPRegister getRegister(){
+        
+        for (int k = currentIndex; k <= maxIndex; k++) {
+            // if the register is available
+            if (R[k].available()) {
+                // we make it unavailable and say that we do not need to push it
+                R[k].use();
+                R[k].setNeedPush(false);
+                // we update the index for a supposedly free register
+                currentIndex = k+1;
+                return R[k];
+            }
+        }
+        
+        // if we arrive here, no available register was found
+        // in this case, we take the last register and push it
+        // before using it
+        assert !(R[maxIndex-1].available());
+        R[maxIndex-1].setNeedPush(true);
+        return R[maxIndex-1];
     }
 
     /**
