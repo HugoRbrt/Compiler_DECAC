@@ -97,7 +97,7 @@ public class Register extends DVal {
 
     static private GPRegister[] initRegisters() {
         GPRegister [] res = new GPRegister[maxIndex];
-        for (int i = 0; i <= maxIndex; i++) {
+        for (int i = 0; i < maxIndex; i++) {
             res[i] = new GPRegister("R" + i, i);
         }
         return res;

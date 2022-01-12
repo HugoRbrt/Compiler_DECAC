@@ -53,28 +53,12 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
     }
 
     protected void codeGenInst(DecacCompiler compiler){
-        boolean oneRegisterAvailable = compiler.getListRegister().OneRegisterAvailable();
-        GPRegister usedRegister;
-        //calcul de l'operand droit
         rightOperand.codeGenInst(compiler);
-        //on recupère un registre dont on aura besoin plus tard
-        if(!oneRegisterAvailable){
-            //si aucun registre dispo au debut: on recupere R2 avec push(R2)
-            usedRegister = compiler.getListRegister().StoreRegister(2, compiler);
-        }else{
-            usedRegister = compiler.getListRegister().UseFirstAvailableRegister();
-        }
-        //on sauvegarde le resultat dans le registre disponible alloué
+        GPRegister usedRegister = compiler.getListRegister().getRegister(compiler);
         compiler.addInstruction(new LOAD(compiler.getListRegister().R0, usedRegister));
         leftOperand.codeGenInst(compiler);
-        //il ne manque plus qu'a faire l'operation entre les deux et liberer usedRegister
         this.codeGenOperations(usedRegister, compiler.getListRegister().R0, compiler);
-        //on libère usedRegister
-        if(!oneRegisterAvailable){
-            compiler.addInstruction(new POP(usedRegister));
-        }else{
-            usedRegister.free();
-        }
+        compiler.getListRegister().freeRegister(usedRegister, compiler);
         compiler.addInstruction(new LOAD(compiler.getListRegister().R0, compiler.getListRegister().R1));
     }
 
