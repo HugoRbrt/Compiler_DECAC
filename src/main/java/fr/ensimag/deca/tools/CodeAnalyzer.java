@@ -48,7 +48,11 @@ public class CodeAnalyzer {
     */
     public void incrPopCount(int nbPop) {
         diffPushPop -= nbPop;
-        assert(diffPushPop >= 0);
+        
+        // Defensive programing
+        if (diffPushPop < 0) {
+            diffPushPop = 0;
+        }
     }
 
     /**

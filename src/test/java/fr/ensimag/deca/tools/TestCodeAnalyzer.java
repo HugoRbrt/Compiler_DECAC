@@ -2,6 +2,8 @@ package fr.ensimag.deca.tools;
 
 import fr.ensimag.deca.tools.CodeAnalyzer;
 import org.apache.log4j.Logger;
+import apache.commons.lang.Validate;
+
 /**
  *
  * @author gl49
@@ -41,21 +43,19 @@ public class TestCodeAnalyzer {
     }
     
     
-    /* Must print an AssertException */
+    /* Must return 0 */
     private static void testThree() {
         CodeAnalyzer codeAnalyzer = new CodeAnalyzer();
         
-        try {
-            codeAnalyzer.incrPopCount(1);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
+        codeAnalyzer.incrPopCount(1);
+        
+        return codeAnalyzer.getStackSizeInstructions();
     }
 
     public static void main(String[] args) {
-        System.out.println(testOne());
-        System.out.println(testTwo());
-        testThree();
+        Validate.isTrue(testOne() == 7);
+        Validate.isTrue(testTwo() == 2);
+        Validate.isTrue(testThree() == 0);
     }
 }
         
