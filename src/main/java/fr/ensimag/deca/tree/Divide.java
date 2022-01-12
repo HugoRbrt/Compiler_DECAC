@@ -2,6 +2,7 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.ima.pseudocode.instructions.DIV;
 
 /**
  *
@@ -20,6 +21,6 @@ public class Divide extends AbstractOpArith {
     }
 
     public void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler){
-        throw new UnsupportedOperationException("not yet implemented");
+        compiler.addInstruction(new DIV(Reg1, storedRegister));
     }
 }

@@ -10,8 +10,12 @@ import fr.ensimag.ima.pseudocode.Register;
  * @date 01/01/2022
  */
 public class ARMRegister extends Register {
-    public ARMRegister(String name) {
+    protected ARMRegister(String name) {
         super(name);
+    }
+    
+    public ARMRegister() {
+        this("ARM Register Bench");
     }
 
     /**

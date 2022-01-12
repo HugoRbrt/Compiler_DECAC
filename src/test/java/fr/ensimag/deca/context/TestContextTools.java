@@ -1,9 +1,7 @@
 package fr.ensimag.deca.context;
 
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.tree.Location;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;

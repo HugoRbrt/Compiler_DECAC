@@ -4,6 +4,10 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.ima.pseudocode.instructions.FLOAT;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.deca.tree.IntLiteral;
+import fr.ensimag.deca.DecacCompiler;
 
 /**
  * Conversion of an int into a float. Used for implicit conversions.
@@ -27,6 +31,11 @@ public class ConvFloat extends AbstractUnaryExpr {
     @Override
     protected String getOperatorName() {
         return "/* conv float */";
+    }
+
+    public void codeGenInst(DecacCompiler compiler){
+        IntLiteral operandInt = (IntLiteral)super.getOperand();
+        compiler.addInstruction(new FLOAT(new ImmediateInteger(operandInt.getValue()),compiler.getListRegister().R0));
     }
 
 }

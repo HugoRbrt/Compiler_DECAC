@@ -67,4 +67,8 @@ public class FloatLiteral extends AbstractExpr {
         // leaf node => nothing to do
     }
 
+    public void codeGenInst(DecacCompiler compiler){
+        compiler.addInstruction(new LOAD(new ImmediateFloat(value), compiler.getListRegister().R0));
+    }
+
 }
