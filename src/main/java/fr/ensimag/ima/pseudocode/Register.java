@@ -38,7 +38,7 @@ public class Register extends DVal {
     }
     
     protected Register(String name) {
-        this.name = name;
+        this(name, 16);
     }
     
     protected Register(String name, int maxIndex) {
@@ -149,8 +149,16 @@ public class Register extends DVal {
     /**
      * free register given in argument and set its needPush field to false
      */
-    public void freeRegister(GPRegister usedRegister) {
+    public void freeRegister(GPRegister usedRegister, DecacCompiler compiler) {
         usedRegister.free();
+        
+        if (usedRegister.getNeedPush()) {
+            // we POP the register but this register still contains info
+            compiler.addInstruction(new POP(usedRegister));
+        } else {
+            // we do not need to pop and just make it free
+            usedRegister.free();
+        }
         usedRegister.setNeedPush(false);
     }
 
@@ -165,7 +173,4 @@ public class Register extends DVal {
         return R[i];
     }
 
-    public void popOnRegister(GPRegister R, DecacCompiler compiler){
-        compiler.addInstruction(new POP(R));
-    }
 }
