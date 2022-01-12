@@ -130,6 +130,7 @@ public class Register extends DVal {
         // before using it
         assert !(R[maxIndex-1].available());
         R[maxIndex-1].setNeedPush(true);
+        
         return R[maxIndex-1];
     }
 
@@ -137,17 +138,25 @@ public class Register extends DVal {
      * @return true if a register in the bench is available, else false
      */
     public boolean OneRegisterAvailable(){
-        for(int i=2;i<16;i++){
+        for(int i=2;i<maxIndex;i++){
             if(R[i].available()){
                 return true;
             }
         }
         return false;
     }
+    
+    /**
+     * free register given in argument and set its needPush field to false
+     */
+    public void freeRegister(GPRegister usedRegister) {
+        usedRegister.free();
+        usedRegister.setNeedPush(false);
+    }
 
     public GPRegister StoreRegister(int i, DecacCompiler compiler){
-        if(i<2 || i>15){
-            throw new IllegalArgumentException("You have to Store a GPRegister (between R2 and R15)");
+        if(i<2 || i>maxIndex){
+            throw new IllegalArgumentException("You have to Store a GPRegister (between R2 and RMAX)");
         }
         if(R[i].available()){
             throw new IllegalArgumentException("You have to Store a GPRegister which is unavailable");
@@ -156,7 +165,7 @@ public class Register extends DVal {
         return R[i];
     }
 
-    public void popOnRegister(GPRegister R,DecacCompiler compiler){
+    public void popOnRegister(GPRegister R, DecacCompiler compiler){
         compiler.addInstruction(new POP(R));
     }
 }

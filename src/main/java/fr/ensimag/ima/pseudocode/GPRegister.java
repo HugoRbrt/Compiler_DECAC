@@ -61,7 +61,7 @@ public class GPRegister extends Register {
     /**
      * Free an unavailable register to make it usable for saves
      */
-    public void liberate(){
+    public void free(){
         assert(!availability);
         availability=true;
     }   
