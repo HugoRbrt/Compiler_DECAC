@@ -11,5 +11,5 @@
 {
     boolean x =  false; 
     boolean y = false; 
-    int z = false && false; 
+    int z = x && y ; 
 }

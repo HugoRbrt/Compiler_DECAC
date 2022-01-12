@@ -10,6 +10,6 @@
 
 {
     string x =  "Everyone"; 
-    string y = "World"; 
-    boolean z = "Everyone" / "World"; 
+    string y = "Hello"; 
+    boolean z = x / y ; 
 }

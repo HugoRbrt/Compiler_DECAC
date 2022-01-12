@@ -11,5 +11,5 @@
 {
     int x =  5; 
     boolean y = true; 
-    string z = 5 % true; 
+    string z = x % y ; 
 }

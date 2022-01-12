@@ -11,5 +11,5 @@
 {
     boolean x =  true; 
     string y = "Everyone"; 
-    float z = true + "Everyone"; 
+    float z = x + y ; 
 }

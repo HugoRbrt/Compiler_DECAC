@@ -11,5 +11,5 @@
 {
     boolean x =  true; 
     boolean y = true; 
-    boolean z = true % true; 
+    boolean z = x % y ; 
 }

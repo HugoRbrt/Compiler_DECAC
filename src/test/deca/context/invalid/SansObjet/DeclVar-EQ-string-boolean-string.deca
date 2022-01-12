@@ -11,5 +11,5 @@
 {
     boolean x =  true; 
     string y = "Hello"; 
-    string z = true == "Hello"; 
+    string z = x == y ; 
 }

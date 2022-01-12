@@ -10,6 +10,6 @@
 
 {
     int x =  2; 
-    string y = "Hello"; 
-    float z = 2 >= "Hello"; 
+    string y = "Everyone"; 
+    float z = x >= y ; 
 }

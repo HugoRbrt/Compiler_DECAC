@@ -11,5 +11,5 @@
 {
     boolean x =  false; 
     boolean y = false; 
-    float z = false % false; 
+    float z = x % y ; 
 }

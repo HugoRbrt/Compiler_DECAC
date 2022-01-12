@@ -9,7 +9,7 @@
 //    cree le 11/01/2022 
 
 {
-    string x =  "Everyone"; 
+    string x =  "Hello"; 
     string y = "Hello"; 
-    int z = "Everyone" != "Hello"; 
+    int z = x != y ; 
 }

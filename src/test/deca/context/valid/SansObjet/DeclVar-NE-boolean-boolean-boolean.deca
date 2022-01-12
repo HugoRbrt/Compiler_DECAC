@@ -9,6 +9,6 @@
 
 {
     boolean x =  true; 
-    boolean y = false; 
-    boolean z = true != false; 
+    boolean y = true; 
+    boolean z = x != y ; 
 }

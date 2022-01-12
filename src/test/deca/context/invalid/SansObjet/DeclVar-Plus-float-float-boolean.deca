@@ -10,6 +10,6 @@
 
 {
     float x =  2.5; 
-    boolean y = true; 
-    float z = 2.5 + true; 
+    boolean y = false; 
+    float z = x + y ; 
 }

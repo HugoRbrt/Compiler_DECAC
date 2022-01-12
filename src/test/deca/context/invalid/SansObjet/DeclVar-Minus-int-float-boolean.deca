@@ -9,7 +9,7 @@
 //    cree le 11/01/2022 
 
 {
-    float x =  1.5; 
-    boolean y = false; 
-    int z = 1.5 - false; 
+    float x =  0.1; 
+    boolean y = true; 
+    int z = x - y ; 
 }

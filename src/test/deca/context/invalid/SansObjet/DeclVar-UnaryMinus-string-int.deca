@@ -10,5 +10,5 @@
 
 {
     int x =  2; 
-    string z = -2 ; 
+    string z = -x ; 
 }

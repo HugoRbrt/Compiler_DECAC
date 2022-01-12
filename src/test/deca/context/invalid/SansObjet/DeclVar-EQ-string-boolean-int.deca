@@ -10,6 +10,6 @@
 
 {
     boolean x =  false; 
-    int y = 20; 
-    string z = false == 20; 
+    int y = 5; 
+    string z = x == y ; 
 }

@@ -2,13 +2,12 @@
 //    Declaration of a int variable using - operation on a int variable .
 // 
 // Results:
-//     Contextual error
-//     Line 13: (RULE 3.28) Incompatible type assignment
+//     nothing
 // 
 // Historique: 
 //    cree le 11/01/2022 
 
 {
-    int x =  10; 
-    int z = -10 ; 
+    int x =  20; 
+    int z = -x ; 
 }

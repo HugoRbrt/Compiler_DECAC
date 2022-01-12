@@ -9,7 +9,7 @@
 //    cree le 11/01/2022 
 
 {
-    int x =  20; 
-    int y = 10; 
-    boolean z = 20 - 10; 
+    int x =  2; 
+    int y = 2; 
+    boolean z = x - y ; 
 }

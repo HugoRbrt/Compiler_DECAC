@@ -9,7 +9,7 @@
 //    cree le 11/01/2022 
 
 {
-    float x =  10.01; 
-    float y = 1.5; 
-    boolean z = 10.01 + 1.5; 
+    float x =  0.1; 
+    float y = 3.14; 
+    boolean z = x + y ; 
 }

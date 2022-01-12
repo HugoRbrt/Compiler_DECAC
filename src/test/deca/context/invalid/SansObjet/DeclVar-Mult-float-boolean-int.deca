@@ -9,7 +9,7 @@
 //    cree le 11/01/2022 
 
 {
-    boolean x =  true; 
-    int y = 20; 
-    float z = true * 20; 
+    boolean x =  false; 
+    int y = 5; 
+    float z = x * y ; 
 }

@@ -9,7 +9,7 @@
 //    cree le 11/01/2022 
 
 {
-    int x =  20; 
-    int y = 17; 
-    float z = 20 != 17; 
+    int x =  17; 
+    int y = 5; 
+    float z = x != y ; 
 }

@@ -9,7 +9,7 @@
 //    cree le 11/01/2022 
 
 {
-    int x =  17; 
-    string y = "World"; 
-    boolean z = 17 < "World"; 
+    int x =  3; 
+    string y = "Hello"; 
+    boolean z = x < y ; 
 }

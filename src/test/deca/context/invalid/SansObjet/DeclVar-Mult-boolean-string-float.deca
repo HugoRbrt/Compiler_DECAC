@@ -10,6 +10,6 @@
 
 {
     string x =  "Everyone"; 
-    float y = 3.14; 
-    boolean z = "Everyone" * 3.14; 
+    float y = 1.5; 
+    boolean z = x * y ; 
 }

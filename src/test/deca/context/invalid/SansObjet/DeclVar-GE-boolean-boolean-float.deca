@@ -9,7 +9,7 @@
 //    cree le 11/01/2022 
 
 {
-    boolean x =  true; 
+    boolean x =  false; 
     float y = 10.01; 
-    boolean z = true >= 10.01; 
+    boolean z = x >= y ; 
 }

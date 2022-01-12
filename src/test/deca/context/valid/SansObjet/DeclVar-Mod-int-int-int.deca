@@ -8,7 +8,7 @@
 //    cree le 11/01/2022 
 
 {
-    int x =  3; 
-    int y = 17; 
-    int z = 3 % 17; 
+    int x =  20; 
+    int y = 10; 
+    int z = x % y ; 
 }

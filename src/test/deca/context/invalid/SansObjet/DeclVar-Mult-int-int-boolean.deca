@@ -9,7 +9,7 @@
 //    cree le 11/01/2022 
 
 {
-    int x =  3; 
+    int x =  17; 
     boolean y = false; 
-    int z = 3 * false; 
+    int z = x * y ; 
 }

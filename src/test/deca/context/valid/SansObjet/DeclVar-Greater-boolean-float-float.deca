@@ -10,5 +10,5 @@
 {
     float x =  0.1; 
     float y = 10.01; 
-    boolean z = 0.1 > 10.01; 
+    boolean z = x > y ; 
 }

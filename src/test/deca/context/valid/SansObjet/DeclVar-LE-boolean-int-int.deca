@@ -8,7 +8,7 @@
 //    cree le 11/01/2022 
 
 {
-    int x =  2; 
-    int y = 20; 
-    boolean z = 2 <= 20; 
+    int x =  3; 
+    int y = 17; 
+    boolean z = x <= y ; 
 }

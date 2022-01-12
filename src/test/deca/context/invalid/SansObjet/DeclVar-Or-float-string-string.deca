@@ -11,5 +11,5 @@
 {
     string x =  "Everyone"; 
     string y = "Hello"; 
-    float z = "Everyone" || "Hello"; 
+    float z = x || y ; 
 }

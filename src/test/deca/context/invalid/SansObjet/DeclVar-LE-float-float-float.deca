@@ -10,6 +10,6 @@
 
 {
     float x =  0.1; 
-    float y = 0.1; 
-    float z = 0.1 <= 0.1; 
+    float y = 10.01; 
+    float z = x <= y ; 
 }

@@ -10,6 +10,6 @@
 
 {
     boolean x =  false; 
-    string y = "Hello"; 
-    int z = false <= "Hello"; 
+    string y = "Everyone"; 
+    int z = x <= y ; 
 }

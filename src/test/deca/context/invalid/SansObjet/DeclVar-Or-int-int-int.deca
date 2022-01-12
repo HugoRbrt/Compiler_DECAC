@@ -9,7 +9,7 @@
 //    cree le 11/01/2022 
 
 {
-    int x =  2; 
+    int x =  3; 
     int y = 20; 
-    int z = 2 || 20; 
+    int z = x || y ; 
 }
