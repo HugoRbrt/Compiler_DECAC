@@ -17,6 +17,11 @@ import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.WINT;
+import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
 
 /**
  * Deca Identifier
@@ -220,12 +225,16 @@ public class Identifier extends AbstractIdentifier {
         }
     }
 
-    //protected void codeGenPrint(DecacCompiler compiler){
-        // if(getDefinition().isExpression())
-        //     compiler.addInstruction(new LOAD(this.getExpDefinition().getOperand(), Register.R1));
-        // if(definition.getType().isInt())
-        //     compiler.addInstruction(new WINT());
-        // else
-        //     compiler.addInstruction(new WFLOAT());
-    //}
+    protected void codeGenPrint(DecacCompiler compiler, boolean printHex){
+         if(getDefinition().isExpression()){
+             RegisterOffset R = compiler.getstackTable().get(this.getName());
+             compiler.addInstruction(new LOAD(R, Register.R1));
+         }
+         if(definition.getType().isInt()){
+             compiler.addInstruction(new WINT());
+         }
+         else{
+             compiler.addInstruction(new WFLOAT());
+         }
+    }
 }
