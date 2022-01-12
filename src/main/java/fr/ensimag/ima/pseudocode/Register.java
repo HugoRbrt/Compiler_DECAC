@@ -22,8 +22,18 @@ public class Register extends DVal {
      * current index for a supposedly available register
     */
     private int currentIndex = 2;
-
-        /**
+    
+    /**
+     * stackAnalyzer to operate increments on
+    *
+    * private StackAnalyzer stackAnalyzer;
+    *
+    *public setStackAnalyzer(StackAnalyzer stackAnalyzer) {
+    *    this.stackAnalyzer = stackAnalyzer;
+    *}
+    */
+    
+    /**
     * public constructor to access them more easily
     */
     public Register() {
@@ -119,7 +129,9 @@ public class Register extends DVal {
         GPRegister pushedRegister = R[maxIndex-1]; // for now
         assert !(pushedRegister.available());
         pushedRegister.setNeedPush(true);
+        
         compiler.addInstruction(new PUSH(pushedRegister));
+        /* stackAnalyzer.incrCountPush(1) */
         
         return R[maxIndex-1];
     }
@@ -128,14 +140,15 @@ public class Register extends DVal {
      * free register given in argument and set its needPush field to false
      */
     public void freeRegister(GPRegister usedRegister, DecacCompiler compiler) {
-        usedRegister.free();
         
         if (usedRegister.getNeedPush()) {
             // we POP the register but this register still contains info
             compiler.addInstruction(new POP(usedRegister));
+            /* stackAnalyzer.incrCountPop(1) */
         } else {
             // we do not need to pop and just make it free
             usedRegister.free();
+            currentIndex = usedRegister.getNumber();
         }
         usedRegister.setNeedPush(false);
     }
