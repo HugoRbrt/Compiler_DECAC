@@ -11,5 +11,5 @@
 {
     boolean x =  false; 
     string y = "World"; 
-    int z = false != "World"; 
+    int z = x != y ; 
 }

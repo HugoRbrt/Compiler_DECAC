@@ -10,6 +10,6 @@
 
 {
     string x =  "World"; 
-    string y = "Everyone"; 
-    float z = "World" * "Everyone"; 
+    string y = "World"; 
+    float z = x * y ; 
 }

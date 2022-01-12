@@ -24,10 +24,10 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
         Type t2 = getRightOperand().verifyExpr(compiler, localEnv, currentClass);
         Type resType = ContextTools.typeArithOp(compiler, t1, t2, getLocation());
         if (resType.isFloat()) {
-            if (getLeftOperand().getType().isInt()) {
+            if (t1.isInt()) {
                 setLeftOperand(new ConvFloat(getLeftOperand()));
                 getLeftOperand().verifyExpr(compiler, localEnv, currentClass);
-            } else if (getRightOperand().getType().isInt()) {
+            } else if (t2.isInt()) {
                 setRightOperand(new ConvFloat(getRightOperand()));
                 getRightOperand().verifyExpr(compiler, localEnv, currentClass);
             }

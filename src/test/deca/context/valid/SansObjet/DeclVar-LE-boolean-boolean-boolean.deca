@@ -8,7 +8,7 @@
 //    cree le 11/01/2022 
 
 {
-    boolean x =  true; 
+    boolean x =  false; 
     boolean y = false; 
-    boolean z = true <= false; 
+    boolean z = x <= y ; 
 }

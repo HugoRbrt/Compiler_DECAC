@@ -10,6 +10,6 @@
 
 {
     boolean x =  true; 
-    float y = 3.14; 
-    string z = true >= 3.14; 
+    float y = 1.5; 
+    string z = x >= y ; 
 }

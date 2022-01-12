@@ -10,6 +10,6 @@
 
 {
     string x =  "Hello"; 
-    int y = 10; 
-    string z = "Hello" / 10; 
+    int y = 17; 
+    string z = x / y ; 
 }

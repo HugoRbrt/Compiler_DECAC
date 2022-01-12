@@ -11,5 +11,5 @@
 {
     string x =  "Hello"; 
     float y = 10.01; 
-    string z = "Hello" + 10.01; 
+    string z = x + y ; 
 }

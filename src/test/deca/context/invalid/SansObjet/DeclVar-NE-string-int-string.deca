@@ -10,6 +10,6 @@
 
 {
     int x =  3; 
-    string y = "Everyone"; 
-    string z = 3 != "Everyone"; 
+    string y = "Hello"; 
+    string z = x != y ; 
 }

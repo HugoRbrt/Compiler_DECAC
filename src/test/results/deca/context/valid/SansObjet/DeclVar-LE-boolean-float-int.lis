@@ -1,9 +1,9 @@
-DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:40) - verify program: start
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:39) - verify program: start
 DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:35) - verify Main: start
 DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:41) - 
-DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:45) - z booleanx floaty int
+DEBUG fr.ensimag.deca.tree.ListDeclVar.verifyListDeclVariable(ListDeclVar.java:45) - y intz booleanx float
 DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:42) - verify Main: end
-DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:46) - verify program: end
+DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:45) - verify program: end
 `> [10, 0] Program
    +> ListDeclClass [List with 0 elements]
    `> [10, 0] Main
@@ -22,7 +22,7 @@ DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:46) - verify progr
       |  ||  +> [12, 8] Identifier (y)
       |  ||  |  definition: variable defined at [12, 8], type=int
       |  ||  `> [12, 10] Initialization
-      |  ||     `> [12, 12] Int (20)
+      |  ||     `> [12, 12] Int (5)
       |  ||        type: int
       |  []> [13, 12] DeclVar
       |      +> [13, 4] Identifier (boolean)
@@ -30,10 +30,10 @@ DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:46) - verify progr
       |      +> [13, 12] Identifier (z)
       |      |  definition: variable defined at [13, 12], type=boolean
       |      `> [13, 14] Initialization
-      |         `> [13, 20] LowerOrEqual
+      |         `> [13, 18] LowerOrEqual
       |            type: boolean
-      |            +> [13, 16] Float (1.5)
-      |            |  type: float
-      |            `> [13, 23] Int (20)
-      |               type: int
+      |            +> [13, 16] Identifier (x)
+      |            |  definition: variable defined at [11, 10], type=float
+      |            `> [13, 21] Identifier (y)
+      |               definition: variable defined at [12, 8], type=int
       `> ListInst [List with 0 elements]

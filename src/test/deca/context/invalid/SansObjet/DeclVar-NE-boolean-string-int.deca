@@ -10,6 +10,6 @@
 
 {
     string x =  "World"; 
-    int y = 5; 
-    boolean z = "World" != 5; 
+    int y = 3; 
+    boolean z = x != y ; 
 }

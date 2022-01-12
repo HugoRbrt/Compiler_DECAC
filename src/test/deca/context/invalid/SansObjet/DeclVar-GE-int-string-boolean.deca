@@ -11,5 +11,5 @@
 {
     string x =  "Hello"; 
     boolean y = true; 
-    int z = "Hello" >= true; 
+    int z = x >= y ; 
 }

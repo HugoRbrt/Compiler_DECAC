@@ -1,0 +1,14 @@
+// Description:
+//    Declaration of a string variable using ! operation on a boolean variable .
+// 
+// Results:
+//     Contextual error
+//     Line 13: (RULE 3.28) Incompatible type assignment
+// 
+// Historique: 
+//    cree le 11/01/2022 
+
+{
+    boolean x =  true; 
+    string z = !x ; 
+}

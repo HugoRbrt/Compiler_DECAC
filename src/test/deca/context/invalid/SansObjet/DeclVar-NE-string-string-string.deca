@@ -10,6 +10,6 @@
 
 {
     string x =  "Everyone"; 
-    string y = "Hello"; 
-    string z = "Everyone" != "Hello"; 
+    string y = "World"; 
+    string z = x != y ; 
 }

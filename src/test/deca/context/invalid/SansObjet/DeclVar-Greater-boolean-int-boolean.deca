@@ -9,7 +9,7 @@
 //    cree le 11/01/2022 
 
 {
-    int x =  3; 
+    int x =  17; 
     boolean y = true; 
-    boolean z = 3 > true; 
+    boolean z = x > y ; 
 }

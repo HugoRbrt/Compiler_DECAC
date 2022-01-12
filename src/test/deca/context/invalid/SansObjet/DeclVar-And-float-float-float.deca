@@ -10,6 +10,6 @@
 
 {
     float x =  1.5; 
-    float y = 0.1; 
-    float z = 1.5 && 0.1; 
+    float y = 3.14; 
+    float z = x && y ; 
 }

@@ -10,6 +10,6 @@
 
 {
     string x =  "Hello"; 
-    int y = 17; 
-    float z = "Hello" > 17; 
+    int y = 20; 
+    float z = x > y ; 
 }

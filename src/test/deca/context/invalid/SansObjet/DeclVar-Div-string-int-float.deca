@@ -11,5 +11,5 @@
 {
     int x =  17; 
     float y = 3.14; 
-    string z = 17 / 3.14; 
+    string z = x / y ; 
 }

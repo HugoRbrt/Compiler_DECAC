@@ -9,6 +9,6 @@
 //    cree le 11/01/2022 
 
 {
-    int x =  10; 
-    boolean z = -10 ; 
+    int x =  3; 
+    boolean z = -x ; 
 }

@@ -11,5 +11,5 @@
 {
     boolean x =  false; 
     float y = 2.5; 
-    boolean z = false > 2.5; 
+    boolean z = x > y ; 
 }

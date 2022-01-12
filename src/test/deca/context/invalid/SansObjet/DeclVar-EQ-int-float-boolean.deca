@@ -10,6 +10,6 @@
 
 {
     float x =  3.14; 
-    boolean y = false; 
-    int z = 3.14 == false; 
+    boolean y = true; 
+    int z = x == y ; 
 }

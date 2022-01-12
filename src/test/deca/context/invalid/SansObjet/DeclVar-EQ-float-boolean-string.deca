@@ -10,6 +10,6 @@
 
 {
     boolean x =  true; 
-    string y = "Everyone"; 
-    float z = true == "Everyone"; 
+    string y = "World"; 
+    float z = x == y ; 
 }

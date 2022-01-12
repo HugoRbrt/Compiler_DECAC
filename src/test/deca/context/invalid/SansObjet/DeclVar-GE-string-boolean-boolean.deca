@@ -11,5 +11,5 @@
 {
     boolean x =  true; 
     boolean y = false; 
-    string z = true >= false; 
+    string z = x >= y ; 
 }

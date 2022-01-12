@@ -10,6 +10,6 @@
 
 {
     string x =  "Hello"; 
-    int y = 2; 
-    string z = "Hello" == 2; 
+    int y = 10; 
+    string z = x == y ; 
 }

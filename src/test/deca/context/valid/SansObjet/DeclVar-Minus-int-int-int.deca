@@ -8,7 +8,7 @@
 //    cree le 11/01/2022 
 
 {
-    int x =  5; 
-    int y = 2; 
-    int z = 5 - 2; 
+    int x =  2; 
+    int y = 17; 
+    int z = x - y ; 
 }

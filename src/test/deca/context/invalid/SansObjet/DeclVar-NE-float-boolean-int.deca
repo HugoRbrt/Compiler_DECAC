@@ -10,6 +10,6 @@
 
 {
     boolean x =  true; 
-    int y = 3; 
-    float z = true != 3; 
+    int y = 2; 
+    float z = x != y ; 
 }

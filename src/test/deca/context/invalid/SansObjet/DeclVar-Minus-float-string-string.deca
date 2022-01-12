@@ -10,6 +10,6 @@
 
 {
     string x =  "World"; 
-    string y = "Hello"; 
-    float z = "World" - "Hello"; 
+    string y = "World"; 
+    float z = x - y ; 
 }

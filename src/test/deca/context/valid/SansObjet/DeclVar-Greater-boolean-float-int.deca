@@ -9,6 +9,6 @@
 
 {
     float x =  2.5; 
-    int y = 20; 
-    boolean z = 2.5 > 20; 
+    int y = 17; 
+    boolean z = x > y ; 
 }

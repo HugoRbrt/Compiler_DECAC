@@ -10,6 +10,6 @@
 
 {
     string x =  "Everyone"; 
-    float y = 1.5; 
-    string z = "Everyone" / 1.5; 
+    float y = 0.1; 
+    string z = x / y ; 
 }

@@ -9,7 +9,7 @@
 //    cree le 11/01/2022 
 
 {
-    int x =  10; 
+    int x =  3; 
     string y = "Everyone"; 
-    string z = 10 <= "Everyone"; 
+    string z = x <= y ; 
 }
