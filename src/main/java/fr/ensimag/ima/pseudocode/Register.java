@@ -99,7 +99,7 @@ public class Register extends DVal {
      * register. If no such register is found, we return the last one
      * and indicate that it will need to be pushed
      */
-    public GPRegister getRegister(){
+    public GPRegister getRegister(DecacCompiler compiler){
         
         for (int k = currentIndex; k <= maxIndex; k++) {
             // if the register is available
@@ -116,8 +116,10 @@ public class Register extends DVal {
         // if we arrive here, no available register was found
         // in this case, we take the last register and push it
         // before using it
-        assert !(R[maxIndex-1].available());
-        R[maxIndex-1].setNeedPush(true);
+        GPRegister pushedRegister = R[maxIndex-1]; // for now
+        assert !(pushedRegister.available());
+        pushedRegister.setNeedPush(true);
+        compiler.addInstruction(new PUSH(pushedRegister));
         
         return R[maxIndex-1];
     }
