@@ -383,5 +383,5 @@ public class DecacCompiler implements Runnable {
     public void incrDeclaredVariables(int nbVariables) {
         codeAnalyzer.incrDeclaredVariables(nbVariables);
     }
-
+    
 }

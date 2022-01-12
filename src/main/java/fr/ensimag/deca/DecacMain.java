@@ -7,6 +7,8 @@ import java.lang.Runtime;
 import java.util.LinkedList;
 import java.lang.Runnable;
 
+import fr.ensimag.deca.tools.SuperBanner;
+
 /**
  * Main class for the command-line Deca compiler.
  *
@@ -30,7 +32,8 @@ public class DecacMain {
             System.exit(1);
         }
         if (options.getPrintBanner()) {
-            System.out.println("g9/gl49");
+            
+            System.out.println(new SuperBanner());
         }
 
         if (options.getParallel()) {
