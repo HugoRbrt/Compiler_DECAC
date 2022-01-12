@@ -15,7 +15,7 @@ public class ARMRegister extends Register {
     }
     
     public ARMRegister() {
-        this("NoName");
+        this("ARM Register Bench");
     }
 
     /**

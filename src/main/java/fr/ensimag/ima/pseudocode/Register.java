@@ -27,7 +27,7 @@ public class Register extends DVal {
     * public constructor to access them more easily
     */
     public Register() {
-        this("NoName");
+        this("Register Bench");
     }
 
     @Override
