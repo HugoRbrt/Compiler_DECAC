@@ -34,20 +34,25 @@ public class CodeAnalyzer {
     }
 
     /**
-    * @args nbPop : number of consecutive POP instructions to be declared
+    * @args nbPush : number of consecutive PUSH instructions to be declared
     */
-    public void incrPopCount(int nbPop) {
-        diffPushPop += nbPop;
+    public void incrPushCount(int nbPush) {
+        diffPushPop += nbPush;
         if (diffPushPop > stackSizeInstructions) {
             stackSizeInstructions = diffPushPop;
         }
     }
 
     /**
-    * @args nbPush : number of consecutive PUSH instructions to be declared
+    * @args nbPop: number of consecutive POP instructions to be declared
     */
-    public void incrPushCount(int nbPush) {
-        diffPushPop -= nbPush;
+    public void incrPopCount(int nbPop) {
+        diffPushPop -= nbPop;
+        
+        // Defensive programing
+        if (diffPushPop < 0) {
+            diffPushPop = 0;
+        }
     }
 
     /**

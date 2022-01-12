@@ -8,6 +8,7 @@ import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.deca.tools.StackHashTableSymbol;
 import fr.ensimag.deca.tools.StackHashTableSymbol;
+import fr.ensimag.deca.tools.CodeAnalyzer;
 import fr.ensimag.deca.tree.AbstractProgram;
 import fr.ensimag.deca.tree.Location;
 import fr.ensimag.deca.tree.LocationException;
@@ -63,6 +64,7 @@ public class DecacCompiler implements Runnable {
     private SymbolTable symbTable = new SymbolTable();
     private EnvironmentType envTypes = EnvironmentType.getEnvTypes();
     private StackHashTableSymbol stackTable = new StackHashTableSymbol();
+    private CodeAnalyzer codeAnalyzer = new CodeAnalyzer();
 
     public DecacCompiler(CompilerOptions compilerOptions, File source) {
         super();
@@ -86,6 +88,7 @@ public class DecacCompiler implements Runnable {
                 new TypeDefinition(new StringType(this.symbTable.create("string")), Location.BUILTIN));
         envTypes.put(this.symbTable.create("null"),
                 new TypeDefinition(new NullType(this.symbTable.create("null")), Location.BUILTIN));
+
     }
 
     /**
@@ -129,6 +132,13 @@ public class DecacCompiler implements Runnable {
         return stackTable;
     }
 
+    /**
+     * Gencode analyzer for the stack's needs
+     */
+    public CodeAnalyzer getCodeAnalyzer() {
+        return codeAnalyzer;
+    }
+    
     /**
      * @see
      * fr.ensimag.ima.pseudocode.IMAProgram#add(fr.ensimag.ima.pseudocode.AbstractLine)
@@ -199,6 +209,7 @@ public class DecacCompiler implements Runnable {
     private final File source;
     private Register ListRegister;
 
+
     public void setListRegister(Register list){
         ListRegister = list;
     }
@@ -206,6 +217,8 @@ public class DecacCompiler implements Runnable {
     public Register getListRegister() {
         return ListRegister;
     }
+    
+
 
     /**
      * The main program. Every instruction generated will eventually end up here.
@@ -353,6 +366,22 @@ public class DecacCompiler implements Runnable {
         DecaParser parser = new DecaParser(tokens);
         parser.setDecacCompiler(this);
         return parser.parseProgramAndManageErrors(err);
+    }
+    
+    
+    /**
+     * Shortcuts for code analysis
+     */
+    public void incrPopCount(int nbPop) {
+        codeAnalyzer.incrPopCount(nbPop);
+    }
+    
+    public void incrPushCount(int nbPush) {
+        codeAnalyzer.incrPushCount(nbPush);
+    }
+    
+    public void incrDeclaredVariables(int nbVariables) {
+        codeAnalyzer.incrDeclaredVariables(nbVariables);
     }
 
 }

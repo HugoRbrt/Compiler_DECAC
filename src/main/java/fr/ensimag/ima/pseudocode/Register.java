@@ -131,7 +131,7 @@ public class Register extends DVal {
         pushedRegister.setNeedPush(true);
         
         compiler.addInstruction(new PUSH(pushedRegister));
-        /* stackAnalyzer.incrCountPush(1) */
+        compiler.incrPushCount(1);
         
         return R[maxIndex-1];
     }
@@ -144,7 +144,7 @@ public class Register extends DVal {
         if (usedRegister.getNeedPush()) {
             // we POP the register but this register still contains info
             compiler.addInstruction(new POP(usedRegister));
-            /* stackAnalyzer.incrCountPop(1) */
+            compiler.incrPopCount(1);
         } else {
             // we do not need to pop and just make it free
             usedRegister.free();
