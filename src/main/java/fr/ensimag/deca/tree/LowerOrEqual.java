@@ -1,5 +1,7 @@
 package fr.ensimag.deca.tree;
 
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.deca.DecacCompiler;
 
 /**
  *
@@ -17,4 +19,7 @@ public class LowerOrEqual extends AbstractOpIneq {
         return "<=";
     }
 
+    public void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler){
+        throw new UnsupportedOperationException("not yet implemented");
+    }
 }

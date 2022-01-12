@@ -2,6 +2,8 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.deca.DecacCompiler;
 
 /**
  *
@@ -30,4 +32,7 @@ public class Modulo extends AbstractOpArith {
         return "%";
     }
 
+    public void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler){
+        throw new UnsupportedOperationException("not yet implemented");
+    }
 }

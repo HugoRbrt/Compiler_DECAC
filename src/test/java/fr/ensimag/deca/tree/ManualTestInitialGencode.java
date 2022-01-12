@@ -22,9 +22,9 @@ public class ManualTestInitialGencode {
                 new Main(new ListDeclVar(),linst));
         ListExpr lexp1 = new ListExpr(), lexp2 = new ListExpr();
         linst.add(new Print(false,lexp1));
+        lexp2.add(new Plus(new IntLiteral(2), new IntLiteral(3)));
         linst.add(new Println(false,lexp2));
         lexp1.add(new StringLiteral("Hello "));
-        lexp2.add(new StringLiteral("everybody !"));
         return source;
     }
 

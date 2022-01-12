@@ -14,7 +14,7 @@ import fr.ensimag.ima.pseudocode.instructions.POP;
 public class Register extends DVal {
     private String name;
 
-    protected Register(String name) {
+    public Register(String name) {
         this.name = name;
     }
 
