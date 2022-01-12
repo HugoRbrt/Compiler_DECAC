@@ -28,7 +28,6 @@ public class DeclVar extends AbstractDeclVar {
         this.initialization = initialization;
     }
 
-    @Override
     public AbstractInitialization getInit() { return initialization; }
 
     @Override
@@ -61,7 +60,9 @@ public class DeclVar extends AbstractDeclVar {
 
     protected void codeGenDeclVar(DecacCompiler compiler){
         compiler.getstackTable().put(varName.getName(), compiler.getListRegister().GB);
-        initialization.codeGenDeclVar(compiler);
+        // instruction pour augmenter GB de 1
+        initialization.codeGenDeclVar(compiler, varName);
+        
     }
     
     @Override

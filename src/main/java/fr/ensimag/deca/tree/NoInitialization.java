@@ -53,4 +53,10 @@ public class NoInitialization extends AbstractInitialization {
         // leaf node => nothing to do
     }
 
+    @Override
+    public void codeGenDeclVar(DecacCompiler compiler, AbstractIdentifier varName) {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

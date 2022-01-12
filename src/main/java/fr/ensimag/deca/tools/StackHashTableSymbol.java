@@ -37,7 +37,7 @@ public class StackHashTableSymbol {
     }
 
     public void put(Symbol name, Register R){
-        map.put(name, new RegisterOffset(map.size(), R));
+        map.put(name, new RegisterOffset(map.size()+1, R)); // add 1 to avoid 0(GB) error
     }
 
 

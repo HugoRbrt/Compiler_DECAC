@@ -73,7 +73,7 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
         if(!oneRegisterAvailable){
             compiler.addInstruction(new POP(usedRegister));
         }else{
-            usedRegister.liberate();
+            usedRegister.free();
         }
         compiler.addInstruction(new LOAD(compiler.getListRegister().R0, compiler.getListRegister().R1));
     }
