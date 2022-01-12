@@ -2,7 +2,7 @@ package fr.ensimag.deca.tools;
 
 import fr.ensimag.deca.tools.CodeAnalyzer;
 import org.apache.log4j.Logger;
-import apache.commons.lang.Validate;
+import org.apache.commons.lang.Validate;
 
 /**
  *
@@ -44,7 +44,7 @@ public class TestCodeAnalyzer {
     
     
     /* Must return 0 */
-    private static void testThree() {
+    private static int testThree() {
         CodeAnalyzer codeAnalyzer = new CodeAnalyzer();
         
         codeAnalyzer.incrPopCount(1);
