@@ -140,15 +140,5 @@ public class Register extends DVal {
         usedRegister.setNeedPush(false);
     }
 
-    public GPRegister StoreRegister(int i, DecacCompiler compiler){
-        if(i<2 || i>maxIndex){
-            throw new IllegalArgumentException("You have to Store a GPRegister (between R2 and RMAX)");
-        }
-        if(R[i].available()){
-            throw new IllegalArgumentException("You have to Store a GPRegister which is unavailable");
-        }
-        compiler.addInstruction(new PUSH(R[i]));
-        return R[i];
-    }
 
 }
