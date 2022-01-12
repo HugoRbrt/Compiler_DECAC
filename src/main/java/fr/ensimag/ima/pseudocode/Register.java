@@ -13,9 +13,21 @@ import fr.ensimag.ima.pseudocode.instructions.POP;
  */
 public class Register extends DVal {
     private String name;
-
-    public Register(String name) {
+    
+    /**
+    * number of the first supposedly available register in the bench
+    */
+    private int firstAvailable = 2;
+    
+    protected Register(String name) {
         this.name = name;
+    }
+    
+    /*
+    * public constructor to access them more easily
+    */
+    public Register() {
+        this("NoName");
     }
 
     @Override
@@ -63,16 +75,23 @@ public class Register extends DVal {
         return res;
     }
 
+    /**
+    * @return the first available register
+    */
     public GPRegister UseFirstAvailableRegister(){
-        for(int i=2;i<16;i++){
+        for(int i=firstAvailable; i <= 15; i++){
             if(R[i].available()){
                 R[i].use();
+                firstAvailable++;
                 return R[i];
             }
         }
         throw new IllegalArgumentException("no Register Available");
     }
 
+    /**
+     * @return true if a register in the bench is available, else false
+     */
     public boolean OneRegisterAvailable(){
         for(int i=2;i<16;i++){
             if(R[i].available()){
@@ -82,7 +101,7 @@ public class Register extends DVal {
         return false;
     }
 
-    public GPRegister StoreRegister(int i,DecacCompiler compiler){
+    public GPRegister StoreRegister(int i, DecacCompiler compiler){
         if(i<2 || i>15){
             throw new IllegalArgumentException("You have to Store a GPRegister (between R2 and R15)");
         }
@@ -93,7 +112,7 @@ public class Register extends DVal {
         return R[i];
     }
 
-    public void PopOnRegister(GPRegister R,DecacCompiler compiler){
+    public void popOnRegister(GPRegister R,DecacCompiler compiler){
         compiler.addInstruction(new POP(R));
     }
 }
