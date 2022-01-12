@@ -15,7 +15,7 @@ import fr.ensimag.deca.tools.SymbolTable.Symbol;
  */
 public class ManualTestDeclVarGenCode {
 
-    public static AbstractProgram initTest1() {
+    public static AbstractProgram initTest1() {/*
         ListInst linst = new ListInst();
         ListDeclVar LDecl = new ListDeclVar();
         // ¨Pour le faire fonctionner il faut passer le constructeur de Symbol en public
@@ -31,7 +31,10 @@ public class ManualTestDeclVarGenCode {
         linst.add(new Println(false,lexp2));
         lexp1.add(new StringLiteral("Hello "));
         lexp2.add(new StringLiteral("everybody !"));
-        return source;
+        return source;*/
+        return new Program(
+                new ListDeclClass(),
+                new Main(new ListDeclVar(),new ListInst()));
     }
 
     public static String gencodeSource(AbstractProgram source) {
