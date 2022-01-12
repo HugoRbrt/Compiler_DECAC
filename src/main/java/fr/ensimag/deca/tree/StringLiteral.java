@@ -36,6 +36,22 @@ public class StringLiteral extends AbstractStringLiteral {
         Validate.notNull(value);
         value = value.replaceAll("^\"|\"$", "");
         this.value = value;
+        RemoveBackslash();
+    }
+
+    public void RemoveBackslash() {
+        boolean found = false;
+        String newstr = "";
+        for (int i = 0; i < value.length(); i++) {
+            if (!found && Character.compare(value.charAt(i), '\\') == 0) {
+                found = true;
+            }
+            else {
+                found = false;
+                newstr += value.charAt(i);
+            }
+        }
+        value = newstr;
     }
 
     @Override
