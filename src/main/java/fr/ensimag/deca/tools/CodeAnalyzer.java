@@ -7,7 +7,7 @@ package fr.ensimag.deca.tools;
  */
 
 
-public class codeAnalyzer {
+public class CodeAnalyzer {
 
     /**
     * Number that keeps track of declared variables
@@ -48,6 +48,7 @@ public class codeAnalyzer {
     */
     public void incrPushCount(int nbPush) {
         diffPushPop -= nbPush;
+        assert(diffPushPop >= 0);
     }
 
     /**
