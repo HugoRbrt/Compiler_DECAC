@@ -10,6 +10,6 @@
 
 {
     string x =  "Everyone"; 
-    int y = 10; 
-    boolean z = "Everyone" || 10; 
+    int y = 5; 
+    boolean z = x || y ; 
 }

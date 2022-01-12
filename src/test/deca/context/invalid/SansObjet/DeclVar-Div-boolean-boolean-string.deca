@@ -11,5 +11,5 @@
 {
     boolean x =  false; 
     string y = "Everyone"; 
-    boolean z = false / "Everyone"; 
+    boolean z = x / y ; 
 }

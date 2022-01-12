@@ -11,5 +11,5 @@
 {
     string x =  "World"; 
     string y = "Hello"; 
-    int z = "World" - "Hello"; 
+    int z = x - y ; 
 }

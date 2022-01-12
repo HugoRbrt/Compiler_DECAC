@@ -11,5 +11,5 @@
 {
     boolean x =  false; 
     int y = 5; 
-    float z = false + 5; 
+    float z = x + y ; 
 }

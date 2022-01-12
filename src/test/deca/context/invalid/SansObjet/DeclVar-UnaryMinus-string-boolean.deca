@@ -10,5 +10,5 @@
 
 {
     boolean x =  true; 
-    string z = -true ; 
+    string z = -x ; 
 }

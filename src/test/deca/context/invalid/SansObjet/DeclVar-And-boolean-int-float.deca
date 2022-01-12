@@ -9,7 +9,7 @@
 //    cree le 11/01/2022 
 
 {
-    int x =  3; 
-    float y = 10.01; 
-    boolean z = 3 && 10.01; 
+    int x =  17; 
+    float y = 1.5; 
+    boolean z = x && y ; 
 }

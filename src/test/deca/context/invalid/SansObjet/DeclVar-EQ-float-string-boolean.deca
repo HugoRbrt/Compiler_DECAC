@@ -9,7 +9,7 @@
 //    cree le 11/01/2022 
 
 {
-    string x =  "Everyone"; 
-    boolean y = true; 
-    float z = "Everyone" == true; 
+    string x =  "Hello"; 
+    boolean y = false; 
+    float z = x == y ; 
 }

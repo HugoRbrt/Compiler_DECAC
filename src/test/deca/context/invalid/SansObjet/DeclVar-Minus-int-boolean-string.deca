@@ -10,6 +10,6 @@
 
 {
     boolean x =  true; 
-    string y = "Hello"; 
-    int z = true - "Hello"; 
+    string y = "Everyone"; 
+    int z = x - y ; 
 }

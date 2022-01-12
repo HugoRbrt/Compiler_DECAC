@@ -10,6 +10,6 @@
 
 {
     boolean x =  true; 
-    boolean y = true; 
-    int z = true % true; 
+    boolean y = false; 
+    int z = x % y ; 
 }

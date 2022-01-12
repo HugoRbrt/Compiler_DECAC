@@ -9,6 +9,6 @@
 //    cree le 11/01/2022 
 
 {
-    string x =  "World"; 
-    string z = -"World" ; 
+    string x =  "Everyone"; 
+    string z = -x ; 
 }

@@ -9,7 +9,7 @@
 //    cree le 11/01/2022 
 
 {
-    float x =  0.1; 
-    int y = 17; 
-    string z = 0.1 + 17; 
+    float x =  3.14; 
+    int y = 10; 
+    string z = x + y ; 
 }

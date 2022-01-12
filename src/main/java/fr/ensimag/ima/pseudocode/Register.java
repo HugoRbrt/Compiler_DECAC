@@ -22,8 +22,18 @@ public class Register extends DVal {
      * current index for a supposedly available register
     */
     private int currentIndex = 2;
-
-        /**
+    
+    /**
+     * stackAnalyzer to operate increments on
+    *
+    * private StackAnalyzer stackAnalyzer;
+    *
+    *public setStackAnalyzer(StackAnalyzer stackAnalyzer) {
+    *    this.stackAnalyzer = stackAnalyzer;
+    *}
+    */
+    
+    /**
     * public constructor to access them more easily
     */
     public Register() {
@@ -93,25 +103,13 @@ public class Register extends DVal {
         return res;
     }
 
-    /**
-    * @return the first available register
-    */
-    public GPRegister UseFirstAvailableRegister(){
-        for(int i=currentIndex; i <= maxIndex; i++){
-            if(R[i].available()){
-                R[i].use();
-                return R[i];
-            }
-        }
-        throw new IllegalArgumentException("no Register Available");
-    }
     
     /**
      * @return a register. This register is taken as the first available
      * register. If no such register is found, we return the last one
      * and indicate that it will need to be pushed
      */
-    public GPRegister getRegister(){
+    public GPRegister getRegister(DecacCompiler compiler){
         
         for (int k = currentIndex; k <= maxIndex; k++) {
             // if the register is available
@@ -128,49 +126,36 @@ public class Register extends DVal {
         // if we arrive here, no available register was found
         // in this case, we take the last register and push it
         // before using it
-        assert !(R[maxIndex-1].available());
-        R[maxIndex-1].setNeedPush(true);
+        GPRegister pushedRegister = R[maxIndex-1]; // for now
+        assert !(pushedRegister.available());
+        pushedRegister.setNeedPush(true);
+        
+        compiler.addInstruction(new PUSH(pushedRegister));
+        /* stackAnalyzer.incrCountPush(1) */
         
         return R[maxIndex-1];
-    }
-
-    /**
-     * @return true if a register in the bench is available, else false
-     */
-    public boolean OneRegisterAvailable(){
-        for(int i=2;i<maxIndex;i++){
-            if(R[i].available()){
-                return true;
-            }
-        }
-        return false;
     }
     
     /**
      * free register given in argument and set its needPush field to false
      */
     public void freeRegister(GPRegister usedRegister, DecacCompiler compiler) {
-        usedRegister.free();
         
         if (usedRegister.getNeedPush()) {
             // we POP the register but this register still contains info
             compiler.addInstruction(new POP(usedRegister));
+            /* stackAnalyzer.incrCountPop(1) */
         } else {
             // we do not need to pop and just make it free
             usedRegister.free();
+            // we update the index of an available register
+            int regNb = usedRegister.getNumber();
+            if (regNb < currentIndex) {
+                currentIndex = regNb;
+            }
         }
         usedRegister.setNeedPush(false);
     }
 
-    public GPRegister StoreRegister(int i, DecacCompiler compiler){
-        if(i<2 || i>maxIndex){
-            throw new IllegalArgumentException("You have to Store a GPRegister (between R2 and RMAX)");
-        }
-        if(R[i].available()){
-            throw new IllegalArgumentException("You have to Store a GPRegister which is unavailable");
-        }
-        compiler.addInstruction(new PUSH(R[i]));
-        return R[i];
-    }
 
 }

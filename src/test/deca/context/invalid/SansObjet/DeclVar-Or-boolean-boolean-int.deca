@@ -11,5 +11,5 @@
 {
     boolean x =  true; 
     int y = 5; 
-    boolean z = true || 5; 
+    boolean z = x || y ; 
 }

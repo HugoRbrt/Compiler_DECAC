@@ -10,5 +10,5 @@
 
 {
     string x =  "Everyone"; 
-    float z = -"Everyone" ; 
+    float z = -x ; 
 }

@@ -9,7 +9,7 @@
 //    cree le 11/01/2022 
 
 {
-    int x =  5; 
-    int y = 17; 
-    string z = 5 >= 17; 
+    int x =  17; 
+    int y = 5; 
+    string z = x >= y ; 
 }

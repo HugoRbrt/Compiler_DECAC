@@ -9,7 +9,7 @@
 //    cree le 11/01/2022 
 
 {
-    string x =  "World"; 
-    boolean y = true; 
-    float z = "World" && true; 
+    string x =  "Everyone"; 
+    boolean y = false; 
+    float z = x && y ; 
 }

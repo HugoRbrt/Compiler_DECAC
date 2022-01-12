@@ -9,6 +9,6 @@
 //    cree le 11/01/2022 
 
 {
-    string x =  "World"; 
-    int z = -"World" ; 
+    string x =  "Hello"; 
+    int z = -x ; 
 }

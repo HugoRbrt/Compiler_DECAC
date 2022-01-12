@@ -9,6 +9,6 @@
 
 {
     float x =  1.5; 
-    int y = 2; 
-    boolean z = 1.5 == 2; 
+    int y = 17; 
+    boolean z = x == y ; 
 }

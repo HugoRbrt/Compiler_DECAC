@@ -11,5 +11,5 @@
 {
     boolean x =  false; 
     boolean y = false; 
-    string z = false / false; 
+    string z = x / y ; 
 }

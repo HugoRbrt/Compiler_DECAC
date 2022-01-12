@@ -11,5 +11,5 @@
 {
     string x =  "World"; 
     string y = "Everyone"; 
-    string z = "World" > "Everyone"; 
+    string z = x > y ; 
 }

@@ -8,6 +8,6 @@
 //    cree le 11/01/2022 
 
 {
-    int x =  20; 
-    float z = -20 ; 
+    int x =  3; 
+    float z = -x ; 
 }

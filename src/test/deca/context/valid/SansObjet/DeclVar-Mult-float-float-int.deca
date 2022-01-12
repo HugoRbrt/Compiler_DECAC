@@ -8,7 +8,7 @@
 //    cree le 11/01/2022 
 
 {
-    float x =  0.1; 
-    int y = 17; 
-    float z = 0.1 * 17; 
+    float x =  1.5; 
+    int y = 3; 
+    float z = x * y ; 
 }

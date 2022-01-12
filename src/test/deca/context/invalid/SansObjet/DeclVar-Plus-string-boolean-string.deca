@@ -11,5 +11,5 @@
 {
     boolean x =  true; 
     string y = "World"; 
-    string z = true + "World"; 
+    string z = x + y ; 
 }

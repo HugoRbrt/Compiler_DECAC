@@ -11,5 +11,5 @@
 {
     int x =  20; 
     string y = "World"; 
-    float z = 20 % "World"; 
+    float z = x % y ; 
 }

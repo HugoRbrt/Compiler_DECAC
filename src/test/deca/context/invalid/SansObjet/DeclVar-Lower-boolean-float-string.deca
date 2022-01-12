@@ -11,5 +11,5 @@
 {
     float x =  10.01; 
     string y = "World"; 
-    boolean z = 10.01 < "World"; 
+    boolean z = x < y ; 
 }

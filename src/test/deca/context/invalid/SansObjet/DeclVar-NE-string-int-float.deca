@@ -9,7 +9,7 @@
 //    cree le 11/01/2022 
 
 {
-    int x =  10; 
-    float y = 1.5; 
-    string z = 10 != 1.5; 
+    int x =  2; 
+    float y = 2.5; 
+    string z = x != y ; 
 }

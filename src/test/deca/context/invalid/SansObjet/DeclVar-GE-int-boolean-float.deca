@@ -11,5 +11,5 @@
 {
     boolean x =  false; 
     float y = 10.01; 
-    int z = false >= 10.01; 
+    int z = x >= y ; 
 }

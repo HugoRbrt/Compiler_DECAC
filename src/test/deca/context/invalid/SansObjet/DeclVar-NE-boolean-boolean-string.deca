@@ -10,6 +10,6 @@
 
 {
     boolean x =  true; 
-    string y = "Hello"; 
-    boolean z = true != "Hello"; 
+    string y = "World"; 
+    boolean z = x != y ; 
 }

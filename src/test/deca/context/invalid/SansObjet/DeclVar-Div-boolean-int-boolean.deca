@@ -10,6 +10,6 @@
 
 {
     int x =  10; 
-    boolean y = false; 
-    boolean z = 10 / false; 
+    boolean y = true; 
+    boolean z = x / y ; 
 }

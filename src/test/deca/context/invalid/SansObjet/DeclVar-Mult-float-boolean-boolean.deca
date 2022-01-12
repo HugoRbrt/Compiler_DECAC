@@ -11,5 +11,5 @@
 {
     boolean x =  true; 
     boolean y = true; 
-    float z = true * true; 
+    float z = x * y ; 
 }

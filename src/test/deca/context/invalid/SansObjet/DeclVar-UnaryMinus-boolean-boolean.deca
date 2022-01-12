@@ -10,5 +10,5 @@
 
 {
     boolean x =  true; 
-    boolean z = -true ; 
+    boolean z = -x ; 
 }

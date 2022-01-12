@@ -9,7 +9,7 @@
 //    cree le 11/01/2022 
 
 {
-    int x =  2; 
+    int x =  5; 
     string y = "World"; 
-    int z = 2 || "World"; 
+    int z = x || y ; 
 }
