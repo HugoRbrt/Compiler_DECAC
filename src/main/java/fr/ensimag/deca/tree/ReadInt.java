@@ -6,6 +6,10 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.RINT;
+import fr.ensimag.ima.pseudocode.instructions.WSTR;
+
 import java.io.PrintStream;
 
 /**
@@ -23,6 +27,17 @@ public class ReadInt extends AbstractReadExpr {
         return currentType;
     }
 
+    public void codeGenInst(DecacCompiler compiler) {
+        compiler.addInstruction(new WSTR("Enter " + super.getType().getName().getName() + " : "));
+        compiler.addInstruction(new RINT());
+        compiler.addInstruction(new LOAD(compiler.getListRegister().R1, compiler.getListRegister().R0));
+    }
+
+    protected void codeGenPrint(DecacCompiler compiler, boolean printHex){
+        codeGenInst(compiler);
+        compiler.addInstruction(new LOAD(compiler.getListRegister().R0, compiler.getListRegister().R1));
+        super.codeGenPrint(compiler, printHex);
+    }
 
     @Override
     public void decompile(IndentPrintStream s) {
