@@ -1,0 +1,12 @@
+// Description:
+//    Printing a EQ operation between a int literal and int literal .
+// 
+// Results:
+//     true
+// 
+// Historique: 
+//    cree le 12/01/2022 
+
+{
+    if( 3 == 3 ) { print("true") ;} else { print("false") ;} ; 
+}

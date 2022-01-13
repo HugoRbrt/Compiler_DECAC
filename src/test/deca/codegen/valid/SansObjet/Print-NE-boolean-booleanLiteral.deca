@@ -1,0 +1,12 @@
+// Description:
+//    Printing a NE operation between a boolean literal and boolean literal .
+// 
+// Results:
+//     true
+// 
+// Historique: 
+//    cree le 12/01/2022 
+
+{
+    if( false != true ) { print("true") ;} else { print("false") ;} ; 
+}

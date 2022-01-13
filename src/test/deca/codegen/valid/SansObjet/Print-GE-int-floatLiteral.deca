@@ -1,0 +1,12 @@
+// Description:
+//    Printing a GE operation between a int literal and float literal .
+// 
+// Results:
+//     false
+// 
+// Historique: 
+//    cree le 12/01/2022 
+
+{
+    if( 5 >= 10.01 ) { print("true") ;} else { print("false") ;} ; 
+}
