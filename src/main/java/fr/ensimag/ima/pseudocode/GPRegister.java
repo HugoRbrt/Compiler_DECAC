@@ -19,7 +19,7 @@ public class GPRegister extends Register {
      * Accessed by push if the register was used in a PUSH expression
      * With this, we can keep track of the future POP
      */
-    private boolean needPush = false;
+    private int nbPushOnRegister = 0;
 
     /**
      * @return the number of the register, e.g. 12 for R12.
@@ -28,12 +28,16 @@ public class GPRegister extends Register {
         return number;
     }
     
-    public void setNeedPush(boolean needPush) {
-        this.needPush = needPush;
+    public void incrNbPushOnRegister(int nbPush) {
+        nbPushOnRegister += nbPush;
     }
     
-    public boolean getNeedPush() {
-        return needPush;
+    public void decrNbPushOnRegister(int nbPop) {
+        nbPushOnRegister -= nbPop;
+    }
+    
+    public int getNbPushOnRegister() {
+        return getNbPushOnRegister;
     }
     
     
@@ -70,13 +74,12 @@ public class GPRegister extends Register {
         String s;
         if (availability) {
             s = " FREE";
+        } else if (nbPushOnRegister) {
+            s = " PUSHED(" + Integer.toString(nbPushOnRegister) + ")";
         } else {
-            if (needPush) {
-                s = " BUSY";
-            } else {
-                s = " USED";
-            }
+            s = " ABNORMAL STATE";
         }
+           
         return s;
     }    
 
