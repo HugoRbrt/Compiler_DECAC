@@ -1,7 +1,9 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.*;
+import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.ima.pseudocode.instructions.CMP;
 
 /**
  *
@@ -24,5 +26,7 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
         return resType;
     }
 
-
+    public void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler){
+        compiler.addInstruction(new CMP(Reg1, storedRegister));
+    }
 }
