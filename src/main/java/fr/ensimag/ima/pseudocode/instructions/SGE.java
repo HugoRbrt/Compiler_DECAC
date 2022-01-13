@@ -1,6 +1,6 @@
 package fr.ensimag.ima.pseudocode.instructions;
 
-import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.UnaryInstructionToReg;
 
 /**
@@ -10,7 +10,7 @@ import fr.ensimag.ima.pseudocode.UnaryInstructionToReg;
  */
 public class SGE extends UnaryInstructionToReg {
 
-    public SGE(GPRegister op) {
+    public SGE(Register op) {
         super(op);
     }
 
