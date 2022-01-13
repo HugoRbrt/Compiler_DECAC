@@ -54,10 +54,10 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
     }
 
     protected void codeGenInst(DecacCompiler compiler){
-        rightOperand.codeGenInst(compiler);
+        leftOperand.codeGenInst(compiler);
         GPRegister usedRegister = compiler.getListRegister().getRegister(compiler);
         compiler.addInstruction(new LOAD(compiler.getListRegister().R0, usedRegister));
-        leftOperand.codeGenInst(compiler);
+        rightOperand.codeGenInst(compiler);
         this.codeGenOperations(usedRegister, compiler.getListRegister().R0, compiler);
         compiler.getListRegister().freeRegister(usedRegister, compiler);
     }

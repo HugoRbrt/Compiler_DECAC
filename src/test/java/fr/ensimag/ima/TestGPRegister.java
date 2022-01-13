@@ -56,12 +56,11 @@ public class TestGPRegister {
 
 
     public static void main(String[] args) {
-        // Test visuel : on doit voir se remplir les registres de 0
-        // jusqu'au dernier qui accumule des entiers
-        
-        // ensuite la libération rend vide tous les registres sauf le dernier
-        
+        // Visual test:
+        // we occupy all the registers one by one
+        // then we free all of them but the last one
         // bis repetita
+        // we free the last one
         fillingRegistersTest(7);
     }
 }

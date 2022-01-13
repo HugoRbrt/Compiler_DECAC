@@ -443,8 +443,14 @@ primary_expr returns[AbstractExpr tree]
             LOG.trace($tree);
         }
     | READINT OPARENT CPARENT {
+            $tree = new ReadInt();
+            setLocation($tree, $start);
+            LOG.trace($tree);
         }
     | READFLOAT OPARENT CPARENT {
+            $tree = new ReadFloat();
+            setLocation($tree, $start);
+            LOG.trace($tree);
         }
     | NEW ident OPARENT CPARENT {
             assert($ident.tree != null);

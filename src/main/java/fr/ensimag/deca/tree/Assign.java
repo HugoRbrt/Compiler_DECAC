@@ -8,6 +8,8 @@ import fr.ensimag.deca.context.Definition;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
 
 /**
  * Assignment, i.e. lvalue = expr.
@@ -58,6 +60,8 @@ public class Assign extends AbstractBinaryExpr {
     }
 
     public void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler){
-        throw new UnsupportedOperationException("not yet implemented");
+        RegisterOffset offset = compiler.getstackTable().get(
+            ((Identifier) super.getLeftOperand()).getName());
+        compiler.addInstruction(new STORE(Reg1, offset));
     }
 }

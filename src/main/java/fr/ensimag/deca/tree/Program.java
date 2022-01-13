@@ -11,10 +11,7 @@ import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.ARMRegister;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.Line;
-import fr.ensimag.ima.pseudocode.instructions.ADDSP;
-import fr.ensimag.ima.pseudocode.instructions.BOV;
-import fr.ensimag.ima.pseudocode.instructions.TSTO;
-import fr.ensimag.ima.pseudocode.instructions.HALT;
+
 
 
 /**
@@ -73,23 +70,6 @@ public class Program extends AbstractProgram {
         main.codeGenMainARM(compiler);
     }
     
-    /**
-     * @param d1 : needed stack size
-     * @param d2 : number of declared variables
-     * @param compiler : the compiler to add the lines at
-     * Adds the first instruction of TSTO check and ADDSP in the list of lines
-     */
-    @Override
-    public void addTstoCheck(int d1, int d2, DecacCompiler compiler) {
-        // This function is called with DecacCompiler
-        compiler.addFirstInstruction(new ADDSP(d2));
-        Label stackOverflowLabel = new Label("stack_overflow");
-        compiler.addFirstInstruction(new BOV(stackOverflowLabel));
-        compiler.addFirstInstruction(new TSTO(d1));
-        // Error message at the end of the program
-        compiler.addLabel(stackOverflowLabel);
-        compiler.addInstruction(new HALT());
-    }
 
     @Override
     public void decompile(IndentPrintStream s) {
