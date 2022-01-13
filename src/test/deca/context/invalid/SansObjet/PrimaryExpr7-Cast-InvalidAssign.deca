@@ -8,5 +8,5 @@
 //    cree le 13/01/2022
 
 {
-        boolean x = (int)(3.4);
+        int x = (float)(3);
 }

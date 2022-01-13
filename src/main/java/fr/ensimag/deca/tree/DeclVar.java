@@ -7,6 +7,7 @@ import fr.ensimag.ima.pseudocode.instructions.ADDSP;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
+import fr.ensimag.deca.tools.SymbolTable.Symbol;
 
 /**
  * @author gl49
@@ -59,9 +60,17 @@ public class DeclVar extends AbstractDeclVar {
     }
 
     protected void codeGenDeclVar(DecacCompiler compiler){
-        compiler.getstackTable().put(varName.getName(), compiler.getListRegister().GB);
-        initialization.codeGenDeclVar(compiler, varName);
-        
+        if(varName.getDefinition().getType().isString()){//si on veut declarer un string, il faut juste creer le symbol en java
+            if(initialization instanceof Initialization){
+                ((Identifier)varName).getName().setName(((StringLiteral)((Initialization)initialization).getExpression()).getValue());
+            }
+            else{
+                ((Identifier)varName).getName().setName("");
+            }
+        }else{
+            compiler.getstackTable().put(varName.getName(), compiler.getListRegister().GB);
+            initialization.codeGenDeclVar(compiler, varName);
+        }
     }
     
     @Override

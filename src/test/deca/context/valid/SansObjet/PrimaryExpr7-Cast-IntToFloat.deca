@@ -1,5 +1,5 @@
 // Description:
-//    Legal cast expression: int to float.
+//    Legal (but redundant) cast expression: int to float.
 //
 // Results:
 //    11:18: (RULE 3.39) Illegal cast.
