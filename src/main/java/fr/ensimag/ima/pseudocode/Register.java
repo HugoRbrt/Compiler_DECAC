@@ -23,15 +23,6 @@ public class Register extends DVal {
     */
     private int currentIndex = 2;
     
-    /**
-     * stackAnalyzer to operate increments on
-    *
-    * private StackAnalyzer stackAnalyzer;
-    *
-    *public setStackAnalyzer(StackAnalyzer stackAnalyzer) {
-    *    this.stackAnalyzer = stackAnalyzer;
-    *}
-    */
     
     /**
     * public constructor to access them more easily
@@ -111,7 +102,7 @@ public class Register extends DVal {
      */
     public GPRegister getRegister(DecacCompiler compiler){
         
-        for (int k = currentIndex; k <= maxIndex; k++) {
+        for (int k = currentIndex; k < maxIndex; k++) {
             // if the register is available
             if (R[k].available()) {
                 // we make it unavailable and say that we do not need to push it
