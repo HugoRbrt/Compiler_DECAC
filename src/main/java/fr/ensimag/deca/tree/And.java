@@ -26,6 +26,6 @@ public class And extends AbstractOpBool {
     public void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler){
         compiler.addInstruction(new ADD(Reg1, storedRegister));
         compiler.addInstruction(new CMP(new ImmediateInteger(2), storedRegister));
-        compiler.addInstruction(new SEQ(storedRegister));
+        compiler.addInstruction(new SEQ(compiler.getListRegister().R0));
     }
 }
