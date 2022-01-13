@@ -27,6 +27,15 @@ public abstract class TreeList<TreeType extends Tree> extends Tree {
         list.add(i);
     }
 
+    public void addAll(TreeList<TreeType> l) {
+        ArrayList<TreeType> templ = new ArrayList<>();
+        for (TreeType t: l.getList()) {
+            templ.add(t);
+        }
+        Validate.notNull(l);;
+        list.addAll(templ);
+    }
+
     /**
      * @return the list contained in the class, read-only. Use getModifiableList()
      *         if you need to change elements of the list.

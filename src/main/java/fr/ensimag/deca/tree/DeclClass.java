@@ -4,6 +4,8 @@ import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import org.apache.commons.lang.Validate;
+
 import java.io.PrintStream;
 
 /**
@@ -13,6 +15,23 @@ import java.io.PrintStream;
  * @date 01/01/2022
  */
 public class DeclClass extends AbstractDeclClass {
+
+    final private AbstractIdentifier className;
+    final private AbstractIdentifier superClass;
+    final private ListDeclField fields;
+    final private ListDeclMethod methods;
+
+    public DeclClass(AbstractIdentifier className, AbstractIdentifier superClass,
+            ListDeclField fields, ListDeclMethod methods) {
+        Validate.notNull(className);
+        Validate.notNull(superClass);
+        Validate.notNull(fields);
+        Validate.notNull(methods);
+        this.className = className;
+        this.superClass = superClass;
+        this.fields = fields;
+        this.methods = methods;
+    }
 
     @Override
     public void decompile(IndentPrintStream s) {
@@ -38,12 +57,18 @@ public class DeclClass extends AbstractDeclClass {
 
     @Override
     protected void prettyPrintChildren(PrintStream s, String prefix) {
-        throw new UnsupportedOperationException("Not yet supported");
+        className.prettyPrint(s, prefix, false);
+        superClass.prettyPrint(s, prefix, false);
+        fields.prettyPrint(s, prefix, false, false);
+        methods.prettyPrint(s, prefix, true, false);
     }
 
     @Override
     protected void iterChildren(TreeFunction f) {
-        throw new UnsupportedOperationException("Not yet supported");
+        className.iter(f);
+        superClass.iter(f);
+        fields.iter(f);
+        methods.iter(f);
     }
 
 }

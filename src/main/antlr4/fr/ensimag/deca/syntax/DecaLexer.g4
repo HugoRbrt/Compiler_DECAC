@@ -91,11 +91,17 @@ WS: (' ' | EOL | '\r' | '\t') {skip();};
 // Keywords
 ASM: 'asm';
 
+CLASS: 'class';
+
 ELSE: 'else';
+
+EXTENDS: 'extends';
 
 FALSE: 'false';
 
 IF: 'if';
+
+NEW: 'new';
 
 NULL: 'null';
 
@@ -112,6 +118,8 @@ READINT: 'readInt';
 READFLOAT: 'readFloat';
 
 RETURN: 'return';
+
+THIS: 'this';
 
 TRUE: 'true';
 
