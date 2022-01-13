@@ -1,0 +1,12 @@
+// Description:
+//   Calling readFloat() on an float declaration
+// 
+// Results:
+//     1.0
+// 
+// Historique: 
+//    cree le 12/01/2022 
+
+{
+    float x = readFloat();
+}
