@@ -3,6 +3,7 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
+import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.GPRegister;
@@ -62,16 +63,18 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
     }
 
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex){
-        if(leftOperand instanceof FloatLiteral|| rightOperand instanceof FloatLiteral){
+        codeGenInst(compiler);
+        compiler.addInstruction(new LOAD(compiler.getListRegister().R0, compiler.getListRegister().R1));
+        if(getType().isInt()){
+            compiler.addInstruction(new WINT());
+        }
+        if(getType().isFloat()){
             if(printHex){
                 compiler.addInstruction(new WFLOATX());
             }
             else{
                 compiler.addInstruction(new WFLOAT());
             }
-        }
-        else if(leftOperand instanceof IntLiteral|| rightOperand instanceof IntLiteral){
-            compiler.addInstruction(new WINT());
         }
     }
 
