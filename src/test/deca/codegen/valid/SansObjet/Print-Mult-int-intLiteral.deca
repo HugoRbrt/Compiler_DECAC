@@ -1,0 +1,12 @@
+// Description:
+//    Printing a Mult operation between a int literal and int literal .
+// 
+// Results:
+//     34
+// 
+// Historique: 
+//    cree le 12/01/2022 
+
+{
+    print( 2 * 17  ) ; 
+}

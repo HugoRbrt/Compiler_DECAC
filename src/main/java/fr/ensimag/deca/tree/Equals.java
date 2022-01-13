@@ -1,6 +1,7 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.SEQ;
 import fr.ensimag.deca.DecacCompiler;
 
 
@@ -22,6 +23,7 @@ public class Equals extends AbstractOpExactCmp {
     }    
 
     public void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler){
-        throw new UnsupportedOperationException("not yet implemented");
+        super.codeGenOperations(Reg1, storedRegister, compiler);
+        compiler.addInstruction(new SEQ(storedRegister));
     }
 }

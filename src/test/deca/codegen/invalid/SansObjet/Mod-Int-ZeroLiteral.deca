@@ -1,0 +1,12 @@
+// Description:
+//    Modulo of an int by a zero literal
+//
+// Results:
+//     Error: division by zero
+//
+// Historique:
+//    cree le 13/01/2022
+
+{
+    int x = 5 % 0;
+}

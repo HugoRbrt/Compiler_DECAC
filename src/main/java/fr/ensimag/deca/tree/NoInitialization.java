@@ -27,7 +27,7 @@ public class NoInitialization extends AbstractInitialization {
     }
 
     protected void codeGenDeclVar(DecacCompiler compiler){
-        compiler.addInstruction(new ADDSP(new ImmediateInteger(1)));
+        compiler.incrDeclaredVariables(1);
     }
 
     /**
@@ -55,8 +55,7 @@ public class NoInitialization extends AbstractInitialization {
 
     @Override
     public void codeGenDeclVar(DecacCompiler compiler, AbstractIdentifier varName) {
-        // TODO Auto-generated method stub
-        
+        compiler.incrDeclaredVariables(1);
     }
 
 }

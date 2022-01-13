@@ -1,0 +1,12 @@
+// Description:
+//    Printing int literal .
+// 
+// Results:
+//     17
+// 
+// Historique: 
+//    cree le 12/01/2022 
+
+{
+    print( 17 ) ; 
+}

@@ -1,0 +1,12 @@
+// Description:
+//    Printing a LE operation between a float literal and int literal .
+// 
+// Results:
+//     false
+// 
+// Historique: 
+//    cree le 12/01/2022 
+
+{
+    if( 3.15 <= 3 ) { print("true") ;} else { print("false") ;} ; 
+}

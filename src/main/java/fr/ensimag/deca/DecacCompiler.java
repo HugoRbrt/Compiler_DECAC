@@ -195,6 +195,13 @@ public class DecacCompiler implements Runnable {
     public void addInstruction(Instruction instruction, String comment) {
         program.addInstruction(instruction, comment);
     }
+    
+    /**
+     * New instruction to add at the beginning of the program
+     */
+    public void addFirstInstruction(Instruction instruction) {
+        program.addFirstInstruction(instruction);
+    }
 
     /**
      * @see
@@ -322,7 +329,15 @@ public class DecacCompiler implements Runnable {
         }else{
             prog.codeGenProgramARM(this);
         }
+        
         addComment("end main program");
+        
+        // after analysis of the program, we generate the TSTO instruction
+        int d1 = codeAnalyzer.getNeededStackSize();
+        int d2 = codeAnalyzer.getNbDeclaredVariables();
+        prog.addTstoCheck(d1, d2, this);
+        
+        
         LOG.debug("Generated assembly code:" + nl + program.display());
         LOG.info("Output file assembly file is: " + destName);
 
@@ -381,6 +396,7 @@ public class DecacCompiler implements Runnable {
     }
     
     public void incrDeclaredVariables(int nbVariables) {
+        LOG.debug(nbVariables);
         codeAnalyzer.incrDeclaredVariables(nbVariables);
     }
     

@@ -1,0 +1,13 @@
+// Description:
+//    Printing a float variable after initialisation.
+// 
+// Results:
+//     0.12
+// 
+// Historique: 
+//    cree le 12/01/2022 
+
+{
+    float x = 0.12  ; 
+    print( x ) ; 
+}

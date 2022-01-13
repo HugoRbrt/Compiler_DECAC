@@ -10,6 +10,7 @@ import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
 import fr.ensimag.deca.tree.StringLiteral;
 import fr.ensimag.ima.pseudocode.ImmediateFloat;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import java.io.PrintStream;
 
 /**
@@ -61,6 +62,17 @@ public class BooleanLiteral extends AbstractExpr {
     protected void prettyPrintChildren(PrintStream s, String prefix) {
         // leaf node => nothing to do
     }
+
+    public void codeGenInst(DecacCompiler compiler){
+        int intValue;
+        if(value){
+            intValue = 1;
+        }else{
+            intValue = 0;
+        }
+        compiler.addInstruction(new LOAD(new ImmediateInteger(intValue), compiler.getListRegister().R0));
+    }
+
 
     @Override
     String prettyPrintNode() {

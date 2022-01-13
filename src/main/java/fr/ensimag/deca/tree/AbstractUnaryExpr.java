@@ -1,6 +1,15 @@
 package fr.ensimag.deca.tree;
 
+import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
+import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
+import fr.ensimag.ima.pseudocode.instructions.WINT;
+
+
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 
@@ -24,6 +33,32 @@ public abstract class AbstractUnaryExpr extends AbstractExpr {
 
     protected abstract String getOperatorName();
   
+    
+    protected void codeGenInst(DecacCompiler compiler){
+        operand.codeGenInst(compiler);
+        //GPRegister usedRegister = compiler.getListRegister().getRegister(compiler);
+        //compiler.addInstruction(new LOAD(compiler.getListRegister().R0, usedRegister));
+        this.codeGenOperations(compiler.getListRegister().R0, compiler);
+        //compiler.getListRegister().freeRegister(usedRegister, compiler);
+    }
+
+    protected void codeGenPrint(DecacCompiler compiler, boolean printHex){
+        if(operand instanceof FloatLiteral){
+            if(printHex){
+                compiler.addInstruction(new WFLOATX());
+            }
+            else{
+                compiler.addInstruction(new WFLOAT());
+            }
+        }
+        else if(operand instanceof IntLiteral){
+            compiler.addInstruction(new WINT());
+        }
+    }
+
+    abstract void codeGenOperations(GPRegister storedRegister, DecacCompiler compiler);
+    
+
     @Override
     public void decompile(IndentPrintStream s) {
         s.print("(");

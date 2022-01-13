@@ -1,0 +1,12 @@
+// Description:
+//    Printing a Plus operation between a float literal and float literal .
+// 
+// Results:
+//     5.699999999999999
+// 
+// Historique: 
+//    cree le 12/01/2022 
+
+{
+    print( 3.15 + 2.55  ) ; 
+}

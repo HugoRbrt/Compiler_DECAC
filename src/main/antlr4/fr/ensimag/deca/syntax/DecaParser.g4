@@ -190,7 +190,7 @@ if_then_else returns[IfThenElse tree]
             $tree = new IfThenElse($condition.tree, $li_if.tree, $li_else.tree);
             LOG.trace($tree);
         }
-      )
+      )?
       {
       $tree = new IfThenElse($condition.tree, $li_if.tree, temp);
       setLocation($tree, $if1);

@@ -1,5 +1,7 @@
 package fr.ensimag.deca.tools;
 
+import org.apache.log4j.Logger;
+
 /**
  * Global code analyzer used during code generation to
  * compute the dynamic variables used for error portions
@@ -8,6 +10,7 @@ package fr.ensimag.deca.tools;
 
 
 public class CodeAnalyzer {
+    private static final Logger LOG = Logger.getLogger(CodeAnalyzer.class);    
 
     /**
     * Number that keeps track of declared variables
@@ -29,8 +32,8 @@ public class CodeAnalyzer {
         return nbDeclaredVariables;
     }
     
-    public int getStackSizeInstructions() {
-        return stackSizeInstructions;
+    public int getNeededStackSize() {
+        return stackSizeInstructions + nbDeclaredVariables;
     }
 
     /**
@@ -60,6 +63,7 @@ public class CodeAnalyzer {
      */
     public void incrDeclaredVariables(int nbVariables) {
         nbDeclaredVariables += nbVariables;
+        LOG.debug(Integer.toString(nbDeclaredVariables));
     }
     
 }

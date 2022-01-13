@@ -1,0 +1,12 @@
+// Description:
+//    Printing float literal .
+// 
+// Results:
+//     2.55
+// 
+// Historique: 
+//    cree le 12/01/2022 
+
+{
+    print( 2.55 ) ; 
+}
