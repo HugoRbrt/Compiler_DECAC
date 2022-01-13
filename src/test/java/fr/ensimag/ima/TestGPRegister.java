@@ -32,17 +32,37 @@ public class TestGPRegister {
             LOG.trace("Freeing a register: " + bench.debugDisplay());
         }
         
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 2; i++) {
             bench.freeRegisterWithoutCompiler(registerTab[indexMax-1]);
             LOG.trace("Freeing a register: " + bench.debugDisplay());
         }
 
+        for (int k = 2; k < indexMax + 5; k++) {
+            LOG.trace("Loop n°" + Integer.toString(k) + ":\n");
+            registerTab[k] = bench.getRegisterWithoutCompiler();
+            LOG.trace("Getting a register: " + bench.debugDisplay());
+        }
+        
+        for (int k = indexMax - 1; k > 1; k--) {
+            bench.freeRegisterWithoutCompiler(registerTab[k]);
+            LOG.trace("Freeing a register: " + bench.debugDisplay());
+        }
+        
+        for (int i = 0; i < 9; i++) {
+            bench.freeRegisterWithoutCompiler(registerTab[indexMax-1]);
+            LOG.trace("Freeing a register: " + bench.debugDisplay());
+        }
     }
 
 
     public static void main(String[] args) {
-        fillingRegistersTest(16);
-        fillingRegistersTest(3);
+        // Test visuel : on doit voir se remplir les registres de 0
+        // jusqu'au dernier qui accumule des entiers
+        
+        // ensuite la libération rend vide tous les registres sauf le dernier
+        
+        // bis repetita
+        fillingRegistersTest(7);
     }
 }
         
