@@ -1,5 +1,5 @@
 // Description:
-//    Illegal cast expression: int to float.
+//    Legal cast expression: float to int.
 //
 // Results:
 //    (void)
