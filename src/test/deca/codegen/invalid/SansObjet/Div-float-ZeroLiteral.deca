@@ -1,0 +1,12 @@
+// Description:
+//    Division of an float by a zero literal
+//
+// Results:
+//     Error: division by zero
+//
+// Historique:
+//    cree le 13/01/2022
+
+{
+    float x = 5 / 0;
+}

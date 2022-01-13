@@ -1,0 +1,12 @@
+// Description:
+//    Printing boolean literal .
+// 
+// Results:
+//     true
+// 
+// Historique: 
+//    cree le 12/01/2022 
+
+{
+    print( true ) ; 
+}

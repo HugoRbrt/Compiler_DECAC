@@ -1,0 +1,12 @@
+// Description:
+//    Printing a Lower operation between a int literal and int literal .
+// 
+// Results:
+//     false
+// 
+// Historique: 
+//    cree le 12/01/2022 
+
+{
+    if( 17 < 17 ) { print("true") ;} else { print("false") ;} ; 
+}

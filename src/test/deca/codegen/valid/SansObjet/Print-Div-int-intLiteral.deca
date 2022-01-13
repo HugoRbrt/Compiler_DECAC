@@ -1,0 +1,12 @@
+// Description:
+//    Printing a Div operation between a int literal and int literal .
+// 
+// Results:
+//     1.0
+// 
+// Historique: 
+//    cree le 12/01/2022 
+
+{
+    print( 10 / 10  ) ; 
+}

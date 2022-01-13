@@ -1,0 +1,14 @@
+// Description:
+//    Declaration of a boolean variable using > operation between a boolean variable and boolean .
+// 
+// Results:
+//     (RULE 3.33) Illegal operand type
+// 
+// Historique: 
+//    cree le 11/01/2022 
+
+{
+    boolean x =  false; 
+    boolean y = false; 
+    boolean z = x > y ; 
+}

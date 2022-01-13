@@ -1,0 +1,13 @@
+// Description:
+//    Printing a int variable after initialisation.
+// 
+// Results:
+//     10
+// 
+// Historique: 
+//    cree le 12/01/2022 
+
+{
+    int x = 10  ; 
+    print( x ) ; 
+}

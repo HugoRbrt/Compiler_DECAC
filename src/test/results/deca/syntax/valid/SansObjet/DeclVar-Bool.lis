@@ -1,0 +1,15 @@
+`> [10, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [10, 0] Main
+      +> ListDeclVar [List with 2 elements]
+      |  []> [11, 16] DeclVar
+      |  ||  +> [11, 8] Identifier (boolean)
+      |  ||  +> [11, 16] Identifier (x)
+      |  ||  `> [11, 18] Initialization
+      |  ||     `> [11, 20] BooleanLiteral (true)
+      |  []> [12, 16] DeclVar
+      |      +> [12, 8] Identifier (boolean)
+      |      +> [12, 16] Identifier (y)
+      |      `> [12, 18] Initialization
+      |         `> [12, 20] BooleanLiteral (false)
+      `> ListInst [List with 0 elements]

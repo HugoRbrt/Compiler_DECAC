@@ -1,0 +1,14 @@
+// Description:
+//    Printing a string variable after changing the initialisation value.
+// 
+// Results:
+//     "World"
+// 
+// Historique: 
+//    cree le 12/01/2022 
+
+{
+    string x = "Hello"  ; 
+    x = "World"  ; 
+    print( x ) ; 
+}
