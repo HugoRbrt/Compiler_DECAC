@@ -22,6 +22,10 @@ public class ContextTools {
         return (t1.isFloat() && t2.isInt()) || subtype(envType, t2, t1);
     }
 
+    public static boolean castCompatible(EnvironmentType envType, Type t1, Type t2) {
+        return assignCompatible(envType, t1, t2);
+    }
+
     private static boolean subtype(EnvironmentType envType, Type t2, Type t1) {
         if (t1.sameType(t2)) {
             return true;

@@ -1,0 +1,12 @@
+// Description:
+//    Illegal cast expression: int to float.
+//
+// Results:
+//    (void)
+//
+// Historique:
+//    cree le 13/01/2022
+
+{
+        int x = (int)(3.4);
+}
