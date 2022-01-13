@@ -3,12 +3,12 @@
 # Author : gl49, Teimur
 # Initial version : 13/01/2022
 
-# This program is able to execute all the invalid syntax/context tests
-# for the SansObjet/HelloWorld/object stage of the project.
+# This program is able to execute all the invalid syntax and context tests
+# for the SansObjet, HelloWorld or Object stages of the project.
 # Associated results will be found in ../../tmp
 # under the suffixes .listmp
 # To be Launched from root Projet_GL folder
-# $1 = first argument : lex or synt or context
+# $1 = first argument : synt or context
 # $2 = first argument : valid or invalid
 # $3 = second argument : SansObjet or HelloWorld or Objet
 
@@ -22,6 +22,9 @@ if [ "$1" = "synt" ]
 elif [ "$1" = "context" ]
     then
         folder="context"
+else
+    echo "Usage : ./Regression-test.sh [synt|context] [valid|invalid] [HelloWorld|SansObjet|Objet]"
+    exit 1
 fi
 
 # We change the paths to execute the tests from the project root.
@@ -64,9 +67,9 @@ regression_test () {
 echo "Starting regression verification on "$2" "$1" tests for "$3""
 
 # Looping on all the targeted paths.
-for cas_de_test in "$TESTPATH"/*.deca
+for file_to_test in "$TESTPATH"/*.deca
 do
     # we get the filename without its extension for further use
-    file=$(basename "$cas_de_test" ".deca")
+    file=$(basename "$file_to_test" ".deca")
     regression_test "$file"
 done
