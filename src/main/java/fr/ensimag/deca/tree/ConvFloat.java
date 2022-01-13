@@ -29,7 +29,7 @@ public class ConvFloat extends AbstractUnaryExpr {
         return compiler.getEnvTypes().get(compiler.getSymbTable().create("float")).getType();
     }
 
-    public void codeGenOperations(Register Reg1, GPRegister storedRegister, DecacCompiler compiler){
+    public void codeGenOperations(GPRegister storedRegister, DecacCompiler compiler){
         // Nothing to do
     }
 

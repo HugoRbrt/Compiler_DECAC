@@ -26,8 +26,8 @@ public class UnaryMinus extends AbstractUnaryExpr {
         return resType;
     }
 
-    public void codeGenOperations(Register Reg1, GPRegister storedRegister, DecacCompiler compiler){
-        compiler.addInstruction(new OPP(Reg1, storedRegister));
+    public void codeGenOperations(GPRegister storedRegister, DecacCompiler compiler){
+        compiler.addInstruction(new OPP(storedRegister, storedRegister));
     }
 
     protected void codeGenInst(DecacCompiler compiler){

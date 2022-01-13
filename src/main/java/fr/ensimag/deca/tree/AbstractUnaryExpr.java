@@ -38,7 +38,7 @@ public abstract class AbstractUnaryExpr extends AbstractExpr {
         operand.codeGenInst(compiler);
         //GPRegister usedRegister = compiler.getListRegister().getRegister(compiler);
         //compiler.addInstruction(new LOAD(compiler.getListRegister().R0, usedRegister));
-        this.codeGenOperations(compiler.getListRegister().R0, compiler.getListRegister().R0, compiler);
+        this.codeGenOperations(compiler.getListRegister().R0, compiler);
         //compiler.getListRegister().freeRegister(usedRegister, compiler);
     }
 
@@ -56,7 +56,7 @@ public abstract class AbstractUnaryExpr extends AbstractExpr {
         }
     }
 
-    abstract void codeGenOperations(Register Reg1, GPRegister storedRegister, DecacCompiler compiler);
+    abstract void codeGenOperations(GPRegister storedRegister, DecacCompiler compiler);
     
 
     @Override

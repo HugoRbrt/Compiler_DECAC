@@ -3,6 +3,8 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.CMP;
+import fr.ensimag.ima.pseudocode.instructions.SEQ;
 import fr.ensimag.deca.DecacCompiler;
 
 /**
@@ -25,8 +27,9 @@ public class Not extends AbstractUnaryExpr {
         return resType;
     }
 
-    public void codeGenOperations(Register Reg1, GPRegister storedRegister, DecacCompiler compiler){
-        // TODO
+    public void codeGenOperations(GPRegister storedRegister, DecacCompiler compiler){
+        compiler.addInstruction(new CMP(0, storedRegister));
+        compiler.addInstruction(new SEQ(storedRegister));
     }
 
     @Override
