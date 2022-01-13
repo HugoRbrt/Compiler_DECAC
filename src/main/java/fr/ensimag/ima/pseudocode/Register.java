@@ -50,10 +50,10 @@ public class Register extends DVal {
     public String debugDisplay() {
         String s = name + "[";
         for (int k = 0; k < maxIndex - 1; k++) {
-            s += "R" + Integer.toString(k) + ":" + R[k].toString() + " | ";
+            s += "R" + Integer.toString(k) + ":" + R[k].debugDisplay() + " | ";
         }
         s += "R" + Integer.toString(maxIndex) + ":" + 
-                R[maxIndex-1].toString() + "]";
+                R[maxIndex-1].debugDisplay() + "]";
         
         return s;
     }
@@ -157,5 +157,46 @@ public class Register extends DVal {
         usedRegister.setNeedPush(false);
     }
 
-
+    /**
+     * The two tests below only have a debugging purpose. 
+     */
+    public GPRegister getRegisterWithoutCompiler(){
+        
+        for (int k = currentIndex; k < maxIndex; k++) {
+            // if the register is available
+            if (R[k].available()) {
+                // we make it unavailable and say that we do not need to push it
+                R[k].use();
+                R[k].setNeedPush(false);
+                // we update the index for a supposedly free register
+                currentIndex = k+1;
+                return R[k];
+            }
+        }
+        
+        // if we arrive here, no available register was found
+        // in this case, we take the last register and push it
+        // before using it
+        GPRegister pushedRegister = R[maxIndex-1]; // for now
+        assert !(pushedRegister.available());
+        pushedRegister.setNeedPush(true);
+        
+        return R[maxIndex-1];
+    }
+    
+    public void freeRegisterWithoutCompiler(GPRegister usedRegister) {
+        
+        if (usedRegister.getNeedPush()) {
+            // we POP the register but this register still contains info
+        } else {
+            // we do not need to pop and just make it free
+            usedRegister.free();
+            // we update the index of an available register
+            int regNb = usedRegister.getNumber();
+            if (regNb < currentIndex) {
+                currentIndex = regNb;
+            }
+        }
+        usedRegister.setNeedPush(false);
+    }
 }
