@@ -31,6 +31,10 @@ public abstract class GenericProgram {
     public void addInstruction(Instruction i, String s) {
         lines.add(new Line(null, i, s));
     }
+    
+    public void addFirstInstruction(Instruction i) {
+        lines.addFirst(new Line(i));
+    }
 
     /**
      * Append the content of program p to the current program. The new program

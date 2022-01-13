@@ -21,16 +21,4 @@ public class IMAProgram  extends GenericProgram{
         lines.add(new Line(s));
     }
     
-    /**
-     * @param d1 : needed stack size
-     * @param d2 : number of declared variables
-     * Adds the first instruction of TSTO check and ADDSP in the list of lines
-     */
-    public void addTstoCheck(int d1, int d2) {
-        lines.addFirst(new Line(new ADDSP(d2)));
-        lines.addFirst(new Line(new BOV(new Label("stack_overflow"))));
-        lines.addFirst(new Line(new TSTO(d1)));
-    }
-    
-    
 }
