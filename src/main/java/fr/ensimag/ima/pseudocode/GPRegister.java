@@ -37,7 +37,7 @@ public class GPRegister extends Register {
     }
     
     public int getNbPushOnRegister() {
-        return getNbPushOnRegister;
+        return nbPushOnRegister;
     }
     
     
@@ -73,13 +73,17 @@ public class GPRegister extends Register {
     public String debugDisplay(){
         String s;
         if (availability) {
-            s = " FREE";
-        } else if (nbPushOnRegister) {
-            s = " PUSHED(" + Integer.toString(nbPushOnRegister) + ")";
-        } else {
-            s = " ABNORMAL STATE";
+            // available
+            s = " [ ]";
+        } else {        
+            if (nbPushOnRegister < 0) {
+                s = " [X]"; // abnormal state
+            } else {
+                // used with a certain number of PUSH on it
+                s = " [" + Integer.toString(nbPushOnRegister) + "]";
+            }
         }
-           
+        
         return s;
     }    
 

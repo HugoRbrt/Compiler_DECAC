@@ -27,8 +27,13 @@ public class TestGPRegister {
             LOG.trace("Getting a register: " + bench.debugDisplay());
         }
         
-        for (int k = indexMax - 1; k > 2; k--) {
+        for (int k = indexMax - 1; k > 1; k--) {
             bench.freeRegisterWithoutCompiler(registerTab[k]);
+            LOG.trace("Freeing a register: " + bench.debugDisplay());
+        }
+        
+        for (int i = 0; i < 5; i++) {
+            bench.freeRegisterWithoutCompiler(registerTab[indexMax-1]);
             LOG.trace("Freeing a register: " + bench.debugDisplay());
         }
 
