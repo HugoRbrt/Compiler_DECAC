@@ -1,0 +1,20 @@
+// Description:
+//     IfElse structure with quite simple conditions
+// 
+// Results:
+//     2
+// 
+// History: 
+//    created on 13/01/2022 
+
+{
+    int x ; 
+    if ( 1+1 != 2 ) {
+        x = 1;
+    } else if ( 1+2 == 3 ){
+        x = 2;
+    } else {
+        x = 3;
+    }
+    println(x); 
+}
