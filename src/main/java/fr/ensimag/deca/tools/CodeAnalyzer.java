@@ -29,8 +29,8 @@ public class CodeAnalyzer {
         return nbDeclaredVariables;
     }
     
-    public int getStackSizeInstructions() {
-        return stackSizeInstructions;
+    public int getNeededStackSize() {
+        return stackSizeInstructions + nbDeclaredVariables;
     }
 
     /**

@@ -333,7 +333,7 @@ public class DecacCompiler implements Runnable {
         addComment("end main program");
         
         // after analysis of the program, we generate the TSTO instruction
-        int d1 = codeAnalyzer.getStackSizeInstructions();
+        int d1 = codeAnalyzer.getNeededStackSize();
         int d2 = codeAnalyzer.getNbDeclaredVariables();
         prog.addTstoCheck(d1, d2, this);
         

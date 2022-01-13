@@ -52,7 +52,7 @@ public class Initialization extends AbstractInitialization {
         expression.codeGenInst(compiler);
         RegisterOffset r = compiler.getstackTable().get(varName.getName());
         compiler.addInstruction(new STORE(compiler.getListRegister().R0, r));
-        //Paul, le 12 : peut-être ajouter un compiler.incrDeclaredVariables(1) ici
+        compiler.incrDeclaredVariables(1);
     }
 
 

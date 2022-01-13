@@ -27,7 +27,7 @@ public class NoInitialization extends AbstractInitialization {
     }
 
     protected void codeGenDeclVar(DecacCompiler compiler){
-        compiler.addInstruction(new ADDSP(new ImmediateInteger(1)));
+        compiler.incrDeclaredVariables(1);
     }
 
     /**
