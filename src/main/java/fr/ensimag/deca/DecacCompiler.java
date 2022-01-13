@@ -396,6 +396,7 @@ public class DecacCompiler implements Runnable {
     }
     
     public void incrDeclaredVariables(int nbVariables) {
+        LOG.debug(nbVariables);
         codeAnalyzer.incrDeclaredVariables(nbVariables);
     }
     
