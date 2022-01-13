@@ -48,10 +48,16 @@ public class Register extends DVal {
     }
        
 
-
     @Override
     public String toString() {
-        return name;
+        String s = name + "[";
+        for (int k = 0; k < maxIndex - 1; k++) {
+            s += "R" + Integer.toString(k) + ":" + R[k].toString() + " | ";
+        }
+        s += "R" + Integer.toString(maxIndex) + ":" + 
+                R[maxIndex-1].toString() + "]";
+        
+        return s;
     }
 
     /**

@@ -68,18 +68,17 @@ public class GPRegister extends Register {
     
     @Override
     public String toString(){
-        String s = name;
-        if (available) {
-            s += " FREE";
+        String s;
+        if (availability) {
+            s = " FREE";
         } else {
             if (needPush) {
-                s += " BUSY";
+                s = " BUSY";
             } else {
-                s += " USED";
+                s = " USED";
             }
         }
         return s;
-    }
-    
+    }    
 
 }
