@@ -4,6 +4,7 @@ package fr.ensimag.deca;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
+import fr.ensimag.deca.codegen.ErrorManager;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.deca.tools.StackHashTableSymbol;
@@ -65,6 +66,7 @@ public class DecacCompiler implements Runnable {
     private EnvironmentType envTypes = EnvironmentType.getEnvTypes();
     private StackHashTableSymbol stackTable = new StackHashTableSymbol();
     private CodeAnalyzer codeAnalyzer = new CodeAnalyzer();
+    private ErrorManager errorManager = new ErrorManager();
 
     public DecacCompiler(CompilerOptions compilerOptions, File source) {
         super();
@@ -137,6 +139,13 @@ public class DecacCompiler implements Runnable {
      */
     public CodeAnalyzer getCodeAnalyzer() {
         return codeAnalyzer;
+    }
+    
+    /**
+     * ErrorManager to create the approriate code
+     */
+    public ErrorManager getErrorManager() {
+        return errorManager;
     }
     
     /**
@@ -335,8 +344,11 @@ public class DecacCompiler implements Runnable {
         // after analysis of the program, we generate the TSTO instruction
         int d1 = codeAnalyzer.getNeededStackSize();
         int d2 = codeAnalyzer.getNbDeclaredVariables();
-        prog.addTstoCheck(d1, d2, this);
+        errorManager.setTstoArg(d1);
+        errorManager.setAddspArg(d2);
         
+        errorManager.addTstoCheck(this);
+        errorManager.genCodeErrorManager(this);
         
         LOG.debug("Generated assembly code:" + nl + program.display());
         LOG.info("Output file assembly file is: " + destName);

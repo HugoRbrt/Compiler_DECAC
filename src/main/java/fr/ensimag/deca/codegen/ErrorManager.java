@@ -9,6 +9,7 @@ import fr.ensimag.ima.pseudocode.instructions.TSTO;
 import fr.ensimag.ima.pseudocode.instructions.HALT;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
 import fr.ensimag.ima.pseudocode.instructions.WNL;
+import fr.ensimag.ima.pseudocode.instructions.ERROR;
 
 /**
  * Initial version : 13/1/2022
@@ -81,7 +82,7 @@ public class ErrorManager {
      * Generates the initial code for the stack overflow test
      * @param compiler : the compiler to write in
      */
-    private void addTstoCheck(DecacCompiler compiler) {
+    public void addTstoCheck(DecacCompiler compiler) {
         // Start point for the program
         compiler.addFirstInstruction(new ADDSP(tstoArg));
         compiler.addFirstInstruction(new BOV(stackOverflowLabel));
@@ -99,7 +100,7 @@ public class ErrorManager {
         compiler.addLabel(label);
         compiler.addInstruction(new WSTR(new ImmediateString(msg)));
         compiler.addInstruction(new WNL());
-        compiler.addInstruction(new HALT());
+        compiler.addInstruction(new ERROR());
     }
             
 }
