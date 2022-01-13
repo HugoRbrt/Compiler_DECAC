@@ -77,6 +77,8 @@ SLASH: '/';
 
 PERCENT: '%';
 
+PROTECTED: 'protected';
+
 EXCLAM: '!';
 
 AND: '&&';

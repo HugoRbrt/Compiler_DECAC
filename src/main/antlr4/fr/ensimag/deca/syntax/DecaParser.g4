@@ -162,7 +162,8 @@ inst returns[AbstractInst tree]
         }
     | RETURN expr SEMI {
             assert($expr.tree != null);
-            $tree = $expr.tree;
+            $tree = new Return($expr.tree);
+            setLocation($tree, $start);
             LOG.trace($tree);
         }
     ;
@@ -565,33 +566,33 @@ decl_field_set returns [ListDeclField tree]
 @init   {
             $tree = new ListDeclField();
         }
-    : v=visibility[$tree] t=type list_decl_field[$tree,$t.tree]
+    : vis=visibility t=type list_decl_field[$tree,$vis.v,$t.tree]
       SEMI
     ;
 
 // Class-related
-visibility[ListDeclField t]
+visibility returns [Visibility v]
     : /* epsilon */ {
-        $t.setVisibility(Visibility.PUBLIC);
+        $v = Visibility.PUBLIC;
         }
     | PROTECTED {
-        $t.setVisibility(Visibility.PROTECTED);
+        $v = Visibility.PROTECTED;
         }
     ;
 
 // Class-related
-list_decl_field[ListDeclField tree, AbstractIdentifier t]
-    : dv1=decl_field[$t] {
+list_decl_field[ListDeclField tree, Visibility v, AbstractIdentifier t]
+    : dv1=decl_field[$v, $t] {
             $tree.add($dv1.tree);
     }
-        (COMMA dv2=decl_field[$t] {
+        (COMMA dv2=decl_field[$v, $t] {
             $tree.add($dv2.tree);
         }
       )*
     ;
 
 // Class-related
-decl_field[AbstractIdentifier t] returns [AbstractDeclField tree]
+decl_field[Visibility v, AbstractIdentifier t] returns [AbstractDeclField tree]
 @init   {
             $tree = null;
         }
@@ -599,14 +600,14 @@ decl_field[AbstractIdentifier t] returns [AbstractDeclField tree]
             setLocation($i.tree,$i.start);
         }
       (eq=EQUALS e=expr {
-            $tree = new DeclField($t, $i.tree, new Initialization($e.tree));
+            $tree = new DeclField($v, $t, $i.tree, new Initialization($e.tree));
             setLocation($tree.getInit(), $eq);
             setLocation($tree, $i.start);
             LOG.trace($tree);
         }
       )? {
             if ($tree == null) {
-                $tree = new DeclField($t, $i.tree, new NoInitialization());
+                $tree = new DeclField($v, $t, $i.tree, new NoInitialization());
                 setLocation($tree, $i.start);
                 LOG.trace($tree);
             }
