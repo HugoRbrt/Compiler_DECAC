@@ -30,16 +30,17 @@ NC='\033[0m'
 test_codegen() {
     # $1 = first argument : name of files without extension
 
-    $DECAC "$TESTPATH"/$1.deca
+    $DECAC "$TESTPATH"/$1.deca 2>&1
 
     # Checks if a new result file was created.
     # echo "$TMP/$1.listmp"
     if [ ! -f $TESTPATH/$1.ass ]
         then
            echo "${RED}[NO NEW .ass file] : $1 ${NC}"
+           return
+        else
+            ima $TESTPATH/$1.ass >  $TMP/$1.restmp
     fi
-
-    ima $TESTPATH/$1.ass >  $TMP/$1.restmp
 
 
     if [ ! -f $RESPATH/$1.res ]
@@ -47,6 +48,7 @@ test_codegen() {
             echo "${RED}[NO OLD .res file] : $1 ${NC}"
             return
     fi
+
     DIFF=$(diff $TMP/$1.restmp $RESPATH/$1.res)
     if [ "$DIFF" != "" ]
         then

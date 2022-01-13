@@ -2,7 +2,7 @@
 //    Declaring 500 variables to overflow the stack.
 // 
 // Results:
-//       Error: Stack OV:
+//       Error: Stack Overflow
 // 
 // Historique: 
 //    cree le 13/01/2022 
@@ -488,7 +488,7 @@
     boolean asj ;
     string ask ;
     boolean asl ;
-    string asm ;
+    string asmm ;
     boolean asn ;
     float aso ;
     string asp ;
