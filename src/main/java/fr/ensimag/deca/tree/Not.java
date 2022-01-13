@@ -1,6 +1,8 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.*;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.deca.DecacCompiler;
 
 /**
@@ -23,6 +25,9 @@ public class Not extends AbstractUnaryExpr {
         return resType;
     }
 
+    public void codeGenOperations(Register Reg1, GPRegister storedRegister, DecacCompiler compiler){
+        // TODO
+    }
 
     @Override
     protected String getOperatorName() {

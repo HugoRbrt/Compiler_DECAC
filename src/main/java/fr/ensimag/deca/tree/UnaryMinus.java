@@ -2,7 +2,10 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.OPP;
 
 /**
  * @author gl49
@@ -23,6 +26,19 @@ public class UnaryMinus extends AbstractUnaryExpr {
         return resType;
     }
 
+    public void codeGenOperations(Register Reg1, GPRegister storedRegister, DecacCompiler compiler){
+        compiler.addInstruction(new OPP(Reg1, storedRegister));
+    }
+
+    protected void codeGenInst(DecacCompiler compiler){
+        super.codeGenInst(compiler);
+    }
+
+    protected void codeGenPrint(DecacCompiler compiler, boolean printHex){
+        codeGenInst(compiler);
+        compiler.addInstruction(new LOAD(compiler.getListRegister().R0, compiler.getListRegister().R1));
+        super.codeGenPrint(compiler, printHex);
+    }
 
     @Override
     protected String getOperatorName() {

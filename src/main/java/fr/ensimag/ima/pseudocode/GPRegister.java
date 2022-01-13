@@ -64,7 +64,20 @@ public class GPRegister extends Register {
     public void free(){
         assert(!availability);
         availability=true;
-    }   
-    
+    }
+
+    public String debugDisplay(){
+        String s;
+        if (availability) {
+            s = " FREE";
+        } else {
+            if (needPush) {
+                s = " BUSY";
+            } else {
+                s = " USED";
+            }
+        }
+        return s;
+    }    
 
 }
