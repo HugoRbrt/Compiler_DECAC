@@ -412,10 +412,11 @@ select_expr returns[AbstractExpr tree]
             $tree = $e.tree;
             LOG.trace($tree);
         }
-    | e1=select_expr DOT i=ident {
+    | e1=select_expr d=DOT i=ident {
             assert($e1.tree != null);
             assert($i.tree != null);
-            // Class-related
+            $tree = new Selection($e1.tree,$i.tree);
+            setLocation($tree, $d);
         }
         (o=OPARENT args=list_expr CPARENT {
             // we matched "e1.i(args)"
@@ -447,9 +448,10 @@ primary_expr returns[AbstractExpr tree]
         }
     | READFLOAT OPARENT CPARENT {
         }
-    | NEW ident OPARENT CPARENT {
+    | n=NEW ident OPARENT CPARENT {
             assert($ident.tree != null);
-            // Class-related
+            $tree = new New($ident.tree);
+            setLocation($tree, $n);
         }
     | cast=OPARENT type CPARENT OPARENT expr CPARENT {
             assert($type.tree != null);
@@ -494,10 +496,10 @@ literal returns[AbstractExpr tree]
         LOG.trace($tree);
         }
     | THIS {
-        // Class-related
+        // Later
         }
     | NULL {
-        $tree = null;
+        $tree = new NullLiteral();
         LOG.trace($tree);
         }
     ;

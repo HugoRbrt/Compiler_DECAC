@@ -63,6 +63,8 @@ OBRACE: '{';
 
 CBRACE: '}';
 
+DOT: '.';
+
 OPARENT: '(';
 
 CPARENT: ')';
