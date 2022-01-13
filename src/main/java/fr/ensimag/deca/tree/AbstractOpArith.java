@@ -4,6 +4,7 @@ import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
 
 /**
  * Arithmetic binary operations (+, -, /, ...)
@@ -42,6 +43,7 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
 
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex){
         codeGenInst(compiler);
+        compiler.addInstruction(new LOAD(compiler.getListRegister().R0, compiler.getListRegister().R1));
         super.codeGenPrint(compiler, printHex);
     }
 

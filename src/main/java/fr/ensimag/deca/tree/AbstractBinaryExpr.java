@@ -59,7 +59,6 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
         leftOperand.codeGenInst(compiler);
         this.codeGenOperations(usedRegister, compiler.getListRegister().R0, compiler);
         compiler.getListRegister().freeRegister(usedRegister, compiler);
-        compiler.addInstruction(new LOAD(compiler.getListRegister().R0, compiler.getListRegister().R1));
     }
 
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex){
