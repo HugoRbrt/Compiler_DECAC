@@ -1,0 +1,14 @@
+// Description:
+//    Division of an float by a zero int variable
+//
+// Results:
+//     line 13
+//     Error: division by zero
+//
+// Historique:
+//    cree le 13/01/2022
+
+{
+    int y = 0
+    float x = 5 / y;
+}

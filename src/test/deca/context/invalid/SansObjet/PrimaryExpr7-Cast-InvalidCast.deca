@@ -1,0 +1,12 @@
+// Description:
+//    Invalid cast expression.
+//
+// Results:
+//    11:20: (RULE 3.39) Illegal cast.
+//
+// Historique:
+//    cree le 13/01/2022
+
+{
+        boolean x = (boolean)(0);
+}

@@ -237,4 +237,12 @@ public class Identifier extends AbstractIdentifier {
              compiler.addInstruction(new WFLOAT());
          }
     }
+
+    @Override
+    protected void codeGenInst(DecacCompiler compiler) {
+        if(getDefinition().isExpression()){
+            RegisterOffset R = compiler.getstackTable().get(this.getName());
+            compiler.addInstruction(new LOAD(R, Register.R0));
+        }
+    }
 }

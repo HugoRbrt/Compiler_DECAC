@@ -9,6 +9,10 @@ import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.ARMRegister;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.Line;
+
+
 
 /**
  * Deca complete program (class definition plus main block)
@@ -65,6 +69,7 @@ public class Program extends AbstractProgram {
         compiler.setListRegister(new ARMRegister());
         main.codeGenMainARM(compiler);
     }
+    
 
     @Override
     public void decompile(IndentPrintStream s) {

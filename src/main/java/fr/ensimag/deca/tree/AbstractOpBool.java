@@ -25,7 +25,5 @@ public abstract class AbstractOpBool extends AbstractBinaryExpr {
         return resType;
     }
 
-    public void codeGenOperations(Register Reg1, Register storedRegister){
-        throw new UnsupportedOperationException("not yet implemented");
-    }
+    abstract void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler);
 }

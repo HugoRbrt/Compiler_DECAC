@@ -4,6 +4,7 @@ package fr.ensimag.deca;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
+import fr.ensimag.deca.codegen.ErrorManager;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.deca.tools.StackHashTableSymbol;
@@ -65,6 +66,7 @@ public class DecacCompiler implements Runnable {
     private EnvironmentType envTypes = EnvironmentType.getEnvTypes();
     private StackHashTableSymbol stackTable = new StackHashTableSymbol();
     private CodeAnalyzer codeAnalyzer = new CodeAnalyzer();
+    private ErrorManager errorManager = new ErrorManager();
 
     public DecacCompiler(CompilerOptions compilerOptions, File source) {
         super();
@@ -140,6 +142,13 @@ public class DecacCompiler implements Runnable {
     }
     
     /**
+     * ErrorManager to create the approriate code
+     */
+    public ErrorManager getErrorManager() {
+        return errorManager;
+    }
+    
+    /**
      * @see
      * fr.ensimag.ima.pseudocode.IMAProgram#add(fr.ensimag.ima.pseudocode.AbstractLine)
      */
@@ -194,6 +203,13 @@ public class DecacCompiler implements Runnable {
      */
     public void addInstruction(Instruction instruction, String comment) {
         program.addInstruction(instruction, comment);
+    }
+    
+    /**
+     * New instruction to add at the beginning of the program
+     */
+    public void addFirstInstruction(Instruction instruction) {
+        program.addFirstInstruction(instruction);
     }
 
     /**
@@ -322,7 +338,18 @@ public class DecacCompiler implements Runnable {
         }else{
             prog.codeGenProgramARM(this);
         }
+        
         addComment("end main program");
+        
+        // after analysis of the program, we generate the TSTO instruction
+        int d1 = codeAnalyzer.getNeededStackSize();
+        int d2 = codeAnalyzer.getNbDeclaredVariables();
+        errorManager.setTstoArg(d1);
+        errorManager.setAddspArg(d2);
+        
+        errorManager.addTstoCheck(this);
+        errorManager.genCodeErrorManager(this);
+        
         LOG.debug("Generated assembly code:" + nl + program.display());
         LOG.info("Output file assembly file is: " + destName);
 
@@ -381,6 +408,7 @@ public class DecacCompiler implements Runnable {
     }
     
     public void incrDeclaredVariables(int nbVariables) {
+        LOG.debug(nbVariables);
         codeAnalyzer.incrDeclaredVariables(nbVariables);
     }
     

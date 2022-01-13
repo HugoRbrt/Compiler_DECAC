@@ -1,0 +1,12 @@
+// Description:
+//    Printing a Mult operation between a int literal and float literal .
+// 
+// Results:
+//     0.36
+// 
+// Historique: 
+//    cree le 12/01/2022 
+
+{
+    print( 3 * 0.12  ) ; 
+}

@@ -1,0 +1,1 @@
+src/test/deca/syntax/invalid/SansObjet/Include-CircularInclude2.deca:11:40: Circular include for file Include-CircularInclude1.deca

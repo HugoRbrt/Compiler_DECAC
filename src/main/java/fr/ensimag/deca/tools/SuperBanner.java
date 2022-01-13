@@ -9,7 +9,7 @@ public class SuperBanner {
             " |      *  Teimur Abu Zaki  *      |\n" +
             " |      *   Adrien Bouchet  *      |\n" +
             " |      *     Troy Fau      *      |\n" +
-            " |      *  Paul Marthelot   *      |\n" +
+            " |      *   Paul Marthelot  *      |\n" +
             " |      *    Hugo Robert    *      |\n" +
             " +---------------------------------+\n" +
             "\u001B[0m";

@@ -25,7 +25,7 @@ public class TestCodeAnalyzer {
         codeAnalyzer.incrPushCount(5); //stack:7
         codeAnalyzer.incrPopCount(3);  //stack:4
         //needed:7
-        return codeAnalyzer.getStackSizeInstructions();
+        return codeAnalyzer.getNeededStackSize();
     }
     
     /* Must return 2 */
@@ -39,7 +39,7 @@ public class TestCodeAnalyzer {
         codeAnalyzer.incrPopCount(1);  //stack:0
         codeAnalyzer.incrPushCount(1); //stack:1
         //needed:2
-        return codeAnalyzer.getStackSizeInstructions();
+        return codeAnalyzer.getNeededStackSize();
     }
     
     
@@ -49,7 +49,7 @@ public class TestCodeAnalyzer {
         
         codeAnalyzer.incrPopCount(1);
         
-        return codeAnalyzer.getStackSizeInstructions();
+        return codeAnalyzer.getNeededStackSize();
     }
 
     public static void main(String[] args) {

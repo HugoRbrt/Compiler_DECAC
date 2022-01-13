@@ -1,0 +1,12 @@
+// Description:
+//    Legal cast expression: float to int.
+//
+// Results:
+//    (void)
+//
+// Historique:
+//    cree le 13/01/2022
+
+{
+        int x = (int)(3.4);
+}

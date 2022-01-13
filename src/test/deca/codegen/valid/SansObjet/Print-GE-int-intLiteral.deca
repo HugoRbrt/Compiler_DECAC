@@ -1,0 +1,12 @@
+// Description:
+//    Printing a GE operation between a int literal and int literal .
+// 
+// Results:
+//     true
+// 
+// Historique: 
+//    cree le 12/01/2022 
+
+{
+    if( 17 >= 3 ) { print("true") ;} else { print("false") ;} ; 
+}

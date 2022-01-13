@@ -445,8 +445,14 @@ primary_expr returns[AbstractExpr tree]
             LOG.trace($tree);
         }
     | READINT OPARENT CPARENT {
+            $tree = new ReadInt();
+            setLocation($tree, $start);
+            LOG.trace($tree);
         }
     | READFLOAT OPARENT CPARENT {
+            $tree = new ReadFloat();
+            setLocation($tree, $start);
+            LOG.trace($tree);
         }
     | n=NEW ident OPARENT CPARENT {
             assert($ident.tree != null);
@@ -456,7 +462,8 @@ primary_expr returns[AbstractExpr tree]
     | cast=OPARENT type CPARENT OPARENT expr CPARENT {
             assert($type.tree != null);
             assert($expr.tree != null);
-            // Not yet
+            $tree = new Cast($type.tree,$expr.tree);
+            setLocation($tree,$cast);
         }
     | literal {
             assert($literal.tree != null);

@@ -23,15 +23,6 @@ public class Register extends DVal {
     */
     private int currentIndex = 2;
     
-    /**
-     * stackAnalyzer to operate increments on
-    *
-    * private StackAnalyzer stackAnalyzer;
-    *
-    *public setStackAnalyzer(StackAnalyzer stackAnalyzer) {
-    *    this.stackAnalyzer = stackAnalyzer;
-    *}
-    */
     
     /**
     * public constructor to access them more easily
@@ -55,8 +46,17 @@ public class Register extends DVal {
         this.name = name;
         this.maxIndex = maxIndex;
     }
-       
 
+    public String debugDisplay() {
+        String s = name + "[";
+        for (int k = 0; k < maxIndex-1; k++) {
+            s += "R" + Integer.toString(k) + ":" + R[k].debugDisplay() + " | ";
+        }
+        s += "R" + Integer.toString(maxIndex-1) + ":" + 
+                R[maxIndex-1].debugDisplay() + "]";
+        
+        return s;
+    }
 
     @Override
     public String toString() {
@@ -111,12 +111,11 @@ public class Register extends DVal {
      */
     public GPRegister getRegister(DecacCompiler compiler){
         
-        for (int k = currentIndex; k <= maxIndex; k++) {
+        for (int k = currentIndex; k < maxIndex; k++) {
             // if the register is available
             if (R[k].available()) {
                 // we make it unavailable and say that we do not need to push it
                 R[k].use();
-                R[k].setNeedPush(false);
                 // we update the index for a supposedly free register
                 currentIndex = k+1;
                 return R[k];
@@ -128,7 +127,7 @@ public class Register extends DVal {
         // before using it
         GPRegister pushedRegister = R[maxIndex-1]; // for now
         assert !(pushedRegister.available());
-        pushedRegister.setNeedPush(true);
+        pushedRegister.incrNbPushOnRegister(1);
         
         compiler.addInstruction(new PUSH(pushedRegister));
         compiler.incrPushCount(1);
@@ -140,21 +139,77 @@ public class Register extends DVal {
      * free register given in argument and set its needPush field to false
      */
     public void freeRegister(GPRegister usedRegister, DecacCompiler compiler) {
-        
-        if (usedRegister.getNeedPush()) {
-            // we POP the register but this register still contains info
-            compiler.addInstruction(new POP(usedRegister));
-            compiler.incrPopCount(1);
-        } else {
-            // we do not need to pop and just make it free
-            usedRegister.free();
-            // we update the index of an available register
-            int regNb = usedRegister.getNumber();
-            if (regNb < currentIndex) {
-                currentIndex = regNb;
+        // if register is free, do nothing
+        // else
+        if (!usedRegister.available()) {
+            // if values were pushed onto it
+            if (usedRegister.getNbPushOnRegister() > 0) {
+                // we POP the register and decrease the number of PUSH on it
+                compiler.addInstruction(new POP(usedRegister));
+                compiler.incrPopCount(1);
+                usedRegister.decrNbPushOnRegister(1);
+            
+            } else {
+                // we do not need to pop and just make it free
+                usedRegister.free();
+                // we update the index of an available register
+                int regNb = usedRegister.getNumber();
+            
+                if (regNb < currentIndex) {
+                    currentIndex = regNb;
+                }
             }
         }
-        usedRegister.setNeedPush(false);
+        
+    }
+
+    /**
+     * The two tests below only have a debugging purpose. 
+     */
+    public GPRegister getRegisterWithoutCompiler(){
+        
+        for (int k = currentIndex; k < maxIndex; k++) {
+            // if the register is available
+            if (R[k].available()) {
+                // we make it unavailable and say that we do not need to push it
+                R[k].use();
+                // we update the index for a supposedly free register
+                currentIndex = k+1;
+                return R[k];
+            }
+        }
+        
+        // if we arrive here, no available register was found
+        // in this case, we take the last register and push it
+        // before using it
+        GPRegister pushedRegister = R[maxIndex-1]; // for now
+        assert !(pushedRegister.available());
+        pushedRegister.incrNbPushOnRegister(1);
+        
+        return R[maxIndex-1];
+    }
+    
+    public void freeRegisterWithoutCompiler(GPRegister usedRegister) {
+        // if register is free, do nothing
+        // else
+        if (!usedRegister.available()) {
+            // if values were pushed onto it
+            if (usedRegister.getNbPushOnRegister() > 0) {
+                // we POP the register and decrease the number of PUSH on it
+                usedRegister.decrNbPushOnRegister(1);
+            
+            } else {
+                // we do not need to pop and just make it free
+                usedRegister.free();
+                // we update the index of an available register
+                int regNb = usedRegister.getNumber();
+            
+                if (regNb < currentIndex) {
+                    currentIndex = regNb;
+                }
+            }
+        }
+        
     }
 
 

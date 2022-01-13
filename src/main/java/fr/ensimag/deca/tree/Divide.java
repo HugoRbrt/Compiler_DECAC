@@ -2,7 +2,10 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.context.Type;
 import fr.ensimag.ima.pseudocode.instructions.DIV;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.QUO;
 
 /**
  *
@@ -21,6 +24,13 @@ public class Divide extends AbstractOpArith {
     }
 
     public void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler){
-        compiler.addInstruction(new DIV(Reg1, storedRegister));
+        compiler.addInstruction(new LOAD(storedRegister, compiler.getListRegister().R1));
+        compiler.addInstruction(new LOAD(Reg1, storedRegister));
+        if(getType().isFloat()){
+            compiler.addInstruction(new DIV(Reg1, storedRegister));
+        }
+        else if(getType().isInt()){
+            compiler.addInstruction(new QUO(Reg1, storedRegister));
+        }
     }
 }
