@@ -26,7 +26,7 @@ public class Or extends AbstractOpBool {
     public void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler){
         compiler.addInstruction(new ADD(Reg1, storedRegister));
         compiler.addInstruction(new CMP(new ImmediateInteger(0), storedRegister));
-        compiler.addInstruction(new SNE(storedRegister));
+        compiler.addInstruction(new SNE(compiler.getListRegister().R0));
     }
 
 }
