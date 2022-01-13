@@ -1,0 +1,12 @@
+// Description:
+//    Cast in a Plus operation; conserves an int result.
+//
+// Results:
+//    (void)
+//
+// Historique:
+//    cree le 13/01/2022
+
+{
+        int x = 3 + (int)(2.4);
+}

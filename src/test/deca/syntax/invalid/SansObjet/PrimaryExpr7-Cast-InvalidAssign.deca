@@ -1,0 +1,12 @@
+// Description:
+//    Invalid assignment of a casted expression.
+//
+// Results:
+//    11:20: (RULE 3.28) Incompatible type assignment
+//
+// Historique:
+//    cree le 13/01/2022
+
+{
+        boolean x = (int)(3.4);
+}
