@@ -14,6 +14,8 @@ import fr.ensimag.ima.pseudocode.Line;
 import fr.ensimag.ima.pseudocode.instructions.ADDSP;
 import fr.ensimag.ima.pseudocode.instructions.BOV;
 import fr.ensimag.ima.pseudocode.instructions.TSTO;
+import fr.ensimag.ima.pseudocode.instructions.HALT;
+
 
 /**
  * Deca complete program (class definition plus main block)
@@ -81,8 +83,12 @@ public class Program extends AbstractProgram {
     public void addTstoCheck(int d1, int d2, DecacCompiler compiler) {
         // This function is called with DecacCompiler
         compiler.addFirstInstruction(new ADDSP(d2));
-        compiler.addFirstInstruction(new BOV(new Label("stack_overflow")));
+        Label stackOverflowLabel = new Label("stack_overflow");
+        compiler.addFirstInstruction(new BOV(stackOverflowLabel));
         compiler.addFirstInstruction(new TSTO(d1));
+        // Error message at the end of the program
+        compiler.addLabel(stackOverflowLabel);
+        compiler.addInstruction(new HALT());
     }
 
     @Override
