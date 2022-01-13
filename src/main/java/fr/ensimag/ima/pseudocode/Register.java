@@ -46,10 +46,8 @@ public class Register extends DVal {
         this.name = name;
         this.maxIndex = maxIndex;
     }
-       
 
-    @Override
-    public String toString() {
+    public String debugDisplay() {
         String s = name + "[";
         for (int k = 0; k < maxIndex - 1; k++) {
             s += "R" + Integer.toString(k) + ":" + R[k].toString() + " | ";
@@ -58,6 +56,11 @@ public class Register extends DVal {
                 R[maxIndex-1].toString() + "]";
         
         return s;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 
     /**

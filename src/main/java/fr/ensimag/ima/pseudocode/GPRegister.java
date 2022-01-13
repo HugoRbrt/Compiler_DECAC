@@ -65,9 +65,8 @@ public class GPRegister extends Register {
         assert(!availability);
         availability=true;
     }
-    
-    @Override
-    public String toString(){
+
+    public String debugDisplay(){
         String s;
         if (availability) {
             s = " FREE";
