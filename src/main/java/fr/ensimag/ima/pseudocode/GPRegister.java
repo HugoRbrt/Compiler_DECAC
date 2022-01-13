@@ -64,7 +64,22 @@ public class GPRegister extends Register {
     public void free(){
         assert(!availability);
         availability=true;
-    }   
+    }
+    
+    @Override
+    public String toString(){
+        String s = name;
+        if (available) {
+            s += " FREE";
+        } else {
+            if (needPush) {
+                s += " BUSY";
+            } else {
+                s += " USED";
+            }
+        }
+        return s;
+    }
     
 
 }
