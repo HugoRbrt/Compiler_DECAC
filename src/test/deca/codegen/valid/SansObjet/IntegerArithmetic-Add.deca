@@ -1,0 +1,14 @@
+// Description:
+//    Addition mod 2^32 to get the minimum integer
+//
+// Results:
+//    "a big negative number"
+//
+// History:
+//    created on 14/01/2022
+
+{
+    int x = 0x7fffffff;
+    float y = 0x2;
+    print(x+y);
+}
