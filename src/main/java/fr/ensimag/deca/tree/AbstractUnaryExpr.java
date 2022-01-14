@@ -42,10 +42,6 @@ public abstract class AbstractUnaryExpr extends AbstractExpr {
         //compiler.getListRegister().freeRegister(usedRegister, compiler);
     }
 
-    protected void codeGenPrint(DecacCompiler compiler, boolean printHex){
-       operand.codeGenPrint(compiler, printHex);
-    }
-
     abstract void codeGenOperations(GPRegister storedRegister, DecacCompiler compiler);
     
 
