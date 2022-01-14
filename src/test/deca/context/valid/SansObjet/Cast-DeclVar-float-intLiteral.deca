@@ -1,0 +1,12 @@
+// Description:
+//    Declaration of a float variable using a float cast on a int literal .
+// 
+// Results:
+//     nothing
+// 
+// Historique: 
+//    cree le 14/01/2022 
+
+{
+    float x =  (float) (3) ; 
+}

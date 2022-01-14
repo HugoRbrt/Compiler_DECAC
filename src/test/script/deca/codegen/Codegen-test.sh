@@ -55,6 +55,7 @@ test_codegen() {
             echo "${RED}[UNEXPECTED OUTUT] : $1 ${NC}"
         else
             echo "${GREEN}[EXPECTED OUTPUT] : $1 ${NC}"
+            rm $TMP/$1.restmp
     fi
 }
 

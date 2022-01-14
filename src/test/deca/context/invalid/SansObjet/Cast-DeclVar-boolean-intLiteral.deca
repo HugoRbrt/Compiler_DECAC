@@ -1,0 +1,13 @@
+// Description:
+//    Declaration of a boolean variable using a boolean cast on a int literal .
+// 
+// Results:
+//     Contextual error
+//     Line 14: (RULE 3.39) Illegal cast
+// 
+// Historique: 
+//    cree le 14/01/2022 
+
+{
+    boolean x =  (boolean) (3) ; 
+}
