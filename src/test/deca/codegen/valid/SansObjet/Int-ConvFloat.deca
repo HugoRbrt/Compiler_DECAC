@@ -9,7 +9,7 @@
 
 {
     int x =  16;
-    float y = (float) x;
+    float y = (float) (x);
 
     print(y);
 }
