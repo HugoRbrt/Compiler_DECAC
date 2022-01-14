@@ -1,0 +1,12 @@
+// Description:
+//    Overflow for a float arithmetic substraction
+//
+// Results:
+//     ERROR: float_arithmetic_overflow
+//
+// History:
+//    created on 14/01/2022
+
+{
+    //TODO
+}
