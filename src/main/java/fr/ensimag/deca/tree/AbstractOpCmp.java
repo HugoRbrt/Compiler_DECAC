@@ -22,6 +22,13 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
         Type t1 = getLeftOperand().verifyExpr(compiler, localEnv, currentClass);
         Type t2 = getRightOperand().verifyExpr(compiler, localEnv, currentClass);
         Type resType = ContextTools.typeCmpOp(compiler, getOperatorName(), t1, t2, getLocation());
+        if (t1.isInt()) {
+            setLeftOperand(new ConvFloat(getLeftOperand()));
+            getLeftOperand().verifyExpr(compiler, localEnv, currentClass);
+        } else if (t2.isInt()) {
+            setRightOperand(new ConvFloat(getRightOperand()));
+            getRightOperand().verifyExpr(compiler, localEnv, currentClass);
+        }
         setType(resType);
         return resType;
     }
