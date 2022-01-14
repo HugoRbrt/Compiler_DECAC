@@ -9,6 +9,7 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.RINT;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
 
 import java.io.PrintStream;
 
@@ -29,6 +30,7 @@ public class ReadInt extends AbstractReadExpr {
 
     public void codeGenInst(DecacCompiler compiler) {
         compiler.addInstruction(new RINT());
+        compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("float_arithmetic")));
         compiler.addInstruction(new LOAD(compiler.getListRegister().R1, compiler.getListRegister().R0));
     }
 
