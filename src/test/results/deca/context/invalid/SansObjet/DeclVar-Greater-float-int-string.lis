@@ -1,3 +1,1 @@
-DEBUG fr.ensimag.deca.tree.Program.verifyProgram(Program.java:39) - verify program: start
-DEBUG fr.ensimag.deca.tree.Main.verifyMain(Main.java:35) - verify Main: start
 src/test/deca/context/invalid/SansObjet/DeclVar-Greater-float-int-string.deca:14:16: (RULE 3.33) Illegal operand type.
