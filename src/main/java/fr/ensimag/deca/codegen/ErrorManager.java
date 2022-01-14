@@ -14,7 +14,7 @@ import fr.ensimag.ima.pseudocode.instructions.ERROR;
 /**
  * Initial version : 13/1/2022
  * @author gl49
- * Class used to generate all the code relative to Errors in IMA 
+ * Class used to generate all the code relative to Errors in IMA
  * programs' execution
  */
 
@@ -27,46 +27,46 @@ public class ErrorManager {
      * addspArg: number of variables declared in the program
      */
     private int addspArg = 0;
-    
-    
+
+
     /**
      * Labels for the different errors
      */
-    private final Label stackOverflowLabel = new Label("stack_overflow_error"); 
+    private final Label stackOverflowLabel = new Label("stack_overflow_error");
     private final Label divByZeroLabel = new Label("division_by_zero_error");
-    private final Label nullReferenceLabel = 
+    private final Label nullReferenceLabel =
             new Label("null_dereferencing_error");
     private final Label ioErrorLabel = new Label("input_output_error");
     private final Label heapOverflowLabel = new Label("heap_overflow_error");
-    
+
     public void setTstoArg(int arg) {
         tstoArg = arg;
     }
-    
+
     public void setAddspArg(int arg) {
         addspArg = arg;
     }
-    
+
     public Label getStackOverflowLabel() {
         return stackOverflowLabel;
     }
-    
+
     public Label getDivByZeroLabel() {
         return divByZeroLabel;
     }
-    
+
     public Label getNullReferenceLabel() {
         return nullReferenceLabel;
     }
-    
+
     public Label getIOErrorLabel() {
         return ioErrorLabel;
     }
-    
+
     public Label getHeapOverflowLabel() {
         return heapOverflowLabel;
     }
-    
+
     /**
      * ErrorManager generates codes for errors that are put there
      */
@@ -77,7 +77,7 @@ public class ErrorManager {
         genCodeError(ioErrorLabel, "ERROR: input/output error", compiler);
         genCodeError(heapOverflowLabel, "ERROR: heap overflow", compiler);
     }
-    
+
     /**
      * Generates the initial code for the stack overflow test
      * @param compiler : the compiler to write in
@@ -88,10 +88,10 @@ public class ErrorManager {
         compiler.addFirstInstruction(new BOV(stackOverflowLabel));
         compiler.addFirstInstruction(new TSTO(addspArg));
     }
-    
-    
+
+
     /**
-     * @params label : a label to be attributed to the error 
+     * @params label : a label to be attributed to the error
      * @params message : the message shown when error is encountered
      * @params compiler : the compiler to write in
      */
@@ -102,5 +102,5 @@ public class ErrorManager {
         compiler.addInstruction(new WNL());
         compiler.addInstruction(new ERROR());
     }
-            
+
 }
