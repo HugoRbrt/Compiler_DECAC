@@ -1,0 +1,14 @@
+// Description:
+//    Overflow for a float arithmetic division
+//
+// Results:
+//     ERROR: float_arithmetic_overflow
+//
+// History:
+//    created on 14/01/2022
+
+{
+    float x = 0x1.ffffep+127;
+    float y = 0x1.00000p-127;
+    print(x/y);
+}

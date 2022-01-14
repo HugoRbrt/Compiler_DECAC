@@ -4,6 +4,7 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.instructions.OPP;
 import fr.ensimag.ima.pseudocode.instructions.SUB;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
 
 /**
  * @author gl49
@@ -21,6 +22,9 @@ public class Minus extends AbstractOpArith {
         //return storedRegister
         compiler.addInstruction(new SUB(Reg1, storedRegister));
         compiler.addInstruction(new OPP(storedRegister, storedRegister));
+        if(super.getLeftOperand() instanceof FloatLiteral || super.getRightOperand() instanceof FloatLiteral){
+            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("float_arithmetic")));
+        }
     }
 
     @Override

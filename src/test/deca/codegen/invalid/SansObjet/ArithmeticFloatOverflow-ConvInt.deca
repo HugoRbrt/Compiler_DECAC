@@ -1,0 +1,12 @@
+// Description:
+//    Overflow for a conversion from a float to an int
+//
+// Results:
+//     ERROR: float_arithmetic_overflow
+//
+// History:
+//    created on 13/01/2022
+
+{
+    //TODO
+}
