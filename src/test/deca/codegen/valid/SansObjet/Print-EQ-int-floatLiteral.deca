@@ -8,5 +8,5 @@
 //    cree le 12/01/2022 
 
 {
-    if( 20 == 3.15 ) { print("true") ;} else { print("false") ;} ;
+    if( 20 == 3.15 ) { print("true") ;} else { print("false") ;} ; 
 }
