@@ -1,5 +1,5 @@
 // Description:
-//    Multiple And expressions.
+//    Testing object-oriented Deca.
 //
 // Results:
 //    (void)
@@ -11,8 +11,8 @@ class A {}
 
 class B extends A {}
 
-class A {}
-
 {
-
+    int x = 2;
+    A a;
+    A.equals(B);
 }

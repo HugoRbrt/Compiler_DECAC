@@ -42,22 +42,23 @@ public class DeclClass extends AbstractDeclClass {
      * Contextual class declaration check. First checks whether the superclass exists, then checks
      * whether the class hasn't already been declared.
      *
-     * @param compiler
-     * @throws ContextualError
+     * @param compiler contains the predefined EnvironmentType.
+     * @throws ContextualError if the class has already been declared.
      */
     @Override
     protected void verifyClass(DecacCompiler compiler) throws ContextualError {
         EnvironmentType envT = compiler.getEnvTypes();
         SymbolTable.Symbol nameSymb = className.getName();
-        SymbolTable.Symbol superSymb = superClass.getName();
+        ClassDefinition superCl = (ClassDefinition) envT.get(superClass.getName());
         superClass.verifyType(compiler);
         try {
             envT.declare(nameSymb,
                     new ClassDefinition(new ClassType(nameSymb, getLocation(),
-                            (ClassDefinition) envT.get(superSymb)), getLocation(), (ClassDefinition) envT.get(superSymb)));
+                            superCl), getLocation(), superCl));
         }
         catch (EnvironmentExp.DoubleDefException e) {
-            throw new ContextualError("(RULE 3.17) Class has already been declared.", className.getLocation());
+            throw new ContextualError(
+                    "(RULE 3.17) Class has already been declared.", className.getLocation());
         }
     }
 

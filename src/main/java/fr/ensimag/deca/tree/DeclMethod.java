@@ -1,9 +1,7 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.tools.IndentPrintStream;
-import jdk.nashorn.internal.ir.Block;
 import org.apache.commons.lang.Validate;
-import org.graalvm.compiler.core.common.type.ArithmeticOpTable;
 
 import java.io.PrintStream;
 

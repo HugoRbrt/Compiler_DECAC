@@ -77,6 +77,8 @@ public class DecacCompiler implements Runnable {
             program = new ARMProgram();
         }
         this.source = source;
+
+        predefinedEnvironments();
     }
 
     /**
@@ -273,6 +275,38 @@ public class DecacCompiler implements Runnable {
             return true;
         }
     }
+
+    /**
+     * First part of the first context analysis pass: initializing the
+     * builtin types, including the Object class and its EnvironmentExp,
+     * containing the equals method.
+     */
+    private void predefinedEnvironments() {
+        envTypes.put(symbTable.create("void"),
+                new TypeDefinition(new VoidType(symbTable.create("void")), Location.BUILTIN));
+        envTypes.put(symbTable.create("boolean"),
+                new TypeDefinition(new BooleanType(symbTable.create("boolean")), Location.BUILTIN));
+        envTypes.put(symbTable.create("float"),
+                new TypeDefinition(new FloatType(symbTable.create("float")), Location.BUILTIN));
+        envTypes.put(symbTable.create("int"),
+                new TypeDefinition(new IntType(symbTable.create("int")), Location.BUILTIN));
+        envTypes.put(symbTable.create("null"),
+                new TypeDefinition(new NullType(symbTable.create("null")), Location.BUILTIN));
+        /*  Defining Deca types uses ClassDefinition extension of TypeDefinition;
+            each defition has its own EnvironmentExp that includes a pointer to
+            the superclass's environment. */
+        envTypes.put(symbTable.create("Object"),
+                new ClassDefinition(new ClassType(symbTable.create("Object"),
+                        Location.BUILTIN, null), Location.BUILTIN, null));
+        /*  Definition of the equals method, in the EnvironmentExp tied to the
+            Object class. */
+        ClassDefinition obj = (ClassDefinition) envTypes.get(symbTable.create("Object"));
+        Signature params = new Signature(obj.getType());
+        obj.getMembers().put(symbTable.create("equals"),
+                new MethodDefinition(envTypes.get(symbTable.create("boolean")).getType(),
+                        Location.BUILTIN, params, 0));
+    }
+
     /**
      * function that makes the class to implements Runnable interface
      * by calling compile() function (usefull for -p decac option )
@@ -308,7 +342,6 @@ public class DecacCompiler implements Runnable {
             prog.decompile(out);
             return false;
         }
-
 
         prog.verifyProgram(this);
         assert(prog.checkAllDecorations());

@@ -12,6 +12,10 @@ import java.util.List;
 public class Signature {
     List<Type> args = new ArrayList<Type>();
 
+    public Signature(Type... types) {
+        args.addAll(List.of(types));
+    }
+
     public void add(Type t) {
         args.add(t);
     }

@@ -77,6 +77,16 @@ public class EnvironmentExp {
         environment.put(name, def);
     }
 
+    /**
+     * Adds the definition def associated to the symbol name in the environment.
+     * Version without double definition check, for initializing the builtin
+     * methods.
+     *
+     * @param name Name of the symbol to define.
+     * @param def Definition of the symbol.
+     */
+    public void put(Symbol name, ExpDefinition def) { environment.put(name, def); }
+
     @Override
     public String toString() {
         String s = "";
