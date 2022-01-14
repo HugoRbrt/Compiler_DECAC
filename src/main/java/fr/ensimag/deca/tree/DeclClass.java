@@ -1,9 +1,9 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.ClassType;
+import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.deca.tools.SymbolTable;
 import org.apache.commons.lang.Validate;
 
 import java.io.PrintStream;
@@ -38,9 +38,27 @@ public class DeclClass extends AbstractDeclClass {
         s.print("class { ... A FAIRE ... }");
     }
 
+    /**
+     * Contextual class declaration check. First checks whether the superclass exists, then checks
+     * whether the class hasn't already been declared.
+     *
+     * @param compiler
+     * @throws ContextualError
+     */
     @Override
     protected void verifyClass(DecacCompiler compiler) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        EnvironmentType envT = compiler.getEnvTypes();
+        SymbolTable.Symbol nameSymb = className.getName();
+        SymbolTable.Symbol superSymb = superClass.getName();
+        superClass.verifyType(compiler);
+        try {
+            envT.declare(nameSymb,
+                    new ClassDefinition(new ClassType(nameSymb, getLocation(),
+                            (ClassDefinition) envT.get(superSymb)), getLocation(), (ClassDefinition) envT.get(superSymb)));
+        }
+        catch (EnvironmentExp.DoubleDefException e) {
+            throw new ContextualError("(RULE 3.17) Class has already been declared.", className.getLocation());
+        }
     }
 
     @Override

@@ -1,8 +1,9 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.ima.pseudocode.instructions.HALT;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
@@ -41,11 +42,31 @@ public class Program extends AbstractProgram {
     @Override
     public void verifyProgram(DecacCompiler compiler) throws ContextualError {
         LOG.debug("verify program: start");
-//        classes.verifyListClass(compiler);
+        // initializing builtin types, including Object class
+        SymbolTable symbT = compiler.getSymbTable();
+        EnvironmentType envT = compiler.getEnvTypes();
+        envT.put(symbT.create("void"),
+                new TypeDefinition(new VoidType(symbT.create("void")), Location.BUILTIN));
+        envT.put(symbT.create("boolean"),
+                new TypeDefinition(new BooleanType(symbT.create("boolean")), Location.BUILTIN));
+        envT.put(symbT.create("float"),
+                new TypeDefinition(new FloatType(symbT.create("float")), Location.BUILTIN));
+        envT.put(symbT.create("int"),
+                new TypeDefinition(new IntType(symbT.create("int")), Location.BUILTIN));
+        envT.put(symbT.create("string"),
+                new TypeDefinition(new StringType(symbT.create("string")), Location.BUILTIN));
+        envT.put(symbT.create("null"),
+                new TypeDefinition(new NullType(symbT.create("null")), Location.BUILTIN));
+        /*  Defining Deca types uses ClassDefinition extension of TypeDefinition; the ClassType
+            instance will create a ClassDefinition with its own EnvironmentExp that includes a
+            pointer to the superclass's environment. */
+        envT.put(symbT.create("Object"),
+                new ClassDefinition(new ClassType(symbT.create("Object"), Location.BUILTIN, null),
+                        Location.BUILTIN, null));
+        classes.verifyListClass(compiler);
 //        classes.verifyListClassMembers(compiler);
 //        classes.verifyListClassBody();
         main.verifyMain(compiler);
-        //throw new UnsupportedOperationException("not yet implemented");
         LOG.debug("verify program: end");
     }
 

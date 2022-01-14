@@ -1,0 +1,18 @@
+// Description:
+//    Multiple And expressions.
+//
+// Results:
+//    (void)
+//
+// Historique:
+//    cree le 13/01/2022
+
+class A {}
+
+class B extends A {}
+
+class A {}
+
+{
+
+}

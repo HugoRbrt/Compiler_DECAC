@@ -77,20 +77,6 @@ public class DecacCompiler implements Runnable {
             program = new ARMProgram();
         }
         this.source = source;
-        // initializing builtin types
-        envTypes.put(this.symbTable.create("void"),
-                new TypeDefinition(new VoidType(this.symbTable.create("void")), Location.BUILTIN));
-        envTypes.put(this.symbTable.create("boolean"),
-                new TypeDefinition(new BooleanType(this.symbTable.create("boolean")), Location.BUILTIN));
-        envTypes.put(this.symbTable.create("float"),
-                new TypeDefinition(new FloatType(this.symbTable.create("float")), Location.BUILTIN));
-        envTypes.put(this.symbTable.create("int"),
-                new TypeDefinition(new IntType(this.symbTable.create("int")), Location.BUILTIN));
-        envTypes.put(this.symbTable.create("string"),
-                new TypeDefinition(new StringType(this.symbTable.create("string")), Location.BUILTIN));
-        envTypes.put(this.symbTable.create("null"),
-                new TypeDefinition(new NullType(this.symbTable.create("null")), Location.BUILTIN));
-
     }
 
     /**
