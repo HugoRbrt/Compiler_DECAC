@@ -62,6 +62,6 @@ public class Assign extends AbstractBinaryExpr {
     public void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler){
         RegisterOffset offset = compiler.getstackTable().get(
             ((Identifier) super.getLeftOperand()).getName());
-        compiler.addInstruction(new STORE(Reg1, offset));
+        compiler.addInstruction(new STORE(storedRegister, offset));
     }
 }
