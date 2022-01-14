@@ -1,0 +1,10 @@
+; Normally, IMA cannot have that much stack memory
+    TSTO #1000000
+    BOV stack_overflow
+    ADDSP #1000
+
+
+stack_overflow:
+    WSTR "ERROR: stack_overflow"
+    WNL
+    ERROR
