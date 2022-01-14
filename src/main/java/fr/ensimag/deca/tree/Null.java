@@ -9,8 +9,8 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 
 import java.io.PrintStream;
 
-public class NullLiteral extends AbstractExpr {
-    public NullLiteral() {
+public class Null extends AbstractExpr {
+    public Null() {
         super();
     }
 
