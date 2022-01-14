@@ -1,0 +1,22 @@
+// Description:
+//      Interactive test to know if an int given in standard input
+//      is in [0, 5]
+//
+// Results:
+//      x is in [0, 5]       OR       x is NOT is [0,5]
+//
+// History:
+//      created on 14/1/2021
+
+{
+    float x;
+    println("Please enter an integer: ");
+    x = readFloat();
+
+    if (x >= 0 && x <= 5) {
+        print("x belongs to [0, 5]");
+    } else {
+        print("x does not belong to [0, 5]");
+    }
+}
+        
