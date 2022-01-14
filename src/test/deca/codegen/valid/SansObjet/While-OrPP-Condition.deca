@@ -1,0 +1,17 @@
+// Description:
+//     Using a While structure with an OR operation
+//     between two positive conditions
+//
+// Results:
+//     10
+//
+// History:
+//    created on 14/01/2022
+
+{
+    int x = 0;
+    while ( (x < 10) || ( x > 11 ) ) {
+        x = x + 1;
+    }
+    println(x);
+}
