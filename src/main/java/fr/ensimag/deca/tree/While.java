@@ -8,7 +8,7 @@ import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
-import fr.ensimag.ima.pseudocode.instructions.BNE;
+import fr.ensimag.ima.pseudocode.instructions.BEQ;
 import fr.ensimag.ima.pseudocode.instructions.BRA;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
 import java.io.PrintStream;
@@ -45,7 +45,7 @@ public class While extends AbstractInst {
         compiler.addLabel(beginWhile);
         condition.codeGenInst(compiler);
         compiler.addInstruction(new CMP(new ImmediateInteger(1), compiler.getListRegister().R0));
-        compiler.addInstruction(new BNE(endWhile));
+        compiler.addInstruction(new BEQ(endWhile));
         body.codeGenListInst(compiler);
         compiler.addInstruction(new BRA(beginWhile));
         compiler.addLabel(endWhile);
