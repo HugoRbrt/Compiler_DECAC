@@ -12,6 +12,7 @@ import fr.ensimag.ima.pseudocode.instructions.POP;
 import fr.ensimag.ima.pseudocode.instructions.WINT;
 import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
 import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
+import fr.ensimag.ima.pseudocode.ImmediateString;
 import fr.ensimag.deca.tree.FloatLiteral;
 import fr.ensimag.deca.tree.IntLiteral;
 
@@ -54,12 +55,16 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
     }
 
     protected void codeGenInst(DecacCompiler compiler){
-        leftOperand.codeGenInst(compiler);
-        GPRegister usedRegister = compiler.getListRegister().getRegister(compiler);
-        compiler.addInstruction(new LOAD(compiler.getListRegister().R0, usedRegister));
-        rightOperand.codeGenInst(compiler);
-        this.codeGenOperations(usedRegister, compiler.getListRegister().R0, compiler);
-        compiler.getListRegister().freeRegister(usedRegister, compiler);
+        if(rightOperand instanceof StringLiteral){
+            ((Identifier)leftOperand).getName().setName(((StringLiteral)rightOperand).getValue());
+        }else{
+            leftOperand.codeGenInst(compiler);
+            GPRegister usedRegister = compiler.getListRegister().getRegister(compiler);
+            compiler.addInstruction(new LOAD(compiler.getListRegister().R0, usedRegister));
+            rightOperand.codeGenInst(compiler);
+            this.codeGenOperations(usedRegister, compiler.getListRegister().R0, compiler);
+            compiler.getListRegister().freeRegister(usedRegister, compiler);
+        }
     }
 
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex){

@@ -3,8 +3,9 @@
 # Author : gl49, Teimur
 # Initial version : 13/01/2022
 
-# This program is able to execute all the invalid syntax/context tests
-# for the SansObjet/HelloWorld/object stage of the project.
+# This program is able to execute all the invalid tests for
+# syntax/ and context/ of the HelloWorld, SansObjet and Objet
+# stages of the project.
 # Associated results will be found in ../../tmp
 # under the suffixes .listmp
 # $1 = first argument : lex or synt or context
@@ -21,9 +22,12 @@ if [ "$1" = "synt" ]
 elif [ "$1" = "context" ]
     then
         folder="context"
+elif [ "$1" = "lex" ]
+    then
+	folder="syntax"
 else
-    echo "Wrong argument"
-    exit
+    echo "Usage : ./Launch-test.sh [lex|synt|context] [valid|invalid] [HelloWorld|SansObjet|Objet]"
+    exit 1
 fi
 
 
@@ -72,10 +76,10 @@ test_valid () {
 echo "Starting "$2" "$1" tests for "$3""
 
 # Looping on all the targeted paths.
-for cas_de_test in "$TESTPATH"/*.deca
+for file_to_test in "$TESTPATH"/*.deca
 do
     # we get the filename without its extension for further use
-    file=$(basename "$cas_de_test" ".deca")
+    file=$(basename "$file_to_test" ".deca")
     test_"$2" "$file" "$1"
 done
 

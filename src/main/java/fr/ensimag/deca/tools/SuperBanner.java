@@ -1,7 +1,7 @@
 package fr.ensimag.deca.tools;
 
 /**
- * Super banner for our team 
+ * Super banner for our team
  */
 public class SuperBanner {
     String wowTresBelleBanniere = "\033[1;94m" +
@@ -13,10 +13,10 @@ public class SuperBanner {
             " |      *    Hugo Robert    *      |\n" +
             " +---------------------------------+\n" +
             "\u001B[0m";
-    
+
     @Override
     public String toString() {
         return wowTresBelleBanniere;
     }
-    
+
 }

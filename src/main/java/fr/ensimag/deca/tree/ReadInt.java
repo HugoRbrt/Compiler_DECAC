@@ -28,7 +28,6 @@ public class ReadInt extends AbstractReadExpr {
     }
 
     public void codeGenInst(DecacCompiler compiler) {
-        compiler.addInstruction(new WSTR("Enter " + super.getType().getName().getName() + " : "));
         compiler.addInstruction(new RINT());
         compiler.addInstruction(new LOAD(compiler.getListRegister().R1, compiler.getListRegister().R0));
     }

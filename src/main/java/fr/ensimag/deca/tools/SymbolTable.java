@@ -30,6 +30,13 @@ public class SymbolTable {
         return map.get(name);
     }
 
+    public Symbol get(String s) {
+        if (!map.containsKey(s)) {
+            throw new IllegalArgumentException("symbol not found in SymbolTable");
+        }
+        return map.get(s);
+    }
+
     public static class Symbol {
         // Constructor is private, so that Symbol instances can only be created
         // through SymbolTable.create factory (which thus ensures uniqueness
@@ -41,6 +48,10 @@ public class SymbolTable {
 
         public String getName() {
             return name;
+        }
+
+        public void setName(String n) {
+            this.name = n;
         }
 
         @Override

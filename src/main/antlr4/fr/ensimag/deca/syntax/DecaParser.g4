@@ -172,23 +172,24 @@ if_then_else returns[IfThenElse tree]
 @init   {
             $tree = null;
             ListInst temp = new ListInst();
+            ListInst elseElif = temp;
+
         }
     : if1=IF OPARENT condition=expr CPARENT OBRACE li_if=list_inst CBRACE {
-            $tree = new IfThenElse($condition.tree, $li_if.tree, new ListInst());
             LOG.trace($tree);
         }
       (ELSE elsif=IF OPARENT elsif_cond=expr CPARENT OBRACE elsif_li=list_inst CBRACE {
-            IfThenElse Elif = new IfThenElse($elsif_cond.tree, $elsif_li.tree, new ListInst());
-            setLocation(Elif, $elsif);
+            elseElif = new ListInst();
+            IfThenElse Elif = new IfThenElse($elsif_cond.tree, $elsif_li.tree, elseElif);
             temp.add(Elif);
+            setLocation(Elif, $elsif);
             LOG.trace($tree);
         }
       )*
       (ELSE OBRACE li_else=list_inst CBRACE {
             for (AbstractInst i: $li_else.tree.getList()) {
-                temp.add(i);
+                elseElif.add(i);
             }
-            LOG.trace($tree);
         }
       )?
       {

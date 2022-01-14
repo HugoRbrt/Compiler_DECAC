@@ -10,28 +10,28 @@ import org.apache.log4j.Logger;
 
 
 public class CodeAnalyzer {
-    private static final Logger LOG = Logger.getLogger(CodeAnalyzer.class);    
+    private static final Logger LOG = Logger.getLogger(CodeAnalyzer.class);
 
     /**
     * Number that keeps track of declared variables
     */
     private int nbDeclaredVariables = 0;
-    
+
     /**
     * Number that keeps track of the needed size of memory in
     * stack to compute the instructions
     */
     private int stackSizeInstructions = 0;
-    
+
     /**
      * Special counter to keep track of a the number of PUSH - POP
      */
     private int diffPushPop = 0;
-    
+
     public int getNbDeclaredVariables() {
         return nbDeclaredVariables;
     }
-    
+
     public int getNeededStackSize() {
         return stackSizeInstructions + nbDeclaredVariables;
     }
@@ -51,7 +51,7 @@ public class CodeAnalyzer {
     */
     public void incrPopCount(int nbPop) {
         diffPushPop -= nbPop;
-        
+
         // Defensive programing
         if (diffPushPop < 0) {
             diffPushPop = 0;
@@ -65,5 +65,5 @@ public class CodeAnalyzer {
         nbDeclaredVariables += nbVariables;
         LOG.debug(Integer.toString(nbDeclaredVariables));
     }
-    
+
 }
