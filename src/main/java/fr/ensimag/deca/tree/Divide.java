@@ -10,6 +10,7 @@ import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.QUO;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.BEQ;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
 
 /**
  *
@@ -29,14 +30,16 @@ public class Divide extends AbstractOpArith {
 
     public void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler){
         if(getType().isFloat()){
-            compiler.addInstruction(new CMP(new ImmediateFloat(0.F), Reg1));
+            compiler.addInstruction(new CMP(new ImmediateFloat(0.F), storedRegister));
             compiler.addInstruction(new BEQ(compiler.getErrorManager().getErrorLabel("division_by_zero")));
             compiler.addInstruction(new DIV(storedRegister, Reg1));
+            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("float_arithmetic")));
         }
         else if(getType().isInt()){
-            compiler.addInstruction(new CMP(new ImmediateInteger(0), Reg1));
+            compiler.addInstruction(new CMP(new ImmediateInteger(0), storedRegister));
             compiler.addInstruction(new BEQ(compiler.getErrorManager().getErrorLabel("division_by_zero")));
             compiler.addInstruction(new QUO(storedRegister, Reg1));
+            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("float_arithmetic")));
         }
         compiler.addInstruction(new LOAD(Reg1, storedRegister));
     }
