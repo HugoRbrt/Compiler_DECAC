@@ -16,13 +16,11 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.ima.pseudocode.ImmediateString;
 import java.io.PrintStream;
+
+import fr.ensimag.ima.pseudocode.instructions.*;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 import fr.ensimag.ima.pseudocode.Register;
-import fr.ensimag.ima.pseudocode.instructions.LOAD;
-import fr.ensimag.ima.pseudocode.instructions.WINT;
-import fr.ensimag.ima.pseudocode.instructions.WSTR;
-import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
 
 /**
@@ -228,26 +226,27 @@ public class Identifier extends AbstractIdentifier {
     }
 
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex){
-         if(definition.getType().isString()){
-             System.out.println(getName().getName());
-             compiler.addInstruction(new WSTR(getName().getName()));
-         }
-         else{
-             if(getDefinition().isExpression()){
-                 RegisterOffset R = compiler.getstackTable().get(this.getName());
-                 compiler.addInstruction(new LOAD(R, Register.R1));
-             }
-             if(definition.getType().isInt()){
-                 compiler.addInstruction(new WINT());
-             }
-             else if(definition.getType().isString()){
-                 String s = compiler.getSymbTable().get( getName().getName() ).getName();
-                 compiler.addInstruction(new WSTR(new ImmediateString(s)));
-             }
-             else{
-                 compiler.addInstruction(new WFLOAT());
-             }
-         }
+        if (definition.getType().isString()) {
+            System.out.println(getName().getName());
+            compiler.addInstruction(new WSTR(getName().getName()));
+        } else {
+            if (getDefinition().isExpression()) {
+                RegisterOffset R = compiler.getstackTable().get(this.getName());
+                compiler.addInstruction(new LOAD(R, Register.R1));
+            }
+            if (definition.getType().isInt()) {
+                compiler.addInstruction(new WINT());
+            } else if (definition.getType().isString()) {
+                String s = compiler.getSymbTable().get(getName().getName()).getName();
+                compiler.addInstruction(new WSTR(new ImmediateString(s)));
+            } else {
+                if (printHex) {
+                    compiler.addInstruction(new WFLOATX());
+                } else {
+                    compiler.addInstruction(new WFLOAT());
+                }
+            }
+        }
     }
 
     @Override
