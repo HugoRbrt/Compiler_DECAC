@@ -188,7 +188,6 @@ if_then_else returns[IfThenElse tree]
             for (AbstractInst i: $li_else.tree.getList()) {
                 temp.add(i);
             }
-            $tree = new IfThenElse($condition.tree, $li_if.tree, $li_else.tree);
             LOG.trace($tree);
         }
       )?
