@@ -19,4 +19,3 @@
         print("x does not belong to [0, 5]");
     }
 }
-        

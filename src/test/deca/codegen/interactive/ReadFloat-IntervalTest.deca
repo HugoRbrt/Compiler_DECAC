@@ -1,7 +1,3 @@
-// Description:
-//      Interactive test to know if an int given in standard input
-//      is in [0, 5]
-//
 // Results:
 //      x is in [0, 5]       OR       x is NOT is [0,5]
 //
@@ -19,4 +15,3 @@
         print("x does not belong to [0, 5]");
     }
 }
-        
