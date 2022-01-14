@@ -12,6 +12,7 @@ import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
 import fr.ensimag.ima.pseudocode.ImmediateFloat;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
+import org.apache.log4j.Logger;
 
 /**
  * Single precision, floating-point literal
@@ -48,7 +49,9 @@ public class FloatLiteral extends AbstractExpr {
         if(printHex){
             compiler.addInstruction(new WFLOATX());
         }
-        compiler.addInstruction(new WFLOAT());
+        else {
+            compiler.addInstruction(new WFLOAT());
+        }
     }
 
     @Override

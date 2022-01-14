@@ -55,16 +55,12 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
     }
 
     protected void codeGenInst(DecacCompiler compiler){
-        if(rightOperand instanceof StringLiteral){
-            ((Identifier)leftOperand).getName().setName(((StringLiteral)rightOperand).getValue());
-        }else{
-            leftOperand.codeGenInst(compiler);
-            GPRegister usedRegister = compiler.getListRegister().getRegister(compiler);
-            compiler.addInstruction(new LOAD(compiler.getListRegister().R0, usedRegister));
-            rightOperand.codeGenInst(compiler);
-            this.codeGenOperations(usedRegister, compiler.getListRegister().R0, compiler);
-            compiler.getListRegister().freeRegister(usedRegister, compiler);
-        }
+        leftOperand.codeGenInst(compiler);
+        GPRegister usedRegister = compiler.getListRegister().getRegister(compiler);
+        compiler.addInstruction(new LOAD(compiler.getListRegister().R0, usedRegister));
+        rightOperand.codeGenInst(compiler);
+        this.codeGenOperations(usedRegister, compiler.getListRegister().R0, compiler);
+        compiler.getListRegister().freeRegister(usedRegister, compiler);
     }
 
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex){
@@ -73,11 +69,10 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
         if(getType().isInt()){
             compiler.addInstruction(new WINT());
         }
-        if(getType().isFloat()){
-            if(printHex){
+        else if(getType().isFloat()) {
+            if (printHex) {
                 compiler.addInstruction(new WFLOATX());
-            }
-            else{
+            } else {
                 compiler.addInstruction(new WFLOAT());
             }
         }
