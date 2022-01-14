@@ -1,0 +1,25 @@
+// Description:
+//     Using a While structure with two while inside of it
+//
+// Results:
+//     1234512341231210
+//
+// History:
+//    created on 14/01/2022
+
+
+{
+    int x = 0;
+    int y = 5;
+    while (y > 1) {
+
+        while (x < y) {
+            x = x + 1;
+            print(x);
+        }
+
+        x = 0;
+        y = y - 1;
+    }
+    print(y);
+}
