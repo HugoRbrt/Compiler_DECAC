@@ -1,0 +1,14 @@
+// Description:
+//    Multiplication between two normal positive integers
+//
+// Results:
+//    8
+//
+// History:
+//    created on 14/01/2022
+
+{
+    int x = 2;
+    int y = 4;
+    print(x*y);
+}

@@ -228,7 +228,7 @@ public class Identifier extends AbstractIdentifier {
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex){
         if (definition.getType().isString()) {
             System.out.println(getName().getName());
-            compiler.addInstruction(new WSTR(getName().getName()));
+            compiler.addInstruction(new WSTR(compiler.getIdentMap().getIdentString(name)));
         } else {
             if (getDefinition().isExpression()) {
                 RegisterOffset R = compiler.getstackTable().get(this.getName());
