@@ -30,6 +30,20 @@ public class ContextTools {
         if (t1.sameType(t2)) {
             return true;
         }
+        if (t2.isNull() && t1.isClass()) {
+            return true;
+        }
+        if (t1.isClass() && t2.isClass()) {
+            try {
+                ClassType c1 = t1.asClassType("", null);
+                ClassType c2 = t2.asClassType("", null);
+                if (c2.isSubClassOf(c1)) {
+                    return true;
+                }
+            } catch (ContextualError e) {
+                // Will never occur
+            }
+        }
         return false;
     }
 
