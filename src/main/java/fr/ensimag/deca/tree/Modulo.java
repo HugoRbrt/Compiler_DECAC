@@ -34,5 +34,6 @@ public class Modulo extends AbstractOpArith {
 
     public void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler){
         compiler.addInstruction(new REM(Reg1, storedRegister));
+        compiler.addInstruction(new LOAD(Reg1, storedRegister));
     }
 }
