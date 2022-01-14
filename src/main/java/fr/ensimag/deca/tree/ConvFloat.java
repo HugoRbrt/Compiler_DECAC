@@ -5,6 +5,7 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.ima.pseudocode.instructions.FLOAT;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.deca.tree.IntLiteral;
@@ -40,8 +41,9 @@ public class ConvFloat extends AbstractUnaryExpr {
     }
 
     public void codeGenInst(DecacCompiler compiler){
-        IntLiteral operandInt = (IntLiteral)super.getOperand();
-        compiler.addInstruction(new FLOAT(new ImmediateInteger(operandInt.getValue()),compiler.getListRegister().R0));
+        super.getOperand().codeGenInst(compiler);
+        compiler.addInstruction(new FLOAT(compiler.getListRegister().R0,compiler.getListRegister().R1));
+        compiler.addInstruction(new LOAD(compiler.getListRegister().R1, compiler.getListRegister().R0));
     }
 
 }
