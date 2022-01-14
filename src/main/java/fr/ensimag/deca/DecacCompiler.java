@@ -137,6 +137,13 @@ public class DecacCompiler implements Runnable {
     }
 
     /**
+     * Symbols associated with the String value
+     */
+    public StringIdentMap getIdentMap() {
+        return stringIdentMap;
+    }
+
+    /**
      * Gencode analyzer for the stack's needs
      */
     public CodeAnalyzer getCodeAnalyzer() {
