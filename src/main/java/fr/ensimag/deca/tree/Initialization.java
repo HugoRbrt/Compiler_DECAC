@@ -43,6 +43,7 @@ public class Initialization extends AbstractInitialization {
             EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
         this.expression = expression.verifyRValue(compiler, localEnv, currentClass, t);
+        expression.verifyExpr(compiler, localEnv, currentClass);
     }
 
     @Override
