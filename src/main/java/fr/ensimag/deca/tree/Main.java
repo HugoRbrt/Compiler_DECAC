@@ -1,6 +1,7 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.NullType;
 import fr.ensimag.deca.context.VoidType;
@@ -33,14 +34,10 @@ public class Main extends AbstractMain {
     @Override
     protected void verifyMain(DecacCompiler compiler) throws ContextualError {
         LOG.debug("verify Main: start");
-        // A FAIRE: Appeler méthodes "verify*" de ListDeclVarSet et ListInst.
-        // Vous avez le droit de changer le profil fourni pour ces méthodes
-        // (mais ce n'est à priori pas nécessaire).
         declVariables.verifyListDeclVariable(compiler, compiler.getEnvExp(), null);
         insts.verifyListInst(compiler, compiler.getEnvExp(), null,
                 compiler.getEnvTypes().get(compiler.getSymbTable().create("void"), Location.BUILTIN).getType());
         LOG.debug("verify Main: end");
-        //throw new UnsupportedOperationException("not yet implemented");
     }
 
     @Override

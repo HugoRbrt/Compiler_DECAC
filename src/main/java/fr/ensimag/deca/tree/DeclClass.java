@@ -51,15 +51,15 @@ public class DeclClass extends AbstractDeclClass {
         SymbolTable.Symbol nameSymb = className.getName();
         superClass.verifyType(compiler);
         ClassDefinition superCl = (ClassDefinition) envT.get(superClass.getName());
+        ClassType cl = new ClassType(nameSymb, getLocation(), superCl);
         try {
-            envT.declare(nameSymb,
-                    new ClassDefinition(new ClassType(nameSymb, getLocation(),
-                            superCl), getLocation(), superCl));
-        }
-        catch (EnvironmentExp.DoubleDefException e) {
+            envT.declare(nameSymb, cl.getDefinition());
+
+        } catch (EnvironmentExp.DoubleDefException e) {
             throw new ContextualError(
                     "(RULE 3.17) Class has already been declared.", className.getLocation());
         }
+        className.setDefinition(envT.get(className.getName()));
     }
 
     @Override
@@ -70,9 +70,7 @@ public class DeclClass extends AbstractDeclClass {
         cl.setNumberOfFields(superCl.getNumberOfFields());
         for (AbstractDeclField f: fields.getList()) {
             cl.incNumberOfFields();
-            f.verifyField(compiler,
-                    (ClassDefinition) compiler.getEnvTypes().get(className.getName()),
-                    cl.getNumberOfFields());
+            f.verifyField(compiler, cl.getMembers(), cl, cl.getNumberOfFields());
         }
     }
     

@@ -23,6 +23,7 @@ public class New extends AbstractExpr {
             throw new ContextualError("(RULE 3.42) New instance must be of a class type.", getLocation());
         }
         instantiation.setDefinition(compiler.getEnvTypes().get(instantiation.getName(), instantiation.getLocation()));
+        setType(currentType);
         return currentType;
     }
 

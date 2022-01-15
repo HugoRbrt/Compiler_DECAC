@@ -176,6 +176,7 @@ public class Identifier extends AbstractIdentifier {
         if (def == null) {
             throw new ContextualError("(RULE 0.1) variable does not exist.", getLocation());
         }
+
         Type currentType = def.getType();
         setDefinition(localEnv.get(getName()));
         return currentType;

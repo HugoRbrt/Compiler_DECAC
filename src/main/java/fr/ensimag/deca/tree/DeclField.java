@@ -42,8 +42,8 @@ public class DeclField extends AbstractDeclField {
      * @throws ContextualError
      */
     @Override
-    protected void verifyField(DecacCompiler compiler, ClassDefinition currentClass, int counter) throws ContextualError {
-        EnvironmentExp localEnv = currentClass.getMembers();
+    protected void verifyField(DecacCompiler compiler, EnvironmentExp localEnv,
+            ClassDefinition currentClass, int counter) throws ContextualError {
         Type currentType = type.verifyType(compiler);
         if (currentType.isVoid()) {
             throw new ContextualError("(RULE 2.5) Field cannot be void type.", type.getLocation());
@@ -63,6 +63,7 @@ public class DeclField extends AbstractDeclField {
             throw new ContextualError(
                     "(RULE 2.5) Field name already in use as method name.", fieldName.getLocation());
         }
+        fieldName.setDefinition(localEnv.get(fieldName.getName()));
     }
 
     @Override

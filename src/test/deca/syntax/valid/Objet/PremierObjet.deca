@@ -16,6 +16,10 @@ class B extends A {}
 class C extends A {}
 
 {
-    int z = 2;
-    A a = null;
+    int x = 1;
+    A a = new A();
+    A b = new B();
+    x = 2;
+    a.x = 3;
+    b.x = 4;
 }

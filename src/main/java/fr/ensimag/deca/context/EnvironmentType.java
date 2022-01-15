@@ -47,5 +47,12 @@ public class EnvironmentType {
         envTypes.put(symb, type);
     }
 
-
+    @Override
+    public String toString() {
+        String s = "";
+        for (Symbol symb: envTypes.keySet()) {
+            s += symb + " " + envTypes.get(symb).getType() + " ";
+        }
+        return s;
+    }
 }

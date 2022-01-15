@@ -91,7 +91,7 @@ public class EnvironmentExp {
     public String toString() {
         String s = "";
         for (Symbol symb: environment.keySet()) {
-            s += symb + " " + environment.get(symb).getType();
+            s += symb + " " + environment.get(symb).getType() + " ";
         }
         return s;
     }
