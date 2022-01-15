@@ -88,6 +88,8 @@ public class DecacCompiler implements Runnable {
                 new TypeDefinition(new FloatType(this.symbTable.create("float")), Location.BUILTIN));
         envTypes.put(this.symbTable.create("int"),
                 new TypeDefinition(new IntType(this.symbTable.create("int")), Location.BUILTIN));
+        envTypes.put(this.symbTable.create("string"),
+                new TypeDefinition(new StringType(this.symbTable.create("string")), Location.BUILTIN));
         envTypes.put(this.symbTable.create("null"),
                 new TypeDefinition(new NullType(this.symbTable.create("null")), Location.BUILTIN));
 
@@ -132,13 +134,6 @@ public class DecacCompiler implements Runnable {
      */
     public StackHashTableSymbol getstackTable() {
         return stackTable;
-    }
-
-    /**
-     * Symbols associated with the String value
-     */
-    public StringIdentMap getIdentMap() {
-        return stringIdentMap;
     }
 
     /**

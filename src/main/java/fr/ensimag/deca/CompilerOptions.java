@@ -165,10 +165,10 @@ public class CompilerOptions {
     }
 
     protected void displayUsage() {
-        System.out.println("\033[1;95m    Usage : decac [[-p | -v] [-n] [-r X] [-d]*" + 
-                " [-P] [-w] <fichier deca>...] | [-b]\u001B[m");
-        System.out.println(); 
-        System.out.println("\033[96m-b  (banner): prints the team banner");
+        System.out.println("Usage : decac [[-p | -v] [-n]" +
+			" [-r X] [-d]* [-P] [-w] <fichier deca>...] | [-b]");
+        
+        System.out.println("-b  (banner): prints the team banner");
         System.out.println("-p  (parse): stops at the tree building step and " +
                 "displays its decompilation (i.e. one source file should " +
                 "output a syntaxically correct deca program");
@@ -187,7 +187,7 @@ public class CompilerOptions {
         System.out.println("-w  (warnings): enables warning messages during "+
                 "compilation");
 	System.out.println("-a  (arm target): produces a .s file instead of a"+
-                " regular .ass file \u001B[0m");
+                " regular .ass file");
     }
 
 

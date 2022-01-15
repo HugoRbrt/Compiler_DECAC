@@ -55,33 +55,25 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
     }
 
     protected void codeGenInst(DecacCompiler compiler){
-        if(rightOperand instanceof StringLiteral){
-            compiler.getIdentMap().setIdentString(((AbstractIdentifier)leftOperand).getName(), ((StringLiteral)rightOperand).getValue());
-        }else{
-            leftOperand.codeGenInst(compiler);
-            GPRegister usedRegister = compiler.getListRegister().getRegister(compiler);
-            compiler.addInstruction(new LOAD(compiler.getListRegister().R0, usedRegister));
-            rightOperand.codeGenInst(compiler);
-            this.codeGenOperations(usedRegister, compiler.getListRegister().R0, compiler);
-            compiler.getListRegister().freeRegister(usedRegister, compiler);
-        }
+        leftOperand.codeGenInst(compiler);
+        GPRegister usedRegister = compiler.getListRegister().getRegister(compiler);
+        compiler.addInstruction(new LOAD(compiler.getListRegister().R0, usedRegister));
+        rightOperand.codeGenInst(compiler);
+        this.codeGenOperations(usedRegister, compiler.getListRegister().R0, compiler);
+        compiler.getListRegister().freeRegister(usedRegister, compiler);
     }
 
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex){
-        if(rightOperand instanceof StringLiteral){
-            compiler.getIdentMap().setIdentString(((AbstractIdentifier)leftOperand).getName(), ((StringLiteral)rightOperand).getValue());
-        }else{
-            codeGenInst(compiler);
-            compiler.addInstruction(new LOAD(compiler.getListRegister().R0, compiler.getListRegister().R1));
-            if(getType().isInt()){
-                compiler.addInstruction(new WINT());
-            }
-            else if(getType().isFloat()) {
-                if (printHex) {
-                    compiler.addInstruction(new WFLOATX());
-                } else {
-                    compiler.addInstruction(new WFLOAT());
-                }
+        codeGenInst(compiler);
+        compiler.addInstruction(new LOAD(compiler.getListRegister().R0, compiler.getListRegister().R1));
+        if(getType().isInt()){
+            compiler.addInstruction(new WINT());
+        }
+        else if(getType().isFloat()) {
+            if (printHex) {
+                compiler.addInstruction(new WFLOATX());
+            } else {
+                compiler.addInstruction(new WFLOAT());
             }
         }
     }

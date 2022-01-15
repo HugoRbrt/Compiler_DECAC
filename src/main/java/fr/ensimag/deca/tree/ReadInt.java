@@ -30,7 +30,7 @@ public class ReadInt extends AbstractReadExpr {
 
     public void codeGenInst(DecacCompiler compiler) {
         compiler.addInstruction(new RINT());
-        compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("input_output")));
+        compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("float_arithmetic")));
         compiler.addInstruction(new LOAD(compiler.getListRegister().R1, compiler.getListRegister().R0));
     }
 

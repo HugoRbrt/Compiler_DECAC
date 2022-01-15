@@ -15,7 +15,6 @@
 # go into project root
 cd "$(dirname "$0")"/../../.. || exit 1
 
-exitnum=0
 
 if [ "$1" = "synt" ]
     then
@@ -58,7 +57,6 @@ test_invalid () {
             echo "${GREEN}[KO] : $1 ${NC}"
         else # unexpected success
             echo "${RED}[OK] : $1 ${NC}"
-            exitnum=$(($exitnum + 1))
     fi
 }
 
@@ -69,7 +67,6 @@ test_valid () {
     if test_"$2" $TESTPATH/$1.deca 2>&1 | grep -q "$1.deca"
         then 	# unexpected fail
             echo "${RED}[KO] : $1 ${NC}"
-            exitnum=$(($exitnum + 1))
         else 	# normal success : we store the new result in a tmp file
             test_"$2" $TESTPATH/$1.deca 1> $TMP/$1.listmp 2>> $TMP/$1.listmp
             echo "${GREEN}[OK] : $1 ${NC}"
@@ -86,5 +83,5 @@ do
     test_"$2" "$file" "$1"
 done
 
-exit $exitnum
+
 

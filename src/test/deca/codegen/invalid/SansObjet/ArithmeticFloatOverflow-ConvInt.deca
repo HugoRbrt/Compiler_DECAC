@@ -8,5 +8,6 @@
 //    created on 14/01/2022
 
 {
-    int y = (int) (0.2);
+    float x =  0x1.fffffp+127;
+    int y = (int) x;
 }

@@ -9,7 +9,6 @@ import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
-import fr.ensimag.ima.pseudocode.instructions.WSTR;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
 
 /**

@@ -6,8 +6,6 @@ import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.OPP;
-import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
-import fr.ensimag.ima.pseudocode.instructions.WINT;
 
 /**
  * @author gl49
@@ -29,8 +27,7 @@ public class UnaryMinus extends AbstractUnaryExpr {
     }
 
     public void codeGenOperations(GPRegister storedRegister, DecacCompiler compiler){
-        compiler.addInstruction(new OPP(storedRegister, compiler.getListRegister().R1));
-        compiler.addInstruction(new LOAD(compiler.getListRegister().R1, storedRegister));
+        compiler.addInstruction(new OPP(storedRegister, storedRegister));
     }
 
     protected void codeGenInst(DecacCompiler compiler){
@@ -40,13 +37,7 @@ public class UnaryMinus extends AbstractUnaryExpr {
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex){
         codeGenInst(compiler);
         compiler.addInstruction(new LOAD(compiler.getListRegister().R0, compiler.getListRegister().R1));
-        if (super.getType().isFloat()) {
-            compiler.addInstruction(new WFLOAT());
-        }
-        else {
-            compiler.addInstruction(new WINT());
-        }
-        
+        super.codeGenPrint(compiler, printHex);
     }
 
     @Override

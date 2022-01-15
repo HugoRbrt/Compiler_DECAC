@@ -19,8 +19,6 @@ RESPATH=src/test/results/deca/codegen/"$1"/"$2"
 TMP=src/test/tmp
 DECAC=src/main/bin/decac
 
-exitnum=0
-
 # Coloring for the script.
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -39,7 +37,6 @@ test_codegen() {
     if [ ! -f $TESTPATH/$1.ass ]
         then
            echo "${RED}[NO NEW .ass file] : $1 ${NC}"
-           exitnum=$(($exitnum + 1))
            return
         else
             ima $TESTPATH/$1.ass >  $TMP/$1.restmp
@@ -49,7 +46,6 @@ test_codegen() {
     if [ ! -f $RESPATH/$1.res ]
         then
             echo "${RED}[NO OLD .res file] : $1 ${NC}"
-            exitnum=$(($exitnum + 1))
             return
     fi
 
@@ -57,12 +53,9 @@ test_codegen() {
     if [ "$DIFF" != "" ]
         then
             echo "${RED}[UNEXPECTED OUTUT] : $1 ${NC}"
-            exitnum=$(($exitnum + 1))
         else
             echo "${GREEN}[EXPECTED OUTPUT] : $1 ${NC}"
-            rm $TMP/$1.restmp
     fi
-    rm $TESTPATH/$1.ass
 }
 
 echo "Start of "$1" generated code tests for "$2""
@@ -74,5 +67,3 @@ do
     file=$(basename "$cas_de_test" ".deca")
     test_codegen "$file"
 done
-
-exit $exitnum

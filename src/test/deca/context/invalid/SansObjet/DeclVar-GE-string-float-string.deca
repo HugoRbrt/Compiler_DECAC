@@ -1,0 +1,15 @@
+// Description:
+//    Declaration of a string variable using >= operation between a float variable and string .
+// 
+// Results:
+//     Contextual error
+//     Line 14: (RULE 3.33) Illegal operand type.
+// 
+// Historique: 
+//    cree le 11/01/2022 
+
+{
+    float x =  1.5; 
+    string y = "Hello"; 
+    string z = x >= y ; 
+}

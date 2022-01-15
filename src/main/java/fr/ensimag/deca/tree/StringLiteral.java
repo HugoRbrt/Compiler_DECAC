@@ -57,9 +57,8 @@ public class StringLiteral extends AbstractStringLiteral {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) {
-        StringType currentType = new StringType(compiler.getSymbTable().create("string"));
-        setType(currentType);
-        return currentType;
+        setType(compiler.getEnvTypes().get(compiler.getSymbTable().create("string")).getType());
+        return compiler.getEnvTypes().get(compiler.getSymbTable().create("string")).getType();
     }
 
     @Override
