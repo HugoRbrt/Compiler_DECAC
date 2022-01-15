@@ -74,7 +74,6 @@ public class ClassType extends Type {
         }
         ClassDefinition hierarchy = definition.getSuperClass();
         while (hierarchy != null) {
-            System.out.println(hierarchy.getType().getName().toString());
             if (hierarchy.getType().getName().toString().equals(
                     potentialSuperClass.getName().toString())) {
                 return true;
