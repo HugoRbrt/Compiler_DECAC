@@ -10,15 +10,20 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import java.io.PrintStream;
 
 public class New extends AbstractExpr {
-    private AbstractIdentifier initialization;
+    private AbstractIdentifier instantiation;
 
-    public New(AbstractIdentifier initialization) {
-        this.initialization = initialization;
+    public New(AbstractIdentifier instantiation) {
+        this.instantiation = instantiation;
     }
 
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass) throws ContextualError {
-        return null;
+        Type currentType = instantiation.verifyType(compiler);
+        if (!currentType.isClass()) {
+            throw new ContextualError("(RULE 3.42) New instance must be of a class type.", getLocation());
+        }
+        instantiation.setDefinition(compiler.getEnvTypes().get(instantiation.getName(), instantiation.getLocation()));
+        return currentType;
     }
 
     @Override
@@ -27,11 +32,11 @@ public class New extends AbstractExpr {
 
     @Override
     protected void prettyPrintChildren(PrintStream s, String prefix) {
-        initialization.prettyPrint(s, prefix, true);
+        instantiation.prettyPrint(s, prefix, true);
     }
 
     @Override
     protected void iterChildren(TreeFunction f) {
-        initialization.iter(f);
+        instantiation.iter(f);
     }
 }

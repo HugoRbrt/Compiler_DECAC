@@ -15,5 +15,5 @@ class B extends A {}
 
 {
     int z = 2;
-    A a = new A();
+    A a = new B();
 }
