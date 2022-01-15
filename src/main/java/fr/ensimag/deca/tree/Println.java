@@ -26,7 +26,7 @@ public class Println extends AbstractPrint {
 
     @Override
     protected void codeGenInstARM(DecacCompiler compiler) {
-        StringLiteral newLine = new StringLiteral("\\n");
+        StringLiteral newLine = new StringLiteral("\\n", true);
         getArguments().add(newLine);
         super.codeGenInstARM(compiler);
     }
