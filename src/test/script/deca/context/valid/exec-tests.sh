@@ -1,5 +1,12 @@
 #! /bin/sh
 cd "$(dirname "$0")"|| exit 1
-./exec-tests-HelloWorld.sh
-./exec-tests-SansObjet.sh
 
+exitnum=0
+
+./exec-tests-HelloWorld.sh
+exitnum=$(($exitnum + $?))
+
+./exec-tests-SansObjet.sh
+exitnum=$(($exitnum + $?))
+
+exit $exitnum

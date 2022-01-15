@@ -290,6 +290,16 @@
                             <goal>exec</goal>
                         </goals>
                     </execution>
+                    <execution>
+                        <id>decompile-tests</id>
+                        <configuration>
+                            <executable>./src/test/script/deca/syntax/valid/decompile-idemp-test.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
                 </executions>
             </plugin>
 
