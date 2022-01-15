@@ -34,15 +34,9 @@ public class ContextTools {
             return true;
         }
         if (t1.isClass() && t2.isClass()) {
-            try {
-                ClassType c1 = t1.asClassType("", null);
-                ClassType c2 = t2.asClassType("", null);
-                if (c2.isSubClassOf(c1)) {
-                    return true;
-                }
-            } catch (ContextualError e) {
-                // Will never occur
-            }
+            ClassType c1 = (ClassType) t1;
+            ClassType c2 = (ClassType) t2;
+            return c2.isSubClassOf(c1);
         }
         return false;
     }
