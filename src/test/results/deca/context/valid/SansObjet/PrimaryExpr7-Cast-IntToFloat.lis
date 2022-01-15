@@ -11,6 +11,7 @@
       |         `> [11, 18] Cast
       |            type: float
       |            +> [11, 19] Identifier (float)
+      |            |  definition: type (builtin), type=float
       |            `> [11, 26] Int (2)
       |               type: int
       `> ListInst [List with 0 elements]

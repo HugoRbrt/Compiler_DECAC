@@ -67,6 +67,7 @@ regression_test () {
             exitnum=$(($exitnum + 1))
         else
             echo "${GREEN}[NO-REGRESSION] : $1 ${NC}"
+            rm $TMP/$1.listmp
     fi
 }
 

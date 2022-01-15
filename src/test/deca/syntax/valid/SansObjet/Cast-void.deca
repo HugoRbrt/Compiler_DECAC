@@ -1,8 +1,8 @@
 // Description:
-//    Casting a float to an integer and assigning to float
+//    Casting a float to a void and assigning to float
 //
 // Results:
-//     2.0
+//     (nothing)
 //
 // History:
 //    created on 14/01/2022
@@ -11,5 +11,4 @@
     float x =  2.3;
     float y = (void) (x);
 
-    print(y);
 }

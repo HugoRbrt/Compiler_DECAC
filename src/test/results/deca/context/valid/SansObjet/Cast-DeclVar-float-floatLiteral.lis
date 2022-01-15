@@ -8,8 +8,10 @@
       |      +> [11, 10] Identifier (x)
       |      |  definition: variable defined at [11, 10], type=float
       |      `> [11, 12] Initialization
-      |         `> ConvFloat
+      |         `> [11, 15] Cast
       |            type: float
-      |            `> [11, 14] ReadInt
-      |               type: int
+      |            +> [11, 16] Identifier (float)
+      |            |  definition: type (builtin), type=float
+      |            `> [11, 24] Float (0.12)
+      |               type: float
       `> ListInst [List with 0 elements]
