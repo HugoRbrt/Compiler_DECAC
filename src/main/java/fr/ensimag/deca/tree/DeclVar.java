@@ -5,6 +5,7 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.instructions.ADDSP;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.deca.tree.Initialization;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
@@ -37,7 +38,7 @@ public class DeclVar extends AbstractDeclVar {
             throws ContextualError {
         Type currentType = type.verifyType(compiler);
         type.setDefinition(compiler.getEnvTypes().get(type.getName(), Location.BUILTIN));
-        if (currentType.isNull()) {
+        if (currentType.isVoid()) {
             throw new ContextualError("(RULE 3.17) Variable cannot be void type.", type.getLocation());
         }
         initialization.verifyInitialization(compiler, currentType, localEnv, currentClass);
@@ -61,12 +62,11 @@ public class DeclVar extends AbstractDeclVar {
 
     protected void codeGenDeclVar(DecacCompiler compiler){
         if(varName.getDefinition().getType().isString()){//si on veut declarer un string, il faut juste creer le symbol en java
+            String value="";
             if(initialization instanceof Initialization){
-                ((Identifier)varName).getName().setName(((StringLiteral)((Initialization)initialization).getExpression()).getValue());
+                value = ((StringLiteral)((Initialization)initialization).getExpression()).getValue();
             }
-            else{
-                ((Identifier)varName).getName().setName("");
-            }
+            compiler.getIdentMap().setIdentString(((AbstractIdentifier)varName).getName(),value);
         }else{
             compiler.getstackTable().put(varName.getName(), compiler.getListRegister().GB);
             initialization.codeGenDeclVar(compiler, varName);

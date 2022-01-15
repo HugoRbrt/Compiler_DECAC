@@ -1,0 +1,12 @@
+// Description:
+//    Declaration of a string variable using a string cast on a string literal .
+// 
+// Results:
+//     nothing
+// 
+// Historique: 
+//    cree le 14/01/2022 
+
+{
+    string x =  (string) ("Everyone") ; 
+}

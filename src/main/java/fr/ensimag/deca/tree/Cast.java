@@ -3,15 +3,6 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.ima.pseudocode.instructions.INT;
-import fr.ensimag.ima.pseudocode.instructions.FLOAT;
-import fr.ensimag.ima.pseudocode.instructions.LOAD;
-import fr.ensimag.ima.pseudocode.instructions.BOV;
-import fr.ensimag.ima.pseudocode.instructions.WINT;
-import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
-import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
-import fr.ensimag.deca.context.Type;
-import fr.ensimag.ima.pseudocode.GPRegister;
 
 import java.io.PrintStream;
 
@@ -38,43 +29,6 @@ public class Cast extends AbstractExpr {
 
     @Override
     public void decompile(IndentPrintStream s) {
-    }
-
-    protected void codeGenInst(DecacCompiler compiler){
-        expression.codeGenInst(compiler);
-        if(type.getDefinition().getType().isInt()){
-            compiler.addInstruction(new INT(compiler.getListRegister().R0,compiler.getListRegister().R1));
-        }
-        else if(type.getDefinition().getType().isFloat()){
-            compiler.addInstruction(new FLOAT(compiler.getListRegister().R0,compiler.getListRegister().R1));
-            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("float_arithmetic")));
-        }
-        else{
-            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("impossible_conversion")));
-        }
-        compiler.addInstruction(new LOAD(compiler.getListRegister().R1, compiler.getListRegister().R0));
-    }
-
-    public void codeGenOperations(GPRegister storedRegister, DecacCompiler compiler){
-        // Nothing to do
-    }
-
-    protected void codeGenPrint(DecacCompiler compiler, boolean printHex){
-        codeGenInst(compiler);
-        compiler.addInstruction(new LOAD(compiler.getListRegister().R0, compiler.getListRegister().R1));
-        if(type.getDefinition().getType().isInt()){
-            compiler.addInstruction(new WINT());
-        }
-        else if(type.getDefinition().getType().isFloat()){
-            if(printHex){
-                compiler.addInstruction(new WFLOATX());
-            }else{
-                compiler.addInstruction(new WFLOAT());
-            }
-        }
-        else{
-            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("impossible_conversion")));
-        }
     }
 
     @Override
