@@ -6,10 +6,12 @@ res=0
 cd syntax
 ./allin.sh
 res=$(($res + $?))
+cd ..
 
 cd context
 ./allin.sh
 res=$(($res + $?))
+cd ..
 
 cd codegen
 ./allin.sh
