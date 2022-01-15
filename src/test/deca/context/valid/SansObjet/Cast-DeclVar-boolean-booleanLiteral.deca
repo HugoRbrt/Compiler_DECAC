@@ -1,0 +1,12 @@
+// Description:
+//    Declaration of a boolean variable using a boolean cast on a boolean literal .
+// 
+// Results:
+//     nothing
+// 
+// Historique: 
+//    cree le 14/01/2022 
+
+{
+    boolean x =  (boolean) (true) ; 
+}

@@ -1,0 +1,14 @@
+// Description:
+//     Testing the MINUS operator
+// 
+// Results:
+//     -2.0
+// 
+// History: 
+//    created on 13/01/2022 
+
+{
+    float x = -(1 + 1.0);
+    
+    print(x);
+}

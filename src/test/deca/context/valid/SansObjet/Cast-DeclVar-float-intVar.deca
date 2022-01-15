@@ -1,0 +1,13 @@
+// Description:
+//    Declaration of a float variable using a float cast on a int variable .
+// 
+// Results:
+//     nothing
+// 
+// Historique: 
+//    cree le 14/01/2022 
+
+{
+    int x =  3 ; 
+    float y =  (float) ( x ) ; 
+}

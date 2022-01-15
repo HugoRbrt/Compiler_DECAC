@@ -15,6 +15,7 @@
 # go into project root
 cd "$(dirname "$0")"/../../.. || exit 1
 
+exitnum=0
 
 if [ "$1" = "synt" ]
     then
@@ -46,6 +47,7 @@ regression_test () {
     if [ ! -f $LISPATH/$1.lis ]
         then
             echo "${RED}[NO OLD] : $1 ${NC}"
+            exitnum=$(($exitnum + 1))
             return
     fi
 
@@ -54,6 +56,7 @@ regression_test () {
     if [ ! -f $TMP/$1.listmp ]
         then
            echo "${RED}[NO NEW] : $1 ${NC}"
+           exitnum=$(($exitnum + 1))
            return
     fi
 
@@ -61,6 +64,7 @@ regression_test () {
     if [ "$DIFF" != "" ]
         then
             echo "${RED}[REGRESSION] : $1 ${NC}"
+            exitnum=$(($exitnum + 1))
         else
             echo "${GREEN}[NO-REGRESSION] : $1 ${NC}"
     fi
@@ -75,3 +79,5 @@ do
     file=$(basename "$file_to_test" ".deca")
     regression_test "$file"
 done
+
+exit $exitnum

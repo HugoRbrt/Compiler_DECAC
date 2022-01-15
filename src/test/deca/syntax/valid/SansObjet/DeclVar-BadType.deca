@@ -1,0 +1,12 @@
+// Description:
+//    Variable declaration using a non predefined type token
+//
+// Results:
+//    (nothing)
+//
+// Historique:
+//    cree le 11/01/2022
+
+{
+        Int x;
+}

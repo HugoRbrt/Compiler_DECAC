@@ -1,0 +1,24 @@
+// Description:
+//     Testing the NOT operator
+// 
+// Results:
+//     OKOK
+// 
+// History: 
+//    created on 13/01/2022 
+
+{
+    boolean condition = true;
+
+    if ( condition ) {
+        print("OK");
+    } else {
+        print("KO");
+    }
+
+    if ( !condition ) {
+       print("KO");
+    } else {
+       print("OK");
+    }
+}

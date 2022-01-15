@@ -1,0 +1,15 @@
+// Description:
+//    Casting a float to an integer
+//
+// Results:
+//     16
+//
+// History:
+//    created on 14/01/2022
+
+{
+    float x =  0x1.0p+4;
+    int y = (int) (x);
+
+    print(y);
+}

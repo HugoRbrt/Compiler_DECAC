@@ -18,6 +18,7 @@ public class Cast extends AbstractExpr {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass) throws ContextualError {
         Type t1 = type.verifyType(compiler);
+        type.setDefinition(compiler.getEnvTypes().get(compiler.getSymbTable().get("int")));
         Type t2 = expression.verifyExpr(compiler, localEnv, currentClass);
         if (!ContextTools.castCompatible(compiler.getEnvTypes(), t1, t2)) {
             throw new ContextualError("(RULE 3.39) Illegal cast.", getLocation());

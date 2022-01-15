@@ -1,0 +1,13 @@
+// Description:
+//    Declaration of a boolean variable using a readInt .
+// 
+// Results:
+//     Contextual error
+//     Line 14: (RULE 3.28) Incompatible type assignment
+// 
+// Historique: 
+//    cree le 14/01/2022 
+
+{
+    boolean x =  readInt() ;
+}

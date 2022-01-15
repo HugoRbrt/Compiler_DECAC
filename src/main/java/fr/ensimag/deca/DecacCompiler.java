@@ -1,6 +1,7 @@
 package fr.ensimag.deca;
 
 //import com.sun.tools.doclint.Env;
+import fr.ensimag.deca.codegen.StringIdentMap;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
@@ -67,6 +68,7 @@ public class DecacCompiler implements Runnable {
     private StackHashTableSymbol stackTable = new StackHashTableSymbol();
     private CodeAnalyzer codeAnalyzer = new CodeAnalyzer();
     private ErrorManager errorManager = new ErrorManager();
+    private StringIdentMap stringIdentMap = new StringIdentMap();
 
     public DecacCompiler(CompilerOptions compilerOptions, File source) {
         super();
@@ -120,6 +122,13 @@ public class DecacCompiler implements Runnable {
      */
     public StackHashTableSymbol getstackTable() {
         return stackTable;
+    }
+
+    /**
+     * Symbols associated with the String value
+     */
+    public StringIdentMap getIdentMap() {
+        return stringIdentMap;
     }
 
     /**

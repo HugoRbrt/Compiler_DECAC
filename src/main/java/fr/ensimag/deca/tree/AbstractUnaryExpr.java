@@ -42,20 +42,6 @@ public abstract class AbstractUnaryExpr extends AbstractExpr {
         //compiler.getListRegister().freeRegister(usedRegister, compiler);
     }
 
-    protected void codeGenPrint(DecacCompiler compiler, boolean printHex){
-        if(operand instanceof FloatLiteral){
-            if(printHex){
-                compiler.addInstruction(new WFLOATX());
-            }
-            else{
-                compiler.addInstruction(new WFLOAT());
-            }
-        }
-        else if(operand instanceof IntLiteral){
-            compiler.addInstruction(new WINT());
-        }
-    }
-
     abstract void codeGenOperations(GPRegister storedRegister, DecacCompiler compiler);
     
 

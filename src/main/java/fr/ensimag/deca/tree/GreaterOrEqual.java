@@ -3,7 +3,7 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
-import fr.ensimag.ima.pseudocode.instructions.SGE;
+import fr.ensimag.ima.pseudocode.instructions.SLE;
 
 /**
  * Operator "x >= y"
@@ -25,6 +25,6 @@ public class GreaterOrEqual extends AbstractOpIneq {
 
     public void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler){
         compiler.addInstruction(new CMP(Reg1, storedRegister));
-        compiler.addInstruction(new SGE(compiler.getListRegister().R0));
+        compiler.addInstruction(new SLE(compiler.getListRegister().R0));
     }
 }

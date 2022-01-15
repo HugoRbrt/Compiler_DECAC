@@ -1,0 +1,14 @@
+// Description:
+//    Declaration of a int variable using a int cast on a boolean variable .
+// 
+// Results:
+//     Contextual error
+//     Line 14: (RULE 3.39) Illegal cast 
+// 
+// Historique: 
+//    cree le 14/01/2022 
+
+{
+    boolean x =  true ; 
+    int y =  (int) ( x ) ; 
+}

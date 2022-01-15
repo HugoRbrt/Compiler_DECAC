@@ -1,0 +1,17 @@
+// Description:
+//     Testing the MINUS operator
+// 
+// Results:
+//     -2
+// 
+// History: 
+//    created on 13/01/2022 
+
+{
+    float y = 2.0;
+
+    y = -y;
+
+    print(y);
+
+}
