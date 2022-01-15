@@ -9,6 +9,7 @@
 
 class A {
     int x;
+    int y = 0;
 }
 
 class B extends A {}
@@ -16,10 +17,15 @@ class B extends A {}
 class C extends A {}
 
 {
-    int x = 1;
+    int x = 1, y;
     A a = new A();
     A b = new B();
+    C c = null;
+    //C c = new A();
+    c = (C)(b);
     x = 2;
     a.x = 3;
     b.x = 4;
+    //b.y = 5;
+    //x.x = 6;
 }

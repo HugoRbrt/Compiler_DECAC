@@ -19,6 +19,6 @@ public class InvalidLValue extends DecaRecognitionException {
 
     @Override
     public String getMessage() {
-        return "left-hand side of assignment is not an lvalue";
+        return "left-hand side of assignment is not an lvalue.";
     }
 }

@@ -54,7 +54,6 @@ public class DeclClass extends AbstractDeclClass {
         ClassType cl = new ClassType(nameSymb, getLocation(), superCl);
         try {
             envT.declare(nameSymb, cl.getDefinition());
-
         } catch (EnvironmentExp.DoubleDefException e) {
             throw new ContextualError(
                     "(RULE 3.17) Class has already been declared.", className.getLocation());

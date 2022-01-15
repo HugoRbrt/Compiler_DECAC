@@ -49,6 +49,7 @@ public class DeclField extends AbstractDeclField {
             throw new ContextualError("(RULE 2.5) Field cannot be void type.", type.getLocation());
         }
         type.setDefinition(compiler.getEnvTypes().get(type.getName(), Location.BUILTIN));
+        initialization.verifyInitialization(compiler, currentType, localEnv, currentClass);
         SymbolTable.Symbol f = fieldName.getName();
         ExpDefinition def = localEnv.get(f);
         if (def == null || def.isField()) {

@@ -24,7 +24,6 @@ public class Selection extends AbstractLValue {
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass) throws ContextualError {
         ClassType currentType = selectingClass.verifyExpr(compiler, localEnv, currentClass).asClassType(
                 "(RULE 3.65) Field or method selection applied to variable of non-class type.", getLocation());
-        ClassDefinition cl = (ClassDefinition) compiler.getEnvTypes().get(compiler.getSymbTable().get(currentType.getName().getName()));
         Type fieldType = selectedField.verifyExpr(compiler, currentType.getDefinition().getMembers(), currentClass);
         setType(fieldType);
         return fieldType;
