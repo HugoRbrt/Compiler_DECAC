@@ -28,6 +28,8 @@ public class Println extends AbstractPrint {
         compiler.addInstruction(new WNL());
     }
 
+    private static boolean armAlreadyLabel = false;
+
     @Override
     protected void codeGenInstARM(DecacCompiler compiler) {
         super.codeGenInstARM(compiler);
@@ -35,11 +37,14 @@ public class Println extends AbstractPrint {
         compiler.addInstruction(new mov(R.r0,1));
         compiler.addInstruction(new ldr(R.r1, "="+"newline"));
         compiler.addInstruction(new ldr(R.r2, "="+"lennewline"));
-        compiler.add(new ARMLine(".data"));
-        compiler.add(new ARMLine("newline"+":"));
-        compiler.add(new ARMLine(".byte " + "\'" + "\\n" + "\'"));
-        compiler.add(new ARMLine("lennewline"+" = . - "+"newline"));
-        compiler.add(new ARMLine(".text"));
+        if (!armAlreadyLabel) {
+            compiler.add(new ARMLine(".data"));
+            compiler.add(new ARMLine("newline"+":"));
+            compiler.add(new ARMLine(".byte " + "\'" + "\\n" + "\'"));
+            compiler.add(new ARMLine("lennewline"+" = . - "+"newline"));
+            compiler.add(new ARMLine(".text"));
+            armAlreadyLabel = true;
+        }
         compiler.addInstruction(new mov(R.r7,4));
         compiler.addInstruction(new svc(0));
     }
