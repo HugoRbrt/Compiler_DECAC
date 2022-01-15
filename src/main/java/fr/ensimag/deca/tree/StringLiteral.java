@@ -39,22 +39,6 @@ public class StringLiteral extends AbstractStringLiteral {
         RemoveBackslash();
     }
 
-    public StringLiteral(String value, boolean armtype) {
-        if (armtype) {
-            Validate.notNull(value);
-            value = value.replaceAll("^\"|\"$", "");
-            this.value = value;
-        }
-        else {
-            Validate.notNull(value);
-            value = value.replaceAll("^\"|\"$", "");
-            this.value = value;
-            RemoveBackslash();
-        }
-        
-    }
-
-
     private void RemoveBackslash() {
         boolean found = false;
         String newstr = "";
