@@ -49,8 +49,8 @@ public class DeclClass extends AbstractDeclClass {
     protected void verifyClass(DecacCompiler compiler) throws ContextualError {
         EnvironmentType envT = compiler.getEnvTypes();
         SymbolTable.Symbol nameSymb = className.getName();
-        ClassDefinition superCl = (ClassDefinition) envT.get(superClass.getName());
         superClass.verifyType(compiler);
+        ClassDefinition superCl = (ClassDefinition) envT.get(superClass.getName());
         try {
             envT.declare(nameSymb,
                     new ClassDefinition(new ClassType(nameSymb, getLocation(),
@@ -65,11 +65,14 @@ public class DeclClass extends AbstractDeclClass {
     @Override
     protected void verifyClassMembers(DecacCompiler compiler)
             throws ContextualError {
-        int counter = 0;
+        ClassDefinition superCl = (ClassDefinition) compiler.getEnvTypes().get(superClass.getName());
+        ClassDefinition cl = (ClassDefinition) compiler.getEnvTypes().get(className.getName());
+        cl.setNumberOfFields(superCl.getNumberOfFields());
         for (AbstractDeclField f: fields.getList()) {
+            cl.incNumberOfFields();
             f.verifyField(compiler,
-                    (ClassDefinition) compiler.getEnvTypes().get(className.getName()), counter);
-            counter++;
+                    (ClassDefinition) compiler.getEnvTypes().get(className.getName()),
+                    cl.getNumberOfFields());
         }
     }
     

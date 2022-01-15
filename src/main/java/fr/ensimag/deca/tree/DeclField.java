@@ -28,6 +28,19 @@ public class DeclField extends AbstractDeclField {
 
     public AbstractInitialization getInit() { return initialization; }
 
+    /**
+     * Context check second pass. Checks field type (cannot be void), then
+     * checks if the field name is already in use. If that is the case, checks
+     * whether the name is used in the current environment (illegal) or used
+     * as a method name in any environment (illegal).
+     *
+     * @param compiler
+     * @param currentClass
+     * @param counter
+     *          Counter to index the fields; counts from number of inherited
+     *          fields + 1.
+     * @throws ContextualError
+     */
     @Override
     protected void verifyField(DecacCompiler compiler, ClassDefinition currentClass, int counter) throws ContextualError {
         EnvironmentExp localEnv = currentClass.getMembers();
@@ -54,6 +67,11 @@ public class DeclField extends AbstractDeclField {
 
     @Override
     public void decompile(IndentPrintStream s) {}
+
+    @Override
+    String prettyPrintNode() {
+        return "[visibility=" + visibility + "] " + getClass().getSimpleName();
+    }
 
     @Override
     protected void prettyPrintChildren(PrintStream s, String prefix) {

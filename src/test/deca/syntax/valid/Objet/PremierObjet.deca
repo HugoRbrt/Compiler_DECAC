@@ -13,6 +13,8 @@ class A {
 
 class B extends A {}
 
+class C extends A {}
+
 {
     int z = 2;
     A a = null;

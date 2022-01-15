@@ -313,7 +313,9 @@ public class DecacCompiler implements Runnable {
         Signature params = new Signature(obj.getType());
         obj.getMembers().put(symbTable.create("equals"),
                 new MethodDefinition(envTypes.get(symbTable.create("boolean")).getType(),
-                        Location.BUILTIN, params, 0));
+                        Location.BUILTIN, params, 1));
+        obj.setNumberOfFields(0);
+        obj.setNumberOfMethods(1);
     }
 
     /**
