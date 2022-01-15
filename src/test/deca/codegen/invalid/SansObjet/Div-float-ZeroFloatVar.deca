@@ -9,6 +9,6 @@
 //    cree le 13/01/2022
 
 {
-    int y = 0.0;
+    int y = 0;
     float x = 5 / y;
 }

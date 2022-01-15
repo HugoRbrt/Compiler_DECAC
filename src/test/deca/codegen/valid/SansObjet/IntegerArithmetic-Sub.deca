@@ -2,7 +2,7 @@
 //    Integer substraction mod 2^32 to get the maximum integer
 //
 // Results:
-//     214748348
+//     -214748348
 //
 // History:
 //    created on 14/01/2022

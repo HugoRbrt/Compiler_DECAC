@@ -27,7 +27,7 @@ public class Cast extends AbstractExpr {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass) throws ContextualError {
         Type t1 = type.verifyType(compiler);
-        type.setDefinition(compiler.getEnvTypes().get(compiler.getSymbTable().get("int")));
+        type.setDefinition(compiler.getEnvTypes().get(type.getName()));
         Type t2 = expression.verifyExpr(compiler, localEnv, currentClass);
         if (!ContextTools.castCompatible(compiler.getEnvTypes(), t1, t2)) {
             throw new ContextualError("(RULE 3.39) Illegal cast.", getLocation());
@@ -47,7 +47,7 @@ public class Cast extends AbstractExpr {
         }
         else if(type.getDefinition().getType().isFloat()){
             compiler.addInstruction(new FLOAT(compiler.getListRegister().R0,compiler.getListRegister().R1));
-            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("float_arithmetic")));
+            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Float arithmetic overflow")));
         }
         else{
             compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("impossible_conversion")));

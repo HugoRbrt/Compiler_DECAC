@@ -24,10 +24,12 @@
       |      +> [13, 10] Identifier (z)
       |      |  definition: variable defined at [13, 10], type=float
       |      `> [13, 12] Initialization
-      |         `> [13, 16] Multiply
-      |            type: int
-      |            +> [13, 14] Identifier (x)
-      |            |  definition: variable defined at [11, 8], type=int
-      |            `> [13, 18] Identifier (y)
-      |               definition: variable defined at [12, 8], type=int
+      |         `> ConvFloat
+      |            type: float
+      |            `> [13, 16] Multiply
+      |               type: int
+      |               +> [13, 14] Identifier (x)
+      |               |  definition: variable defined at [11, 8], type=int
+      |               `> [13, 18] Identifier (y)
+      |                  definition: variable defined at [12, 8], type=int
       `> ListInst [List with 0 elements]

@@ -16,8 +16,10 @@
       |      +> [12, 10] Identifier (z)
       |      |  definition: variable defined at [12, 10], type=float
       |      `> [12, 12] Initialization
-      |         `> [12, 14] UnaryMinus
-      |            type: int
-      |            `> [12, 15] Identifier (x)
-      |               definition: variable defined at [11, 8], type=int
+      |         `> ConvFloat
+      |            type: float
+      |            `> [12, 14] UnaryMinus
+      |               type: int
+      |               `> [12, 15] Identifier (x)
+      |                  definition: variable defined at [11, 8], type=int
       `> ListInst [List with 0 elements]

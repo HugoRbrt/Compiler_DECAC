@@ -8,5 +8,5 @@
 //    cree le 14/01/2022
 
 {
-    int x =  readFloat() * 3 ;
+    float x =  readFloat() * 3 ;
 }
