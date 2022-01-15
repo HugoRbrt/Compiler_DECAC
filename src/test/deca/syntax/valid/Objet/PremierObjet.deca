@@ -16,16 +16,20 @@ class B extends A {}
 
 class C extends A {}
 
+class D {}
+
 {
     int x = 1, y;
     A a = new A();
     A b = new B();
     C c = null;
+    D d = new D();
     //C c = new A();
     c = (C)(b);
     x = 2;
     a.x = 3;
     b.x = 4;
-    //b.y = 5;
+    //z = 5;
+    //d.y = 5;
     //x.x = 6;
 }
