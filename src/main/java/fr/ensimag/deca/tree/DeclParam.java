@@ -2,6 +2,8 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.ParamDefinition;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 
@@ -19,6 +21,23 @@ public class DeclParam extends AbstractDeclParam {
     @Override
     public Type verifySignature(DecacCompiler compiler) throws ContextualError {
         return type.verifyType(compiler);
+    }
+
+    @Override
+    protected void verifyDeclParam(DecacCompiler compiler, EnvironmentExp localEnv)
+            throws ContextualError {
+        Type currentType = type.verifyType(compiler);
+        if (currentType.isVoid()) {
+            throw new ContextualError(
+                    "(RULE 2.5) Parameter cannot be void type.", type.getLocation());
+        }
+        type.setDefinition(compiler.getEnvTypes().get(type.getName(), type.getLocation()));
+        try {
+            localEnv.declare(paramName.getName(), new ParamDefinition(currentType, paramName.getLocation()));
+        } catch (EnvironmentExp.DoubleDefException e) {
+            throw new ContextualError("(RULE 3.17) Parameter has already been declared.", paramName.getLocation());
+        }
+        paramName.setDefinition(localEnv.get(paramName.getName()));
     }
 
     @Override

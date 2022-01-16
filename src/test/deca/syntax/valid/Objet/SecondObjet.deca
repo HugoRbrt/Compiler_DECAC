@@ -14,12 +14,18 @@ class A {
 }
 
 class B extends A {
-    int x;
+    int x = 2;
     void setX(int x) {
     }
-    int getX() {
+    A powerup() {
     }
 }
+
+//Parameter has already been declared
+//class C extends A {
+//    void booyashaka(int x, float x) {
+//    }
+//}
 
 //Invalid method override
 //class C extends A {

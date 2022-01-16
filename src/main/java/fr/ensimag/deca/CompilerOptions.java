@@ -131,9 +131,12 @@ public class CompilerOptions {
         } else {
             logger.info("Java assertions disabled");
         }
-        // A FAIRE: modifier pour le cas general
-        // sourceFiles.add(new File(args[0]));
         
+        // -a and -r cannot be used together at the moment	
+        if (optionRSpotted && armBool) {
+            throw new CLIException("-r X and -a are uncompatible");
+        }
+ 	
         // if no arguments were seen, we explain how decac should be used
         if (args.length == 0) {
             throw new CLIException("No option nor file given");
@@ -165,7 +168,7 @@ public class CompilerOptions {
     }
 
     protected void displayUsage() {
-        System.out.println("\033[1;95m    Usage : decac [[-p | -v] [-n] [-r X] [-d]*" + 
+        System.out.println("\033[1;95m    Usage : decac [[-p | -v] [-n] [-a | -r X] [-d]*" + 
                 " [-P] [-w] <fichier deca>...] | [-b]\u001B[m");
         System.out.println(); 
         System.out.println("\033[96m-b  (banner): prints the team banner");

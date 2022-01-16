@@ -1,0 +1,15 @@
+// Description:
+//    Casting a during a declaration
+//
+// Results:
+//     33
+//
+// History:
+//    created on 16/01/2022
+
+{
+    int x = 33;
+    float y ;
+    y = (float) (x);
+    print(y);
+}
