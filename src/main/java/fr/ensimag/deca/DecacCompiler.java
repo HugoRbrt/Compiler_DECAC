@@ -304,13 +304,10 @@ public class DecacCompiler implements Runnable {
         /*  Defining Deca types uses ClassDefinition extension of TypeDefinition;
             each defition has its own EnvironmentExp that includes a pointer to
             the superclass's environment. */
-        envTypes.put(symbTable.create("Object"),
-                new ClassDefinition(new ClassType(symbTable.create("Object"),
-                        Location.BUILTIN, null), Location.BUILTIN, null));
-        /*  Definition of the equals method, in the EnvironmentExp tied to the
-            Object class. */
         ClassType obj = new ClassType(symbTable.create("Object"), Location.BUILTIN, null);
         envTypes.put(obj.getName(), obj.getDefinition());
+        /*  Definition of the equals method, in the EnvironmentExp tied to the
+            Object class. */
         ClassDefinition cl = obj.getDefinition();
         Signature params = new Signature(cl.getType());
         cl.getMembers().put(symbTable.create("equals"),
