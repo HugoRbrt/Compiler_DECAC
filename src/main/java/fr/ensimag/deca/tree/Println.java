@@ -1,8 +1,12 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.ARMLine;
+import fr.ensimag.ima.pseudocode.ARMRegister;
 import fr.ensimag.ima.pseudocode.instructions.WNL;
+import fr.ensimag.ima.pseudocode.instructionsARM.ldr;
+import fr.ensimag.ima.pseudocode.instructionsARM.mov;
+import fr.ensimag.ima.pseudocode.instructionsARM.svc;
 
 /**
  * @author gl49
@@ -26,9 +30,18 @@ public class Println extends AbstractPrint {
 
     @Override
     protected void codeGenInstARM(DecacCompiler compiler) {
-        StringLiteral newLine = new StringLiteral("\\n");
-        getArguments().add(newLine);
         super.codeGenInstARM(compiler);
+        ARMRegister R = (ARMRegister) compiler.getListRegister();
+        compiler.addInstruction(new mov(R.r0,1));
+        compiler.addInstruction(new ldr(R.r1, "="+"newline"));
+        compiler.addInstruction(new ldr(R.r2, "="+"lennewline"));
+        compiler.add(new ARMLine(".data"));
+        compiler.add(new ARMLine("newline"+":"));
+        compiler.add(new ARMLine(".byte " + "\'" + "\\n" + "\'"));
+        compiler.add(new ARMLine("lennewline"+" = . - "+"newline"));
+        compiler.add(new ARMLine(".text"));
+        compiler.addInstruction(new mov(R.r7,4));
+        compiler.addInstruction(new svc(0));
     }
 
     @Override
