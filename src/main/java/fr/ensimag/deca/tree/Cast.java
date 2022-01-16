@@ -29,6 +29,7 @@ public class Cast extends AbstractExpr {
         Type t1 = type.verifyType(compiler);
         type.setDefinition(compiler.getEnvTypes().get(type.getName()));
         Type t2 = expression.verifyExpr(compiler, localEnv, currentClass);
+        expression.setType(t2);
         if (!ContextTools.castCompatible(compiler.getEnvTypes(), t2, t1)) {
             throw new ContextualError("(RULE 3.39) Illegal cast.", getLocation());
         }
@@ -48,18 +49,18 @@ public class Cast extends AbstractExpr {
 
     protected void codeGenInst(DecacCompiler compiler){
         expression.codeGenInst(compiler);
-        if(type.getDefinition().getType().isInt()){
-            compiler.addInstruction(new INT(compiler.getListRegister().R0,compiler.getListRegister().R1));
-            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Float arithmetic overflow")));
+        // we only add the instruction if the cast is really needed
+        if (!type.getDefinition().getType().sameType(expression.getType())) {
+            if(type.getDefinition().getType().isInt()){
+                compiler.addInstruction(new INT(compiler.getListRegister().R0,compiler.getListRegister().R1));
+                compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Float arithmetic overflow")));
+            }
+            else if(type.getDefinition().getType().isFloat()){
+                compiler.addInstruction(new FLOAT(compiler.getListRegister().R0,compiler.getListRegister().R1));
+                compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Float arithmetic overflow")));
+            }
+            compiler.addInstruction(new LOAD(compiler.getListRegister().R1, compiler.getListRegister().R0));
         }
-        else if(type.getDefinition().getType().isFloat()){
-            compiler.addInstruction(new FLOAT(compiler.getListRegister().R0,compiler.getListRegister().R1));
-            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Float arithmetic overflow")));
-        }
-        else{
-            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("impossible_conversion")));
-        }
-        compiler.addInstruction(new LOAD(compiler.getListRegister().R1, compiler.getListRegister().R0));
     }
 
     public void codeGenOperations(GPRegister storedRegister, DecacCompiler compiler){
