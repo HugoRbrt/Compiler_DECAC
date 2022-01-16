@@ -38,7 +38,7 @@ public class Modulo extends AbstractOpArith {
 
     public void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler){
         compiler.addInstruction(new CMP(new ImmediateInteger(0), storedRegister));
-        compiler.addInstruction(new BEQ(compiler.getErrorManager().getErrorLabel("division_by_zero")));
+        compiler.addInstruction(new BEQ(compiler.getErrorManager().getErrorLabel("Division by zero")));
         compiler.addInstruction(new REM(storedRegister, Reg1));
         compiler.addInstruction(new LOAD(Reg1, storedRegister));
     }

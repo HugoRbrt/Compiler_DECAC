@@ -40,9 +40,9 @@ public class ErrorManager {
     public ErrorManager() {
         // adding all necessary errors to the error map
         Label stackOverflowLabel = new Label("stack_overflow");
-        errorMap.put("stack_overflow", stackOverflowLabel);
+        errorMap.put("Stack overflow , a real one", stackOverflowLabel);
         Label divByZeroLabel = new Label("division_by_zero");
-        errorMap.put("division_by_zero", divByZeroLabel);
+        errorMap.put("Division by zero", divByZeroLabel);
         //Label nullReferenceLabel = new Label("null_dereferencing");
         //errorMap.put("null_dereferencing", nullReferenceLabel);
         Label ioErrorLabel = new Label("input_output_error");
@@ -50,7 +50,7 @@ public class ErrorManager {
         //Label heapOverflowLabel = new Label("heap_overflow");
         //errorMap.put("heap_overflow", heapOverflowLabel);
         Label floatArithmeticOverflow = new Label("float_arithmetic_overflow");
-        errorMap.put("float_arithmetic", floatArithmeticOverflow);
+        errorMap.put("Float arithmetic overflow", floatArithmeticOverflow);
         //Label noReturnLabel = new Label("no_return");
         //errorMap.put("no_return", noReturnLabel);
         Label impossibleConversionLabel = new Label("impossible_conversion");
@@ -92,7 +92,7 @@ public class ErrorManager {
     public void addTstoCheck(DecacCompiler compiler) {
         // Start point for the program
         compiler.addFirstInstruction(new ADDSP(tstoArg));
-        compiler.addFirstInstruction(new BOV(errorMap.get("stack_overflow")));
+        compiler.addFirstInstruction(new BOV(errorMap.get("Stack overflow , a real one")));
         compiler.addFirstInstruction(new TSTO(addspArg));
     }
 

@@ -17,7 +17,7 @@ public class Multiply extends AbstractOpArith {
     public void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler){
         compiler.addInstruction(new MUL(Reg1, storedRegister));
         if(super.getLeftOperand() instanceof FloatLiteral || super.getRightOperand() instanceof FloatLiteral){
-            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("float_arithmetic")));
+            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Float arithmetic overflow")));
         }
     }
 

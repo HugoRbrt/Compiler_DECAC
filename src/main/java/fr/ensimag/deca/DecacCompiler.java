@@ -374,11 +374,13 @@ public class DecacCompiler implements Runnable {
         // after analysis of the program, we generate the TSTO instruction
         int d1 = codeAnalyzer.getNeededStackSize();
         int d2 = codeAnalyzer.getNbDeclaredVariables();
-        errorManager.setTstoArg(d1);
-        errorManager.setAddspArg(d2);
+        if(Objects.isNull(this.compilerOptions) || !this.compilerOptions.getArmBool()){
+            errorManager.setTstoArg(d1);
+            errorManager.setAddspArg(d2);
         
-        errorManager.addTstoCheck(this);
-        errorManager.genCodeErrorManager(this);
+            errorManager.addTstoCheck(this);
+            errorManager.genCodeErrorManager(this);
+        }
         
         LOG.debug("Generated assembly code:" + nl + program.display());
         LOG.info("Output file assembly file is: " + destName);

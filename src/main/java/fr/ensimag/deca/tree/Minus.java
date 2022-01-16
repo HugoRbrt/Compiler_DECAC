@@ -23,7 +23,7 @@ public class Minus extends AbstractOpArith {
         compiler.addInstruction(new SUB(Reg1, storedRegister));
         compiler.addInstruction(new OPP(storedRegister, storedRegister));
         if(super.getLeftOperand() instanceof FloatLiteral || super.getRightOperand() instanceof FloatLiteral){
-            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("float_arithmetic")));
+            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Float arithmetic overflow")));
         }
     }
 

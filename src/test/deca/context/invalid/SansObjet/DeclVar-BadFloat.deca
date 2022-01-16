@@ -2,11 +2,11 @@
 //    Variable declaration using a non predefined type token
 //
 // Results:
-//    (nothing)
+//    Error: (RULE 0.2) Type does not exist
 //
 // Historique:
 //    cree le 11/01/2022
 
 {
-        Float print;
+        Float x;
 }

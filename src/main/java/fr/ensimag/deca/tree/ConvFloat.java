@@ -56,7 +56,7 @@ public class ConvFloat extends AbstractUnaryExpr {
     public void codeGenInst(DecacCompiler compiler){
         super.getOperand().codeGenInst(compiler);
         compiler.addInstruction(new FLOAT(compiler.getListRegister().R0,compiler.getListRegister().R1));
-        compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("float_arithmetic")));
+        compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Float arithmetic overflow")));
         compiler.addInstruction(new LOAD(compiler.getListRegister().R1, compiler.getListRegister().R0));
     }
 

@@ -9,6 +9,6 @@
 
 {
     int x = 1073741824; // 2^30
-    int y = 2;
+    int y = 4;
     printx(x*y);
 }
