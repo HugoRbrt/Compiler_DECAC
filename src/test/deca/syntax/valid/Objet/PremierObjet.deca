@@ -19,7 +19,7 @@ class C extends A {}
 class D {}
 
 {
-    int x = 1, y;
+    int x = 1;
     A a = new A();
     A b = new B();
     C c = null;
