@@ -231,7 +231,7 @@ public class DecacCompiler implements Runnable {
     private final CompilerOptions compilerOptions;
     private final File source;
     private Register ListRegister;
-
+    private ARMRegister ListRegisterARM;
 
     public void setListRegister(Register list){
         ListRegister = list;
@@ -241,7 +241,13 @@ public class DecacCompiler implements Runnable {
         return ListRegister;
     }
     
+    public void setListRegisterARM(ARMRegister list){
+        ListRegisterARM = list;
+    }
 
+    public ARMRegister getListRegisterARM() {
+        return ListRegisterARM;
+    }
 
     /**
      * The main program. Every instruction generated will eventually end up here.

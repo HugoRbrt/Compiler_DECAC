@@ -3,7 +3,6 @@ package fr.ensimag.ima.pseudocode.instructionsARM;
 import fr.ensimag.ima.pseudocode.*;
 import fr.ensimag.ima.pseudocode.ARMBinaryInstructionDValToReg;
 import fr.ensimag.ima.pseudocode.DVal;
-import fr.ensimag.ima.pseudocode.ARMGPRegister;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
 
 /**

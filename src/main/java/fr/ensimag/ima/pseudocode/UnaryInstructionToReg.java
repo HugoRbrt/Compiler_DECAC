@@ -11,7 +11,7 @@ public class UnaryInstructionToReg extends UnaryInstruction {
         super(op);
     }
 
-    public UnaryInstructionToReg(ARMGPRegister op) {
+    public UnaryInstructionToReg(GPRegister op) {
         super(op);
     }
 

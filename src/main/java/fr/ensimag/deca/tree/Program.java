@@ -66,7 +66,7 @@ public class Program extends AbstractProgram {
         compiler.addARMBlock(".global _start");
         compiler.addARMComment("ARM program");
         //creation of ARM Register
-        compiler.setListRegister(new ARMRegister());
+        compiler.setListRegisterARM(new ARMRegister());
         main.codeGenMainARM(compiler);
     }
     

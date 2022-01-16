@@ -33,10 +33,10 @@ public class Println extends AbstractPrint {
     @Override
     protected void codeGenInstARM(DecacCompiler compiler) {
         super.codeGenInstARM(compiler);
-        ARMRegister R = (ARMRegister) compiler.getListRegister();
-        compiler.addInstruction(new mov(R.r0,1));
-        compiler.addInstruction(new ldr(R.r1, "="+"newline"));
-        compiler.addInstruction(new ldr(R.r2, "="+"lennewline"));
+        ARMRegister R = compiler.getListRegisterARM();
+        compiler.addInstruction(new mov(ARMRegister.r0,1));
+        compiler.addInstruction(new ldr(ARMRegister.r1, "="+"newline"));
+        compiler.addInstruction(new ldr(ARMRegister.r2, "="+"lennewline"));
         if (!armAlreadyLabel) {
             compiler.add(new ARMLine(".data"));
             compiler.add(new ARMLine("newline"+":"));
@@ -45,7 +45,7 @@ public class Println extends AbstractPrint {
             compiler.add(new ARMLine(".text"));
             armAlreadyLabel = true;
         }
-        compiler.addInstruction(new mov(R.r7,4));
+        compiler.addInstruction(new mov(ARMRegister.r7,4));
         compiler.addInstruction(new svc(0));
     }
 

@@ -91,45 +91,45 @@ public class ARMRegister extends DVal {
      * General Purpose Registers. Array is private because Java arrays cannot be
      * made immutable, use getR(i) to access it.
      */
-    protected static final GPRegister[] r = initRegisters();
+    protected static final ARMGPRegister[] r = initRegisters();
     /**
      * General Purpose Registers
      */
-    public static GPRegister getR(int i) {
+    public static ARMGPRegister getR(int i) {
         return r[i];
     }
 
     /**
      * Convenience shortcut for r[0]
      */
-    public static final GPRegister r0 = r[0];
+    public static final ARMGPRegister r0 = r[0];
 
     /**
      * Convenience shortcut for r[1]
      */
-    public static final GPRegister r1 = r[1];
+    public static final ARMGPRegister r1 = r[1];
 
     /**
      * Convenience shortcut for r[2]
      */
-    public static final GPRegister r2 = r[1];
+    public static final ARMGPRegister r2 = r[1];
 
     /**
      * Convenience shortcut for r[3]
      */
-    public static final GPRegister r3 = r[1];
+    public static final ARMGPRegister r3 = r[1];
 
 
     /**
      * Convenience shortcut for r[7]
      */
-    public static final GPRegister r7 = r[7];
+    public static final ARMGPRegister r7 = r[7];
 
 
-    static private GPRegister[] initRegisters() {
-        GPRegister [] res = new GPRegister[maxIndex];
+    static private ARMGPRegister[] initRegisters() {
+        ARMGPRegister [] res = new ARMGPRegister[maxIndex];
         for (int i = 0; i < maxIndex; i++) {
-            res[i] = new GPRegister("r" + i, i);
+            res[i] = new ARMGPRegister("r" + i, i);
         }
         return res;
     }
@@ -140,7 +140,7 @@ public class ARMRegister extends DVal {
      * register. If no such register is found, we return the last one
      * and indicate that it will need to be pushed
      */
-    public GPRegister getRegister(DecacCompiler compiler){
+    public ARMGPRegister getRegister(DecacCompiler compiler){
         
         for (int k = currentIndex; k < maxIndex; k++) {
             // if the register is available
@@ -151,7 +151,7 @@ public class ARMRegister extends DVal {
                     r[k].use();
                     // we update the index for a supposedly free register
                     currentIndex = k+1;
-                    return R[k];
+                    return r[k];
 		}
             }
         }
@@ -159,7 +159,7 @@ public class ARMRegister extends DVal {
         // if we arrive here, no available register was found
         // in this case, we take the last register and push it
         // before using it
-        GPRegister pushedRegister = r[maxIndex-1]; // for now
+        ARMGPRegister pushedRegister = r[maxIndex-1]; // for now
         assert !(pushedRegister.available());
         pushedRegister.incrNbPushOnRegister(1);
         
@@ -172,7 +172,7 @@ public class ARMRegister extends DVal {
     /**
      * free register given in argument and set its needPush field to false
      */
-    public void freeRegister(GPRegister usedRegister, DecacCompiler compiler) {
+    public void freeRegister(ARMGPRegister usedRegister, DecacCompiler compiler) {
         // if register is free, do nothing
         // else
         if (!usedRegister.available()) {
@@ -205,7 +205,7 @@ public class ARMRegister extends DVal {
      * register. If no such register is found, we return the last one
      * and indicate that it will need to be pushed
      */
-    public GPRegister getRegisterWithoutCompiler(){
+    public ARMGPRegister getRegisterWithoutCompiler(){
         for (int k = currentIndex; k < maxIndex; k++) {
             if (r[k].available()) {
                 if (k != 7) {
@@ -215,7 +215,7 @@ public class ARMRegister extends DVal {
 		}
             }
         }
-        GPRegister pushedRegister = r[maxIndex-1]; // for now
+        ARMGPRegister pushedRegister = r[maxIndex-1]; // for now
         assert !(pushedRegister.available());
         pushedRegister.incrNbPushOnRegister(1);
         return r[maxIndex-1];
@@ -224,7 +224,7 @@ public class ARMRegister extends DVal {
     /**
      * free register given in argument and set its needPush field to false
      */
-    public void freeRegisterWithoutCompiler(GPRegister usedRegister) {
+    public void freeRegisterWithoutCompiler(ARMGPRegister usedRegister) {
         if (!usedRegister.available()) {
             if (usedRegister.getNbPushOnRegister() > 0) {
                 usedRegister.decrNbPushOnRegister(1);

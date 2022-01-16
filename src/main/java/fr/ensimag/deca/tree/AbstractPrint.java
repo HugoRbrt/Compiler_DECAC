@@ -64,16 +64,16 @@ public abstract class AbstractPrint extends AbstractInst {
             String msgName = "msg"+printCounter;
             String lenMsgName = "len"+printCounter;
             printCounter++;
-            ARMRegister R = (ARMRegister) compiler.getListRegister();
-            compiler.addInstruction(new mov(R.r0,1));
-            compiler.addInstruction(new ldr(R.r1, "="+msgName));
-            compiler.addInstruction(new ldr(R.r2, "="+lenMsgName));
+            ARMRegister R = compiler.getListRegisterARM();
+            compiler.addInstruction(new mov(ARMRegister.r0,1));
+            compiler.addInstruction(new ldr(ARMRegister.r1, "="+msgName));
+            compiler.addInstruction(new ldr(ARMRegister.r2, "="+lenMsgName));
             compiler.add(new ARMLine(".data"));
             compiler.add(new ARMLine(msgName+":"));
             a.codeGenPrintARM(compiler);
             compiler.add(new ARMLine(lenMsgName+" = . - "+msgName));
             compiler.add(new ARMLine(".text"));
-            compiler.addInstruction(new mov(R.r7,4));
+            compiler.addInstruction(new mov(ARMRegister.r7,4));
             compiler.addInstruction(new svc(0));
         }
     }
