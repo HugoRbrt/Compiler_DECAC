@@ -1,5 +1,8 @@
 package fr.ensimag.deca.tree;
 
+import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 
 import java.io.PrintStream;
@@ -11,6 +14,11 @@ public class DeclParam extends AbstractDeclParam {
     public DeclParam(AbstractIdentifier type, AbstractIdentifier paramName) {
         this.type = type;
         this.paramName = paramName;
+    }
+
+    @Override
+    public Type verifySignature(DecacCompiler compiler) throws ContextualError {
+        return type.verifyType(compiler);
     }
 
     @Override

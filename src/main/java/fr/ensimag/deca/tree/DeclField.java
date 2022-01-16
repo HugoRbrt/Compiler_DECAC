@@ -46,7 +46,8 @@ public class DeclField extends AbstractDeclField {
             ClassDefinition currentClass, int counter) throws ContextualError {
         Type currentType = type.verifyType(compiler);
         if (currentType.isVoid()) {
-            throw new ContextualError("(RULE 2.5) Field cannot be void type.", type.getLocation());
+            throw new ContextualError(
+                    "(RULE 2.5) Field cannot be void type.", type.getLocation());
         }
         type.setDefinition(compiler.getEnvTypes().get(type.getName(), Location.BUILTIN));
         initialization.verifyInitialization(compiler, currentType, localEnv, currentClass);
@@ -58,11 +59,13 @@ public class DeclField extends AbstractDeclField {
                         currentType, fieldName.getLocation(), visibility, currentClass, counter));
             } catch (EnvironmentExp.DoubleDefException e) {
                 throw new ContextualError(
-                        "(RULE 3.17) Field has already been declared.", fieldName.getLocation());
+                        "(RULE 3.17) Field has already been declared.",
+                        fieldName.getLocation());
             }
         } else {
             throw new ContextualError(
-                    "(RULE 2.5) Field name already in use as method name.", fieldName.getLocation());
+                    "(RULE 2.5) Illegal override: method --> field.",
+                    fieldName.getLocation());
         }
         fieldName.setDefinition(localEnv.get(fieldName.getName()));
     }

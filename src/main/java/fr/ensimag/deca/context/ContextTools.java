@@ -26,7 +26,7 @@ public class ContextTools {
         return (assignCompatible(envType, t1, t2) || assignCompatible(envType, t2, t1));
     }
 
-    private static boolean subtype(EnvironmentType envType, Type t2, Type t1) {
+    public static boolean subtype(EnvironmentType envType, Type t2, Type t1) {
         if (t1.sameType(t2)) {
             return true;
         }

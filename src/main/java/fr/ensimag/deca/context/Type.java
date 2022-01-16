@@ -5,6 +5,8 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.deca.tree.Location;
 
+import java.util.Objects;
+
 /**
  * Deca Type (internal representation of the compiler)
  *
@@ -78,6 +80,19 @@ public abstract class Type {
     public ClassType asClassType(String errorMessage, Location l)
             throws ContextualError {
         throw new ContextualError(errorMessage, l);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Type type = (Type) o;
+        return sameType(type);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name.getName());
     }
 
 }

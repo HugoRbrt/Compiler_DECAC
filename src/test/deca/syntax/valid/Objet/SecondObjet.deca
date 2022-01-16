@@ -1,0 +1,46 @@
+// Description:
+//    Testing object-oriented Deca, with method signatures.
+//
+// Results:
+//    (void)
+//
+// Historique:
+//    cree le 13/01/2022
+
+class A {
+    int x;
+    void setX(int x) {
+    }
+}
+
+class B extends A {
+    int x;
+    void setX(int x) {
+    }
+    int getX() {
+    }
+}
+
+//Invalid method override
+//class C extends A {
+//    boolean equals() {
+//    }
+//}
+
+//Illegal override: field --> method
+//class C extends A {
+//    int x() {
+//    }
+//}
+
+//Method has already been declared
+//class C extends A {
+//    void setX(int x) {
+//    }
+//    void setX(int x) {
+//    }
+//}
+
+{
+    A a = new A();
+}
