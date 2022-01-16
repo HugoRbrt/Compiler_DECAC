@@ -1,14 +1,11 @@
 package fr.ensimag.deca;
 
-//import com.sun.tools.doclint.Env;
-import fr.ensimag.deca.codegen.StringIdentMap;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
 import fr.ensimag.deca.codegen.ErrorManager;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.SymbolTable;
-import fr.ensimag.deca.tools.StackHashTableSymbol;
 import fr.ensimag.deca.tools.StackHashTableSymbol;
 import fr.ensimag.deca.tools.CodeAnalyzer;
 import fr.ensimag.deca.tree.AbstractProgram;
@@ -29,15 +26,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Objects;
-import java.util.LinkedList;
-import java.util.HashMap;
-import java.util.Map;
 import java.lang.Runnable;
 
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.log4j.Logger;
-import fr.ensimag.deca.tools.SymbolTable.Symbol;
 
 /**
  * Decac compiler instance.
@@ -68,7 +61,6 @@ public class DecacCompiler implements Runnable {
     private StackHashTableSymbol stackTable = new StackHashTableSymbol();
     private CodeAnalyzer codeAnalyzer = new CodeAnalyzer();
     private ErrorManager errorManager = new ErrorManager();
-    private StringIdentMap stringIdentMap = new StringIdentMap();
 
     public DecacCompiler(CompilerOptions compilerOptions, File source) {
         super();
@@ -132,13 +124,6 @@ public class DecacCompiler implements Runnable {
      */
     public StackHashTableSymbol getstackTable() {
         return stackTable;
-    }
-
-    /**
-     * Symbols associated with the String value
-     */
-    public StringIdentMap getIdentMap() {
-        return stringIdentMap;
     }
 
     /**

@@ -291,9 +291,9 @@
                         </goals>
                     </execution>
                     <execution>
-                        <id>decompile-tests</id>
+                        <id>Idempotence-tests</id>
                         <configuration>
-                            <executable>./src/test/script/deca/syntax/valid/decompile-idemp-test.sh</executable>
+                            <executable>./src/test/script/decompile-idemp-test.sh</executable>
                         </configuration>
                         <phase>test</phase>
                         <goals>
