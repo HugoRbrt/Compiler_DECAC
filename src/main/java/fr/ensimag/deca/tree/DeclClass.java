@@ -59,6 +59,7 @@ public class DeclClass extends AbstractDeclClass {
                     "(RULE 3.17) Class has already been declared.", className.getLocation());
         }
         className.setDefinition(envT.get(className.getName()));
+        className.setType(envT.get(nameSymb).getType());
     }
 
     @Override
@@ -80,7 +81,13 @@ public class DeclClass extends AbstractDeclClass {
     
     @Override
     protected void verifyClassBody(DecacCompiler compiler) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        ClassDefinition cl = (ClassDefinition) compiler.getEnvTypes().get(className.getName());
+        for (AbstractDeclField f: fields.getList()) {
+            f.verifyFieldInitialization(compiler, cl.getMembers(), cl);
+        }
+        for (AbstractDeclMethod m: methods.getList()) {
+            m.verifyMethodBody(compiler, cl.getMembers(), cl);
+        }
     }
 
 

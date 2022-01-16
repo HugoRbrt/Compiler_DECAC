@@ -309,13 +309,15 @@ public class DecacCompiler implements Runnable {
                         Location.BUILTIN, null), Location.BUILTIN, null));
         /*  Definition of the equals method, in the EnvironmentExp tied to the
             Object class. */
-        ClassDefinition obj = (ClassDefinition) envTypes.get(symbTable.create("Object"));
-        Signature params = new Signature(obj.getType());
-        obj.getMembers().put(symbTable.create("equals"),
+        ClassType obj = new ClassType(symbTable.create("Object"), Location.BUILTIN, null);
+        envTypes.put(obj.getName(), obj.getDefinition());
+        ClassDefinition cl = obj.getDefinition();
+        Signature params = new Signature(cl.getType());
+        cl.getMembers().put(symbTable.create("equals"),
                 new MethodDefinition(envTypes.get(symbTable.create("boolean")).getType(),
-                        Location.BUILTIN, params, 1));
-        obj.setNumberOfFields(0);
-        obj.setNumberOfMethods(1);
+                        Location.BUILTIN, params, 1, cl));
+        cl.setNumberOfFields(0);
+        cl.setNumberOfMethods(1);
     }
 
     /**

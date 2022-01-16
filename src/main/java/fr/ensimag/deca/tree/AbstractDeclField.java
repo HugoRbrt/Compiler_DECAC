@@ -14,6 +14,10 @@ public abstract class AbstractDeclField extends Tree {
             ClassDefinition currentClass, int counter)
             throws ContextualError;
 
+    protected abstract void verifyFieldInitialization(DecacCompiler compiler,
+            EnvironmentExp localEnv, ClassDefinition currentClass)
+            throws ContextualError;
+
     /**
      * Returns non-terminal AbstractInitialization
      * @return

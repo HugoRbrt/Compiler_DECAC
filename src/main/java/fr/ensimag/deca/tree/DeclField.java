@@ -34,6 +34,9 @@ public class DeclField extends AbstractDeclField {
      * whether the name is used in the current environment (illegal) or used
      * as a method name in any environment (illegal).
      *
+     * NB: does not check field initialization, which is done on pass 3, after
+     * method signatures have been checked.
+     *
      * @param compiler
      * @param currentClass
      * @param counter
@@ -49,8 +52,8 @@ public class DeclField extends AbstractDeclField {
             throw new ContextualError(
                     "(RULE 2.5) Field cannot be void type.", type.getLocation());
         }
-        type.setDefinition(compiler.getEnvTypes().get(type.getName(), Location.BUILTIN));
-        initialization.verifyInitialization(compiler, currentType, localEnv, currentClass);
+        type.setDefinition(compiler.getEnvTypes().get(type.getName(), type.getLocation()));
+        type.setType(currentType);
         SymbolTable.Symbol f = fieldName.getName();
         ExpDefinition def = localEnv.get(f);
         if (def == null || def.isField()) {
@@ -68,6 +71,12 @@ public class DeclField extends AbstractDeclField {
                     fieldName.getLocation());
         }
         fieldName.setDefinition(localEnv.get(fieldName.getName()));
+    }
+
+    @Override
+    protected void verifyFieldInitialization(DecacCompiler compiler, EnvironmentExp localEnv,
+            ClassDefinition currentClass) throws ContextualError {
+        initialization.verifyInitialization(compiler, type.getType(), localEnv, currentClass);
     }
 
     @Override
