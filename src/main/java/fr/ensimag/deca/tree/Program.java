@@ -53,8 +53,8 @@ public class Program extends AbstractProgram {
     public void codeGenProgram(DecacCompiler compiler) {
         // A FAIRE: compléter ce squelette très rudimentaire de code
 
-        //creation of Register
-        compiler.setListRegister(new Register());
+        //creation of the register bench with a given number of registers
+        compiler.setListRegister(new Register(compiler.getCompilerOptions().getRegisters()));
         compiler.addComment("Main program");
         main.codeGenMain(compiler);
         compiler.addInstruction(new HALT());
