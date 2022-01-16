@@ -39,22 +39,6 @@ public class StringLiteral extends AbstractStringLiteral {
         RemoveBackslash();
     }
 
-    public StringLiteral(String value, boolean armtype) {
-        if (armtype) {
-            Validate.notNull(value);
-            value = value.replaceAll("^\"|\"$", "");
-            this.value = value;
-        }
-        else {
-            Validate.notNull(value);
-            value = value.replaceAll("^\"|\"$", "");
-            this.value = value;
-            RemoveBackslash();
-        }
-        
-    }
-
-
     private void RemoveBackslash() {
         boolean found = false;
         String newstr = "";
@@ -85,22 +69,7 @@ public class StringLiteral extends AbstractStringLiteral {
 
     @Override
     protected void codeGenPrintARM(DecacCompiler compiler) {
-        String msgName = "msg"+i;
-        String lenMsgName = "len"+i;
-        i++;
-        ARMRegister R = (ARMRegister) compiler.getListRegister();
-        compiler.addInstruction(new mov(R.r0,1));
-        compiler.addInstruction(new ldr(R.r1, "="+msgName));
-        compiler.addInstruction(new ldr(R.r2, "="+lenMsgName));
-        //we add instruction at the end of the file :
-        LinkedList<AbstractLine> l = new LinkedList<AbstractLine>();
-        compiler.add(new ARMLine(".data"));
-        compiler.add(new ARMLine(msgName+":"));
         compiler.add(new ARMLine(".ascii " +"\"" +value + "\""));
-        compiler.add(new ARMLine(lenMsgName+" = . - "+msgName));
-        compiler.add(new ARMLine(".text"));
-        compiler.addInstruction(new mov(R.r7,4));
-        compiler.addInstruction(new svc(0));
     }
 
     @Override

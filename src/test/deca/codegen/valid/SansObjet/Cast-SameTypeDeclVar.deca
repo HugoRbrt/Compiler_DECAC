@@ -1,0 +1,13 @@
+// Description:
+//    Casting a same type variable during a declaration
+//
+// Results:
+//     ERROR: float_arithmetic_overflow
+//
+// History:
+//    created on 16/01/2022
+
+{
+    int y = (int) (33);
+    print(y);
+}

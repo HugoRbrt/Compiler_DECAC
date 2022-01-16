@@ -8,7 +8,6 @@
 //    created on 13/01/2022
 
 {
-    float x = 0x1.ffffep+127;
-    float y = 0x1.ffffep+127;
-    print(x+y);
+    float x = 0x1.9999998807907104p+127;
+    print(x + x);
 }

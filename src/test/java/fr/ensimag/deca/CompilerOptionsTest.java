@@ -75,6 +75,13 @@ public class CompilerOptionsTest{
         try{compOpt.parseArgs(args);} catch (CLIException e) {e.printStackTrace();};
     }
     
+    //@Test(expected = CLIException.class)
+    public static void testAandR() throws CLIException {
+        // checks that no argument throw an exception
+        String[] args = {"-n", "-d", "-d", "-a", "-r", "16", "oui.deca"};
+        CompilerOptions compOpt = new CompilerOptions();
+        try{compOpt.parseArgs(args);} catch (CLIException e) {e.printStackTrace();};
+    }  
     
     //@Test(expected = CLIException.class)
     public static void testInvalidRValue() throws CLIException {
@@ -141,5 +148,6 @@ public class CompilerOptionsTest{
         testInvalidFile();
         testNoArgs();
         testBandRegisters();
+	testAandR();
     }
 }
