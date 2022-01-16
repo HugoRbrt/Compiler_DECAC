@@ -300,6 +300,16 @@
                             <goal>exec</goal>
                         </goals>
                     </execution>
+                    <execution>
+                        <id>Limited-registers-tests</id>
+                        <configuration>
+                            <executable>./src/test/script/deca/codegen/Limit-reg.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
                 </executions>
             </plugin>
 
