@@ -61,8 +61,9 @@ test_codegen() {
         else
             echo "${GREEN}[EXPECTED OUTPUT] : $1 ${NC}"
             rm $TMP/$1.restmp
+            rm $TESTPATH/$1.ass
     fi
-    rm $TESTPATH/$1.ass
+
 }
 
 echo "Start of "$1" generated code tests for "$2""

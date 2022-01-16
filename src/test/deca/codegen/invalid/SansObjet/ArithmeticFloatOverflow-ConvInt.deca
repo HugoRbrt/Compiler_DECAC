@@ -8,7 +8,5 @@
 //    created on 14/01/2022
 
 {
-    int x = 33554434;
-    float y = (float) (x); // 2^25 + 2
-    print(y);
+    int x = (int) (0x1.0p31);
 }
