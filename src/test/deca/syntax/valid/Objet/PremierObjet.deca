@@ -24,6 +24,8 @@ class D {}
     A b = new B();
     C c = null;
     D d = new D();
+    B bp = new B();
+    A ap = (A)(bp);
     //Incompatible type assignment
     //C c = new A();
     //Needs runtime error, dynamic type of b is B (== ClassCastException in java)

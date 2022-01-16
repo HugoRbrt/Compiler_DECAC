@@ -57,8 +57,8 @@ public class DeclMethod extends AbstractDeclMethod {
         }
         if (def != null && def.isMethod()) {
             MethodDefinition mdef = (MethodDefinition) def;
-            if (!mdef.getSignature().equals(sig) && ContextTools.subtype(
-                    compiler.getEnvTypes(), currentType, mdef.getType())) {
+            if (!(mdef.getSignature().equals(sig) && ContextTools.subtype(
+                    compiler.getEnvTypes(), currentType, mdef.getType()))) {
                 throw new ContextualError(
                         "(RULE 2.7) Invalid method override.", methodName.getLocation());
             }
