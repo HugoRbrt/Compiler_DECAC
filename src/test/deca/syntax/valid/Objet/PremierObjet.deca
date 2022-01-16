@@ -24,8 +24,16 @@ class D {}
     A b = new B();
     C c = null;
     D d = new D();
+    //Incompatible type assignment
     //C c = new A();
+    //Needs runtime error, dynamic type of b is B (== ClassCastException in java)
     c = (C)(b);
+    //Needs exception? According to cast_compatible rules, no, according to p101, yes?
+    c = (C)(a);
+    //Incompatible type assignment
+    //c = (B)(b);
+    //Illegal cast
+    //c = (C)(d);
     x = 2;
     a.x = 3;
     b.x = 4;
