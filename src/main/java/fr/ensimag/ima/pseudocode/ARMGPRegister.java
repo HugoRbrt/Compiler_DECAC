@@ -6,35 +6,6 @@ package fr.ensimag.ima.pseudocode;
  * @author Ensimag
  * @date 01/01/2022
  */
-public class ARMGPRegister extends ARMRegister {
-    /**
-     * @return the number of the register, e.g. 12 for R12.
-     */
-    public int getNumber() {
-        return number;
-    }
-
-    private int number;
-
-    private boolean availability;
-
-    ARMGPRegister(String name, int number) {
-        super(name);
-        this.number = number;
-    }
-
-    public boolean available(){
-        return availability;
-    }
-
-    public void use(){
-        assert(availability);
-        availability=false;
-    }
-
-    public void liberate(){
-        assert(!availability);
-        availability=true;
-    }
-
+public class ARMGPRegister extends GPRegister {
+    
 }
