@@ -45,7 +45,8 @@ public class Program extends AbstractProgram {
         classes.verifyListClass(compiler);
         classes.verifyListClassMembers(compiler);
         classes.verifyListClassBody(compiler);
-        main.verifyMain(compiler);
+        main.verifyMain(compiler, compiler.getEnvExp(), null,
+                compiler.getEnvTypes().get(compiler.getSymbTable().create("void")).getType());
         LOG.debug("verify program: end");
     }
 

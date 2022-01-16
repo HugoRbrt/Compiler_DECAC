@@ -178,6 +178,7 @@ public class Identifier extends AbstractIdentifier {
         }
         Type currentType = def.getType();
         setDefinition(localEnv.get(getName()));
+        setType(currentType);
         return currentType;
     }
 

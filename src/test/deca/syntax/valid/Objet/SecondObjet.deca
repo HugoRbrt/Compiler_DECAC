@@ -14,16 +14,23 @@ class A {
 }
 
 class B extends A {
-    int x = 2;
+    int x = 2, y;
     void setX(int x) {
     }
-    A powerup() {
+    A powerup(int x) {
+        A z = new A();
+        x = 2 + 3;
+        y = 4;
+        z.x = 5;
+        return z;
     }
 }
 
-//Parameter has already been declared
+//Method has already been declared
 //class C extends A {
-//    void booyashaka(int x, float x) {
+//    void setX(int x) {
+//    }
+//    void setX(int x) {
 //    }
 //}
 
@@ -39,11 +46,25 @@ class B extends A {
 //    }
 //}
 
-//Method has already been declared
+//Parameter has already been declared
 //class C extends A {
-//    void setX(int x) {
+//    void booyashaka(int x, float x) {
 //    }
-//    void setX(int x) {
+//}
+
+//Variable has already been declared.
+//class C extends A {
+//    int x;
+//    void rep(int x) {
+//        int x;
+//    }
+//}
+
+//Return expression does not fit method signature
+//class C extends A {
+//    int ret() {
+//        float x;
+//        return x;
 //    }
 //}
 

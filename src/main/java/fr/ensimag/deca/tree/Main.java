@@ -1,10 +1,7 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ClassDefinition;
-import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.NullType;
-import fr.ensimag.deca.context.VoidType;
+import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import java.io.PrintStream;
 
@@ -32,11 +29,11 @@ public class Main extends AbstractMain {
     }
 
     @Override
-    protected void verifyMain(DecacCompiler compiler) throws ContextualError {
+    protected void verifyMain(DecacCompiler compiler, EnvironmentExp localEnv,
+            ClassDefinition currentClass, Type returnType) throws ContextualError {
         LOG.debug("verify Main: start");
-        declVariables.verifyListDeclVariable(compiler, compiler.getEnvExp(), null);
-        insts.verifyListInst(compiler, compiler.getEnvExp(), null,
-                compiler.getEnvTypes().get(compiler.getSymbTable().create("void"), Location.BUILTIN).getType());
+        declVariables.verifyListDeclVariable(compiler, localEnv, currentClass);
+        insts.verifyListInst(compiler, localEnv, currentClass, returnType);
         LOG.debug("verify Main: end");
     }
 

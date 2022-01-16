@@ -17,7 +17,15 @@ public class Return extends AbstractInst {
     }
 
     @Override
-    protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass, Type returnType) throws ContextualError {
+    protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
+            ClassDefinition currentClass, Type returnType) throws ContextualError {
+        Type currentType = returnExpr.verifyExpr(compiler, localEnv, currentClass);
+        returnExpr.setType(currentType);
+        if (!returnType.sameType(currentType)) {
+            throw new ContextualError(
+                    "(RULE 3.24) Return expression does not fit method signature.",
+                    returnExpr.getLocation());
+        }
     }
 
     @Override

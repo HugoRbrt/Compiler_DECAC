@@ -301,7 +301,7 @@ public class DecacCompiler implements Runnable {
                 new TypeDefinition(new IntType(symbTable.create("int")), Location.BUILTIN));
         envTypes.put(symbTable.create("null"),
                 new TypeDefinition(new NullType(symbTable.create("null")), Location.BUILTIN));
-        /*  Defining Deca types uses ClassDefinition extension of TypeDefinition;
+        /*  Defining Deca class types uses ClassDefinition extension of TypeDefinition;
             each defition has its own EnvironmentExp that includes a pointer to
             the superclass's environment. */
         ClassType obj = new ClassType(symbTable.create("Object"), Location.BUILTIN, null);
@@ -312,7 +312,7 @@ public class DecacCompiler implements Runnable {
         Signature params = new Signature(cl.getType());
         cl.getMembers().put(symbTable.create("equals"),
                 new MethodDefinition(envTypes.get(symbTable.create("boolean")).getType(),
-                        Location.BUILTIN, params, 1, cl));
+                        Location.BUILTIN, params, 1));
         cl.setNumberOfFields(0);
         cl.setNumberOfMethods(1);
     }

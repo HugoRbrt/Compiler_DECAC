@@ -66,7 +66,7 @@ public class DeclMethod extends AbstractDeclMethod {
         }
         try {
             localEnv.declare(
-                    m, new MethodDefinition(currentType, returnType.getLocation(), sig, counter, currentClass));
+                    m, new MethodDefinition(currentType, returnType.getLocation(), sig, counter));
         } catch (EnvironmentExp.DoubleDefException e) {
             throw new ContextualError("(RULE 3.17) Method has already been declared.",
                     methodName.getLocation());
@@ -76,10 +76,11 @@ public class DeclMethod extends AbstractDeclMethod {
     }
 
     @Override
-    protected void verifyMethodBody(DecacCompiler compiler, EnvironmentExp localEnv,
-            ClassDefinition currentClass) throws ContextualError {
-        MethodDefinition mth = (MethodDefinition) localEnv.get(methodName.getName());
-        declParameters.verifyListDeclParam(compiler, mth.getParameters());
+    protected void verifyMethodBody(DecacCompiler compiler, EnvironmentExp classEnv, ClassDefinition currentClass)
+            throws ContextualError {
+        EnvironmentExp localEnv = declParameters.verifyListDeclParam(compiler, classEnv);
+        block.verifyMain(compiler, localEnv, currentClass, returnType.getType());
+
     }
 
     @Override
