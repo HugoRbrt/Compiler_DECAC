@@ -174,7 +174,7 @@ public class Identifier extends AbstractIdentifier {
             ClassDefinition currentClass) throws ContextualError {
         ExpDefinition def = localEnv.get(this.getName());
         if (def == null) {
-            throw new ContextualError("(RULE 0.1) variable does not exist.", getLocation());
+            throw new ContextualError("(RULE 0.1) variable has not been declared.", getLocation());
         }
         Type currentType = def.getType();
         setDefinition(localEnv.get(getName()));
