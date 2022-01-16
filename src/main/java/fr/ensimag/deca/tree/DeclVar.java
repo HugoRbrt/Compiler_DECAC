@@ -49,6 +49,7 @@ public class DeclVar extends AbstractDeclVar {
             throw new ContextualError("(RULE 3.17) Variable has already been declared.", varName.getLocation());
         }
         varName.setDefinition(localEnv.get(varName.getName()));
+        varName.setType(currentType);
     }
 
     
