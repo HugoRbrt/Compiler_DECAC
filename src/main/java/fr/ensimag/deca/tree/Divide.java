@@ -39,7 +39,6 @@ public class Divide extends AbstractOpArith {
             compiler.addInstruction(new CMP(new ImmediateInteger(0), storedRegister));
             compiler.addInstruction(new BEQ(compiler.getErrorManager().getErrorLabel("Division by zero")));
             compiler.addInstruction(new QUO(storedRegister, Reg1));
-            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Float arithmetic overflow")));
         }
         compiler.addInstruction(new LOAD(Reg1, storedRegister));
     }

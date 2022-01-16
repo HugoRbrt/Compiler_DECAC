@@ -8,5 +8,5 @@
 //    created on 14/01/2022
 
 {
-    int y = (int) (0.2);
+    int y = (int) (0x);
 }

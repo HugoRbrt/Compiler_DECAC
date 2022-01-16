@@ -50,6 +50,7 @@ public class Cast extends AbstractExpr {
         expression.codeGenInst(compiler);
         if(type.getDefinition().getType().isInt()){
             compiler.addInstruction(new INT(compiler.getListRegister().R0,compiler.getListRegister().R1));
+            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Float arithmetic overflow")));
         }
         else if(type.getDefinition().getType().isFloat()){
             compiler.addInstruction(new FLOAT(compiler.getListRegister().R0,compiler.getListRegister().R1));
