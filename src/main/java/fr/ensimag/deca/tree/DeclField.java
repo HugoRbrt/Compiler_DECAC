@@ -2,6 +2,7 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.*;
+import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
@@ -74,7 +75,7 @@ public class DeclField extends AbstractDeclField {
                     "(RULE 2.5) Illegal override: method --> field.",
                     fieldName.getLocation());
         }
-        fieldName.setDefinition(localEnv.get(fieldName.getName()));
+        fieldName.setDefinition(localEnv.get(f));
     }
 
     @Override

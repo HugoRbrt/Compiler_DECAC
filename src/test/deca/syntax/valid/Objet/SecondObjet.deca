@@ -9,6 +9,7 @@
 
 class A {
     int x;
+    protected int y;
     void setX(int x) {
     }
     float magic() {
@@ -20,7 +21,7 @@ class A {
 }
 
 class B extends A {
-    int x = 2, y;
+    int x = 2;
     void setX(int x) {
     }
     A powerup(int x) {
@@ -75,8 +76,24 @@ class B extends A {
 //    }
 //}
 
+//Selecting class not a subclass of current class
+//class C extends A {
+//    int getY(A a) {
+//        return a.y;
+//    }
+//}
+
+//Protected field is not visible in the current scope
+//class C {
+//    int getY() {
+//       A a = new A();
+//       a.y = 3;
+//    }
+//}
+
 {
     A a = new A();
+    int y;
     float f = a.magic();
     boolean b = a.long(a.x, f);
 //Invalid parameter list
@@ -84,6 +101,8 @@ class B extends A {
 //Incompatible type assignment
 //    boolean d = a.magic();
     a.x = 7;
+//Variable has not been declared
+//    a.y = 4;
 //Variable has not been declared
 //    a.d = 1;
 //'This' reference outside of class scope

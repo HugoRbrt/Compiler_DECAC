@@ -1,6 +1,7 @@
 package fr.ensimag.deca.tree;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Location in a file (File, line, positionInLine).
@@ -58,5 +59,4 @@ public class Location implements Serializable {
         this.positionInLine = positionInLine;
         this.filename = filename;
     }
-
 }
