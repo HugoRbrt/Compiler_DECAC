@@ -86,7 +86,7 @@ public class ErrorManager {
         errorMap.forEach((name, label)
                 -> genCodeError(label, "ERROR: " + name, compiler));
     }
-    src/main/java/fr/ensimag/ima/pseudocode/Label.java
+
 
     /**
      * Generates the initial code for the stack overflow test
