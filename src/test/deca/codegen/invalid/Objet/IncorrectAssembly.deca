@@ -1,0 +1,22 @@
+// Description:
+//      Program whose only class uses an incorrect assembly
+//
+// Result:
+//      ERROR: incorrect_assembly
+//
+// History:
+//      created on 17/1/2022
+
+
+class A {
+    int x;
+
+    asm ( "WSTR \"HelloWorld\" \n ADD R0, R17" );
+
+    int y;
+}
+
+
+{
+    A a = new A();
+}

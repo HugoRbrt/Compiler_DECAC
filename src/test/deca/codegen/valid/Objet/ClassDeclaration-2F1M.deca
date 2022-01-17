@@ -1,0 +1,24 @@
+// Description:
+//      Class with two fields, one method with two parameters
+//
+// Result:
+//      p.x=1 p.y=2
+//
+// History:
+//      created on 17/1/2022
+
+class P {
+    int x;
+    int y;
+
+    void move(int a, int b) {
+        x = x + a;
+        y = y + b;
+    }
+}
+
+{
+    P p = new P();
+    p.move(1, 2);
+    println("p.x=", p.x, " p.y=", p.y);
+}

@@ -1,0 +1,18 @@
+// Description:
+//      Invalid program using a cast of a class on one of its subclass
+//
+// Result:
+//      ERROR: impossible_conversion
+//
+// History:
+//      created on 17/1/2022
+
+
+class A {}
+class B extends A {}
+
+{
+    A a = new A();
+    B b = (B) (a);
+    println("Abnormal success");
+}
