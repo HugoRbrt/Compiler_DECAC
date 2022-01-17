@@ -1,0 +1,18 @@
+// Description:
+//      Program verifying if two instances of a class are different
+//
+// Result:
+//      OK
+//
+// History:
+//      created on 17/1/2022
+
+class A { }
+
+{
+    A a = new A();
+    A other = new A();
+    if (! a.equals(other)) {
+        println("OK");
+    }
+}

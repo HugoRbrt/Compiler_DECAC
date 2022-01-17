@@ -1,0 +1,19 @@
+// Description:
+//      Declaring a methods with same ident as parent class
+//
+// Results:
+//      RUle (2.7) Method defined in parent class with different signature
+//
+// History:
+//      created on 17/1/2022
+
+class B {
+    void x(int x) {
+        return 1;
+    }
+}
+
+class A extends B{
+    void x() {
+    }
+}

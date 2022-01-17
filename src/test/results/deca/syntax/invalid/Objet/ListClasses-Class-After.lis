@@ -1,0 +1,1 @@
+src/test/deca/syntax/invalid/Objet/ListClasses-Class-After.deca:14:0: mismatched input 'class' expecting {FLOAT, INT, '}', '(', '-', '!', ';', 'false', 'if', 'new', 'null', 'print', 'println', 'printx', 'printlnx', 'readInt', 'readFloat', 'return', 'this', 'true', 'while', IDENT, STRING}

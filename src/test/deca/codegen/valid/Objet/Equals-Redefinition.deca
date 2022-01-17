@@ -1,0 +1,39 @@
+// Description:
+//      Redifinition of equal.
+//
+// Result:
+//      OK1 OK2
+//
+// History:
+//      created on 17/1/2022
+
+class A {
+    int x = 1;
+
+    void setX(int x) {
+        this.x = x;
+    }
+
+    boolean equals(Object other) {
+	if (! (other instanceOf A)) {
+            return false;
+        }
+        other = (A) (other);
+        return (this.x == other.x)
+    }
+
+}
+
+{
+    A a = new A();
+    A other = new A();
+
+    if ( a.equals(other) ) {
+        print("OK1 ");
+    }
+    
+    other.setX(2);
+    if ( ! a.equals(other) ) {
+        print("OK2");
+    }
+}

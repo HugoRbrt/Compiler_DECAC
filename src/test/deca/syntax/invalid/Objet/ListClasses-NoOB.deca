@@ -1,0 +1,14 @@
+// Description:
+//      Syntaxically incorrect program
+//
+// Result:
+//      Parsing error on line 16
+//
+// History:
+//      Created in 17/1/2022
+
+class A
+}
+{
+
+}

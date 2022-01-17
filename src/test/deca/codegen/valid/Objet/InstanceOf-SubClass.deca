@@ -1,0 +1,24 @@
+// Description:
+//      Program verifying if instanceof is well designed for 
+//      a mother class towards one of its daughter
+//
+// Result:
+//      Nice
+//
+// History:
+//      created on 17/1/2022
+
+
+class B { }
+class C extends B { }
+
+{
+    B b;
+    b = new B();
+
+    if (b instanceof C) {
+        println("KO");
+    } else {
+        println("Nice");
+    }
+}

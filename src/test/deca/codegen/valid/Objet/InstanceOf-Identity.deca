@@ -1,0 +1,19 @@
+// Description:
+//      Program verifying if a program variable
+//      is an instance of the Class that it was assigned to
+//
+// Result:
+//      OK
+//
+// History:
+//      created on 17/1/2022
+
+
+class A { }
+
+{
+    A a = new A();
+    if (a instanceof A) {
+        println("OK");
+    }
+}

@@ -21,6 +21,15 @@ public class Return extends AbstractInst {
             ClassDefinition currentClass, Type returnType) throws ContextualError {
         Type currentType = returnExpr.verifyExpr(compiler, localEnv, currentClass);
         returnExpr.setType(currentType);
+        if (returnType.isVoid()) {
+            throw new ContextualError(
+                    "(RULE 3.24) Incorrect usage of 'return' instruction.",
+                    returnExpr.getLocation());
+        }
+        /* Extra rule added, not required by specification. Keep or remove?
+        *  Assignment will take care of incorrect return values; only useful
+        *  in case of method call without assignment.
+        */
         if (!returnType.sameType(currentType)) {
             throw new ContextualError(
                     "(RULE 3.24) Incompatible return expression type.",

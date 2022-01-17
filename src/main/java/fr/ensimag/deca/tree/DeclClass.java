@@ -80,7 +80,6 @@ public class DeclClass extends AbstractDeclClass {
         }
         cl.setNumberOfMethods(superCl.getNumberOfMethods());
         for (AbstractDeclMethod m: methods.getList()) {
-            cl.incNumberOfMethods();
             m.verifyMethod(compiler, cl.getMembers(), cl, cl.getNumberOfMethods());
         }
     }

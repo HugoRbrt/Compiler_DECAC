@@ -1,0 +1,16 @@
+// Description:
+//      Syntaxically correct program with classes with attributes and empty methods
+//
+// Result:
+//      nothing
+//
+// History:
+//      Created in 17/1/2022
+
+class A extends B{
+    boolean y;
+}
+
+class B extends A {
+    protected int x;
+}

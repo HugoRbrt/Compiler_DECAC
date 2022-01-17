@@ -1,0 +1,30 @@
+// Description:
+//      Syntaxically correct program with classes with attributes and methods with multiple parameters
+//
+// Result:
+//      nothing
+//
+// History:
+//      Created in 17/1/2022
+
+class A {
+    int x;
+    int y;
+    protected boolean x;
+    void test(int x, int y, int z, boolean x, float f) {
+        print(x);
+        print(z);
+    }
+    void test2(int y, int f) {
+        print(f);
+    }
+}
+
+class B {
+    int x;
+    protected boolean x;
+    protected boolean y = false;
+    void test(boolean x, flot z, int u) {
+        float x = 0;
+    }
+}

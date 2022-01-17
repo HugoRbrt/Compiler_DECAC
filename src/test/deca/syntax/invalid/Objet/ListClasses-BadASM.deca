@@ -1,0 +1,20 @@
+// Description:
+//      Syntaxically incorrect program
+//
+// Result:
+//      Parsing error on line 11
+//
+// History:
+//      Created in 17/1/2022
+
+class A {
+    int assemble() asm {
+        "
+        ADD R0, R1
+        BADINST R2, R0
+        LOAD 1(GB), R0
+        "
+    };
+
+}
+

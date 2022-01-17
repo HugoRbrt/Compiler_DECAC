@@ -1,0 +1,51 @@
+// Description:
+//      Redifinition of equal two times to see the difference
+//
+// Result:
+//      OK1 OK2
+//
+// History:
+//      created on 17/1/2022
+
+class A {
+    int x = 1;
+
+    void setX(int x) {
+        this.x = x;
+    }
+
+    boolean equals(Object other) {
+	if (! (other instanceOf A)) {
+            return false;
+        }
+        other = (A) (other);
+        return (this.x == other.x)
+    }
+}
+
+class B extends A { 
+
+    boolean equals(Object other) {
+	if (! (other instanceOf B)) {
+            return false;
+        }
+        other = (B) (other);
+        return (this.x == other.x)
+    }
+}
+
+
+
+{
+    A a = new A();
+    B b = new B();
+
+    if ( a.equals(b) ) { // we have (b instance of A && b.x == a.x)
+        print("OK1 ");
+    }
+    
+    other.setX(2);
+    if ( ! b.equals(a) ) { // we have (! a instance of A)
+        print("OK2");
+    }
+}

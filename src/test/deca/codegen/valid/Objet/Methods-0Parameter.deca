@@ -1,0 +1,25 @@
+// Description:
+//      Testing a function without parameter
+//
+// Result:
+//      17
+//
+// History:
+//      Created on 17/1/2022
+
+class A {
+    int x = 17;
+
+    void function() {
+        println(x);
+    }
+
+    float y;
+}
+
+{
+    A a = new A();
+    a.function();
+}
+
+

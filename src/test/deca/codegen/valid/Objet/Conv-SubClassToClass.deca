@@ -1,0 +1,19 @@
+// Description:
+//      Valid program for a cast of a subclass on a class
+//
+// Result:
+//      11
+//
+// History:
+//      created on 17/1/2022
+
+
+class A { }
+class B extends A { int x = 1; }
+
+{
+    A a = new B();
+    println(a.x);
+    a = (A) (a);
+    println(a.x);
+}

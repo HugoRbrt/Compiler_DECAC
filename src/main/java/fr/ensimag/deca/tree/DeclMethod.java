@@ -43,7 +43,9 @@ public class DeclMethod extends AbstractDeclMethod {
      * @param currentClass
      * @param counter
      *          Counter to index the methods; counts from number of inherited
-     *      *   methods + 1.
+     * methods. If the method overrides a superclass method, the counter takes
+     * the superclass method's index number, otherwise it is incremented by
+     * one and this value provides the index number.
      * @throws ContextualError
      */
     @Override
@@ -68,6 +70,10 @@ public class DeclMethod extends AbstractDeclMethod {
                 throw new ContextualError(
                         "(RULE 2.7) Invalid method override.", methodName.getLocation());
             }
+            counter = mdef.getIndex();
+        } else {
+            currentClass.incNumberOfMethods();
+            counter++;
         }
         try {
             localEnv.declare(

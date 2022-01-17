@@ -1,0 +1,18 @@
+// Description:
+//      Program casting a class onto herself
+//
+// Result:
+//      11
+//
+// History:
+//      created on 17/1/2022
+
+
+class A { int x = 1; }
+
+{
+    A a = new A();
+    println(a.x);
+    a = (A) (a);
+    println(a.x);
+}

@@ -1,0 +1,18 @@
+// Description:
+//      Syntaxically correct program with multiple empty class bodies followed by main
+//
+// Result:
+//      nothing
+//
+// History:
+//      Created in 17/1/2022
+
+class A {
+    int foo() {
+        return 2;
+    }
+}
+
+{
+    A a = new A();
+}

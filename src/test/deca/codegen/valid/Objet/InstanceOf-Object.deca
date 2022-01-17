@@ -1,0 +1,18 @@
+// Description:
+//      Program verifying if an instance of a random class
+//      is linked to Object
+//
+// Result:
+//      OK
+//
+// History:
+//      created on 17/1/2022
+
+
+class A {}
+{
+    A a = new A();
+    if (a instanceof Object) {
+        println("OK");
+    }
+}
