@@ -51,14 +51,11 @@ public class Program extends AbstractProgram {
 
     @Override
     public void codeGenProgram(DecacCompiler compiler) {
-        // A FAIRE: compléter ce squelette très rudimentaire de code
-
         //creation of the register bench with a given number of registers
         compiler.setListRegister(new Register(compiler.getCompilerOptions().getRegisters()));
-        compiler.addComment("Main program");
-        classes.codeGen(compiler);
+        classes.codeGenTable(compiler);
         main.codeGenMain(compiler);
-        compiler.addInstruction(new HALT());
+        classes.codeGen(compiler);
     }
 
     @Override

@@ -23,7 +23,9 @@ public class EmptyMain extends AbstractMain {
 
     @Override
     protected void codeGenMain(DecacCompiler compiler) {
-        compiler.addComment("Empty main here");
+        compiler.addComment(" --------------------------------------------------");
+        compiler.addComment("             Empty Main Program");
+        compiler.addComment(" --------------------------------------------------");
     }
 
     /**

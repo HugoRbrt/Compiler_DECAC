@@ -9,7 +9,7 @@ import org.apache.commons.lang.Validate;
  * @author Ensimag
  * @date 01/01/2022
  */
-public class Label extends Operand {
+public class Label extends DVal {
     private static int i=0;
 
     @Override

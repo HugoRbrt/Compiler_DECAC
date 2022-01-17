@@ -5,6 +5,11 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
 
 import java.io.PrintStream;
 
@@ -30,5 +35,9 @@ public abstract class AbstractDeclField extends Tree {
      *
      * @param compiler
      */
-    protected abstract void codeGen(DecacCompiler compiler, int fieldCounter);
+    protected void codeGen(DecacCompiler compiler, int fieldCounter){
+        compiler.addInstruction(new LOAD(new ImmediateInteger(0), Register.R0));
+        compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.R1));
+        compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(fieldCounter+1, Register.R1)));
+    }
 }

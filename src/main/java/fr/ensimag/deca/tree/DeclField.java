@@ -105,10 +105,4 @@ public class DeclField extends AbstractDeclField {
         fieldName.iter(f);
         initialization.iter(f);
     }
-
-    protected void codeGen(DecacCompiler compiler, int fieldCounter){
-        compiler.addInstruction(new LOAD(new ImmediateInteger(0), compiler.getListRegister().R0));
-        compiler.addInstruction(new LOAD(new RegisterOffset(-2, compiler.getListRegister().LB), compiler.getListRegister().R1));
-        compiler.addInstruction(new STORE(compiler.getListRegister().R0, new RegisterOffset(fieldCounter+1, compiler.getListRegister().R1)));
-    }
 }

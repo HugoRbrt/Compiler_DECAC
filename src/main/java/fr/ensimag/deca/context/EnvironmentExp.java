@@ -3,6 +3,7 @@ package fr.ensimag.deca.context;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -42,7 +43,6 @@ public class EnvironmentExp {
     /**
      * Return the definition of the symbol in the environment, or null if the
      * symbol is undefined.
-     * @return
      */
     public ExpDefinition get(Symbol key) {
         if (environment.containsKey(key)) {
@@ -52,6 +52,17 @@ public class EnvironmentExp {
             return null;
         }
         return parentEnvironment.get(key);
+    }
+
+    public void getSymbolMethod(Symbol[] symbolList){
+        if(parentEnvironment != null){
+            parentEnvironment.getSymbolMethod(symbolList);
+        }
+        for(Symbol s : environment.keySet()){
+            if(environment.get(s).isMethod()){
+                symbolList[((MethodDefinition)environment.get(s)).getIndex() - 1] = s;
+            }
+        }
     }
 
     /**

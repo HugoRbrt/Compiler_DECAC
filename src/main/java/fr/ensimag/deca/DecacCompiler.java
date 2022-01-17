@@ -327,12 +327,7 @@ public class DecacCompiler implements Runnable {
             return false;
         }
 
-        addComment("start main program");
         prog.codeGenProgram(this);
-
-
-        
-        addComment("end main program");
         
         // after analysis of the program, we generate the TSTO instruction
         int d1 = codeAnalyzer.getNeededStackSize();

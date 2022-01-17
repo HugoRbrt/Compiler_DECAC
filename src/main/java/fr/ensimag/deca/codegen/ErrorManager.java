@@ -80,11 +80,13 @@ public class ErrorManager {
      * ErrorManager generates codes for errors that are put there
      */
     public void genCodeErrorManager(DecacCompiler compiler) {
-        compiler.addComment("--- ERROR SECTION ---");
+        compiler.addComment(" --------------------------------------------------");
+        compiler.addComment("             Error messages");
+        compiler.addComment(" --------------------------------------------------");
         errorMap.forEach((name, label)
                 -> genCodeError(label, "ERROR: " + name, compiler));
     }
-
+    src/main/java/fr/ensimag/ima/pseudocode/Label.java
 
     /**
      * Generates the initial code for the stack overflow test
