@@ -4,6 +4,7 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable;
+import fr.ensimag.ima.pseudocode.Label;
 import org.apache.commons.lang.Validate;
 
 import java.io.PrintStream;
@@ -100,5 +101,11 @@ public class DeclMethod extends AbstractDeclMethod {
         methodName.iter(f);
         declParameters.iter(f);
         block.iterChildren(f);
+    }
+
+    protected void codeGen(DecacCompiler compiler, String className){
+        compiler.addLabel(new Label(className+"."+methodName.getName().getName()));
+        //il faudra ajouter dans la pile une case mémoire correspondant à la méthde ajouté
+        //TODO
     }
 }

@@ -1,0 +1,22 @@
+// Description:
+//      Program trying to achieve a null dereferencement
+//
+// Result:
+//      ERROR: dereferencing null
+//
+// History:
+//      created on 17/1/2022
+
+class Null {
+    float documentation;
+    
+    void redige(float texte) {
+        println(texte);
+    }
+}
+
+{ 
+    Null laRSE;
+    float COP26 = 2016.0;
+    println(laRSE.redige(COP26));
+}

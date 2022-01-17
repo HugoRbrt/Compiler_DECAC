@@ -1,0 +1,5 @@
+etiquette:
+	NEW #100000000, R2
+	BRA etiquette
+
+	HALT

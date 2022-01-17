@@ -32,4 +32,11 @@ public abstract class AbstractDeclClass extends Tree {
     protected abstract void verifyClassBody(DecacCompiler compiler)
             throws ContextualError;
 
+
+    /**
+     * Generate assembly code for the IMA instruction.
+     *
+     * @param compiler
+     */
+    protected abstract void codeGen(DecacCompiler compiler);
 }

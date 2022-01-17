@@ -1,0 +1,21 @@
+// Description:
+//      Program declaring a subclass and printing
+//      one of its inherited fields
+//
+// Result:
+//      1
+//
+// History:
+//      created on 17/1/2022
+
+class C {
+    int x = 1;	
+}
+
+class D extends C {
+}
+
+{
+    D d = new D();
+    println(d.x);
+}

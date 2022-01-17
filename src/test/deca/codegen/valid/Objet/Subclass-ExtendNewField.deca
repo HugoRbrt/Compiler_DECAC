@@ -1,0 +1,22 @@
+// Description:
+//      Program using a subclass redeclaring one of the strings
+//
+// Result:
+//      c.x=0, d.x=1
+//
+// History:
+//      created on 17/1/2022
+
+class C {
+    int x;	
+}
+
+class D extend C {
+    int x = 1;
+}
+
+{
+    C c = new C();
+    D d = new D();
+    print("c.x=", c.x, "d.x=", d.x);
+}

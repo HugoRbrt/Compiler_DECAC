@@ -1,0 +1,24 @@
+// Description:
+//    Casting a boolean onto itself
+//
+// Results:
+//     OKOK
+//
+// History:
+//    created on 14/01/2022
+
+{
+    boolean yes = true;
+    boolean no = false;
+    
+    if ( (boolean) (!yes) ) {
+        print("KO");
+    } else {
+        print("OK");
+    }
+
+    if ( (boolean) (!no) ) {
+        print("OK");
+    }
+
+}
