@@ -1,0 +1,14 @@
+// Description:
+//      Program declaring a class with 0 field and 0 method
+//
+// Result:
+//      nothing
+//
+// History:
+//      created on 17/1/2022
+
+class C {
+	
+}
+
+{}

@@ -1,0 +1,21 @@
+// Description:
+//      Program declaring two fields, one with the same name and a new one
+//
+// Result:
+//      x=2, y=3
+//
+// History:
+//      created on 17/1/2022
+
+class C {
+    int x = 1;	
+}
+
+class D extends C {
+    int x = 2;
+    int y = 3;
+}
+
+{
+    D d = new D();
+    println("x=", d.x, ", y=", d.y);

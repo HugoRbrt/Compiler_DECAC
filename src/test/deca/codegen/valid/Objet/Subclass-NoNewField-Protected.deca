@@ -1,0 +1,21 @@
+// Description:
+//      Program declaring a subclass without new field
+//      and printing one of these fields
+//
+// Result:
+//      1
+//
+// History:
+//      created on 17/1/2022
+
+class C {
+    protected int x = 1;	
+}
+
+class D extends C {
+}
+
+{
+    D d = new D();
+    println(d.x);
+}

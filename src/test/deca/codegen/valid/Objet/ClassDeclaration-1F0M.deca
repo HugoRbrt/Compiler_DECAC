@@ -1,0 +1,19 @@
+// Description:
+//      Program declaring a class with 1 field and 0 method
+//
+// Result:
+//      1
+//
+// History:
+//      created on 17/1/2022
+
+class C {
+    int x;
+}
+
+{
+    C c = new C();
+    c.x = 1;
+    println(c.x);
+}
+
