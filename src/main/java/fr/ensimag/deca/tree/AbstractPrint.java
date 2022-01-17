@@ -3,11 +3,6 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.ima.pseudocode.ARMRegister;
-import fr.ensimag.ima.pseudocode.ARMLine;
-import fr.ensimag.ima.pseudocode.instructionsARM.ldr;
-import fr.ensimag.ima.pseudocode.instructionsARM.mov;
-import fr.ensimag.ima.pseudocode.instructionsARM.svc;
 import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.ima.pseudocode.Label;
 import java.io.PrintStream;
@@ -57,27 +52,6 @@ public abstract class AbstractPrint extends AbstractInst {
             a.codeGenPrint(compiler, printHex);
         }
     }
-
-    @Override
-    protected void codeGenInstARM(DecacCompiler compiler) {
-        for (AbstractExpr a : getArguments().getList()) {
-            String msgName = "msg"+printCounter;
-            String lenMsgName = "len"+printCounter;
-            printCounter++;
-            ARMRegister R = (ARMRegister) compiler.getListRegister();
-            compiler.addInstruction(new mov(R.r0,1));
-            compiler.addInstruction(new ldr(R.r1, "="+msgName));
-            compiler.addInstruction(new ldr(R.r2, "="+lenMsgName));
-            compiler.add(new ARMLine(".data"));
-            compiler.add(new ARMLine(msgName+":"));
-            a.codeGenPrintARM(compiler);
-            compiler.add(new ARMLine(lenMsgName+" = . - "+msgName));
-            compiler.add(new ARMLine(".text"));
-            compiler.addInstruction(new mov(R.r7,4));
-            compiler.addInstruction(new svc(0));
-        }
-    }
-
 
     private boolean getPrintHex() {
         return printHex;

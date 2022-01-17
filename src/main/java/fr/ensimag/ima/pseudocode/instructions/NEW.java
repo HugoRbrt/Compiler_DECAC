@@ -2,7 +2,7 @@ package fr.ensimag.ima.pseudocode.instructions;
 
 import fr.ensimag.ima.pseudocode.BinaryInstructionDValToReg;
 import fr.ensimag.ima.pseudocode.DVal;
-import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
 
 /**
@@ -11,11 +11,11 @@ import fr.ensimag.ima.pseudocode.ImmediateInteger;
  */
 public class NEW extends BinaryInstructionDValToReg {
 
-    public NEW(DVal size, GPRegister destination) {
+    public NEW(DVal size,Register destination) {
         super(size, destination);
     }
 
-    public NEW(int size, GPRegister op2) {
+    public NEW(int size, Register op2) {
         super(new ImmediateInteger(size), op2);
     }
 

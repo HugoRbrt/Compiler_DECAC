@@ -21,10 +21,5 @@ public class InlinePortion extends AbstractLine {
     void display(PrintStream s) {
         s.println(asmCode);
     }
-
-    @Override
-    void ARMdisplay(PrintStream s) {
-        s.println(asmCode);
-    }
-
+    
 }

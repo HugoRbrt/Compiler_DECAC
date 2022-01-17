@@ -9,7 +9,6 @@ import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 import fr.ensimag.ima.pseudocode.Register;
-import fr.ensimag.ima.pseudocode.ARMRegister;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.Line;
 
@@ -57,20 +56,10 @@ public class Program extends AbstractProgram {
         //creation of the register bench with a given number of registers
         compiler.setListRegister(new Register(compiler.getCompilerOptions().getRegisters()));
         compiler.addComment("Main program");
+        classes.codeGen(compiler);
         main.codeGenMain(compiler);
         compiler.addInstruction(new HALT());
     }
-
-    public void codeGenProgramARM(DecacCompiler compiler) {
-        // A FAIRE: compléter ce squelette très rudimentaire de code
-        compiler.addARMBlock(".text");
-        compiler.addARMBlock(".global _start");
-        compiler.addARMComment("ARM program");
-        //creation of ARM Register
-        compiler.setListRegister(new ARMRegister());
-        main.codeGenMainARM(compiler);
-    }
-    
 
     @Override
     public void decompile(IndentPrintStream s) {

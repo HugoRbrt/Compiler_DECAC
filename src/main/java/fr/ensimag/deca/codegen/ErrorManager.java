@@ -80,6 +80,7 @@ public class ErrorManager {
      * ErrorManager generates codes for errors that are put there
      */
     public void genCodeErrorManager(DecacCompiler compiler) {
+        compiler.addComment("--- ERROR SECTION ---");
         errorMap.forEach((name, label)
                 -> genCodeError(label, "ERROR: " + name, compiler));
     }
@@ -91,9 +92,9 @@ public class ErrorManager {
      */
     public void addTstoCheck(DecacCompiler compiler) {
         // Start point for the program
-        compiler.addFirstInstruction(new ADDSP(tstoArg));
+        compiler.addFirstInstruction(new ADDSP(addspArg));
         compiler.addFirstInstruction(new BOV(errorMap.get("Stack overflow , a real one")));
-        compiler.addFirstInstruction(new TSTO(addspArg));
+        compiler.addFirstInstruction(new TSTO(tstoArg));
     }
 
 
@@ -103,7 +104,6 @@ public class ErrorManager {
      * @params compiler : the compiler to write in
      */
     private void genCodeError(Label label, String msg, DecacCompiler compiler) {
-        compiler.addComment("- Error message --");
         compiler.addLabel(label);
         compiler.addInstruction(new WSTR(new ImmediateString(msg)));
         compiler.addInstruction(new WNL());

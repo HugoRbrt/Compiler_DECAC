@@ -4,10 +4,8 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.ima.pseudocode.ARMRegister;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.ima.pseudocode.ARMLine;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
 import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
@@ -54,11 +52,6 @@ public class FloatLiteral extends AbstractExpr {
         else {
             compiler.addInstruction(new WFLOAT());
         }
-    }
-
-    @Override
-    protected void codeGenPrintARM(DecacCompiler compiler) {
-        compiler.add(new ARMLine(".ascii " +"\"" +value + "\""));
     }
 
     @Override

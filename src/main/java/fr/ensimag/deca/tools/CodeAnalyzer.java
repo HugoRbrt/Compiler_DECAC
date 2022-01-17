@@ -63,7 +63,7 @@ public class CodeAnalyzer {
      */
     public void incrDeclaredVariables(int nbVariables) {
         nbDeclaredVariables += nbVariables;
-        LOG.debug(Integer.toString(nbDeclaredVariables));
+        LOG.debug("Tracked variables :" + Integer.toString(nbDeclaredVariables));
     }
 
 }

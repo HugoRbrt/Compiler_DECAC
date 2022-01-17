@@ -1,7 +1,5 @@
 package fr.ensimag.deca;
 
-//import com.sun.tools.doclint.Env;
-import fr.ensimag.deca.codegen.StringIdentMap;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
@@ -9,35 +7,28 @@ import fr.ensimag.deca.codegen.ErrorManager;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.deca.tools.StackHashTableSymbol;
-import fr.ensimag.deca.tools.StackHashTableSymbol;
 import fr.ensimag.deca.tools.CodeAnalyzer;
 import fr.ensimag.deca.tree.AbstractProgram;
 import fr.ensimag.deca.tree.Location;
 import fr.ensimag.deca.tree.LocationException;
 import fr.ensimag.ima.pseudocode.AbstractLine;
 import fr.ensimag.ima.pseudocode.IMAProgram;
-import fr.ensimag.ima.pseudocode.ARMProgram;
 import fr.ensimag.ima.pseudocode.GenericProgram;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.Register;
-import fr.ensimag.ima.pseudocode.ARMRegister;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Objects;
-import java.util.LinkedList;
-import java.util.HashMap;
-import java.util.Map;
 import java.lang.Runnable;
 
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.log4j.Logger;
-import fr.ensimag.deca.tools.SymbolTable.Symbol;
 
 /**
  * Decac compiler instance.
@@ -68,16 +59,13 @@ public class DecacCompiler implements Runnable {
     private StackHashTableSymbol stackTable = new StackHashTableSymbol();
     private CodeAnalyzer codeAnalyzer = new CodeAnalyzer();
     private ErrorManager errorManager = new ErrorManager();
-    private StringIdentMap stringIdentMap = new StringIdentMap();
 
     public DecacCompiler(CompilerOptions compilerOptions, File source) {
         super();
         this.compilerOptions = compilerOptions;
-        if(Objects.isNull(this.compilerOptions) || !this.compilerOptions.getArmBool()){
-            program = new IMAProgram();
-        }else{
-            program = new ARMProgram();
-        }
+
+        program = new IMAProgram();
+
         this.source = source;
 
         predefinedEnvironments();
@@ -125,13 +113,6 @@ public class DecacCompiler implements Runnable {
     }
 
     /**
-     * Symbols associated with the String value
-     */
-    public StringIdentMap getIdentMap() {
-        return stringIdentMap;
-    }
-
-    /**
      * Gencode analyzer for the stack's needs
      */
     public CodeAnalyzer getCodeAnalyzer() {
@@ -160,12 +141,6 @@ public class DecacCompiler implements Runnable {
         program.addComment(comment);
     }
 
-    /**
-     * @see fr.ensimag.ima.pseudocode.IMAProgram#addARMComment(java.lang.String)
-     */
-    public void addARMComment(String comment) {
-        program.addComment(comment);
-    }
 
     /**
      * @see
@@ -181,15 +156,6 @@ public class DecacCompiler implements Runnable {
      */
     public void addInstruction(Instruction instruction) {
         program.addInstruction(instruction);
-    }
-
-    /**
-     * @see
-     * fr.ensimag.ima.pseudocode.IMAProgram#addOther(fr.ensimag.ima.pseudocode.Instruction)
-     */
-    public void addARMBlock(String other) {
-        ARMProgram armP = (ARMProgram)program;
-        armP.addARMBlock(other);
     }
 
 
@@ -251,11 +217,11 @@ public class DecacCompiler implements Runnable {
         for (int i = 1; i < tmp.length-1; i++) {
             destFile += "." +tmp[i];
         }
-        if(Objects.isNull(this.compilerOptions) || !this.compilerOptions.getArmBool()){
-            destFile += ".ass";
-        }else{
+        /*if(Objects.isNull(this.compilerOptions) || !this.compilerOptions.getArmBool()){*/
+        destFile += ".ass";
+        /*else{
             destFile += ".s";
-        }
+        }*/
         LOG.info(" dest:"+ destFile);
         PrintStream err = System.err;
         PrintStream out = System.out;
@@ -362,11 +328,9 @@ public class DecacCompiler implements Runnable {
         }
 
         addComment("start main program");
-        if(Objects.isNull(this.compilerOptions) || !this.compilerOptions.getArmBool()){
-            prog.codeGenProgram(this);
-        }else{
-            prog.codeGenProgramARM(this);
-        }
+        prog.codeGenProgram(this);
+
+
         
         addComment("end main program");
         

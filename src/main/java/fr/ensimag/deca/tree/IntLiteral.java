@@ -6,11 +6,9 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.ima.pseudocode.ARMLine;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.WINT;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
-import fr.ensimag.ima.pseudocode.ARMRegister;
 
 import java.io.PrintStream;
 
@@ -42,12 +40,6 @@ public class IntLiteral extends AbstractExpr {
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex) {
         compiler.addInstruction(new LOAD(new ImmediateInteger(value),compiler.getListRegister().R1));
         compiler.addInstruction(new WINT());
-    }
-
-
-    @Override
-    protected void codeGenPrintARM(DecacCompiler compiler) {
-        compiler.add(new ARMLine(".ascii " +"\"" +value + "\""));
     }
 
     @Override

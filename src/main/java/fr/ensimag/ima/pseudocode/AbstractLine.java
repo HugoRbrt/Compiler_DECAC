@@ -10,5 +10,4 @@ import java.io.PrintStream;
  */
 public abstract class AbstractLine {
     abstract void display(PrintStream s);
-    abstract void ARMdisplay(PrintStream s);
 }

@@ -5,11 +5,6 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.ImmediateString;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
-import fr.ensimag.ima.pseudocode.instructionsARM.ldr;
-import fr.ensimag.ima.pseudocode.instructionsARM.mov;
-import fr.ensimag.ima.pseudocode.instructionsARM.svc;
-import fr.ensimag.ima.pseudocode.ARMRegister;
-import fr.ensimag.ima.pseudocode.ARMLine;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.AbstractLine;
 import java.util.LinkedList;
@@ -65,11 +60,6 @@ public class StringLiteral extends AbstractStringLiteral {
     @Override
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex) {
         compiler.addInstruction(new WSTR(new ImmediateString(value)));
-    }
-
-    @Override
-    protected void codeGenPrintARM(DecacCompiler compiler) {
-        compiler.add(new ARMLine(".ascii " +"\"" +value + "\""));
     }
 
     @Override

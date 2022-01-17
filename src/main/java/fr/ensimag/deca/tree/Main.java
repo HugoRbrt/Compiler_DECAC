@@ -9,7 +9,6 @@ import fr.ensimag.deca.tools.SymbolTable;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 import fr.ensimag.ima.pseudocode.*;
-import fr.ensimag.ima.pseudocode.instructionsARM.*;
 
 /**
  * @author gl49
@@ -46,21 +45,7 @@ public class Main extends AbstractMain {
         declVariables.codeGenListDeclVar(compiler);
         insts.codeGenListInst(compiler);
     }
-    @Override
-    protected void codeGenMainARM(DecacCompiler compiler) {
-        /* Paul, le 6/1 : cette partie du code est à décommenter pour plus tard
-        compiler.addComment("Beginning of variables declaration");
-        declVariables.codeListDeclVar(compiler); */
-        compiler.addARMComment("Beginning of main ARM instructions:");
-        compiler.addARMBlock("_start:");
-        ARMRegister R = (ARMRegister) compiler.getListRegister();
-        insts.codeGenListInstARM(compiler);
-        compiler.addInstruction(new mov(R.r0,0));
-        compiler.addInstruction(new mov(R.ARMUseSpecificRegister(7),1));
-        compiler.addInstruction(new svc(0));
 
-    }
-    
     @Override
     public void decompile(IndentPrintStream s) {
         s.println("{");
