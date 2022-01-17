@@ -39,9 +39,9 @@ public class DeclMethod extends AbstractDeclMethod {
      * @param currentClass
      * @param counter
      *          Counter to index the methods; counts from number of inherited
-     * methods. If the method overrides a superclass method, the counter
-     * takes the superclass method's index number, otherwise it is incremented
-     * by one and this value provides the index number.
+     * methods. If the method overrides a superclass method, the counter takes
+     * the superclass method's index number, otherwise it is incremented by
+     * one and this value provides the index number.
      * @throws ContextualError
      */
     @Override

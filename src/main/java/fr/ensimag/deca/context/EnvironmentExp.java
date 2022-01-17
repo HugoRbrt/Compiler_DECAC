@@ -2,6 +2,7 @@ package fr.ensimag.deca.context;
 
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
