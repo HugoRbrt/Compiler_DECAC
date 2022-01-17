@@ -1,9 +1,12 @@
 package fr.ensimag.deca.context;
 
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.deca.tree.AbstractIdentifier;
+import fr.ensimag.deca.tree.DeclClass;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -43,7 +46,6 @@ public class EnvironmentExp {
     /**
      * Return the definition of the symbol in the environment, or null if the
      * symbol is undefined.
-     * @return
      */
     public ExpDefinition get(Symbol key) {
         if (environment.containsKey(key)) {
@@ -53,6 +55,20 @@ public class EnvironmentExp {
             return null;
         }
         return parentEnvironment.get(key);
+    }
+
+    public void getSymbolMethod(Symbol[] symbolList, ClassDefinition className){
+        if(parentEnvironment != null){
+            parentEnvironment.getSymbolMethod(symbolList, className.getSuperClass());
+        }
+        for(Symbol s : environment.keySet()){
+            if(environment.get(s).isMethod()){
+                if(!s.getName().contains("code.")){
+                    s.setName("code."+className.getNature()+"."+s.getName());
+                }
+                symbolList[((MethodDefinition)environment.get(s)).getIndex() - 1] = s;
+            }
+        }
     }
 
     /**

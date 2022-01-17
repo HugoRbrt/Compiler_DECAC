@@ -9,7 +9,7 @@ import org.apache.commons.lang.Validate;
  * @author Ensimag
  * @date 01/01/2022
  */
-public class Label extends Operand {
+public class Label extends DVal {
     private static int i=0;
 
     @Override
@@ -25,7 +25,7 @@ public class Label extends Operand {
     public Label(String name) {
         super();
         Validate.isTrue(name.length() <= 1024, "Label name too long, not supported by IMA");
-        Validate.isTrue(name.matches("^[a-zA-Z][a-zA-Z0-9_.]*$"), "Invalid label name " + name);
+        //Validate.isTrue(name.matches("^[a-zA-Z][a-zA-Z0-9_.]*$"), "Invalid label name " + name);
         this.name = name;
     }
     private String name;

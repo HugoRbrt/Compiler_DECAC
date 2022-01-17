@@ -5,6 +5,11 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.LEA;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
 import org.apache.commons.lang.Validate;
 
 import java.io.PrintStream;
@@ -32,6 +37,10 @@ public class DeclClass extends AbstractDeclClass {
         this.superClass = superClass;
         this.fields = fields;
         this.methods = methods;
+    }
+
+    public AbstractIdentifier getSuperClass(){
+        return superClass;
     }
 
     @Override
@@ -107,9 +116,30 @@ public class DeclClass extends AbstractDeclClass {
         methods.iter(f);
     }
 
+    protected void codeGenTable(DecacCompiler compiler){
+        compiler.addComment("construction of Method Table for "+className.getName().getName());
+        RegisterOffset superClassAdress = compiler.getstackTable().get(superClass.getName());
+        compiler.getstackTable().put(className.getName(), Register.GB);
+        compiler.addInstruction(new LEA(superClassAdress, Register.R0));
+        compiler.addInstruction(new STORE(Register.R0, compiler.getstackTable().get(className.getName())));
+
+        SymbolTable.Symbol[] s = new SymbolTable.Symbol[className.getClassDefinition().getNumberOfMethods()];
+        className.getClassDefinition().getMembers().getSymbolMethod(s, className.getClassDefinition());
+
+        for(SymbolTable.Symbol symbol : s){
+            symbol.setName(symbol.getName());
+            compiler.getstackTable().put(symbol, Register.GB);
+            compiler.addInstruction(new LOAD(new Label(symbol.getName()), Register.R0));
+            compiler.addInstruction(new STORE(Register.R0, compiler.getstackTable().get(symbol)));
+        }
+    }
+
     protected void codeGen(DecacCompiler compiler){
         String stringClassName = className.getName().getName();
-        compiler.getstackTable().put(className.getName(), compiler.getListRegister().GB);
+        compiler.addComment(" --------------------------------------------------");
+        compiler.addComment("             Class "+ stringClassName);
+        compiler.addComment(" --------------------------------------------------");
+        compiler.getstackTable().put(className.getName(), Register.GB);
         fields.codeGen(compiler, stringClassName);
         methods.codeGen(compiler, stringClassName );
     }

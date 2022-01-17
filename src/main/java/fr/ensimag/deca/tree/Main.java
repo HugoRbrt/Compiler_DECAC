@@ -6,6 +6,8 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import java.io.PrintStream;
 
 import fr.ensimag.deca.tools.SymbolTable;
+import fr.ensimag.ima.pseudocode.instructions.HALT;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 import fr.ensimag.ima.pseudocode.*;
@@ -38,12 +40,12 @@ public class Main extends AbstractMain {
 
     @Override
     protected void codeGenMain(DecacCompiler compiler) {
-        /* Paul, le 9/1 : cette partie du code est à décommenter pour plus tard 
-        compiler.addComment("Beginning of variables declaration");
-        declVariables.codeGenListDeclVar(compiler); */
-        compiler.addComment("Beginning of main instructions:");
+        compiler.addComment(" --------------------------------------------------");
+        compiler.addComment("             Main Program");
+        compiler.addComment(" --------------------------------------------------");
         declVariables.codeGenListDeclVar(compiler);
         insts.codeGenListInst(compiler);
+        compiler.addInstruction(new HALT());
     }
 
     @Override
