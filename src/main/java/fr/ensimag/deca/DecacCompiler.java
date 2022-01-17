@@ -227,11 +227,11 @@ public class DecacCompiler implements Runnable {
         for (int i = 1; i < tmp.length-1; i++) {
             destFile += "." +tmp[i];
         }
-        if(Objects.isNull(this.compilerOptions) || !this.compilerOptions.getArmBool()){
-            destFile += ".ass";
-        }else{
+        /*if(Objects.isNull(this.compilerOptions) || !this.compilerOptions.getArmBool()){*/
+        destFile += ".ass";
+        /*else{
             destFile += ".s";
-        }
+        }*/
         LOG.info(" dest:"+ destFile);
         PrintStream err = System.err;
         PrintStream out = System.out;
