@@ -1,0 +1,29 @@
+// Description:
+//      Testing a method with at least 4 parameters
+//
+//
+// Result:
+//      0 20.0
+//
+// History:
+//      Created on 17/1/2022
+
+class A {
+    int x=14;
+
+    float function(int v, float w, boolean y, A other) {
+        if ((other.x == this.x) && y) {
+            return (v + w + x);
+	}
+	return 0.0;
+    }
+}
+
+{
+    A a = new A();
+    A other = new A();
+
+    println(a.function(3, 3.0, false, other), " ", a.function(3, 3.0, true, other));
+}
+
+

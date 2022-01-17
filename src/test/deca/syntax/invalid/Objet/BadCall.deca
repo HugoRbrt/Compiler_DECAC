@@ -1,0 +1,19 @@
+// Description:
+//      Calls for class methods/attributes
+//
+// Result:
+//      Parsing error on line 18
+//
+// History:
+//      Created in 17/1/2022
+
+class A {
+    int x;
+    void test(int x) {
+    }
+}
+
+{
+    int y = 0;
+    A.test(int y);
+}

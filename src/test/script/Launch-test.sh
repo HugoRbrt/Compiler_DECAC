@@ -46,19 +46,25 @@ test_invalid () {
     # $1 = first argument : name of files without extension
     # $2 = lex or synt or context
 
+    test_"$2" $TESTPATH/$1.deca 1> tempor.gl49 2>> tempor.gl49
     # invalid include tests are special so they were manually verified
     if echo $TESTPATH/$1.deca 2>&1 | grep -q -e "Include"
         then
             test_"$2" $TESTPATH/$1.deca 1> $TMP/$1.listmp 2>> $TMP/$1.listmp
             echo "${GREEN}[KO] : $1 ${NC}"
-
-    elif test_"$2" $TESTPATH/$1.deca 2>&1 | grep -q -e "$1.deca:[0-9][0-9]*:"
-        then # normal fail
-            test_"$2" $TESTPATH/$1.deca 1> $TMP/$1.listmp 2>> $TMP/$1.listmp
-            echo "${GREEN}[KO] : $1 ${NC}"
-        else # unexpected success
-            echo "${RED}[OK] : $1 ${NC}"
+    # Assertion error
+    elif  grep -q -e "AssertionError" < tempor.gl49
+        then
+            echo "${RED}[KO] : $1 ${NC}"
             exitnum=$(($exitnum + 1))
+
+    elif grep -q -e "$1.deca:[0-9][0-9]*:" < tempor.gl49
+        then # normal fail
+            cp tempor.gl49 $TMP/$1.listmp
+            echo "${GREEN}[KO] : $1 ${NC}"
+    else # unexpected success
+        echo "${RED}[OK] : $1 ${NC}"
+        exitnum=$(($exitnum + 1))
     fi
 }
 
@@ -66,12 +72,13 @@ test_valid () {
     # $1 = first argument : name of files without extension
     # $2 = lex or synt or context
 
-    if test_"$2" $TESTPATH/$1.deca 2>&1 | grep -q "$1.deca"
+    test_"$2" $TESTPATH/$1.deca 1> tempor.gl49 2>> tempor.gl49
+    if grep -q -e "$1.deca" -e "AssertionError" < tempor.gl49
         then 	# unexpected fail
             echo "${RED}[KO] : $1 ${NC}"
             exitnum=$(($exitnum + 1))
         else 	# normal success : we store the new result in a tmp file
-            test_"$2" $TESTPATH/$1.deca 1> $TMP/$1.listmp 2>> $TMP/$1.listmp
+            cp tempor.gl49 $TMP/$1.listmp
             echo "${GREEN}[OK] : $1 ${NC}"
     fi
 }
@@ -86,5 +93,6 @@ do
     test_"$2" "$file" "$1"
 done
 
+rm tempor.gl49
 exit $exitnum
 

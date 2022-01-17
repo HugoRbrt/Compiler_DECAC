@@ -1,0 +1,20 @@
+// Description:
+//      calling the function with a different number of arguments
+//
+// Results:
+//      RUle (3.72) No method found
+//
+// History:
+//      created on 17/1/2022
+
+class A {
+    protected int x;
+    int foo() {
+        return 1;
+    }
+}
+
+{
+    A a = new A();
+    int x = a.foo(5);
+}

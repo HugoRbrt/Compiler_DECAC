@@ -1,0 +1,12 @@
+// Description:
+//      Syntaxically correct program with multiple empty class bodies followed by main
+//
+// Result:
+//      nothing
+//
+// History:
+//      Created in 17/1/2022
+
+{
+    A a = null;
+}

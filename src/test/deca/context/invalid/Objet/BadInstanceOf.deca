@@ -1,0 +1,20 @@
+// Description:
+//      Instance of on non class variables
+//
+// Results:
+//      RUle (3.40) Types not compatible for this operation
+//
+// History:
+//      created on 17/1/2022
+
+class A {
+    protected int x;
+    int foo() {
+        return 1;
+    }
+}
+
+{
+    int y;
+   boolean x = A instanceof  y ;
+}

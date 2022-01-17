@@ -1,0 +1,15 @@
+// Description:
+//      Syntaxically incorrect program
+//
+// Result:
+//      Parsing error on line 12
+//
+// History:
+//      Created in 17/1/2022
+
+class A {
+    protected int x;
+    int test() {
+        protected int y;
+    }
+}

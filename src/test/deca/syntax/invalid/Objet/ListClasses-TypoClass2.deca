@@ -1,0 +1,13 @@
+// Description:
+//      Syntaxically incorrect program
+//
+// Result:
+//      Parsing error on line 10
+//
+// History:
+//      Created in 17/1/2022
+
+clas A {
+    int x;
+    protected boolean x;
+}

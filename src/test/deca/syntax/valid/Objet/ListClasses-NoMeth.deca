@@ -1,0 +1,18 @@
+// Description:
+//      Syntaxically correct program with classes with attributes
+//
+// Result:
+//      nothing
+//
+// History:
+//      Created in 17/1/2022
+
+class A {
+    int x;
+    protected boolean x;
+}
+
+class B {
+    int x;
+    protected boolean x;
+}

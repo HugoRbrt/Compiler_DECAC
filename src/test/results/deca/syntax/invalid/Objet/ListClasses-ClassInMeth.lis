@@ -1,0 +1,1 @@
+src/test/deca/syntax/invalid/Objet/ListClasses-ClassInMeth.deca:12:8: mismatched input 'class' expecting {FLOAT, INT, '}', '(', '-', '!', ';', 'false', 'if', 'new', 'null', 'print', 'println', 'printx', 'printlnx', 'readInt', 'readFloat', 'return', 'this', 'true', 'while', IDENT, STRING}

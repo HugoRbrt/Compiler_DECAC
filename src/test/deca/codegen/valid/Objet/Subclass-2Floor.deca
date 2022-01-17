@@ -1,0 +1,27 @@
+// Description:
+//      Declaration of a mother and grandmother class
+//
+// Result:
+//      c.x=0, d.x=1, e.x=2;
+//
+// History:
+//      created on 17/1/2022
+
+class C {
+    int x;	
+}
+
+class D extends C {
+    int x = 1;
+}
+
+class E extends D {
+    int x = 2;
+}    
+
+{
+    C c = new C();
+    D d = new D();
+    E e = new E();
+    print("c.x=", c.x, "d.x=", d.x, "e.x=", e.x);
+}

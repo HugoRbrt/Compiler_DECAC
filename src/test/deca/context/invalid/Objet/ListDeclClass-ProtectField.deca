@@ -1,0 +1,17 @@
+// Description:
+//      Accessing a protected field in a class
+//
+// Results:
+//      RUle (3.66) Protected field
+//
+// History:
+//      created on 17/1/2022
+
+class A {
+    protected int x;
+}
+
+{
+    A a = new A();
+    print(a.x);
+}

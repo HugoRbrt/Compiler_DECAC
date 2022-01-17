@@ -1,0 +1,20 @@
+// Description:
+//      Method with a void type parameter
+//
+// Results:
+//      RUle (2.9) Method parameter cannot be void
+//
+// History:
+//      created on 17/1/2022
+
+class A {
+    protected int x;
+    int foo(void x) {
+        return 1;
+    }
+}
+
+{
+    A a = new A();
+    int x = a.foo();
+}

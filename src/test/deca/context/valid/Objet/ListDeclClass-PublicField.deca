@@ -1,0 +1,16 @@
+// Description:
+//      Accessing a public field in a class
+//
+// Results:
+//      nothing
+//
+// History:
+//      created on 17/1/2022
+
+class A {
+    int x;
+}
+
+{
+    print(A.x);
+}
