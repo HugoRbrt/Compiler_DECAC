@@ -105,6 +105,8 @@ FALSE: 'false';
 
 IF: 'if';
 
+INSTANCEOF: 'instanceof';
+
 NEW: 'new';
 
 NULL: 'null';
