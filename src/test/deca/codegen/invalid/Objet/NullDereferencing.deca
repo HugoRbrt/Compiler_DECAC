@@ -18,5 +18,5 @@ class Null {
 { 
     Null laRSE;
     float COP26 = 2016.0;
-    println(laRSE.redige(COP26));
+    laRSE.redige(COP26);
 }

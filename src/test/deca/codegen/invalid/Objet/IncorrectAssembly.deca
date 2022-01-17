@@ -12,7 +12,8 @@ class A {
     int x;
 
     void function()
-    asm ( "svc #0 \n RTS" );
+    asm ( "svc #0
+           RTS" );
 
     int y;
 }

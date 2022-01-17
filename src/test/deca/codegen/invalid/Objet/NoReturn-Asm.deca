@@ -12,7 +12,8 @@ class A {
     int x;
 
     int function()
-    asm ( "ADD R0, R1 \n RTS" );
+    asm ( "ADD R0, R1
+           RTS" );
 }
 
 
