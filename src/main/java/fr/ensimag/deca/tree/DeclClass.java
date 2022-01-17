@@ -39,6 +39,10 @@ public class DeclClass extends AbstractDeclClass {
         this.methods = methods;
     }
 
+    public AbstractIdentifier getSuperClass(){
+        return superClass;
+    }
+
     @Override
     public void decompile(IndentPrintStream s) {
         s.print("class { ... A FAIRE ... }");
@@ -120,12 +124,13 @@ public class DeclClass extends AbstractDeclClass {
         compiler.addInstruction(new STORE(Register.R0, compiler.getstackTable().get(className.getName())));
 
         SymbolTable.Symbol[] s = new SymbolTable.Symbol[className.getClassDefinition().getNumberOfMethods()];
-        className.getClassDefinition().getMembers().getSymbolMethod(s);
+        className.getClassDefinition().getMembers().getSymbolMethod(s, className.getClassDefinition());
 
         for(SymbolTable.Symbol symbol : s){
+            symbol.setName(symbol.getName());
             compiler.getstackTable().put(symbol, Register.GB);
-            compiler.addInstruction(new STORE(Register.R0, compiler.getstackTable().get(symbol)));
             compiler.addInstruction(new LOAD(new Label(symbol.getName()), Register.R0));
+            compiler.addInstruction(new STORE(Register.R0, compiler.getstackTable().get(symbol)));
         }
     }
 

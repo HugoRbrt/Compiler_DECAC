@@ -9,6 +9,7 @@ import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
+import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
 import org.apache.commons.lang.Validate;
 
 import java.io.PrintStream;
@@ -115,8 +116,8 @@ public class DeclMethod extends AbstractDeclMethod {
 
     protected void codeGenTable(DecacCompiler compiler, SymbolTable.Symbol classSymbol){
         compiler.getstackTable().put(methodName.getName(), Register.GB);
-        compiler.addInstruction(new STORE(Register.R0, compiler.getstackTable().get(classSymbol)));
         compiler.addInstruction(new LOAD(new Label(methodName.getName().getName()), Register.R0));
+        compiler.addInstruction(new STORE(Register.R0, compiler.getstackTable().get(classSymbol)));
     }
 
     protected void codeGen(DecacCompiler compiler, String className){

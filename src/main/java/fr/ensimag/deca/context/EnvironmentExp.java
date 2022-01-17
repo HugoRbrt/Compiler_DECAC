@@ -1,6 +1,8 @@
 package fr.ensimag.deca.context;
 
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.deca.tree.AbstractIdentifier;
+import fr.ensimag.deca.tree.DeclClass;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,12 +57,15 @@ public class EnvironmentExp {
         return parentEnvironment.get(key);
     }
 
-    public void getSymbolMethod(Symbol[] symbolList){
+    public void getSymbolMethod(Symbol[] symbolList, ClassDefinition className){
         if(parentEnvironment != null){
-            parentEnvironment.getSymbolMethod(symbolList);
+            parentEnvironment.getSymbolMethod(symbolList, className.getSuperClass());
         }
         for(Symbol s : environment.keySet()){
             if(environment.get(s).isMethod()){
+                if(!s.getName().contains("code.")){
+                    s.setName("code."+className.getNature()+"."+s.getName());
+                }
                 symbolList[((MethodDefinition)environment.get(s)).getIndex() - 1] = s;
             }
         }

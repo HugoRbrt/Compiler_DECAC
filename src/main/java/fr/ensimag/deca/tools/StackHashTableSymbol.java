@@ -21,7 +21,7 @@ import fr.ensimag.ima.pseudocode.Register;
  */
 public class StackHashTableSymbol {
     private Map<Symbol, RegisterOffset> map = new HashMap<Symbol, RegisterOffset>();
-
+    private int size = 1;
 
     /**
      * Create or reuse a symbol.
@@ -37,7 +37,8 @@ public class StackHashTableSymbol {
     }
 
     public void put(Symbol name, Register R){
-        map.put(name, new RegisterOffset(map.size()+1, R)); // add 1 to avoid 0(GB) error
+        map.put(name, new RegisterOffset(size, R)); // add 1 to avoid 0(GB) error
+        size++;
     }
 
 
