@@ -3,8 +3,10 @@ package fr.ensimag.deca.context;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tree.Identifier;
+import fr.ensimag.deca.tree.Location;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -119,6 +121,26 @@ public class TestCastMethods {
                 Definition def = Mockito.mock(Definition.class);
                 ident.setDefinition(def);
                 ExpDefinition cl2 = ident.getExpDefinition();
+            }
+        });
+    }
+
+    @Test
+    public void testAsClassType() throws ContextualError {
+        Type t1 = new ClassType(
+                compiler.getSymbTable().create("t1"), Mockito.mock(Location.class),
+                Mockito.mock(ClassDefinition.class));
+        ClassType t2 = t1.asClassType("", Mockito.mock(Location.class));
+        assertInstanceOf(ClassType.class, t2);
+    }
+
+    @Test
+    public void testAsClassTypeEx() throws ContextualError {
+        assertThrows(ContextualError.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                Type t1 = new IntType(compiler.getSymbTable().create("t1"));
+                ClassType t2 = t1.asClassType("", null);
             }
         });
     }
