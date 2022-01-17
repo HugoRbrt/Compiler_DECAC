@@ -58,4 +58,9 @@ public class NoInitialization extends AbstractInitialization {
         compiler.incrDeclaredVariables(1);
     }
 
+    @Override
+    protected void codeGenDeclVarARM(DecacCompiler compiler, AbstractIdentifier varName) {
+        compiler.incrDeclaredVariables(1); 
+    }
+
 }

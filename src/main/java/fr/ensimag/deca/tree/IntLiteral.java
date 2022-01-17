@@ -9,6 +9,7 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.ARMLine;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.WINT;
+import fr.ensimag.ima.pseudocode.instructionsARM.mov;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.ARMRegister;
 
@@ -72,6 +73,11 @@ public class IntLiteral extends AbstractExpr {
 
     public void codeGenInst(DecacCompiler compiler){
         compiler.addInstruction(new LOAD(new ImmediateInteger(value), compiler.getListRegister().R0));
+    }
+
+    public void codeGenInstARM(DecacCompiler compiler){
+        compiler.getListRegisterARM();
+        compiler.addInstruction(new mov(ARMRegister.getR(0), value));
     }
 
 }

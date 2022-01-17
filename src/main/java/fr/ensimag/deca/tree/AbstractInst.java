@@ -34,14 +34,14 @@ public abstract class AbstractInst extends Tree {
      * @param compiler
      */
     protected abstract void codeGenInst(DecacCompiler compiler);
+    
     /**
      * Generate assembly code for the ARM instruction.
      *
      * @param compiler
      */
     protected abstract void codeGenInstARM(DecacCompiler compiler);
-
-
+    
     /**
      * Decompile the tree, considering it as an instruction.
      *

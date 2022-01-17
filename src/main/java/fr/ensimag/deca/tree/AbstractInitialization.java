@@ -27,4 +27,6 @@ public abstract class AbstractInitialization extends Tree {
             throws ContextualError;
 
     protected abstract void codeGenDeclVar(DecacCompiler compiler, AbstractIdentifier varName);
+
+    protected abstract void codeGenDeclVarARM(DecacCompiler compiler, AbstractIdentifier varName);
 }

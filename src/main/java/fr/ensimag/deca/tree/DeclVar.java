@@ -72,7 +72,28 @@ public class DeclVar extends AbstractDeclVar {
             initialization.codeGenDeclVar(compiler, varName);
         }
     }
+
+    protected void codeGenDeclVarARM(DecacCompiler compiler){
+        // Absolument identique à la fonction pour IMA mais avec initialisation propre à ARM.
+        if(varName.getDefinition().getType().isString()){//si on veut declarer un string, il faut juste creer le symbol en java
+            String value="";
+            if(initialization instanceof Initialization){
+                value = ((StringLiteral)((Initialization)initialization).getExpression()).getValue();
+            }
+            compiler.getIdentMap().setIdentString(((AbstractIdentifier)varName).getName(),value);
+        }else{
+            //compiler.getSymbTable().create(varName.getName().getName());
+            initialization.codeGenDeclVarARM(compiler, varName);
+        }
+    }
     
+    protected void codeGenDeclVarAllocARM(DecacCompiler compiler){
+        // Absolument identique à la fonction pour IMA mais avec initialisation propre à ARM.
+        if(!varName.getDefinition().getType().isString()){//si on veut declarer un string, il faut juste creer le symbol en java
+            compiler.addARMBlock(varName.getName().getName() + ": " + ".word 0");  //label with name of variable   
+        }    
+    }
+
     @Override
     protected
     void iterChildren(TreeFunction f) {

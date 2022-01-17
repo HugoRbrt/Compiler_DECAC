@@ -54,14 +54,13 @@ public class Main extends AbstractMain {
     }
     @Override
     protected void codeGenMainARM(DecacCompiler compiler) {
-        /* Paul, le 6/1 : cette partie du code est à décommenter pour plus tard
-        compiler.addComment("Beginning of variables declaration");
-        declVariables.codeListDeclVar(compiler); */
+        compiler.addARMComment("Beginning of variables declaration");
+        declVariables.codeGenListDeclVarARM(compiler);
         compiler.addARMComment("Beginning of main ARM instructions:");
         compiler.addARMBlock("_start:");
-        ARMRegister R = compiler.getListRegisterARM();
+        //ARMRegister R = compiler.getListRegisterARM();
         insts.codeGenListInstARM(compiler);
-        compiler.addInstruction(new mov(R.r0,0));
+        compiler.addInstruction(new mov(ARMRegister.getR(0),0));
         compiler.addInstruction(new mov(ARMRegister.getR(7),1));
         compiler.addInstruction(new svc(0));
 
