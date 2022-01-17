@@ -2,11 +2,11 @@ package fr.ensimag.deca.context;
 
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tools.DecacInternalError;
+import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.deca.tree.Identifier;
 import fr.ensimag.deca.tree.Location;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,7 +17,7 @@ public class TestCastMethods {
 
     @Test
     public void testGetClassDef() {
-        Identifier ident = new Identifier(compiler.getSymbTable().create("ident"));
+        Identifier ident = new Identifier(Mockito.mock(SymbolTable.Symbol.class));
         ClassDefinition def = Mockito.mock(ClassDefinition.class);
         ident.setDefinition(def);
         ClassDefinition cl2 = ident.getClassDefinition();
@@ -29,7 +29,7 @@ public class TestCastMethods {
         assertThrows(DecacInternalError.class, new Executable() {
             @Override
             public void execute() throws Throwable {
-                Identifier ident = new Identifier(compiler.getSymbTable().create("ident"));
+                Identifier ident = new Identifier(Mockito.mock(SymbolTable.Symbol.class));
                 Definition def = Mockito.mock(Definition.class);
                 ident.setDefinition(def);
                 ClassDefinition cl2 = ident.getClassDefinition();
@@ -39,7 +39,7 @@ public class TestCastMethods {
 
     @Test
     public void testGetMethodDef() {
-        Identifier ident = new Identifier(compiler.getSymbTable().create("ident"));
+        Identifier ident = new Identifier(Mockito.mock(SymbolTable.Symbol.class));
         MethodDefinition def = Mockito.mock(MethodDefinition.class);
         ident.setDefinition(def);
         MethodDefinition cl2 = ident.getMethodDefinition();
@@ -51,7 +51,7 @@ public class TestCastMethods {
         assertThrows(DecacInternalError.class, new Executable() {
             @Override
             public void execute() throws Throwable {
-                Identifier ident = new Identifier(compiler.getSymbTable().create("ident"));
+                Identifier ident = new Identifier(Mockito.mock(SymbolTable.Symbol.class));
                 Definition def = Mockito.mock(Definition.class);
                 ident.setDefinition(def);
                 MethodDefinition cl2 = ident.getMethodDefinition();
@@ -61,7 +61,7 @@ public class TestCastMethods {
 
     @Test
     public void testGetFieldDef() {
-        Identifier ident = new Identifier(compiler.getSymbTable().create("ident"));
+        Identifier ident = new Identifier(Mockito.mock(SymbolTable.Symbol.class));
         FieldDefinition def = Mockito.mock(FieldDefinition.class);
         ident.setDefinition(def);
         FieldDefinition cl2 = ident.getFieldDefinition();
@@ -73,7 +73,7 @@ public class TestCastMethods {
         assertThrows(DecacInternalError.class, new Executable() {
             @Override
             public void execute() throws Throwable {
-                Identifier ident = new Identifier(compiler.getSymbTable().create("ident"));
+                Identifier ident = new Identifier(Mockito.mock(SymbolTable.Symbol.class));
                 Definition def = Mockito.mock(Definition.class);
                 ident.setDefinition(def);
                 FieldDefinition cl2 = ident.getFieldDefinition();
@@ -83,7 +83,7 @@ public class TestCastMethods {
 
     @Test
     public void testGetVariableDef() {
-        Identifier ident = new Identifier(compiler.getSymbTable().create("ident"));
+        Identifier ident = new Identifier(Mockito.mock(SymbolTable.Symbol.class));
         VariableDefinition def = Mockito.mock(VariableDefinition.class);
         ident.setDefinition(def);
         VariableDefinition cl2 = ident.getVariableDefinition();
@@ -95,7 +95,7 @@ public class TestCastMethods {
         assertThrows(DecacInternalError.class, new Executable() {
             @Override
             public void execute() throws Throwable {
-                Identifier ident = new Identifier(compiler.getSymbTable().create("ident"));
+                Identifier ident = new Identifier(Mockito.mock(SymbolTable.Symbol.class));
                 Definition def = Mockito.mock(Definition.class);
                 ident.setDefinition(def);
                 VariableDefinition cl2 = ident.getVariableDefinition();
@@ -105,7 +105,7 @@ public class TestCastMethods {
 
     @Test
     public void testGetExpDef() {
-        Identifier ident = new Identifier(compiler.getSymbTable().create("ident"));
+        Identifier ident = new Identifier(Mockito.mock(SymbolTable.Symbol.class));
         ExpDefinition def = Mockito.mock(ExpDefinition.class);
         ident.setDefinition(def);
         ExpDefinition cl2 = ident.getExpDefinition();
@@ -117,7 +117,7 @@ public class TestCastMethods {
         assertThrows(DecacInternalError.class, new Executable() {
             @Override
             public void execute() throws Throwable {
-                Identifier ident = new Identifier(compiler.getSymbTable().create("ident"));
+                Identifier ident = new Identifier(Mockito.mock(SymbolTable.Symbol.class));
                 Definition def = Mockito.mock(Definition.class);
                 ident.setDefinition(def);
                 ExpDefinition cl2 = ident.getExpDefinition();
@@ -128,7 +128,7 @@ public class TestCastMethods {
     @Test
     public void testAsClassType() throws ContextualError {
         Type t1 = new ClassType(
-                compiler.getSymbTable().create("t1"), Mockito.mock(Location.class),
+                Mockito.mock(SymbolTable.Symbol.class), Mockito.mock(Location.class),
                 Mockito.mock(ClassDefinition.class));
         ClassType t2 = t1.asClassType("", Mockito.mock(Location.class));
         assertInstanceOf(ClassType.class, t2);
@@ -139,7 +139,7 @@ public class TestCastMethods {
         assertThrows(ContextualError.class, new Executable() {
             @Override
             public void execute() throws Throwable {
-                Type t1 = new IntType(compiler.getSymbTable().create("t1"));
+                Type t1 = new IntType(Mockito.mock(SymbolTable.Symbol.class));
                 ClassType t2 = t1.asClassType("", null);
             }
         });
