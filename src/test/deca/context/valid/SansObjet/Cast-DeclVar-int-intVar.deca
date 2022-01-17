@@ -1,0 +1,13 @@
+// Description:
+//    Declaration of a int variable using a int cast on a int variable .
+// 
+// Results:
+//     nothing
+// 
+// Historique: 
+//    cree le 14/01/2022 
+
+{
+    int x =  20 ; 
+    int y =  (int) ( x ) ; 
+}

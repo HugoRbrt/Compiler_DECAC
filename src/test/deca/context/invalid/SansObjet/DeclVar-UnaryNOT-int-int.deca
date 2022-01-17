@@ -1,0 +1,14 @@
+// Description:
+//    Declaration of a int variable using ! operation on a int variable .
+// 
+// Results:
+//     Contextual error
+//     Line 13: (RULE 3.37) Illegal operand type..
+// 
+// Historique: 
+//    cree le 11/01/2022 
+
+{
+    int x =  10; 
+    int z = !x ; 
+}

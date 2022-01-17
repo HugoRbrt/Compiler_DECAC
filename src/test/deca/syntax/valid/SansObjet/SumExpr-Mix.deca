@@ -1,0 +1,12 @@
+// Description:
+//    Multiple sum expressions, including a negative operand.
+//
+// Results:
+//    (void)
+//
+// Historique:
+//    cree le 09/01/2022
+
+{
+       w + x - y + - z;
+}

@@ -1,0 +1,11 @@
+// Description:
+//    Comment with a sub comment which is lexically correct.
+//
+// Results:
+//    empty tree
+//
+// History:
+//    cree le 05/01/2022
+
+/* foo /*
+bar */

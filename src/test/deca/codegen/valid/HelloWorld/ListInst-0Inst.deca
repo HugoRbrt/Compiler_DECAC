@@ -1,0 +1,11 @@
+// Description:
+//    Test on a empty list of instructions.
+//
+// Results:
+// 	nothing
+//
+// History:
+//    created on 05/01/2022
+
+{ /* No instruction to see here */
+}

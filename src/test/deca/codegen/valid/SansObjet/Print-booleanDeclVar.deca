@@ -1,0 +1,13 @@
+// Description:
+//    Printing a boolean variable after initialisation.
+// 
+// Results:
+//     false
+// 
+// Historique: 
+//    cree le 12/01/2022 
+
+{
+    boolean x = false  ; 
+    if( x ) { print("true") ;} else { print("false") ;} ; 
+}

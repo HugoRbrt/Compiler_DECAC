@@ -1,0 +1,15 @@
+// Description:
+//    Declaration of a int variable using % operation between a boolean variable and boolean .
+// 
+// Results:
+//     Contextual error
+//     Line 14: (RULE 3.33) Illegal operand type.
+// 
+// Historique: 
+//    cree le 11/01/2022 
+
+{
+    boolean x =  true; 
+    boolean y = false; 
+    int z = x % y ; 
+}

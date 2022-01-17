@@ -25,7 +25,16 @@ public class SymbolTable {
      * this Symbol. Otherwise, create a new Symbol and add it to the table.
      */
     public Symbol create(String name) {
-        throw new UnsupportedOperationException("Symbol creation");
+        if (!map.containsKey(name))
+            map.put(name, new Symbol(name));
+        return map.get(name);
+    }
+
+    public Symbol get(String s) {
+        if (!map.containsKey(s)) {
+            throw new IllegalArgumentException("symbol not found in SymbolTable");
+        }
+        return map.get(s);
     }
 
     public static class Symbol {
@@ -39,6 +48,10 @@ public class SymbolTable {
 
         public String getName() {
             return name;
+        }
+
+        public void setName(String n) {
+            this.name = n;
         }
 
         @Override

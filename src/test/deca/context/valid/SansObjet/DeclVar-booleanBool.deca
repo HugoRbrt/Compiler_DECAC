@@ -1,0 +1,12 @@
+// Description:
+//    Declaration of a boolean variable with initialization.
+// 
+// Results:
+//     nothing
+// 
+// Historique: 
+//    cree le 11/01/2022 
+
+{
+    boolean x = false ;
+}

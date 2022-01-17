@@ -1,0 +1,17 @@
+// Description:
+//    Declaration of two float variable, x use cast from int to float. 
+//	  Test cast in Or condition.
+// 
+// Results:
+//     Ok
+// 
+// Historique: 
+//    cree le 14/01/2022 
+
+{
+    float x = 1;
+    float y = 5.2;
+    if (x < y || y > 5 ) {
+    	println("Ok");
+    }
+}

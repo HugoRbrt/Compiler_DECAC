@@ -1,0 +1,13 @@
+// Description:
+//    Multiple sum expressions, with invalid parenthesis.
+//
+// Results:
+//    12:19 extraneous input ')' expecting {FLOAT, INT, '(', '-', '!', 'false',
+//    'null', 'readInt', 'readFloat', 'true', IDENT, STRING, NEW, THIS}
+//
+// Historique:
+//    cree le 09/01/2022
+
+{
+       w + x - (y +) - z;
+}

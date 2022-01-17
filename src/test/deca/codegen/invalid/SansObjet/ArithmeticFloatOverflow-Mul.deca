@@ -1,0 +1,13 @@
+// Description:
+//    Overflow for a float arithmetic multiplication
+//
+// Results:
+//     ERROR: float_arithmetic_overflow
+//
+// History:
+//    created on 13/01/2022
+
+{
+    float x = 0x1.9999998807907104p+127;
+    print(x * x);
+}

@@ -1,0 +1,12 @@
+// Description:
+//    Test on inst -> 'println' '(' list_expr ')' without list_expr.
+//
+// Expected Results:
+//    Nothing
+//
+// History:
+//    created on 05/01/2022
+
+{
+    println();
+}

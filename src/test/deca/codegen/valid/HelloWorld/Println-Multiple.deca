@@ -1,0 +1,12 @@
+// Description:
+//    Printing a comparison
+//
+// Results:
+//	Hello\nsecond\nthird\nfourth 
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+        println("Hello", "second", "third", "fourth");
+}

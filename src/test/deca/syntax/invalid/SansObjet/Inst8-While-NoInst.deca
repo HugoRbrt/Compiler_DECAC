@@ -1,0 +1,13 @@
+// Description:
+//    While structure with no instruction block.
+//
+// Results:
+//    Syntax error
+//    12:0 missing '{' at '}'
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+        while (x)
+}

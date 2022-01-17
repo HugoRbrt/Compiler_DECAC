@@ -1,0 +1,13 @@
+// Description:
+//    Declaration of a float variable using - operation on a float variable .
+// 
+// Results:
+//     nothing
+// 
+// Historique: 
+//    cree le 11/01/2022 
+
+{
+    float x =  3.14; 
+    float z = -x ; 
+}

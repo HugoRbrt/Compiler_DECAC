@@ -1,0 +1,16 @@
+`> [10, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [10, 0] Main
+      +> ListDeclVar [List with 0 elements]
+      `> ListInst [List with 1 elements]
+         []> [11, 19] Or
+             +> [11, 12] Or
+             |  +> [11, 9] Plus
+             |  |  +> [11, 8] Identifier (x)
+             |  |  `> [11, 10] Int (3)
+             |  `> [11, 16] Multiply
+             |     +> [11, 15] Identifier (y)
+             |     `> [11, 17] Int (2)
+             `> [11, 23] Modulo
+                +> [11, 22] Identifier (z)
+                `> [11, 24] Int (4)

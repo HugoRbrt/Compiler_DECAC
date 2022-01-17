@@ -1,0 +1,13 @@
+// Description:
+//    tests de println sans parenthèse fermante
+//
+// Results:
+//    Line 12 : syntax error.
+//    test_lex: no errors .
+//
+// History:
+//    cree le 05/01/2022
+
+{
+println("Hello";
+}

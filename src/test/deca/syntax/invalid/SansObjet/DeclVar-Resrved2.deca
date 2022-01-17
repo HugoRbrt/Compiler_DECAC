@@ -1,0 +1,12 @@
+// Description:
+//    Variable declaration using reserved token
+//
+// Results:
+//    Parser error on println line 11
+//
+// Historique:
+//    cree le 11/01/2022
+
+{
+        float println;
+}

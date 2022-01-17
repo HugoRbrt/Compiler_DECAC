@@ -1,0 +1,12 @@
+// Description:
+//    Printing a NE operation between a float literal and float literal .
+// 
+// Results:
+//     true
+// 
+// Historique: 
+//    cree le 12/01/2022 
+
+{
+    if( 3.15 != 10.01 ) { print("true") ;} else { print("false") ;} ; 
+}

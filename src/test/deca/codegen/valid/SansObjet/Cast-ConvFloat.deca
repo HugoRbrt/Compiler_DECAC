@@ -1,0 +1,15 @@
+// Description:
+//    Casting a float to an integer and assigning to float
+//
+// Results:
+//     2.0
+//
+// History:
+//    created on 14/01/2022
+
+{
+    float x =  2.3;
+    float y = (int) (x);
+
+    print(y);
+}

@@ -1,0 +1,12 @@
+// Description:
+//    Printing a comparison
+//
+// Results:
+//    tree with all the variables as branches
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+        println(x < y);
+}

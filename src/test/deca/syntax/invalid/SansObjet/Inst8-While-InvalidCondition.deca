@@ -1,0 +1,13 @@
+// Description:
+//    While structure with complex condition.
+//
+// Results:
+//    Syntax error
+//    11:19 left-hand side of assignment is not an lvalue
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+        while (x = y + z > u = v * w) { ; }
+}

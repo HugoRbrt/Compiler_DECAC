@@ -1,0 +1,14 @@
+// Description:
+//    A string containing only a newline, provoking a lexer error.
+//
+// Results:
+//    Lexical error
+//    11:9 token recognition error.
+//
+//
+// History:
+//    created on 07/01/2022
+
+{
+    println("\n");
+}

@@ -1,0 +1,14 @@
+// Description:
+//    Declaration of two variables with same type but without
+//    separating comma.
+//
+// Results:
+//    Syntax error
+//    13:14 extraneous input 'y' expecting ';'
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+        int x y;
+}

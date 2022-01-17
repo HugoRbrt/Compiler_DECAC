@@ -1,0 +1,15 @@
+// Description:
+//    Multiple binary operations that test the compiler with not enough registers
+//
+// Results:
+//    49.0
+//
+// History:
+//    created on 14/01/2022
+
+{
+    int x = 3;
+    int y = 2;
+    float z = (x + 5) * (y+ 2) + (y + 1) + (5 % y) + (y % x) - (y * 2) + (18.0 - x) ;
+    print(z);
+}

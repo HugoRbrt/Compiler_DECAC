@@ -1,7 +1,6 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.instructions.WNL;
 
 /**
@@ -23,6 +22,7 @@ public class Println extends AbstractPrint {
         super.codeGenInst(compiler);
         compiler.addInstruction(new WNL());
     }
+
 
     @Override
     String getSuffix() {

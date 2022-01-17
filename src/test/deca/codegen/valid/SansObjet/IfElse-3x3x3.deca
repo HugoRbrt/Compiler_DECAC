@@ -1,0 +1,95 @@
+// Description:
+//     Program with a nested 3 IfElifElse structure
+//     We use a +1000 instruction to track if we go
+//     to the wrong structure
+// Results:
+//     1
+//
+// History:
+//    created on 14/01/2022
+
+{
+    int x = 0;
+    if ( !true ) {
+        if ( true ) {
+            if ( true ) {
+                x = x + 1000;
+            } else if ( true ) {
+                x = x + 1000;
+            } else {
+                x = x + 1000;
+            }
+        } else if ( true ) {
+            if ( !true ) {
+                x = x + 1000;
+            } else if ( !true ) {
+                x = x + 1000;
+            } else {
+                x = x + 1000;
+            }
+        } else {
+            if ( true ) {
+                x = x + 1000;
+            } else if ( true ) {
+                x = x + 1000;
+            } else {
+                x = x + 1000;
+            }
+        }
+    }
+    else if ( true ) {
+         if ( !true ) {
+            if ( true ) {
+                x = x + 1000;
+            } else if ( true ) {
+                x = x + 1000;
+            } else {
+                x = x + 1000;
+            }
+        } else if ( true ) {
+            if ( !true ) {
+                x = x + 1000;
+            } else if ( !true ) {
+                x = x + 1000;
+            } else {
+                x = 1;
+            }
+        } else {
+            if ( true ) {
+                x = x + 1000;
+            } else if ( true ) {
+                x = x + 1000;
+            } else  {
+                x = x + 1000;
+            }
+        }
+    }
+    else {
+          if ( !true ) {
+            if ( true ) {
+                x = x + 1000;
+            } else if ( true ) {
+                x = x + 1000;
+            } else {
+                x = x + 1000;
+            }
+        } else if ( true ) {
+            if ( true ) {
+                x = x + 1000;
+            } else if ( true ) {
+                x = x + 1000;
+            } else {
+                x = x + 1000;
+            }
+        } else {
+            if ( true ) {
+                x = x + 1000;
+            } else if ( true ) {
+                x = x + 1000;
+            } else {
+                x = x + 1000;
+            }
+        }
+    }
+    println(x);
+}

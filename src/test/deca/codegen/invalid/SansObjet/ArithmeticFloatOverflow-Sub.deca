@@ -1,0 +1,14 @@
+// Description:
+//    Overflow for a float arithmetic substraction
+//
+// Results:
+//     ERROR: float_arithmetic_overflow
+//
+// History:
+//    created on 13/01/2022
+
+{
+    float x = 0x1.9999998807907104p+127;
+    float y = 0x1.0000011920928955078125p-126;
+    print(y - x - x);
+}

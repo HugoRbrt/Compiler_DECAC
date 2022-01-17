@@ -6,8 +6,13 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
+import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
+import fr.ensimag.ima.pseudocode.ImmediateFloat;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
+import org.apache.log4j.Logger;
 
 /**
  * Single precision, floating-point literal
@@ -33,10 +38,21 @@ public class FloatLiteral extends AbstractExpr {
 
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
-            ClassDefinition currentClass) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");        
+            ClassDefinition currentClass) {
+        setType(compiler.getEnvTypes().get(compiler.getSymbTable().create("float")).getType());
+        return compiler.getEnvTypes().get(compiler.getSymbTable().create("float")).getType();
     }
 
+    @Override
+    protected void codeGenPrint(DecacCompiler compiler, boolean printHex) {
+        compiler.addInstruction(new LOAD(new ImmediateFloat(value),compiler.getListRegister().R1));
+        if(printHex){
+            compiler.addInstruction(new WFLOATX());
+        }
+        else {
+            compiler.addInstruction(new WFLOAT());
+        }
+    }
 
     @Override
     public void decompile(IndentPrintStream s) {
@@ -56,6 +72,10 @@ public class FloatLiteral extends AbstractExpr {
     @Override
     protected void prettyPrintChildren(PrintStream s, String prefix) {
         // leaf node => nothing to do
+    }
+
+    public void codeGenInst(DecacCompiler compiler){
+        compiler.addInstruction(new LOAD(new ImmediateFloat(value), compiler.getListRegister().R0));
     }
 
 }

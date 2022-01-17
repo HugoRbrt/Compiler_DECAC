@@ -1,0 +1,13 @@
+// Description:
+//    tests de programme dont une instruction n'a pas de semicolon
+//
+// Results:
+//    Line 13 : syntax error.
+//    test_lex: no error.
+//
+// History:
+//    cree le 05/01/2022
+
+{
+println("Hello")
+}

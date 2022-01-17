@@ -1,15 +1,13 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
-import fr.ensimag.deca.context.FloatType;
-import fr.ensimag.deca.context.IntType;
+import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ClassDefinition;
-import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.ima.pseudocode.Label;
 import java.io.PrintStream;
+import java.util.Iterator;
+
 import org.apache.commons.lang.Validate;
 
 /**
@@ -19,6 +17,7 @@ import org.apache.commons.lang.Validate;
  * @date 01/01/2022
  */
 public abstract class AbstractPrint extends AbstractInst {
+    private static int printCounter=0;
 
     private boolean printHex;
     private ListExpr arguments = new ListExpr();
@@ -37,15 +36,20 @@ public abstract class AbstractPrint extends AbstractInst {
 
     @Override
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
-            ClassDefinition currentClass, Type returnType)
-            throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+            ClassDefinition currentClass, Type returnType) throws ContextualError {
+        for (AbstractExpr expr : arguments.getList()) {
+            Type currentType = expr.verifyExpr(compiler, localEnv, currentClass);
+            if (!(currentType.isInt() || currentType.isFloat() || currentType.isString())) {
+                throw new ContextualError(
+                        "(RULE 3.31) Cannot print " + currentType.getName() + " type.", getLocation());
+            }
+        }
     }
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
         for (AbstractExpr a : getArguments().getList()) {
-            a.codeGenPrint(compiler);
+            a.codeGenPrint(compiler, printHex);
         }
     }
 
@@ -55,7 +59,14 @@ public abstract class AbstractPrint extends AbstractInst {
 
     @Override
     public void decompile(IndentPrintStream s) {
-        throw new UnsupportedOperationException("not yet implemented");
+        s.print("print" + getSuffix() + "(");
+        for (Iterator<AbstractExpr> it = arguments.getList().iterator(); it.hasNext();) {
+            it.next().decompile(s);
+            if (it.hasNext()) {
+                s.print(", ");
+            }
+        }
+        s.print(");");
     }
 
     @Override

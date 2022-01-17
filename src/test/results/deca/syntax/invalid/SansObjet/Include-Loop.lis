@@ -1,0 +1,1 @@
+src/test/deca/syntax/invalid/SansObjet/Include-Loop.deca:11:28: Circular include for file Include-Loop.deca

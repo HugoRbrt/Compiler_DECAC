@@ -1,0 +1,13 @@
+// Description:
+//    String with triple escape on a quote
+//
+// Results:
+//    test-lex: line 12 error on the third quote
+//
+//
+// History:
+//    cree le 08/01/2022
+
+{
+println("\\\\"Hello");
+}

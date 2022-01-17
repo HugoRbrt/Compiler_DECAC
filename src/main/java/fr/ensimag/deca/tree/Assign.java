@@ -6,6 +6,11 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.Definition;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.WSTR;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
 
 /**
  * Assignment, i.e. lvalue = expr.
@@ -29,13 +34,35 @@ public class Assign extends AbstractBinaryExpr {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        Type currentType = getLeftOperand().verifyExpr(compiler, localEnv, currentClass);
+        setType(currentType);
+        getRightOperand().verifyRValue(compiler, localEnv, currentClass, currentType);
+        return currentType;
     }
 
+    /**
+     * The AbstractBinaryExpr class's decompile method must be overloaded in order
+     * to add a space on each side of the operator.
+     *
+     * @param s The stream to which the method writes.
+     */
+    @Override
+    public void decompile(IndentPrintStream s) {
+        s.print("(");
+        getLeftOperand().decompile(s);
+        s.print(" " + getOperatorName() + " ");
+        getRightOperand().decompile(s);
+        s.print(")");
+    }
 
     @Override
     protected String getOperatorName() {
         return "=";
     }
 
+    public void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler){
+        RegisterOffset offset = compiler.getstackTable().get(
+            ((Identifier) super.getLeftOperand()).getName());
+        compiler.addInstruction(new STORE(storedRegister, offset));
+    }
 }

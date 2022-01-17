@@ -1,0 +1,13 @@
+// Description:
+//    Declaration of two variables with two type declarations.
+//
+// Results:
+//    Syntax error
+//    11:19 extraneous input 'y' expecting ';'
+//
+// Historique:
+//    cree le 07/01/2022
+
+{
+        int x, int y;
+}

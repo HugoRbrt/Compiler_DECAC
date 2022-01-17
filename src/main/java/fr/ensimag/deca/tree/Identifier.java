@@ -14,9 +14,14 @@ import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.ima.pseudocode.ImmediateString;
 import java.io.PrintStream;
+
+import fr.ensimag.ima.pseudocode.instructions.*;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
 
 /**
  * Deca Identifier
@@ -167,7 +172,13 @@ public class Identifier extends AbstractIdentifier {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        ExpDefinition def = localEnv.get(this.getName());
+        if (def == null) {
+            throw new ContextualError("(RULE 0.1) variable has not been declared.", getLocation());
+        }
+        Type currentType = def.getType();
+        setDefinition(localEnv.get(getName()));
+        return currentType;
     }
 
     /**
@@ -176,7 +187,7 @@ public class Identifier extends AbstractIdentifier {
      */
     @Override
     public Type verifyType(DecacCompiler compiler) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        return compiler.getEnvTypes().get(this.getName(), getLocation()).getType();
     }
     
     
@@ -214,4 +225,30 @@ public class Identifier extends AbstractIdentifier {
         }
     }
 
+    protected void codeGenPrint(DecacCompiler compiler, boolean printHex){
+        if (getDefinition().isExpression()) {
+            RegisterOffset R = compiler.getstackTable().get(this.getName());
+            compiler.addInstruction(new LOAD(R, Register.R1));
+        }
+        if (definition.getType().isInt()) {
+            compiler.addInstruction(new WINT());
+        } else if (definition.getType().isString()) {
+            String s = compiler.getSymbTable().get(getName().getName()).getName();
+            compiler.addInstruction(new WSTR(new ImmediateString(s)));
+        } else {
+            if (printHex) {
+                compiler.addInstruction(new WFLOATX());
+            } else {
+                compiler.addInstruction(new WFLOAT());
+            }
+        }
+    }
+
+    @Override
+    protected void codeGenInst(DecacCompiler compiler) {
+        if(getDefinition().isExpression()){
+            RegisterOffset R = compiler.getstackTable().get(this.getName());
+            compiler.addInstruction(new LOAD(R, Register.R0));
+        }
+    }
 }

@@ -1,0 +1,12 @@
+// Description:
+//   Calling readFloat() on an int declaration
+// 
+// Results:
+//     (RULE 3.28) Incompatible type assignment
+// 
+// Historique: 
+//    cree le 12/01/2022 
+
+{
+    int x = readFloat();
+}

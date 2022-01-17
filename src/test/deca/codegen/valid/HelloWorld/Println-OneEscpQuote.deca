@@ -1,0 +1,13 @@
+// Description:
+//    String with one escape on quote
+//
+// Results:
+//    \"Hello
+//
+//
+// History:
+//    cree le 05/01/2022
+
+{
+println("\"Hello");
+}

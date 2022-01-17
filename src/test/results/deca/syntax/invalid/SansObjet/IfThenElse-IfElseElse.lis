@@ -1,0 +1,1 @@
+src/test/deca/syntax/invalid/SansObjet/IfThenElse-IfElseElse.deca:16:8: mismatched input 'else' expecting {FLOAT, INT, '}', '(', '-', '!', ';', 'false', 'if', 'null', 'print', 'println', 'printx', 'printlnx', 'readInt', 'readFloat', 'return', 'true', 'while', IDENT, STRING, NEW, THIS}

@@ -1,0 +1,12 @@
+// Description:
+//    Printing a Minus operation between a int literal and float literal .
+// 
+// Results:
+//     1.88
+// 
+// Historique: 
+//    cree le 12/01/2022 
+
+{
+    print( 2 - 0.12  ) ; 
+}

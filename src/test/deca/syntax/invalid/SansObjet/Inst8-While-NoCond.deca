@@ -1,0 +1,13 @@
+// Description:
+//    While structure with no condition.
+//
+// Results:
+//    Syntax error
+//    12:14 mismatched input '{' expecting '('
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+        while {}
+}

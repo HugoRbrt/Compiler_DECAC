@@ -11,7 +11,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <compileSource>1.8</compileSource>
-        <jacoco.skip>true</jacoco.skip>
+        <jacoco.skip>false</jacoco.skip>
         <jacoco.report_dir>${project.build.directory}/site</jacoco.report_dir>
     </properties>
 
@@ -69,7 +69,7 @@
             <classifier>runtime</classifier>
             <version>0.8.7</version>
             <scope>test</scope>
-        </dependency>        
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -230,6 +230,17 @@
                         </goals>
                     </execution>
                     <execution>
+                        <id>unit-test-codeAnalyzer</id>
+                        <configuration>
+                            <mainClass>fr.ensimag.deca.tools.TestCodeAnalyzer</mainClass>
+                            <classpathScope>test</classpathScope>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                    <execution>
                         <id>basic-context</id>
                         <configuration>
                             <executable>./src/test/script/basic-context.sh</executable>
@@ -263,6 +274,36 @@
                         <id>common-tests</id>
                         <configuration>
                             <executable>./src/test/script/common-tests.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>all-tests</id>
+                        <configuration>
+                            <executable>./src/test/script/deca/exec-all.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>Idempotence-tests</id>
+                        <configuration>
+                            <executable>./src/test/script/decompile-idemp-test.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>Limited-registers-tests</id>
+                        <configuration>
+                            <executable>./src/test/script/deca/codegen/Limit-reg.sh</executable>
                         </configuration>
                         <phase>test</phase>
                         <goals>

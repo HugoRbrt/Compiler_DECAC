@@ -1,5 +1,11 @@
 package fr.ensimag.deca.tree;
 
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.ima.pseudocode.instructions.ADD;
+import fr.ensimag.ima.pseudocode.instructions.CMP;
+import fr.ensimag.ima.pseudocode.instructions.SEQ;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
 
 /**
  *
@@ -17,5 +23,9 @@ public class And extends AbstractOpBool {
         return "&&";
     }
 
-
+    public void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler){
+        compiler.addInstruction(new ADD(Reg1, storedRegister));
+        compiler.addInstruction(new CMP(new ImmediateInteger(2), storedRegister));
+        compiler.addInstruction(new SEQ(compiler.getListRegister().R0));
+    }
 }

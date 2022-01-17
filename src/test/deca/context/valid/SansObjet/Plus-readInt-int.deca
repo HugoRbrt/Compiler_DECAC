@@ -1,0 +1,12 @@
+// Description:
+//      using readInt in a plus operation
+//
+// Results:
+//     nothing
+//
+// Historique:
+//    cree le 14/01/2022
+
+{
+    int x =  readInt() + 3 ;
+}

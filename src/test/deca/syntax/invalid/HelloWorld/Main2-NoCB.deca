@@ -1,0 +1,10 @@
+// Description:
+//    Main without closing bracket
+//
+// Results:
+//    test_lex OK
+//    test_synt: error on line 11
+// History:
+//    cree le 06/01/2022
+
+{

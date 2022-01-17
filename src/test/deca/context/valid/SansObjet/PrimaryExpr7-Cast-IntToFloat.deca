@@ -1,0 +1,12 @@
+// Description:
+//    Legal (but redundant) cast expression: int to float.
+//
+// Results:
+//    11:18: (RULE 3.39) Illegal cast.
+//
+// Historique:
+//    cree le 13/01/2022
+
+{
+        float x = (float)(2);
+}

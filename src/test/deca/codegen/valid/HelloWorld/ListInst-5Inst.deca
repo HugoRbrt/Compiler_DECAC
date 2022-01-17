@@ -1,0 +1,16 @@
+// Description:
+//    Test on a list_inst -> (inst)* with several inst.
+//
+// Expected Results:
+//    1st\n2nd\n3rd\n4th\n5th
+//
+// History:
+//    created on 05/01/2022
+
+{
+    println("1st");
+    println("2nd");
+    println("3rd");
+    println("4th");
+    println("5th");
+}

@@ -1,0 +1,15 @@
+// Description:
+//    Declaration of a variable with odd formatting.
+//
+// Results:
+//    (void)
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+int
+x   =
+  3
+                    ;
+}

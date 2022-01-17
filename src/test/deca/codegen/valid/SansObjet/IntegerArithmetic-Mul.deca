@@ -1,0 +1,14 @@
+// Description:
+//    Multiplication mod 2^32 
+//
+// Results:
+//    0
+//
+// History:
+//    created on 14/01/2022
+
+{
+    int x = 1073741824; // 2^30
+    int y = 4;
+    printx(x*y);
+}

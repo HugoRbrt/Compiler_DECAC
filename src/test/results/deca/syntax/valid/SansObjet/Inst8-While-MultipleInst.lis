@@ -1,0 +1,17 @@
+`> [10, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [10, 0] Main
+      +> ListDeclVar [List with 0 elements]
+      `> ListInst [List with 1 elements]
+         []> [11, 8] While
+             +> [11, 15] Identifier (x)
+             `> ListInst [List with 3 elements]
+                []> [12, 14] Assign
+                ||  +> [12, 12] Identifier (y)
+                ||  `> [12, 16] Identifier (z)
+                []> [13, 14] Assign
+                ||  +> [13, 12] Identifier (u)
+                ||  `> [13, 16] Identifier (v)
+                []> [14, 14] Assign
+                    +> [14, 12] Identifier (s)
+                    `> [14, 16] Identifier (t)

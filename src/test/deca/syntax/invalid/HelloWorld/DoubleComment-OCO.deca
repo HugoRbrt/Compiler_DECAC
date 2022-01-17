@@ -1,0 +1,10 @@
+// Description:
+//    comment with a sub comment which is syntactically incorrect.
+//
+// Results:
+//    line 10: lexing error on the second '*/' .
+//    test_synt: error on lexing .
+// History:
+//    cree le 05/01/2022
+
+/* foo */ "bar" */

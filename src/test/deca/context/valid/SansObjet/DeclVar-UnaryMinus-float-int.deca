@@ -1,0 +1,13 @@
+// Description:
+//    Declaration of a float variable using - operation on a int variable .
+// 
+// Results:
+//     nothing
+// 
+// Historique: 
+//    cree le 11/01/2022 
+
+{
+    int x =  3; 
+    float z = -x ; 
+}

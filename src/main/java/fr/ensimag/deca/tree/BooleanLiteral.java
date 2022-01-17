@@ -6,6 +6,11 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
+import fr.ensimag.deca.tree.StringLiteral;
+import fr.ensimag.ima.pseudocode.ImmediateFloat;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import java.io.PrintStream;
 
 /**
@@ -27,10 +32,21 @@ public class BooleanLiteral extends AbstractExpr {
 
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
-            ClassDefinition currentClass) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+            ClassDefinition currentClass) {
+        setType(compiler.getEnvTypes().get(compiler.getSymbTable().create("boolean")).getType());
+        return compiler.getEnvTypes().get(compiler.getSymbTable().create("boolean")).getType();
     }
 
+    @Override
+    protected void codeGenPrint(DecacCompiler compiler, boolean printHex) {
+        StringLiteral s;
+        if(value){
+            s = new StringLiteral("true");
+        }else{
+            s = new StringLiteral("false");
+        }
+        s.codeGenPrint(compiler, printHex);
+    }
 
     @Override
     public void decompile(IndentPrintStream s) {
@@ -46,6 +62,17 @@ public class BooleanLiteral extends AbstractExpr {
     protected void prettyPrintChildren(PrintStream s, String prefix) {
         // leaf node => nothing to do
     }
+
+    public void codeGenInst(DecacCompiler compiler){
+        int intValue;
+        if(value){
+            intValue = 1;
+        }else{
+            intValue = 0;
+        }
+        compiler.addInstruction(new LOAD(new ImmediateInteger(intValue), compiler.getListRegister().R0));
+    }
+
 
     @Override
     String prettyPrintNode() {

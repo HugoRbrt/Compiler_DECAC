@@ -1,0 +1,15 @@
+// Description:
+//    Declaration of a float variable then printlnx.
+// 
+// Results:
+//     (Sign:0
+//     Exposant:1
+//     Mantisse:1.01)
+// 
+// History: 
+//    created on 11/01/2022 
+
+{
+    float x = 2.5 ;
+    printlnx(x);
+}

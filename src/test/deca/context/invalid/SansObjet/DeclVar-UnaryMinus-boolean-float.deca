@@ -1,0 +1,14 @@
+// Description:
+//    Declaration of a boolean variable using - operation on a float variable .
+// 
+// Results:
+//     Contextual error
+//     Line 13: (RULE 3.28) Incompatible type assignment
+// 
+// Historique: 
+//    cree le 11/01/2022 
+
+{
+    float x =  10.01; 
+    boolean z = -x ; 
+}

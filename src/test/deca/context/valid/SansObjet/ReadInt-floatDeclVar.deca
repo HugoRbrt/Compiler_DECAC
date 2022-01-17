@@ -1,0 +1,12 @@
+// Description:
+//    Calling readInt() on a float declaration
+// 
+// Results:
+//     (nothing)
+// 
+// Historique: 
+//    cree le 12/01/2022 
+
+{
+    float x = readInt();
+}

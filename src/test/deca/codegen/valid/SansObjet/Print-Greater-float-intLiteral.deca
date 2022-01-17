@@ -1,0 +1,12 @@
+// Description:
+//    Printing a Greater operation between a float literal and int literal .
+// 
+// Results:
+//     false
+// 
+// Historique: 
+//    cree le 12/01/2022 
+
+{
+    if( 2.55 > 17 ) { print("true") ;} else { print("false") ;} ; 
+}

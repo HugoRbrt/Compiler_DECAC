@@ -1,0 +1,12 @@
+// Description:
+//    Main with single instruction lacking a semicolon.
+//
+// Results:
+//    12:0 no viable alternative at input '}'
+//
+// History:
+//    created on 08/01/2022
+
+{
+        x
+}

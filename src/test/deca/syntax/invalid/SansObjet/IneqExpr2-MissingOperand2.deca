@@ -1,0 +1,13 @@
+// Description:
+//    Lower or equal expression with missing right operand.
+//
+// Results:
+//    12:11 mismatched input '>' expecting {FLOAT, INT, '(', '-', '!', 'false',
+//    'null', 'readInt', 'readFloat', 'true', IDENT, STRING, NEW, THIS}
+//
+// Historique:
+//    cree le 09/01/2022
+
+{
+        x =>;
+}

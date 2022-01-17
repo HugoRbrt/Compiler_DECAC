@@ -1,0 +1,13 @@
+// Description:
+//    If with missing parenthesis.
+//
+// Results:
+//    Syntax Error
+//    12:18  no viable alternative at input '{'
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+        if (x > 3 {;}
+}

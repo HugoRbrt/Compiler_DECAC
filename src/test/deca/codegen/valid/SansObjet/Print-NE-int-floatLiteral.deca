@@ -1,0 +1,12 @@
+// Description:
+//    Printing a NE operation between a int literal and float literal .
+// 
+// Results:
+//     true
+// 
+// Historique: 
+//    cree le 12/01/2022 
+
+{
+    if( 20 != 1.51 ) { print("true") ;} else { print("false") ;} ; 
+}

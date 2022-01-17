@@ -1,0 +1,12 @@
+// Description:
+//   Calling readInt() on an int declaration
+// 
+// Results:
+//     (nothing)
+// 
+// Historique: 
+//    cree le 12/01/2022 
+
+{
+    int x = readInt();
+}

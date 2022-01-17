@@ -1,10 +1,13 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ClassDefinition;
-import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.instructions.REM;
+import fr.ensimag.ima.pseudocode.instructions.CMP;
+import fr.ensimag.ima.pseudocode.instructions.BEQ;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
 
 /**
  *
@@ -20,7 +23,11 @@ public class Modulo extends AbstractOpArith {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        Type t1 = getLeftOperand().verifyExpr(compiler, localEnv, currentClass);
+        Type t2 = getRightOperand().verifyExpr(compiler, localEnv, currentClass);
+        Type resType = ContextTools.typeArithModulo(compiler, t1, t2, getLocation());
+        setType(resType);
+        return resType;
     }
 
 
@@ -29,4 +36,10 @@ public class Modulo extends AbstractOpArith {
         return "%";
     }
 
+    public void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler){
+        compiler.addInstruction(new CMP(new ImmediateInteger(0), storedRegister));
+        compiler.addInstruction(new BEQ(compiler.getErrorManager().getErrorLabel("Division by zero")));
+        compiler.addInstruction(new REM(storedRegister, Reg1));
+        compiler.addInstruction(new LOAD(Reg1, storedRegister));
+    }
 }

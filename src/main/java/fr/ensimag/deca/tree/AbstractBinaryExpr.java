@@ -3,6 +3,18 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
+import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.POP;
+import fr.ensimag.ima.pseudocode.instructions.WINT;
+import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
+import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
+import fr.ensimag.ima.pseudocode.ImmediateString;
+import fr.ensimag.deca.tree.FloatLiteral;
+import fr.ensimag.deca.tree.IntLiteral;
 
 /**
  * Binary expressions.
@@ -42,12 +54,38 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
         this.rightOperand = rightOperand;
     }
 
+    protected void codeGenInst(DecacCompiler compiler){
+        leftOperand.codeGenInst(compiler);
+        GPRegister usedRegister = compiler.getListRegister().getRegister(compiler);
+        compiler.addInstruction(new LOAD(compiler.getListRegister().R0, usedRegister));
+        rightOperand.codeGenInst(compiler);
+        this.codeGenOperations(usedRegister, compiler.getListRegister().R0, compiler);
+        compiler.getListRegister().freeRegister(usedRegister, compiler);
+    }
+
+    protected void codeGenPrint(DecacCompiler compiler, boolean printHex){
+        codeGenInst(compiler);
+        compiler.addInstruction(new LOAD(compiler.getListRegister().R0, compiler.getListRegister().R1));
+        if(getType().isInt()){
+            compiler.addInstruction(new WINT());
+        }
+        else if(getType().isFloat()) {
+            if (printHex) {
+                compiler.addInstruction(new WFLOATX());
+            } else {
+                compiler.addInstruction(new WFLOAT());
+            }
+        }
+    }
+
+    abstract void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler);
+
 
     @Override
     public void decompile(IndentPrintStream s) {
         s.print("(");
         getLeftOperand().decompile(s);
-        s.print(" " + getOperatorName() + " ");
+        s.print(getOperatorName());
         getRightOperand().decompile(s);
         s.print(")");
     }

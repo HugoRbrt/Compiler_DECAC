@@ -1,5 +1,8 @@
 package fr.ensimag.deca.tree;
 
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.SNE;
+import fr.ensimag.deca.DecacCompiler;
 
 /**
  *
@@ -18,4 +21,8 @@ public class NotEquals extends AbstractOpExactCmp {
         return "!=";
     }
 
+    public void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler){
+        super.codeGenOperations(Reg1, storedRegister, compiler);
+        compiler.addInstruction(new SNE(storedRegister));
+    }
 }

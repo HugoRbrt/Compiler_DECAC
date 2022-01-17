@@ -1,10 +1,8 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ClassDefinition;
-import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.ima.pseudocode.Register;
 
 /**
  *
@@ -20,7 +18,12 @@ public abstract class AbstractOpBool extends AbstractBinaryExpr {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        Type t1 = getLeftOperand().verifyExpr(compiler, localEnv, currentClass);
+        Type t2 = getRightOperand().verifyExpr(compiler, localEnv, currentClass);
+        Type resType = ContextTools.typeBoolOp(compiler, t1, t2, getLocation());
+        setType(resType);
+        return resType;
     }
 
+    abstract void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler);
 }

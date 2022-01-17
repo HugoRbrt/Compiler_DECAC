@@ -6,6 +6,10 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.WINT;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
+
 import java.io.PrintStream;
 
 /**
@@ -28,9 +32,15 @@ public class IntLiteral extends AbstractExpr {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        setType(compiler.getEnvTypes().get(compiler.getSymbTable().create("int"), Location.BUILTIN).getType());
+        return compiler.getEnvTypes().get(compiler.getSymbTable().create("int"), Location.BUILTIN).getType();
     }
 
+    @Override
+    protected void codeGenPrint(DecacCompiler compiler, boolean printHex) {
+        compiler.addInstruction(new LOAD(new ImmediateInteger(value),compiler.getListRegister().R1));
+        compiler.addInstruction(new WINT());
+    }
 
     @Override
     String prettyPrintNode() {
@@ -50,6 +60,10 @@ public class IntLiteral extends AbstractExpr {
     @Override
     protected void prettyPrintChildren(PrintStream s, String prefix) {
         // leaf node => nothing to do
+    }
+
+    public void codeGenInst(DecacCompiler compiler){
+        compiler.addInstruction(new LOAD(new ImmediateInteger(value), compiler.getListRegister().R0));
     }
 
 }

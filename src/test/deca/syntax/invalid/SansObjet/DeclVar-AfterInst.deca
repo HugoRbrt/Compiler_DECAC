@@ -1,0 +1,15 @@
+// Description:
+//    Variable declaration after an instruction.
+//
+// Results:
+//    Syntax Error
+//    14:12 no viable alternative at input 'y'
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+        int x;
+        x = 3;
+        int y;
+}

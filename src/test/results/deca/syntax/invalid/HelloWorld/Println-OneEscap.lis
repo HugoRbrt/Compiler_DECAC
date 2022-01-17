@@ -1,0 +1,1 @@
+src/test/deca/syntax/invalid/HelloWorld/Println-OneEscap.deca:12:8: token recognition error at: '"\");\n}'

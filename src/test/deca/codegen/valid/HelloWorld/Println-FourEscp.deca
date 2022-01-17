@@ -1,0 +1,13 @@
+// Description:
+//    String with triple escape on a quote
+//
+// Results:
+//    \\\\
+//
+//
+// History:
+//    cree le 08/01/2022
+
+{
+println("\\\\");
+}

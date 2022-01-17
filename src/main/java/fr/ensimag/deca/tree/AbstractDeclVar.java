@@ -29,4 +29,18 @@ public abstract class AbstractDeclVar extends Tree {
     protected abstract void verifyDeclVar(DecacCompiler compiler,
             EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError;
+
+    /**
+     * Returns non-terminal AbstractInitialization
+     * @return
+     *      the concrete class's AbstractInitialization field
+     */
+    public abstract AbstractInitialization getInit();
+
+    /**
+     * Generate assembly code for the IMA instruction.
+     *
+     * @param compiler
+     */
+    protected abstract void codeGenDeclVar(DecacCompiler compiler);
 }

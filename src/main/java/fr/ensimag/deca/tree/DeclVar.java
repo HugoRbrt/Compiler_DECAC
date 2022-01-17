@@ -1,13 +1,14 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ClassDefinition;
-import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.instructions.ADDSP;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.deca.tree.Initialization;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
+import fr.ensimag.deca.tools.SymbolTable.Symbol;
 
 /**
  * @author gl49
@@ -29,18 +30,42 @@ public class DeclVar extends AbstractDeclVar {
         this.initialization = initialization;
     }
 
+    public AbstractInitialization getInit() { return initialization; }
+
     @Override
     protected void verifyDeclVar(DecacCompiler compiler,
             EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
+        Type currentType = type.verifyType(compiler);
+        type.setDefinition(compiler.getEnvTypes().get(type.getName(), Location.BUILTIN));
+        if (currentType.isVoid()) {
+            throw new ContextualError("(RULE 3.17) Variable cannot be void type.", type.getLocation());
+        }
+        initialization.verifyInitialization(compiler, currentType, localEnv, currentClass);
+        try {
+            localEnv.declare(varName.getName(), new VariableDefinition(currentType, varName.getLocation()));
+        }
+        catch (EnvironmentExp.DoubleDefException e) {
+            throw new ContextualError("(RULE 3.17) Variable has already been declared.", varName.getLocation());
+        }
+        varName.setDefinition(localEnv.get(varName.getName()));
+        varName.setType(currentType);
     }
 
     
     @Override
     public void decompile(IndentPrintStream s) {
-        throw new UnsupportedOperationException("not yet implemented");
+        type.decompile(s);
+        s.print(" ");
+        varName.decompile(s);
+        initialization.decompile(s);
     }
 
+    protected void codeGenDeclVar(DecacCompiler compiler){
+        compiler.getstackTable().put(varName.getName(), compiler.getListRegister().GB);
+        initialization.codeGenDeclVar(compiler, varName);
+    }
+    
     @Override
     protected
     void iterChildren(TreeFunction f) {

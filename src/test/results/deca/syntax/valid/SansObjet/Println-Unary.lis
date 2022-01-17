@@ -1,0 +1,25 @@
+`> [10, 0] Program
+   +> ListDeclClass [List with 0 elements]
+   `> [10, 0] Main
+      +> ListDeclVar [List with 0 elements]
+      `> ListInst [List with 4 elements]
+         []> [11, 8] Println
+         ||  `> ListExpr [List with 1 elements]
+         ||     []> [11, 16] Not
+         ||         `> [11, 17] Identifier (x)
+         []> [12, 8] Println
+         ||  `> ListExpr [List with 1 elements]
+         ||     []> [12, 16] UnaryMinus
+         ||         `> [12, 17] Identifier (x)
+         []> [13, 8] Println
+         ||  `> ListExpr [List with 2 elements]
+         ||     []> [13, 16] UnaryMinus
+         ||     ||  `> [13, 17] Identifier (x)
+         ||     []> [13, 20] Not
+         ||         `> [13, 21] Identifier (x)
+         []> [14, 8] Println
+             `> ListExpr [List with 2 elements]
+                []> [14, 16] Not
+                ||  `> [14, 17] Int (5)
+                []> [14, 20] UnaryMinus
+                    `> [14, 21] Int (5)

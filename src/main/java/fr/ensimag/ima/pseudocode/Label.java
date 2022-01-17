@@ -10,10 +10,16 @@ import org.apache.commons.lang.Validate;
  * @date 01/01/2022
  */
 public class Label extends Operand {
+    private static int i=0;
 
     @Override
     public String toString() {
         return name;
+    }
+
+    public Label(){
+        this("label"+i);
+        i++;
     }
 
     public Label(String name) {

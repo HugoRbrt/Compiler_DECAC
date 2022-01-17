@@ -1,0 +1,14 @@
+// Description:
+//    Declaration of a float variable using a float cast on a boolean variable .
+// 
+// Results:
+//     Contextual error
+//     Line 14: (RULE 3.39) Illegal cast 
+// 
+// Historique: 
+//    cree le 14/01/2022 
+
+{
+    boolean x =  true ; 
+    float y =  (float) ( x ) ; 
+}

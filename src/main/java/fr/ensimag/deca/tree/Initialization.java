@@ -6,6 +6,13 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 
@@ -35,13 +42,25 @@ public class Initialization extends AbstractInitialization {
     protected void verifyInitialization(DecacCompiler compiler, Type t,
             EnvironmentExp localEnv, ClassDefinition currentClass)
             throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        this.expression = expression.verifyRValue(compiler, localEnv, currentClass, t);
+        expression.verifyExpr(compiler, localEnv, currentClass);
+    }
+
+    @Override
+    protected void codeGenDeclVar(DecacCompiler compiler, AbstractIdentifier varName){
+    //pas encore fonctionnel, codegen de abstractexpr doit etre entierement realisé avant
+    //RegistreRetourExpr correspond au registre contenant la valeur calculé de expr
+        expression.codeGenInst(compiler);
+        RegisterOffset r = compiler.getstackTable().get(varName.getName());
+        compiler.addInstruction(new STORE(compiler.getListRegister().R0, r));
+        compiler.incrDeclaredVariables(1);
     }
 
 
     @Override
     public void decompile(IndentPrintStream s) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        s.print(" = ");
+        getExpression().decompile(s);
     }
 
     @Override

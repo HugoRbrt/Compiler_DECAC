@@ -44,9 +44,9 @@ public class Line extends AbstractLine {
             throw new IMAInternalError("Comment '" + s + "'contains carriage return character");
         }
     }
-    private Instruction instruction;
-    private String comment;
-    private Label label;
+    protected Instruction instruction;
+    protected String comment;
+    protected Label label;
 
     @Override
     void display(PrintStream s) {

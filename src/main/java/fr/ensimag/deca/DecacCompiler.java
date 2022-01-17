@@ -1,19 +1,31 @@
 package fr.ensimag.deca;
 
+import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
+import fr.ensimag.deca.codegen.ErrorManager;
 import fr.ensimag.deca.tools.DecacInternalError;
+import fr.ensimag.deca.tools.SymbolTable;
+import fr.ensimag.deca.tools.StackHashTableSymbol;
+import fr.ensimag.deca.tools.CodeAnalyzer;
 import fr.ensimag.deca.tree.AbstractProgram;
+import fr.ensimag.deca.tree.Location;
 import fr.ensimag.deca.tree.LocationException;
 import fr.ensimag.ima.pseudocode.AbstractLine;
 import fr.ensimag.ima.pseudocode.IMAProgram;
+import fr.ensimag.ima.pseudocode.GenericProgram;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.DVal;
+import fr.ensimag.ima.pseudocode.Register;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.Objects;
+import java.lang.Runnable;
+
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.log4j.Logger;
@@ -33,18 +45,40 @@ import org.apache.log4j.Logger;
  * @author gl49
  * @date 01/01/2022
  */
-public class DecacCompiler {
+public class DecacCompiler implements Runnable {
     private static final Logger LOG = Logger.getLogger(DecacCompiler.class);
-    
+
     /**
      * Portable newline character.
      */
     private static final String nl = System.getProperty("line.separator", "\n");
 
+    private EnvironmentExp envExp = new EnvironmentExp(null);
+    private SymbolTable symbTable = new SymbolTable();
+    private EnvironmentType envTypes = EnvironmentType.getEnvTypes();
+    private StackHashTableSymbol stackTable = new StackHashTableSymbol();
+    private CodeAnalyzer codeAnalyzer = new CodeAnalyzer();
+    private ErrorManager errorManager = new ErrorManager();
+
     public DecacCompiler(CompilerOptions compilerOptions, File source) {
         super();
         this.compilerOptions = compilerOptions;
+
+        program = new IMAProgram();
+
         this.source = source;
+        // initializing builtin types
+        envTypes.put(this.symbTable.create("void"),
+                new TypeDefinition(new VoidType(this.symbTable.create("void")), Location.BUILTIN));
+        envTypes.put(this.symbTable.create("boolean"),
+                new TypeDefinition(new BooleanType(this.symbTable.create("boolean")), Location.BUILTIN));
+        envTypes.put(this.symbTable.create("float"),
+                new TypeDefinition(new FloatType(this.symbTable.create("float")), Location.BUILTIN));
+        envTypes.put(this.symbTable.create("int"),
+                new TypeDefinition(new IntType(this.symbTable.create("int")), Location.BUILTIN));
+        envTypes.put(this.symbTable.create("null"),
+                new TypeDefinition(new NullType(this.symbTable.create("null")), Location.BUILTIN));
+
     }
 
     /**
@@ -63,6 +97,46 @@ public class DecacCompiler {
     }
 
     /**
+     * Environment expressions associated with the program
+     */
+    public EnvironmentExp getEnvExp() {
+        return envExp;
+    }
+
+    /**
+     * Environment types associated with the program
+     */
+    public EnvironmentType getEnvTypes() { return envTypes; }
+
+    /**
+     * Symbols associated with the program
+     */
+    public SymbolTable getSymbTable() {
+        return symbTable;
+    }
+
+    /**
+     * Symbols associated with the stack adresse
+     */
+    public StackHashTableSymbol getstackTable() {
+        return stackTable;
+    }
+
+    /**
+     * Gencode analyzer for the stack's needs
+     */
+    public CodeAnalyzer getCodeAnalyzer() {
+        return codeAnalyzer;
+    }
+    
+    /**
+     * ErrorManager to create the approriate code
+     */
+    public ErrorManager getErrorManager() {
+        return errorManager;
+    }
+    
+    /**
      * @see
      * fr.ensimag.ima.pseudocode.IMAProgram#add(fr.ensimag.ima.pseudocode.AbstractLine)
      */
@@ -76,6 +150,7 @@ public class DecacCompiler {
     public void addComment(String comment) {
         program.addComment(comment);
     }
+
 
     /**
      * @see
@@ -93,6 +168,7 @@ public class DecacCompiler {
         program.addInstruction(instruction);
     }
 
+
     /**
      * @see
      * fr.ensimag.ima.pseudocode.IMAProgram#addInstruction(fr.ensimag.ima.pseudocode.Instruction,
@@ -103,20 +179,41 @@ public class DecacCompiler {
     }
     
     /**
-     * @see 
+     * New instruction to add at the beginning of the program
+     */
+    public void addFirstInstruction(Instruction instruction) {
+        program.addFirstInstruction(instruction);
+    }
+
+    /**
+     * @see
      * fr.ensimag.ima.pseudocode.IMAProgram#display()
      */
-    public String displayIMAProgram() {
+    public String displayProgram() {
         return program.display();
     }
-    
+
+
     private final CompilerOptions compilerOptions;
     private final File source;
+    private Register ListRegister;
+
+
+    public void setListRegister(Register list){
+        ListRegister = list;
+    }
+
+    public Register getListRegister() {
+        return ListRegister;
+    }
+    
+
+
     /**
      * The main program. Every instruction generated will eventually end up here.
      */
-    private final IMAProgram program = new IMAProgram();
- 
+    private final GenericProgram program;
+
 
     /**
      * Run the compiler (parse source file, generate code)
@@ -125,9 +222,17 @@ public class DecacCompiler {
      */
     public boolean compile() {
         String sourceFile = source.getAbsolutePath();
-        String destFile = null;
-        // A FAIRE: calculer le nom du fichier .ass à partir du nom du
-        // A FAIRE: fichier .deca.
+        String[] tmp = sourceFile.split("\\.");
+        String destFile = tmp[0];
+        for (int i = 1; i < tmp.length-1; i++) {
+            destFile += "." +tmp[i];
+        }
+        if(Objects.isNull(this.compilerOptions) || !this.compilerOptions.getArmBool()){
+            destFile += ".ass";
+        }else{
+            destFile += ".s";
+        }
+        LOG.info(" dest:"+ destFile);
         PrintStream err = System.err;
         PrintStream out = System.out;
         LOG.debug("Compiling file " + sourceFile + " to assembly file " + destFile);
@@ -155,6 +260,13 @@ public class DecacCompiler {
             return true;
         }
     }
+    /**
+     * function that makes the class to implements Runnable interface
+     * by calling compile() function (usefull for -p decac option )
+     */
+    public void run(){
+        compile();
+    }
 
     /**
      * Internal function that does the job of compiling (i.e. calling lexer,
@@ -168,7 +280,7 @@ public class DecacCompiler {
      * @return true on error
      */
     private boolean doCompile(String sourceName, String destName,
-            PrintStream out, PrintStream err)
+                              PrintStream out, PrintStream err)
             throws DecacFatalError, LocationException {
         AbstractProgram prog = doLexingAndParsing(sourceName, err);
 
@@ -177,14 +289,40 @@ public class DecacCompiler {
             return true;
         }
         assert(prog.checkAllLocations());
+        // Decompile
+        if (this.compilerOptions.getParse()) {
+            LOG.info("Output decompiled program is: " + destName);
+            prog.decompile(out);
+            return false;
+        }
 
 
         prog.verifyProgram(this);
         assert(prog.checkAllDecorations());
 
+        if (this.compilerOptions.getVerification()) {
+            LOG.info("Verification is done ");
+            return false;
+        }
+
         addComment("start main program");
         prog.codeGenProgram(this);
+
+
+        
         addComment("end main program");
+        
+        // after analysis of the program, we generate the TSTO instruction
+        int d1 = codeAnalyzer.getNeededStackSize();
+        int d2 = codeAnalyzer.getNbDeclaredVariables();
+        if(Objects.isNull(this.compilerOptions) || !this.compilerOptions.getArmBool()){
+            errorManager.setTstoArg(d1);
+            errorManager.setAddspArg(d2);
+        
+            errorManager.addTstoCheck(this);
+            errorManager.genCodeErrorManager(this);
+        }
+        
         LOG.debug("Generated assembly code:" + nl + program.display());
         LOG.info("Output file assembly file is: " + destName);
 
@@ -229,5 +367,22 @@ public class DecacCompiler {
         parser.setDecacCompiler(this);
         return parser.parseProgramAndManageErrors(err);
     }
-
+    
+    
+    /**
+     * Shortcuts for code analysis
+     */
+    public void incrPopCount(int nbPop) {
+        codeAnalyzer.incrPopCount(nbPop);
+    }
+    
+    public void incrPushCount(int nbPush) {
+        codeAnalyzer.incrPushCount(nbPush);
+    }
+    
+    public void incrDeclaredVariables(int nbVariables) {
+        LOG.debug(nbVariables);
+        codeAnalyzer.incrDeclaredVariables(nbVariables);
+    }
+    
 }

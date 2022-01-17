@@ -2,10 +2,16 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.instructions.BNE;
+import fr.ensimag.ima.pseudocode.instructions.BRA;
+import fr.ensimag.ima.pseudocode.instructions.CMP;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 
@@ -34,16 +40,41 @@ public class IfThenElse extends AbstractInst {
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass, Type returnType)
             throws ContextualError {
+        condition.verifyExpr(compiler, localEnv, currentClass);
+        condition.verifyCondition(compiler, localEnv, currentClass);
+        thenBranch.verifyListInst(compiler, localEnv, currentClass, returnType);
+        elseBranch.verifyListInst(compiler, localEnv, currentClass, returnType);
     }
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
-        throw new UnsupportedOperationException("not yet implemented");
+        Label beginElse = new Label();
+        Label endElse = new Label();
+
+        condition.codeGenInst(compiler);
+        compiler.addInstruction(new CMP(new ImmediateInteger(1), compiler.getListRegister().R0));
+        compiler.addInstruction(new BNE(beginElse));
+        thenBranch.codeGenListInst(compiler);
+        compiler.addInstruction(new BRA(endElse));
+        compiler.addLabel(beginElse);
+        elseBranch.codeGenListInst(compiler);
+        compiler.addLabel(endElse);
     }
 
     @Override
     public void decompile(IndentPrintStream s) {
-        throw new UnsupportedOperationException("not yet implemented");
+        s.print("if(");
+        condition.decompile(s);
+        s.print(")");
+        s.println(" {");
+        s.indent();
+        thenBranch.decompile(s);
+        s.unindent();
+        s.println("} else {");
+        s.indent();
+        elseBranch.decompile(s);
+        s.unindent();
+        s.print("}");
     }
 
     @Override

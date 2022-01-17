@@ -1,0 +1,17 @@
+// Description:
+//     Using a While structure with an AND operation
+//     between a positive and a negative conditions
+//
+// Results:
+//     5
+//
+// History:
+//    created on 14/01/2022
+
+{
+    int x = 0;
+    while ( (x < 10) && !( x >= 5 ) ) {
+        x = x + 1;
+    }
+    println(x);
+}

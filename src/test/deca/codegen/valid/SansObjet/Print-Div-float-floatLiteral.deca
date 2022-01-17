@@ -1,0 +1,12 @@
+// Description:
+//    Printing a Div operation between a float literal and float literal .
+// 
+// Results:
+//     12.583333333333334
+// 
+// Historique: 
+//    cree le 12/01/2022 
+
+{
+    print( 1.51 / 0.12  ) ; 
+}

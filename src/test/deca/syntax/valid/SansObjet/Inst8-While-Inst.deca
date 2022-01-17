@@ -1,0 +1,12 @@
+// Description:
+//    While structure with single instruction.
+//
+// Results:
+//    (void)
+//
+// Historique:
+//    cree le 08/01/2022
+
+{
+        while (x) { y = z; }
+}

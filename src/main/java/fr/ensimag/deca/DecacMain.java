@@ -2,6 +2,12 @@ package fr.ensimag.deca;
 
 import java.io.File;
 import org.apache.log4j.Logger;
+import java.util.concurrent.*;
+import java.lang.Runtime;
+import java.util.LinkedList;
+import java.lang.Runnable;
+
+import fr.ensimag.deca.tools.SuperBanner;
 
 /**
  * Main class for the command-line Deca compiler.
@@ -26,17 +32,31 @@ public class DecacMain {
             System.exit(1);
         }
         if (options.getPrintBanner()) {
-            throw new UnsupportedOperationException("decac -b not yet implemented");
+            
+            System.out.println(new SuperBanner());
         }
-        if (options.getSourceFiles().isEmpty()) {
-            throw new UnsupportedOperationException("decac without argument not yet implemented");
-        }
+
         if (options.getParallel()) {
-            // A FAIRE : instancier DecacCompiler pour chaque fichier à
-            // compiler, et lancer l'exécution des méthodes compile() de chaque
-            // instance en parallèle. Il est conseillé d'utiliser
-            // java.util.concurrent de la bibliothèque standard Java.
-            throw new UnsupportedOperationException("Parallel build not yet implemented");
+            ExecutorService executor = Executors.newFixedThreadPool( Runtime.getRuntime().availableProcessors());
+            LinkedList<Future> listFuture = new LinkedList<Future>();
+            for (File source : options.getSourceFiles()){
+                DecacCompiler compiler = new DecacCompiler(options, source);
+                listFuture.add(executor.submit(compiler));
+            }
+            for(Future future : listFuture){
+                try{
+                    future.get();//waiting for the end of the compiling task for each files
+                }catch (CancellationException e) {
+                    System.err.println("Error during parrallel compilation : CancellationException");
+                    System.exit(1);
+                }catch (ExecutionException e) {
+                    System.err.println("Error during parrallel compilation : ExecutionException");
+                    System.exit(1);
+                }catch (InterruptedException e) {
+                    System.err.println("Error during parrallel compilation : InterruptedException");
+                    System.exit(1);
+                }
+            }
         } else {
             for (File source : options.getSourceFiles()) {
                 DecacCompiler compiler = new DecacCompiler(options, source);
