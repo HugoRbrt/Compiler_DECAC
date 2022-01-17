@@ -33,10 +33,6 @@ public class Return extends AbstractInst {
     }
 
     @Override
-    protected void codeGenInstARM(DecacCompiler compiler) {
-    }
-
-    @Override
     public void decompile(IndentPrintStream s) {
     }
 
