@@ -24,6 +24,7 @@ import org.apache.commons.lang.Validate;
  */
 public class StringLiteral extends AbstractStringLiteral {
     private static int i;
+    private static int printCounter=0;
 
     @Override
     public String getValue() {
@@ -68,8 +69,17 @@ public class StringLiteral extends AbstractStringLiteral {
     }
 
     @Override
-    protected void codeGenPrintARM(DecacCompiler compiler) {
-        compiler.add(new ARMLine(".ascii " +"\"" +value + "\""));
+    protected void codeGenPrintARM(DecacCompiler compiler, boolean printHex) {
+        String msgName = "msg"+printCounter;
+        String lenMsgName = "len"+printCounter;
+        printCounter++;
+        compiler.addInstruction(new mov(ARMRegister.r0,1));
+        compiler.addInstruction(new ldr(ARMRegister.r1, "="+msgName));
+        compiler.addInstruction(new ldr(ARMRegister.r2, "="+lenMsgName));
+        compiler.add(new ARMLine(".data"));
+        compiler.add(new ARMLine(msgName+":"));
+        compiler.add(new ARMLine(".ascii " +"\"" + value + "\""));
+        compiler.add(new ARMLine(lenMsgName+" = . - "+msgName));
     }
 
     @Override

@@ -22,7 +22,6 @@ import org.apache.commons.lang.Validate;
  * @date 01/01/2022
  */
 public abstract class AbstractPrint extends AbstractInst {
-    private static int printCounter=0;
 
     private boolean printHex;
     private ListExpr arguments = new ListExpr();
@@ -62,18 +61,7 @@ public abstract class AbstractPrint extends AbstractInst {
     protected void codeGenInstARM(DecacCompiler compiler) {
         System.out.println(getArguments().getList());
         for (AbstractExpr a : getArguments().getList()) {
-            String msgName = "msg"+printCounter;
-            String lenMsgName = "len"+printCounter;
-            printCounter++;
-            ARMRegister R = compiler.getListRegisterARM();
-            compiler.addInstruction(new mov(ARMRegister.r0,1));
-            compiler.addInstruction(new ldr(ARMRegister.r1, "="+msgName));
-            compiler.addInstruction(new ldr(ARMRegister.r2, "="+lenMsgName));
-            compiler.add(new ARMLine(".data"));
-            compiler.add(new ARMLine(msgName+":"));
-            a.codeGenPrintARM(compiler);
-            compiler.add(new ARMLine(lenMsgName+" = . - "+msgName));
-            compiler.add(new ARMLine(".text"));
+            a.codeGenPrintARM(compiler, printHex);
             compiler.addInstruction(new mov(ARMRegister.r7,4));
             compiler.addInstruction(new svc(0));
         }

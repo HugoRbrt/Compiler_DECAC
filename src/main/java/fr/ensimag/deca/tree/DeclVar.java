@@ -87,8 +87,10 @@ public class DeclVar extends AbstractDeclVar {
         }
     }
     
+    /*
+     * Allocate place in ARM memory
+     */
     protected void codeGenDeclVarAllocARM(DecacCompiler compiler){
-        // Absolument identique à la fonction pour IMA mais avec initialisation propre à ARM.
         if(!varName.getDefinition().getType().isString()){//si on veut declarer un string, il faut juste creer le symbol en java
             compiler.addARMBlock(varName.getName().getName() + ": " + ".word 0");  //label with name of variable   
         }    

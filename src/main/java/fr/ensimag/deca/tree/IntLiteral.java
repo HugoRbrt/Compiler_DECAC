@@ -47,8 +47,8 @@ public class IntLiteral extends AbstractExpr {
 
 
     @Override
-    protected void codeGenPrintARM(DecacCompiler compiler) {
-        compiler.add(new ARMLine(".ascii " +"\"" +value + "\""));
+    protected void codeGenPrintARM(DecacCompiler compiler, boolean printHex) {
+        compiler.add(new ARMLine(".ascii " +"\"" + value + "\""));
     }
 
     @Override

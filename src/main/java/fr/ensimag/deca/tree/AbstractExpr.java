@@ -135,7 +135,7 @@ public abstract class AbstractExpr extends AbstractInst {
      *
      * @param compiler
      */
-    protected void codeGenPrintARM(DecacCompiler compiler) {
+    protected void codeGenPrintARM(DecacCompiler compiler, boolean printHex) {
         throw new UnsupportedOperationException("not yet implemented");
     }
 
