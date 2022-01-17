@@ -4,6 +4,7 @@ import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable;
+import fr.ensimag.ima.pseudocode.Label;
 import org.apache.commons.lang.Validate;
 
 import java.io.PrintStream;
@@ -107,4 +108,10 @@ public class DeclClass extends AbstractDeclClass {
         methods.iter(f);
     }
 
+    protected void codeGen(DecacCompiler compiler){
+        String stringClassName = className.getName().getName();
+        compiler.getstackTable().put(className.getName(), compiler.getListRegister().GB);
+        fields.codeGen(compiler, stringClassName);
+        methods.codeGen(compiler, stringClassName );
+    }
 }

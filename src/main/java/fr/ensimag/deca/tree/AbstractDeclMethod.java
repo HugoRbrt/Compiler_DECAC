@@ -15,4 +15,11 @@ public abstract class AbstractDeclMethod extends Tree {
 
     protected abstract void verifyMethodBody(DecacCompiler compiler, EnvironmentExp classEnv,
             ClassDefinition currentClass) throws ContextualError;
+
+    /**
+     * Generate assembly code for the IMA instruction.
+     *
+     * @param compiler
+     */
+    protected abstract void codeGen(DecacCompiler compiler, String className);
 }

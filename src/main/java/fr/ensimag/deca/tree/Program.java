@@ -56,6 +56,7 @@ public class Program extends AbstractProgram {
         //creation of the register bench with a given number of registers
         compiler.setListRegister(new Register(compiler.getCompilerOptions().getRegisters()));
         compiler.addComment("Main program");
+        classes.codeGen(compiler);
         main.codeGenMain(compiler);
         compiler.addInstruction(new HALT());
     }
