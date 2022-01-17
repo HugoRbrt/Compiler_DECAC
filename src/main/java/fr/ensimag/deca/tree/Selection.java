@@ -34,7 +34,7 @@ public class Selection extends AbstractLValue {
             if (currentClass != null && !currentType.isSubClassOf(currentClass.getType())) {
                     throw new ContextualError(
                             "(RULE 3.66) Selecting class not a subclass of current class.",
-                            selectedField.getLocation());
+                            selectingClass.getLocation());
             }
         }
         return fieldType;
