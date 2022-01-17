@@ -12,7 +12,7 @@ class A { }
 {
     A a = new A();
     A other = new A();
-    if (! a.equals(other)) {
+    if (! a.equals((Object) (other))) {
         println("OK");
     }
 }

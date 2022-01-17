@@ -19,3 +19,4 @@ class D extends C {
 {
     D d = new D();
     println("x=", d.x, ", y=", d.y);
+}

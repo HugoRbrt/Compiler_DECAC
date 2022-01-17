@@ -16,6 +16,6 @@ class C extends B { int z=2; }
 {
     A a = new B();
     A abis = new C();
-    println("A: ", a.x, a.y);
-    println("A': ", abis.x, abis.y, abis.z);
+    println("A: ", a.x); // a.y does not exist
+    println("A': ", abis.x); // abis.y and abis.z do not exist
 }

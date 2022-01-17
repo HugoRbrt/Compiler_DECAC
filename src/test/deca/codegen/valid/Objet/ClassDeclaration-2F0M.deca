@@ -14,5 +14,5 @@ class C {
 
 {
     C c = new C();
-    println("x=", x, " y=", y);
+    println("x=", c.x, " y=", c.y);
 }

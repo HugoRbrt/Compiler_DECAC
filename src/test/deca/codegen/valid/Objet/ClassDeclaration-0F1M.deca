@@ -17,7 +17,7 @@ class Q {
 
 {
     Q q = new Q();
-    int x = 3.14;
+    float x = 3.14;
     float pos = q.abs(x);
     float neg = -q.abs(x);
     println(pos, "is the opposite of ", neg);

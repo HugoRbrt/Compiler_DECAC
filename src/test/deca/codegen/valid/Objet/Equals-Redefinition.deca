@@ -15,7 +15,7 @@ class A {
     }
 
     boolean equals(Object other) {
-	if (! (other instanceOf A)) {
+	if (! (other instanceof A)) {
             return false;
         }
         other = (A) (other);
@@ -28,7 +28,7 @@ class A {
     A a = new A();
     A other = new A();
 
-    if ( a.equals(other) ) {
+    if ( a.equals( other) ) {
         print("OK1 ");
     }
     

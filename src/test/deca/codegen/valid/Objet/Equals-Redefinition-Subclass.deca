@@ -15,7 +15,7 @@ class A {
     }
 
     boolean equals(Object other) {
-	if (! (other instanceOf A)) {
+	if (! (other instanceof A)) {
             return false;
         }
         other = (A) (other);
@@ -26,7 +26,7 @@ class A {
 class B extends A { 
 
     boolean equals(Object other) {
-	if (! (other instanceOf B)) {
+	if (! (other instanceof B)) {
             return false;
         }
         other = (B) (other);

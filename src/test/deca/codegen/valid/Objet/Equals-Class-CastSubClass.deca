@@ -14,7 +14,7 @@ class B extends A { }
 {
     A a = new B();
     A other = (A) (a);
-    if (a.equals(other)) {
+    if (a.equals((Object) (other))) {
         println("OK");
     }
 }

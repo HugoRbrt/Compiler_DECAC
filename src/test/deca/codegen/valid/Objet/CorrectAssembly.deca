@@ -14,7 +14,9 @@ class A {
     int x;
 
     int beginning(int a)
-    asm ( "LOAD R2, R1 \n WINT \n RTS" );
+    asm ( "LOAD R2, R1
+           WINT
+           RTS" );
 
     void end()
     asm ( "WSTR \" vla les flics\"" );
