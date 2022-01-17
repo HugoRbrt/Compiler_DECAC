@@ -555,7 +555,9 @@ class_extension returns[AbstractIdentifier tree]
             LOG.trace($tree);
         }
     | /* epsilon */ {
-            $tree = new Identifier(this.getDecacCompiler().getSymbTable().create("Object"));
+            Identifier superclass = new Identifier(this.getDecacCompiler().getSymbTable().create("Object"));
+            superclass.setDefinition(this.getDecacCompiler().getEnvTypes().get(this.getDecacCompiler().getSymbTable().create("Object")));
+            $tree = superclass;
             setLocation($tree, $start);
             LOG.trace($tree);
         }

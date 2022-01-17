@@ -59,7 +59,7 @@ public class DeclClass extends AbstractDeclClass {
             throw new ContextualError(
                     "(RULE 3.17) Class has already been declared.", className.getLocation());
         }
-        className.setDefinition(envT.get(className.getName()));
+        className.setDefinition(envT.get(nameSymb));
         className.setType(envT.get(nameSymb).getType());
     }
 
