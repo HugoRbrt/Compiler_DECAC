@@ -11,7 +11,7 @@ class C {
     int x;	
 }
 
-class D extend C {
+class D extends C {
     int x = 1;
 }
 

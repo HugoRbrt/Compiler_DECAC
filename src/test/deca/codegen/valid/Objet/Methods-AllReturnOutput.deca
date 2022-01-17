@@ -1,0 +1,55 @@
+// Description:
+//      Class having methods with differents signatures
+//
+// Result:
+//      equal
+//      1 2.00000e+01
+//      OK1 OK2 OK3²
+//
+// History:
+//      Created on 17/1/2022
+
+class A {
+    int x;
+
+    A signatureA() {
+        return this;
+    }
+
+    int signatureInt(int y) {
+        return x + y;
+    }
+
+    boolean signatureBoolean(int y) {
+        return (x == y);
+    }
+
+    float signatureFloat(int y) {
+        return ( (float) (x+y) );
+    }
+
+    void signatureVoidWith() {
+	print(" OK2");
+	return;
+    }
+
+    void signatureVoidWithout() {
+        println(" OK3");
+    }
+}
+
+{
+    A instance = new A();
+    A instanceBis = A.signatureA();
+    if (instance.equals(instanceBis)) {
+        println("equal");
+    } 
+    println(instanceBis.signatureInt(1), " ", instance.signatureFloat(2.0));
+    if instance.signatureBoolean(0) {
+        print("OK1");
+    }
+    A.signatureVoidWith();
+    A.signatureVoidWithout();
+}
+
+

@@ -1,0 +1,20 @@
+// Description:
+//      Program verifying if instance of is well design for parallel classes
+//      
+//
+// Result:
+//      OK
+//
+// History:
+//      created on 17/1/2022
+
+
+class A { int x; }
+class B { int x; }
+
+{
+    A a = new A();
+    if (! (a instanceof B)) {
+        println("OK");
+    }
+}

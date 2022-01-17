@@ -1,0 +1,23 @@
+// Description:
+//      Program with a class without return
+//
+// Result:
+//      ERROR: no_return
+//
+// History:
+//      created on 17/1/2022
+
+
+class A {
+    int x;
+
+    int function(int a) {
+        x = a + 1;
+    }
+
+}
+
+
+{
+    A a = new A();
+}

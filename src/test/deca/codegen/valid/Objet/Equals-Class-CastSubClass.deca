@@ -1,0 +1,20 @@
+// Description:
+//      Program verifying if an object and its cast to an upper class
+//      are equal.
+//
+// Result:
+//      OK
+//
+// History:
+//      created on 17/1/2022
+
+class A { }
+class B extends A { }
+
+{
+    A a = new B();
+    A other = (A) (a);
+    if (a.equals(other)) {
+        println("OK");
+    }
+}

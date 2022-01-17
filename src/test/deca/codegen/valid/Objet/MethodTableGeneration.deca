@@ -1,0 +1,24 @@
+// Description:
+//      Example to use with a debugger to see if the methods'table was
+//      well designed during code generation (see slide 26/44 of gencode)
+//
+// Result:
+//      nothing
+//
+// History:
+//      created on 17/1/2022
+
+
+class A {
+    int x;
+    int y;
+    void m() { }
+    void p() { }
+}
+
+class B extends A {
+    int x;
+    int z;
+    void p() { }
+    void q() { }
+}

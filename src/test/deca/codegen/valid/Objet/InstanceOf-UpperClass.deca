@@ -1,0 +1,21 @@
+// Description:
+//      Program verifying if instanceof is well designed for a subclass
+//
+// Result:
+//      OK
+//
+// History:
+//      created on 17/1/2022
+
+
+class A { }
+class B extends A { }
+class C extends B { }
+
+{
+    A a;
+    a = new C();
+    if (a instanceof B) {
+        println("OK");
+    }
+}

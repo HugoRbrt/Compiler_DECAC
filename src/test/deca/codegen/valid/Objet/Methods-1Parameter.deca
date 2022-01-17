@@ -1,0 +1,23 @@
+// Description:
+//      Testing a method with one parameter
+//
+// Result:
+//      42
+//
+// History:
+//      Created on 17/1/2022
+
+class A {
+    int x=14;
+
+    int function(int y) {
+        return x*y;
+    }
+}
+
+{
+    A a = new A();
+    println(a.function(3));
+}
+
+

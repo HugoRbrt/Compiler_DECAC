@@ -1,0 +1,32 @@
+// Description:
+//      Testing a method with 16 parameters
+//
+// Result:
+//      72
+//
+// History:
+//      Created on 17/1/2022
+
+class RipStack {
+
+    int sum;
+
+    void function(int a, int b, int c, int d, int e, int f, int g, int h, int i, int j, int k, int l, int m, int n, int o, int p) {
+        sum =  ( ( ( a + b ) + ( c + d ) ) + ( ( e + f ) + ( g + h ) ) ) +
+	       ( ( ( i + j ) + ( k + l ) ) + ( ( m + n ) + ( o + p ) ) ) ;
+    }
+
+    int getSum() {
+        return sum;
+    }
+
+}
+
+{
+    RipStack ripStack = new RipStack();
+
+    ripStack.function(1, 2, 3, 4, 5, 6, 7, 8, 8, 7, 6, 4, 3, 2, 1);
+    println(ripStack.getSum());
+}
+
+
