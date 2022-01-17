@@ -1,0 +1,15 @@
+// Description:
+//      Program trying to achieve a null dereferencement
+//
+// Result:
+//      ERROR: dereferencing null
+//
+// History:
+//      created on 17/1/2022
+
+class Null { float documentation; }
+
+{ 
+    Null laRSE;
+    println(laRSE.documentation);
+}
