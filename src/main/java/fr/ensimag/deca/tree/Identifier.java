@@ -14,6 +14,7 @@ import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.ima.pseudocode.ARMLine;
 import fr.ensimag.ima.pseudocode.ImmediateString;
 import java.io.PrintStream;
 
@@ -236,6 +237,37 @@ public class Identifier extends AbstractIdentifier {
             }
             if (definition.getType().isInt()) {
                 compiler.addInstruction(new WINT());
+            } else if (definition.getType().isString()) {
+                String s = compiler.getSymbTable().get(getName().getName()).getName();
+                compiler.addInstruction(new WSTR(new ImmediateString(s)));
+            } else {
+                if (printHex) {
+                    compiler.addInstruction(new WFLOATX());
+                } else {
+                    compiler.addInstruction(new WFLOAT());
+                }
+            }
+        }
+    }
+
+    protected void codeGenPrintARM(DecacCompiler compiler, boolean printHex){
+        if (definition.getType().isString()) {
+            ///////// TO MODIFY ////////
+            /*
+            System.out.println(getName().getName());
+            compiler.addInstruction(new WSTR(compiler.getIdentMap().getIdentString(name)));
+            */
+        } else {
+            /*
+            if (getDefinition().isExpression()) {
+                RegisterOffset R = compiler.getstackTable().get(this.getName());
+                compiler.addInstruction(new LOAD(R, Register.R1));
+            }
+            */
+            if (definition.getType().isInt()) {
+
+                compiler.add(new ARMLine(".ascii " +"\"" + this.name.toString() + "\""));
+                //compiler.addInstruction(new WINT());
             } else if (definition.getType().isString()) {
                 String s = compiler.getSymbTable().get(getName().getName()).getName();
                 compiler.addInstruction(new WSTR(new ImmediateString(s)));
