@@ -1,0 +1,21 @@
+// Description:
+//      Class with an assembly int function without RTS at the end
+//
+// Result:
+//      ERROR: no_return
+//
+// History:
+//      created on 17/1/2022
+
+
+class A {
+    int x;
+
+    int function()
+    asm ( "ADD R0, R1 \n RTS" );
+}
+
+
+{
+    A a = new A();
+}

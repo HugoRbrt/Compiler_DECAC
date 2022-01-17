@@ -11,7 +11,8 @@
 class A {
     int x;
 
-    asm ( "WSTR \"HelloWorld\" \n ADD R0, R17" );
+    void function()
+    asm ( "svc #0 \n RTS" );
 
     int y;
 }
