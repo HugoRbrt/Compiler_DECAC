@@ -1,0 +1,18 @@
+// Description:
+//      Syntaxically incorrect program
+//
+// Result:
+//      Parsing error on line 14
+//
+// History:
+//      Created in 17/1/2022
+
+class A {
+    int x;
+}
+
+A a = new A ;
+
+{
+
+}

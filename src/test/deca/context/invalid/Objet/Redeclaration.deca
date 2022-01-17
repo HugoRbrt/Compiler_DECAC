@@ -1,0 +1,23 @@
+// Description:
+//      New on a int
+//
+// Results:
+//      RUle (1.3) Identifier already used
+//
+// History:
+//      created on 17/1/2022
+
+class A {
+    protected int x;
+    int foo() {
+        return 1;
+    }
+}
+
+class B {
+
+}
+
+class A extends B {
+
+}

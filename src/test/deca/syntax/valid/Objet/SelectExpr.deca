@@ -1,0 +1,17 @@
+// Description:
+//      Calls for class methods/attributes
+//
+// Result:
+//      Parsing error on line 16
+//
+// History:
+//      Created in 17/1/2022
+
+class A {
+}
+
+{
+    int x = A.x ;
+    A.call1();
+    A.call2(param1, param2);
+}

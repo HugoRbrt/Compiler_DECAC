@@ -1,0 +1,18 @@
+// Description:
+//      Accessing a filed in a non declared class
+//
+// Results:
+//      RUle (3.65) Class non-existent
+//
+// History:
+//      created on 17/1/2022
+
+class A {
+    int x;
+}
+
+{
+    A a = new A();
+    int B;
+    print(B.x);
+}

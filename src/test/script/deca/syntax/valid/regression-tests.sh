@@ -9,4 +9,7 @@ exitnum=$(($exitnum + $?))
 ./regression-tests-SansObjet.sh
 exitnum=$(($exitnum + $?))
 
+./regression-tests-Objet.sh
+exitnum=$(($exitnum + $?))
+
 exit $exitnum

@@ -1,0 +1,22 @@
+// Description:
+//      Syntaxically correct program with classes with attributes and empty methods
+//
+// Result:
+//      nothing
+//
+// History:
+//      Created in 17/1/2022
+
+class A {
+    int x;
+    protected boolean x;
+    void test() {
+    }
+    void test2() {
+    }
+}
+
+class B {
+    int x;
+    protected boolean x;
+}

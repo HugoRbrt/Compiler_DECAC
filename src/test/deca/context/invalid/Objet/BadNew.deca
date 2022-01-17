@@ -1,0 +1,20 @@
+// Description:
+//      New on a int
+//
+// Results:
+//      RUle (3.42) Type is not a class
+//
+// History:
+//      created on 17/1/2022
+
+class A {
+    protected int x;
+    int foo() {
+        return 1;
+    }
+}
+
+{
+    int  Y;
+    A a = new Y();
+}

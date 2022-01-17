@@ -1,0 +1,17 @@
+// Description:
+//      Syntaxically correct program with multiple empty class bodies
+//
+// Result:
+//      nothing
+//
+// History:
+//      Created in 17/1/2022
+
+class A {
+}
+
+class B {
+}
+
+class C {
+}

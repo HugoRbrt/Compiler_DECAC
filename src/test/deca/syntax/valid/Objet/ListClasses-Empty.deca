@@ -1,0 +1,11 @@
+// Description:
+//      Syntaxically correct program with empty class body
+//
+// Result:
+//      nothing
+//
+// History:
+//      Created in 17/1/2022
+
+class A {
+}

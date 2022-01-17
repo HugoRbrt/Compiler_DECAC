@@ -1,0 +1,12 @@
+// Description:
+//      Syntaxically incorrect program
+//
+// Result:
+//      Parsing error on line 11
+//
+// History:
+//      Created in 17/1/2022
+
+class A {
+    public int x;
+}

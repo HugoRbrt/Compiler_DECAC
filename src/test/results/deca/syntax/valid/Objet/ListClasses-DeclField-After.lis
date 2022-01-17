@@ -1,0 +1,65 @@
+`> [10, 0] Program
+   +> ListDeclClass [List with 2 elements]
+   |  []> [10, 0] DeclClass
+   |  ||  +> [10, 6] Identifier (A)
+   |  ||  +> [10, 8] Identifier (Object)
+   |  ||  +> ListDeclField [List with 3 elements]
+   |  ||  |  []> [11, 8] [visibility=PUBLIC] DeclField
+   |  ||  |  ||  +> [11, 4] Identifier (int)
+   |  ||  |  ||  +> [11, 8] Identifier (x)
+   |  ||  |  ||  `> NoInitialization
+   |  ||  |  []> [12, 22] [visibility=PROTECTED] DeclField
+   |  ||  |  ||  +> [12, 14] Identifier (boolean)
+   |  ||  |  ||  +> [12, 22] Identifier (x)
+   |  ||  |  ||  `> NoInitialization
+   |  ||  |  []> [15, 12] [visibility=PUBLIC] DeclField
+   |  ||  |      +> [15, 4] Identifier (boolean)
+   |  ||  |      +> [15, 12] Identifier (z)
+   |  ||  |      `> NoInitialization
+   |  ||  `> ListDeclMethod [List with 2 elements]
+   |  ||     []> [13, 4] DeclMethod
+   |  ||     ||  +> [13, 4] Identifier (void)
+   |  ||     ||  +> [13, 9] Identifier (test)
+   |  ||     ||  +> ListDeclParam [List with 1 elements]
+   |  ||     ||  |  []> [13, 18] DeclParam
+   |  ||     ||  |      +> [13, 14] Identifier (int)
+   |  ||     ||  |      `> [13, 18] Identifier (x)
+   |  ||     ||  +> ListDeclVar [List with 0 elements]
+   |  ||     ||  `> ListInst [List with 0 elements]
+   |  ||     []> [16, 4] DeclMethod
+   |  ||         +> [16, 4] Identifier (void)
+   |  ||         +> [16, 9] Identifier (test2)
+   |  ||         +> ListDeclParam [List with 1 elements]
+   |  ||         |  []> [16, 19] DeclParam
+   |  ||         |      +> [16, 15] Identifier (int)
+   |  ||         |      `> [16, 19] Identifier (y)
+   |  ||         +> ListDeclVar [List with 0 elements]
+   |  ||         `> ListInst [List with 0 elements]
+   |  []> [20, 0] DeclClass
+   |      +> [20, 6] Identifier (B)
+   |      +> [20, 8] Identifier (Object)
+   |      +> ListDeclField [List with 3 elements]
+   |      |  []> [21, 12] [visibility=PUBLIC] DeclField
+   |      |  ||  +> [21, 4] Identifier (boolean)
+   |      |  ||  +> [21, 12] Identifier (x)
+   |      |  ||  `> [21, 14] Initialization
+   |      |  ||     `> [21, 16] BooleanLiteral (true)
+   |      |  []> [22, 22] [visibility=PROTECTED] DeclField
+   |      |  ||  +> [22, 14] Identifier (boolean)
+   |      |  ||  +> [22, 22] Identifier (x)
+   |      |  ||  `> NoInitialization
+   |      |  []> [25, 8] [visibility=PUBLIC] DeclField
+   |      |      +> [25, 4] Identifier (int)
+   |      |      +> [25, 8] Identifier (y)
+   |      |      `> NoInitialization
+   |      `> ListDeclMethod [List with 1 elements]
+   |         []> [23, 4] DeclMethod
+   |             +> [23, 4] Identifier (void)
+   |             +> [23, 9] Identifier (test)
+   |             +> ListDeclParam [List with 1 elements]
+   |             |  []> [23, 22] DeclParam
+   |             |      +> [23, 14] Identifier (boolean)
+   |             |      `> [23, 22] Identifier (x)
+   |             +> ListDeclVar [List with 0 elements]
+   |             `> ListInst [List with 0 elements]
+   `> EmptyMain

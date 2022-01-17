@@ -1,0 +1,14 @@
+// Description:
+//      Using same ident as method for field
+//
+// Results:
+//      RUle (2.3) Identifier already used
+//
+// History:
+//      created on 17/1/2022
+
+class A {
+    void x() {
+    }
+    protected int x;
+}

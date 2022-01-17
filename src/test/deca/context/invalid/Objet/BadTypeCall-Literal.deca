@@ -1,0 +1,20 @@
+// Description:
+//      calling a method on a int literal
+//
+// Results:
+//      RUle (3.71) Cannot call method on a non-class type
+//
+// History:
+//      created on 17/1/2022
+
+class A {
+    protected int x;
+    int foo() {
+        return 1;
+    }
+}
+
+{
+    A a = new A();
+    int x = 5.foo(5);
+}
