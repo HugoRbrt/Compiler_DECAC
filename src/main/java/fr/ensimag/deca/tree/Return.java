@@ -23,7 +23,7 @@ public class Return extends AbstractInst {
         returnExpr.setType(currentType);
         if (!returnType.sameType(currentType)) {
             throw new ContextualError(
-                    "(RULE 3.24) Return expression does not fit method signature.",
+                    "(RULE 3.24) Incompatible return expression type.",
                     returnExpr.getLocation());
         }
     }

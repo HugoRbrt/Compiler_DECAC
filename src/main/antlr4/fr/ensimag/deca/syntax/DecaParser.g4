@@ -417,12 +417,14 @@ select_expr returns[AbstractExpr tree]
             assert($i.tree != null);
             $tree = new Selection($e1.tree,$i.tree);
             setLocation($tree, $d);
+            LOG.trace($tree);
         }
         (o=OPARENT args=list_expr CPARENT {
             // we matched "e1.i(args)"
             assert($args.tree != null);
             $tree = new MethodCall($e1.tree, $i.tree, $args.tree);
             setLocation($tree, $o);
+            LOG.trace($tree);
         }
         | /* epsilon */ {
             // we matched "e.i"
@@ -438,8 +440,11 @@ primary_expr returns[AbstractExpr tree]
     | m=ident o=OPARENT args=list_expr CPARENT {
             assert($args.tree != null);
             assert($m.tree != null);
-            $tree = new MethodCall(new This(true), $ident.tree, $args.tree);
+            AbstractExpr th = new This(true);
+            setLocation(th, $m.start);
+            $tree = new MethodCall(th, $ident.tree, $args.tree);
             setLocation($tree, $o);
+            LOG.trace($tree);
         }
     | OPARENT expr CPARENT {
             assert($expr.tree != null);

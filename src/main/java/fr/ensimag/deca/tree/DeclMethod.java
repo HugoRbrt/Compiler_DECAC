@@ -80,7 +80,6 @@ public class DeclMethod extends AbstractDeclMethod {
             throws ContextualError {
         EnvironmentExp localEnv = declParameters.verifyListDeclParam(compiler, classEnv);
         block.verifyMain(compiler, localEnv, currentClass, returnType.getType());
-
     }
 
     @Override

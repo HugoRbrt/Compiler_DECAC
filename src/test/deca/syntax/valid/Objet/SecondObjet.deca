@@ -11,6 +11,12 @@ class A {
     int x;
     void setX(int x) {
     }
+    float magic() {
+    }
+    boolean long(int x, float y) {
+        y = magic();
+        y = this.magic();
+    }
 }
 
 class B extends A {
@@ -22,6 +28,7 @@ class B extends A {
         x = 2 + 3;
         y = 4;
         z.x = 5;
+        this.x = 6;
         return z;
     }
 }
@@ -60,7 +67,7 @@ class B extends A {
 //    }
 //}
 
-//Return expression does not fit method signature
+//Incompatible return expression type
 //class C extends A {
 //    int ret() {
 //        float x;
@@ -70,4 +77,17 @@ class B extends A {
 
 {
     A a = new A();
+    float f = a.magic();
+    boolean b = a.long(a.x, f);
+//Invalid parameter list
+//    boolean c = a.long();
+//Incompatible type assignment
+//    boolean d = a.magic();
+    a.x = 7;
+//Variable has not been declared
+//    a.d = 1;
+//'This' reference outside of class scope
+//    this.x = 3;
+//Method has not been declared
+//    magic();
 }

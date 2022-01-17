@@ -82,7 +82,7 @@ public abstract class AbstractExpr extends AbstractInst {
             throws ContextualError {
         Type type2 = this.verifyExpr(compiler, localEnv, currentClass);
         if (!ContextTools.assignCompatible(compiler.getEnvTypes(), expectedType, type2)) {
-            throw new ContextualError("(RULE 3.28) Incompatible type assignment", getLocation());
+            throw new ContextualError("(RULE 3.28) Incompatible type assignment.", getLocation());
         }
         if (type2.isInt() && expectedType.isFloat()) {
             return new ConvFloat(this);
