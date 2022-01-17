@@ -62,14 +62,10 @@ public class IfThenElse extends AbstractInst {
     }
 
     @Override
-    protected void codeGenInstARM(DecacCompiler compiler) {
-        throw new UnsupportedOperationException("not yet implemented");
-    }
-
-    @Override
     public void decompile(IndentPrintStream s) {
-        s.print("if ");
+        s.print("if(");
         condition.decompile(s);
+        s.print(")");
         s.println(" {");
         s.indent();
         thenBranch.decompile(s);

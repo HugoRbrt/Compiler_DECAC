@@ -62,16 +62,8 @@ public class DeclVar extends AbstractDeclVar {
     }
 
     protected void codeGenDeclVar(DecacCompiler compiler){
-        if(varName.getDefinition().getType().isString()){//si on veut declarer un string, il faut juste creer le symbol en java
-            String value="";
-            if(initialization instanceof Initialization){
-                value = ((StringLiteral)((Initialization)initialization).getExpression()).getValue();
-            }
-            compiler.getIdentMap().setIdentString(((AbstractIdentifier)varName).getName(),value);
-        }else{
-            compiler.getstackTable().put(varName.getName(), compiler.getListRegister().GB);
-            initialization.codeGenDeclVar(compiler, varName);
-        }
+        compiler.getstackTable().put(varName.getName(), compiler.getListRegister().GB);
+        initialization.codeGenDeclVar(compiler, varName);
     }
     
     @Override

@@ -227,25 +227,20 @@ public class Identifier extends AbstractIdentifier {
     }
 
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex){
-        if (definition.getType().isString()) {
-            System.out.println(getName().getName());
-            compiler.addInstruction(new WSTR(compiler.getIdentMap().getIdentString(name)));
+        if (getDefinition().isExpression()) {
+            RegisterOffset R = compiler.getstackTable().get(this.getName());
+            compiler.addInstruction(new LOAD(R, Register.R1));
+        }
+        if (definition.getType().isInt()) {
+            compiler.addInstruction(new WINT());
+        } else if (definition.getType().isString()) {
+            String s = compiler.getSymbTable().get(getName().getName()).getName();
+            compiler.addInstruction(new WSTR(new ImmediateString(s)));
         } else {
-            if (getDefinition().isExpression()) {
-                RegisterOffset R = compiler.getstackTable().get(this.getName());
-                compiler.addInstruction(new LOAD(R, Register.R1));
-            }
-            if (definition.getType().isInt()) {
-                compiler.addInstruction(new WINT());
-            } else if (definition.getType().isString()) {
-                String s = compiler.getSymbTable().get(getName().getName()).getName();
-                compiler.addInstruction(new WSTR(new ImmediateString(s)));
+            if (printHex) {
+                compiler.addInstruction(new WFLOATX());
             } else {
-                if (printHex) {
-                    compiler.addInstruction(new WFLOATX());
-                } else {
-                    compiler.addInstruction(new WFLOAT());
-                }
+                compiler.addInstruction(new WFLOAT());
             }
         }
     }
