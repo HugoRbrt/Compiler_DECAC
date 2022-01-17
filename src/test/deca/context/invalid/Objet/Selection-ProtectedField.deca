@@ -1,0 +1,29 @@
+// Description:
+//      Program abnormally trying to access a protected field
+//
+// Result:
+//      Contextual Error
+//      Line 18: (RULE 3.65) Field or method selection applied to variable of non-class type.
+//
+// History:
+//      Created in 17/1/2022
+
+class A {
+    protected int x;
+}
+
+class B extends A {
+    int getX(A a) {
+        return a.x;
+    }
+}
+
+class X {
+    void m() {
+        A a = new A();
+        B b = new B();
+        println(b.getX(a)) ; // 'a' type (A) is not a subtype of B
+    }
+}
+
+
