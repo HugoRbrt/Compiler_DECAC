@@ -13,13 +13,11 @@ import fr.ensimag.deca.tree.Location;
 import fr.ensimag.deca.tree.LocationException;
 import fr.ensimag.ima.pseudocode.AbstractLine;
 import fr.ensimag.ima.pseudocode.IMAProgram;
-import fr.ensimag.ima.pseudocode.ARMProgram;
 import fr.ensimag.ima.pseudocode.GenericProgram;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.Register;
-import fr.ensimag.ima.pseudocode.ARMRegister;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -65,11 +63,9 @@ public class DecacCompiler implements Runnable {
     public DecacCompiler(CompilerOptions compilerOptions, File source) {
         super();
         this.compilerOptions = compilerOptions;
-        if(Objects.isNull(this.compilerOptions) || !this.compilerOptions.getArmBool()){
-            program = new IMAProgram();
-        }else{
-            program = new ARMProgram();
-        }
+
+        program = new IMAProgram();
+
         this.source = source;
         // initializing builtin types
         envTypes.put(this.symbTable.create("void"),
@@ -155,12 +151,6 @@ public class DecacCompiler implements Runnable {
         program.addComment(comment);
     }
 
-    /**
-     * @see fr.ensimag.ima.pseudocode.IMAProgram#addARMComment(java.lang.String)
-     */
-    public void addARMComment(String comment) {
-        program.addComment(comment);
-    }
 
     /**
      * @see
@@ -176,15 +166,6 @@ public class DecacCompiler implements Runnable {
      */
     public void addInstruction(Instruction instruction) {
         program.addInstruction(instruction);
-    }
-
-    /**
-     * @see
-     * fr.ensimag.ima.pseudocode.IMAProgram#addOther(fr.ensimag.ima.pseudocode.Instruction)
-     */
-    public void addARMBlock(String other) {
-        ARMProgram armP = (ARMProgram)program;
-        armP.addARMBlock(other);
     }
 
 
@@ -325,11 +306,9 @@ public class DecacCompiler implements Runnable {
         }
 
         addComment("start main program");
-        if(Objects.isNull(this.compilerOptions) || !this.compilerOptions.getArmBool()){
-            prog.codeGenProgram(this);
-        }else{
-            prog.codeGenProgramARM(this);
-        }
+        prog.codeGenProgram(this);
+
+
         
         addComment("end main program");
         

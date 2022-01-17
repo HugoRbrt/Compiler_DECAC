@@ -70,28 +70,6 @@ public class Line extends AbstractLine {
         s.println();
     }
 
-    @Override
-    void ARMdisplay(PrintStream s) {
-        boolean tab = false;
-        if (label != null) {
-            s.print(label);
-            s.print(":");
-            tab = true;
-        }
-        if (instruction != null) {
-            s.print("\t");
-            instruction.display(s);
-            tab = true;
-        }
-        if (comment != null) {
-            if (tab) {
-                s.print("\t");
-            }
-            s.print(comment);
-        }
-        s.println();
-    }
-
     public void setInstruction(Instruction instruction) {
         this.instruction = instruction;
     }
