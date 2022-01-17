@@ -1,0 +1,21 @@
+// Description:
+//      Valid program assigning a subclass to an instance of the mother class
+//
+// Result:
+//      A: 01
+//      A': 012
+//
+// History:
+//      created on 17/1/2022
+
+
+class A { int x=0; }
+class B extends A { int y=1; }
+class C extends B { int z=2; }
+
+{
+    A a = new B();
+    A abis = new C();
+    println("A: ", a.x, a.y);
+    println("A': ", abis.x, abis.y, abis.z);
+}
