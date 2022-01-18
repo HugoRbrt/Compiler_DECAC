@@ -21,6 +21,7 @@ public class InstanceOf extends AbstractExpr {
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass) throws ContextualError {
         Type t1 = expr.verifyExpr(compiler, localEnv, currentClass);
         Type t2 = comparedTo.verifyType(compiler);
+        comparedTo.setDefinition(compiler.getEnvTypes().get(comparedTo.getName()));
         Type resType = ContextTools.typeInstanceOf(compiler, t1, t2, getLocation());
         setType(resType);
         return resType;

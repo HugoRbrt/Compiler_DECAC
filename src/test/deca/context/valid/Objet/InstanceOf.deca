@@ -1,0 +1,26 @@
+// Description:
+//      Instance of
+//
+// Results:
+//      (nothing)
+//
+// History:
+//      created on 17/1/2022
+
+class A {
+    protected int x;
+    int foo() {
+        return 1;
+    }
+}
+
+class B extends A {
+
+}
+
+{
+    A a = new A();
+    B b = new B();
+    boolean x = a instanceof B ;
+    boolean y = b instanceof A;
+}
