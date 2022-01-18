@@ -57,6 +57,16 @@ public class EnvironmentExp {
         return parentEnvironment.get(key);
     }
 
+     /**
+     * @param key The symbol mapped to the definition
+     */
+    public ExpDefinition getCurrent(Symbol key) {
+        if (environment.containsKey(key)) {
+            return environment.get(key);
+        }
+        return null;
+    }
+
     public void getSymbolMethod(Symbol[] symbolList, ClassDefinition className){
         if(parentEnvironment != null){
             parentEnvironment.getSymbolMethod(symbolList, className.getSuperClass());

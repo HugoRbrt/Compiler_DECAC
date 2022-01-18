@@ -34,11 +34,12 @@ public class DeclMethod extends AbstractDeclMethod {
 
     /**
      * Context check second pass. Checks return type, then checks if the method
-     * name is already in use. If that is the case, checks whether the name is
-     * used as a field name in any environment (illegal), or used as a method
-     * name in the current environment (illegal). If the name is used as a method
-     * name in a superclass environment, to successfully override the new method
-     * must have the same signature and return type as the existing one.
+     * name is already in use in the current environment (illegal). If not, checks
+     * whether the name is used in superclass environments. If that is the case,
+     * checks whether the name is used as a field name in any environment (illegal).
+     * If the name is used as a method name in a superclass environment, to
+     * successfully override the new method must have the same signature and return
+     * type as the existing one.
      *
      * @param compiler
      * @param localEnv
@@ -59,14 +60,13 @@ public class DeclMethod extends AbstractDeclMethod {
         returnType.setType(currentType);
         Signature sig = declParameters.verifySignature(compiler);
         SymbolTable.Symbol m = methodName.getName();
-        ExpDefinition def = localEnv.get(m);
-        try {
-            localEnv.declare(
-                    m, new MethodDefinition(currentType, returnType.getLocation(), sig, counter));
-        } catch (EnvironmentExp.DoubleDefException e) {
-            throw new ContextualError("(RULE 2.6) Method or field has already been declared.",
+        ExpDefinition def = localEnv.getCurrent(m);
+        if (def != null) {
+            throw new ContextualError(
+                    "(RULE 2.6) Method or field has already been declared.",
                     methodName.getLocation());
         }
+        def = localEnv.get(m);
         if (def != null && !def.isMethod()) {
             throw new ContextualError(
                     "(RULE 2.7) Illegal override: field --> method.",
@@ -83,6 +83,12 @@ public class DeclMethod extends AbstractDeclMethod {
         } else {
             currentClass.incNumberOfMethods();
             counter++;
+        }
+        try {
+            localEnv.declare(
+                    m, new MethodDefinition(currentType, returnType.getLocation(), sig, counter));
+        } catch (EnvironmentExp.DoubleDefException ignored) {
+            //Cannot occur
         }
         methodName.setDefinition(localEnv.get(methodName.getName()));
         methodName.setType(currentType);
