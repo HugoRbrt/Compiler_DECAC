@@ -230,17 +230,6 @@
                         </goals>
                     </execution>
                     <execution>
-                        <id>unit-test-codeAnalyzer</id>
-                        <configuration>
-                            <mainClass>fr.ensimag.deca.tools.TestCodeAnalyzer</mainClass>
-                            <classpathScope>test</classpathScope>
-                        </configuration>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>java</goal>
-                        </goals>
-                    </execution>
-                    <execution>
                         <id>basic-context</id>
                         <configuration>
                             <executable>./src/test/script/basic-context.sh</executable>
