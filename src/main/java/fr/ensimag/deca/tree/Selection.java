@@ -25,13 +25,17 @@ public class Selection extends AbstractLValue {
                 compiler, currentType.getDefinition().getMembers(), currentClass);
         setType(fieldType);
         if (selectedField.getDefinition().isField() && selectedField.getFieldDefinition().getVisibility() == Visibility.PROTECTED) {
-            if (currentClass != null &&
-                    !currentClass.getType().isSubClassOf(selectedField.getFieldDefinition().getContainingClass().getType())) {
+            if (currentClass == null) {
                 throw new ContextualError(
                         "(RULE 3.66) Protected field is not visible in the current scope.",
                         selectedField.getLocation());
             }
-            if (currentClass != null && !currentType.isSubClassOf(currentClass.getType())) {
+            if (!currentClass.getType().isSubClassOf(selectedField.getFieldDefinition().getContainingClass().getType())) {
+                throw new ContextualError(
+                        "(RULE 3.66) Protected field is not visible in the current scope.",
+                        selectedField.getLocation());
+            }
+            if (!currentType.isSubClassOf(currentClass.getType())) {
                     throw new ContextualError(
                             "(RULE 3.66) Selecting class not a subclass of current class.",
                             selectingClass.getLocation());

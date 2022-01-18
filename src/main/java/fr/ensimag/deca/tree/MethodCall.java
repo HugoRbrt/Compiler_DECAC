@@ -57,7 +57,7 @@ public class MethodCall extends AbstractExpr {
         }
         MethodDefinition mdef = methodName.getMethodDefinition();
         if (!mdef.getSignature().equals(sig)) {
-            throw new ContextualError("(RULE 3.41) Invalid parameter list.", getLocation());
+            throw new ContextualError("(RULE 3.72) Invalid parameter list.", getLocation());
         }
         setType(returnType);
         return returnType;
