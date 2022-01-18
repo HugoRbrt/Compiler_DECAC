@@ -22,7 +22,7 @@ import fr.ensimag.deca.tree.IntLiteral;
  * @author gl49
  * @date 01/01/2022
  */
-public abstract class AbstractBinaryExpr extends AbstractExpr {
+public abstract class  AbstractBinaryExpr extends AbstractExpr {
 
     public AbstractExpr getLeftOperand() {
         return leftOperand;
