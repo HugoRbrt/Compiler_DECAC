@@ -24,7 +24,7 @@
       |      +> [13, 10] Identifier (z)
       |      |  definition: variable defined at [13, 10], type=float
       |      `> [13, 12] Initialization
-      |         `> ConvFloat
+      |         `> [13, 16] ConvFloat
       |            type: float
       |            `> [13, 16] Modulo
       |               type: int

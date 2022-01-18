@@ -1,1 +1,1 @@
-src/test/deca/syntax/invalid/SansObjet/SumExpr-IncorrectPar.deca:12:19: extraneous input ')' expecting {FLOAT, INT, '(', '-', '!', 'false', 'null', 'readInt', 'readFloat', 'true', IDENT, STRING, NEW, THIS}
+src/test/deca/syntax/invalid/SansObjet/SumExpr-IncorrectPar.deca:12:19: extraneous input ')' expecting {FLOAT, INT, '(', '-', '!', 'false', 'new', 'null', 'readInt', 'readFloat', 'this', 'true', IDENT, STRING}

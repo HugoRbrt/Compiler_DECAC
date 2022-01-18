@@ -24,6 +24,7 @@ import fr.ensimag.ima.pseudocode.Register;
 public class ConvFloat extends AbstractUnaryExpr {
     public ConvFloat(AbstractExpr operand) {
         super(operand);
+        setLocation(operand.getLocation());
     }
 
     @Override

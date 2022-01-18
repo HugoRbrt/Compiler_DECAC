@@ -8,7 +8,7 @@
       |      +> [11, 10] Identifier (x)
       |      |  definition: variable defined at [11, 10], type=float
       |      `> [11, 12] Initialization
-      |         `> ConvFloat
+      |         `> [11, 14] ConvFloat
       |            type: float
       |            `> [11, 14] Int (2)
       |               type: int

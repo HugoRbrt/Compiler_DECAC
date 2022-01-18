@@ -285,7 +285,7 @@ public class DecacCompiler implements Runnable {
 
     /**
      * function that makes the class to implements Runnable interface
-     * by calling compile() function (usefull for -p decac option )
+     * by calling compile() function (usefull for -P decac option )
      */
     public void run(){
         compile();

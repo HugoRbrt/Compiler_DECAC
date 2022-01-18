@@ -1,1 +1,1 @@
-src/test/deca/context/invalid/SansObjet/ReadFloat-intDeclVar.deca:11:12: (RULE 3.28) Incompatible type assignment
+src/test/deca/context/invalid/SansObjet/ReadFloat-intDeclVar.deca:11:12: (RULE 3.28) Incompatible type assignment.
