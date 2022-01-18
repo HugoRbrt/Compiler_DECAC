@@ -21,7 +21,7 @@ public class ListDeclField extends TreeList<AbstractDeclField> {
     }
 
     protected void codeGen(DecacCompiler compiler, String className) {
-        compiler.addLabel(new Label("init."+className));
+        compiler.addLabel(new Label("init_"+className));
         int fieldCounter=0;
         for (AbstractDeclField field: getList()) {
             field.codeGen(compiler, fieldCounter);

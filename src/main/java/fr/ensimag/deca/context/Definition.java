@@ -22,6 +22,10 @@ public abstract class Definition {
         return res;
     }
 
+    public String toStringName(){
+        return ""+type;
+    }
+
     public abstract String getNature();
 
     public Definition(Type type, Location location) {

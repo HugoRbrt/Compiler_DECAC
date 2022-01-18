@@ -5,6 +5,7 @@ import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.LabelOperand;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
@@ -116,7 +117,7 @@ public class DeclMethod extends AbstractDeclMethod {
 
     protected void codeGenTable(DecacCompiler compiler, SymbolTable.Symbol classSymbol){
         compiler.getstackTable().put(methodName.getName(), Register.GB);
-        compiler.addInstruction(new LOAD(new Label(methodName.getName().getName()), Register.R0));
+        compiler.addInstruction(new LOAD(new LabelOperand(new Label(methodName.getName().getName())), Register.R0));
         compiler.addInstruction(new STORE(Register.R0, compiler.getstackTable().get(classSymbol)));
     }
 

@@ -4,10 +4,7 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable;
-import fr.ensimag.ima.pseudocode.Label;
-import fr.ensimag.ima.pseudocode.NullOperand;
-import fr.ensimag.ima.pseudocode.Register;
-import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.*;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.ima.pseudocode.instructions.*;
 import org.apache.log4j.Logger;
@@ -70,10 +67,9 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
         compiler.getstackTable().put(objectSymbol, Register.GB);
         compiler.addInstruction(new STORE(Register.R0, compiler.getstackTable().get(objectSymbol)));
 
-        Symbol equalsObjectSymbol = compiler.getSymbTable().get("equals");
-        equalsObjectSymbol.setName("code.Object."+equalsObjectSymbol.getName());
+        Symbol equalsObjectSymbol = compiler.getSymbTable().create("code_Object_equals");
         compiler.getstackTable().put(equalsObjectSymbol, Register.GB);
-        compiler.addInstruction(new LOAD(new Label(equalsObjectSymbol.getName()), Register.R0));
+        compiler.addInstruction(new LOAD(new LabelOperand(new Label(equalsObjectSymbol.getName())), Register.R0));
         compiler.addInstruction(new STORE(Register.R0,  compiler.getstackTable().get(equalsObjectSymbol)));
 
 
@@ -88,6 +84,8 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
         compiler.addComment(" --------------------------------------------------");
 
         compiler.addComment(" ---------- equals Method");
+        Symbol equalsObjectSymbol = compiler.getSymbTable().create("code_Object_equals");
+        compiler.addLabel(new Label(equalsObjectSymbol.getName()));
         compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.R1), Register.R1));
         compiler.addInstruction(new LOAD(new RegisterOffset(-3, Register.R1), Register.R0));
         compiler.addInstruction(new CMP(Register.R1, Register.R0));
