@@ -59,6 +59,13 @@ public class DeclMethod extends AbstractDeclMethod {
         Signature sig = declParameters.verifySignature(compiler);
         SymbolTable.Symbol m = methodName.getName();
         ExpDefinition def = localEnv.get(m);
+        try {
+            localEnv.declare(
+                    m, new MethodDefinition(currentType, returnType.getLocation(), sig, counter));
+        } catch (EnvironmentExp.DoubleDefException e) {
+            throw new ContextualError("(RULE 2.6) Method or field has already been declared.",
+                    methodName.getLocation());
+        }
         if (def != null && !def.isMethod()) {
             throw new ContextualError(
                     "(RULE 2.7) Illegal override: field --> method.",
@@ -75,13 +82,6 @@ public class DeclMethod extends AbstractDeclMethod {
         } else {
             currentClass.incNumberOfMethods();
             counter++;
-        }
-        try {
-            localEnv.declare(
-                    m, new MethodDefinition(currentType, returnType.getLocation(), sig, counter));
-        } catch (EnvironmentExp.DoubleDefException e) {
-            throw new ContextualError("(RULE 3.17) Method has already been declared.",
-                    methodName.getLocation());
         }
         methodName.setDefinition(localEnv.get(methodName.getName()));
         methodName.setType(currentType);

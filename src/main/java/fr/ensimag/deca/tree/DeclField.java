@@ -67,7 +67,7 @@ public class DeclField extends AbstractDeclField {
                         currentType, fieldName.getLocation(), visibility, currentClass, counter));
             } catch (EnvironmentExp.DoubleDefException e) {
                 throw new ContextualError(
-                        "(RULE 3.17) Field has already been declared.",
+                        "(RULE 2.4) Method or field has already been declared.",
                         fieldName.getLocation());
             }
         } else {

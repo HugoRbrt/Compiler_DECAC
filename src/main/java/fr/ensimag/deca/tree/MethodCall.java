@@ -43,7 +43,7 @@ public class MethodCall extends AbstractExpr {
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
         ClassType currentType = callingClass.verifyExpr(compiler, localEnv, currentClass).asClassType(
-                "(RULE 3.65) Field or method selection applied to variable of non-class type.",
+                "(RULE 3.71) Field or method selection applied to expression of non-class type.",
                 getLocation());
         EnvironmentExp classEnv = currentType.getDefinition().getMembers();
         Type returnType = methodName.verifyExpr(compiler, classEnv, currentClass);
