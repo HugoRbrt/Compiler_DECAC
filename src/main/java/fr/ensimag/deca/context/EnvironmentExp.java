@@ -57,11 +57,7 @@ public class EnvironmentExp {
         return parentEnvironment.get(key);
     }
 
-    /**
-     * Returns the definition of the symbol in the current environment only,
-     * or null if the symbol is undefined in the current environment. Does not
-     * traverse parent environments.
-     *
+     /**
      * @param key The symbol mapped to the definition
      */
     public ExpDefinition getCurrent(Symbol key) {
