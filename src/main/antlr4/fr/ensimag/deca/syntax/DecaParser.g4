@@ -327,10 +327,11 @@ inequality_expr returns[AbstractExpr tree]
             setLocation($tree, $op);
             LOG.trace($tree);
         }
-    | e1=inequality_expr INSTANCEOF type {
+    | e1=inequality_expr op=INSTANCEOF type {
             assert($e1.tree != null);
             assert($type.tree != null);
-            // Not yet
+            $tree = new InstanceOf($e1.tree, $type.tree);
+            setLocation($tree, $op);
         }
     ;
 
