@@ -6,6 +6,7 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.instructions.HALT;
 import java.io.PrintStream;
 
 /**
@@ -26,6 +27,7 @@ public class EmptyMain extends AbstractMain {
         compiler.addComment(" --------------------------------------------------");
         compiler.addComment("             Empty Main Program");
         compiler.addComment(" --------------------------------------------------");
+        compiler.addLine(new HALT());
     }
 
     /**
