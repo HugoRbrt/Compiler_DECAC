@@ -3,6 +3,7 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.instructions.ADDSP;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.deca.tree.Initialization;
@@ -62,7 +63,7 @@ public class DeclVar extends AbstractDeclVar {
     }
 
     protected void codeGenDeclVar(DecacCompiler compiler){
-        compiler.getstackTable().put(varName.getName(), compiler.getListRegister().GB);
+        compiler.getstackTable().put(varName.getName(), Register.GB);
         initialization.codeGenDeclVar(compiler, varName);
     }
     
