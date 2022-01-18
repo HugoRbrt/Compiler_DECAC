@@ -7,4 +7,14 @@
 // History:
 //    created on 05/01/2022
 
-{ println("Hello, World"); }
+class A{
+    int x;
+    float y;
+}
+class B{
+    int z;
+}
+{
+    A kayak = new A();
+    A canoe = new A();
+}
