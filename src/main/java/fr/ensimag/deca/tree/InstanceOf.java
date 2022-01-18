@@ -48,7 +48,8 @@ public class InstanceOf extends AbstractExpr {
         Label success = new Label();
         Label failure = new Label();
         Label end = new Label();
-        compiler.addInstruction(new LEA(  compiler.getstackTable().get(((Identifier) expr).getName()) , Register.R0));
+        System.out.println(((Identifier) expr).getType().getName());
+        compiler.addInstruction(new LEA(  compiler.getstackTable().get( compiler.getSymbTable().get(expr.getType().getName().getName())) , Register.R0));
         compiler.addInstruction(new LEA(  compiler.getstackTable().get( comparedTo.getName()) , Register.R1));
         compiler.addLabel(start);
         compiler.addInstruction(new CMP(Register.R0, Register.R1));
