@@ -27,7 +27,7 @@ public class EmptyMain extends AbstractMain {
         compiler.addComment(" --------------------------------------------------");
         compiler.addComment("             Empty Main Program");
         compiler.addComment(" --------------------------------------------------");
-        compiler.addLine(new HALT());
+        compiler.addInstruction(new HALT());
     }
 
     /**
