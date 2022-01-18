@@ -7,14 +7,4 @@
 // History:
 //    created on 05/01/2022
 
-class A{
-    int x;
-    float y;
-}
-class B{
-    int z;
-}
-{
-    A kayak = new A();
-    A canoe = new A();
-}
+{ println("Hello, World"); }
