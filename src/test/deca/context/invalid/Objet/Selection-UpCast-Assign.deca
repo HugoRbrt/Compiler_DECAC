@@ -1,8 +1,8 @@
 // Description:
-//      Casting down and trying to call method
+//      Casting down and trying to access a field
 //
 // Results:
-//      nothing
+//     (RULE 3.28) Incompatible type assignment.
 //
 // History:
 //      created on 17/1/2022

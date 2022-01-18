@@ -2,7 +2,7 @@
 //      Casting down and trying to call method
 //
 // Results:
-//      nothing
+//      (RULE 0.1) variable has not been declared
 //
 // History:
 //      created on 17/1/2022
