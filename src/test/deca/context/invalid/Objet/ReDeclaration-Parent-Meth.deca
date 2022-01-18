@@ -2,7 +2,7 @@
 //      Declaring a methods with same ident as parent class
 //
 // Results:
-//      RUle (2.7) Method defined in parent class with different signature
+//      Line 17 : Rule (2.7) Method defined in parent class with different signature
 //
 // History:
 //      created on 17/1/2022

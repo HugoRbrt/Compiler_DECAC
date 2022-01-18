@@ -1,0 +1,1 @@
+src/test/deca/context/invalid/Objet/Void-MethodParam.deca:12:12: (RULE 2.9) Parameter cannot be void type.

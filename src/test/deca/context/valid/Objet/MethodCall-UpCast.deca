@@ -1,0 +1,27 @@
+// Description:
+//      Casting down and trying to call method
+//
+// Results:
+//      nothing
+//
+// History:
+//      created on 17/1/2022
+
+class A {
+    protected int x;
+    void foo() {
+    }
+}
+
+class B extends A{
+    boolean y;
+    void fooB() {
+
+    }
+}
+
+{
+    B b = new B();
+    A a = (A) (b);
+    a.foo();
+}

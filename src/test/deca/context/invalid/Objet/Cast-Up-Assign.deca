@@ -1,0 +1,23 @@
+// Description:
+//      Casting up
+//
+// Results:
+//      (RULE 3.28) Incompatible type assignment
+//
+// History:
+//      created on 17/1/2022
+
+class A {
+    protected int x;
+    void foo() {
+    }
+}
+
+class B extends A{
+    boolean y;
+}
+
+{
+    B b = new B();
+    B a = (A) (b);
+}

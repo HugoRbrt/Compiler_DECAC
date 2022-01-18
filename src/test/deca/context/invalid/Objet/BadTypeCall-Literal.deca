@@ -2,7 +2,7 @@
 //      calling a method on a int literal
 //
 // Results:
-//      RUle (3.71) Cannot call method on a non-class type
+//      Line 19 : Rule (3.71) Cannot call method on a non-class type
 //
 // History:
 //      created on 17/1/2022
@@ -16,5 +16,5 @@ class A {
 
 {
     A a = new A();
-    int x = 5.foo(5);
+    int x = 5.foo();
 }

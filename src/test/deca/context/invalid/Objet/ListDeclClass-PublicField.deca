@@ -2,7 +2,7 @@
 //      Accessing a filed in a non declared class
 //
 // Results:
-//      RUle (3.65) Class non-existent
+//      Line 17 : Rule (3.65) Class non-existent
 //
 // History:
 //      created on 17/1/2022

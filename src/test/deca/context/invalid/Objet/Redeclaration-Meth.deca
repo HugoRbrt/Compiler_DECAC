@@ -2,7 +2,7 @@
 //      Declaring two methods with same ident
 //
 // Results:
-//      RUle (2.6) Method ident already used
+//      Line 13 : Rule (2.6) Method ident already used
 //
 // History:
 //      created on 17/1/2022
