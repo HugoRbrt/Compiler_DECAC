@@ -60,6 +60,7 @@ public class Main extends AbstractMain {
         compiler.addARMBlock("_start:");
         //ARMRegister R = compiler.getListRegisterARM();
         insts.codeGenListInstARM(compiler);
+        compiler.addARMBlock("Z = 0");
         compiler.addInstruction(new mov(ARMRegister.getR(0),0));
         compiler.addInstruction(new mov(ARMRegister.getR(7),1));
         compiler.addInstruction(new svc(0));
