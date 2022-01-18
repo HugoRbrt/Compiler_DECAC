@@ -2,7 +2,7 @@
 //      Declaring a methods with same ident as parent class
 //
 // Results:
-//      RUle (2.7) return type of this method is not a subtype of the one in the parent class
+//      Line 17 : Rule (2.7) return type of this method is not a subtype of the one in the parent class
 //
 // History:
 //      created on 17/1/2022

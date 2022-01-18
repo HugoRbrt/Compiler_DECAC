@@ -2,7 +2,7 @@
 //      Using same ident as method for field
 //
 // Results:
-//      RUle (2.3) Identifier already used
+//      Line 13 : Rule (2.6) Identifier already used
 //
 // History:
 //      created on 17/1/2022

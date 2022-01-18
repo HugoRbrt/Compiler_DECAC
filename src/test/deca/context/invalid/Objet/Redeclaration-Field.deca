@@ -2,14 +2,14 @@
 //      Declaring two fields with same ident
 //
 // Results:
-//      RUle (2.4) Identifier already used
+//      Line 14 : Rule (2.4) Identifier already used
 //
 // History:
 //      created on 17/1/2022
 
 class A {
     int x;
-    void x() {
+    void y() {
     }
     protected int x;
 }

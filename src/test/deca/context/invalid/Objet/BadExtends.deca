@@ -2,7 +2,7 @@
 //      Extends on a non declared class
 //
 // Results:
-//      RUle (1.3) Super class does not exist
+//      Line 10 : (RULE 0.2) Type does not exist.
 //
 // History:
 //      created on 17/1/2022

@@ -1,18 +1,12 @@
 // Description:
-//      Declaring a void field
+//      Method with a void type parameter
 //
 // Results:
-//      RUle (2.5) Identifier is used a non-field in a parent class
+//      Line 11 : Rule (2.5) Field cannot be void
 //
 // History:
 //      created on 17/1/2022
 
-class B {
-    void x() {
-
-    }
-}
-
-class A extends B {
-    int x;
+class A {
+   void x;
 }

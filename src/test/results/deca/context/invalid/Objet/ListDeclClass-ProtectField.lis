@@ -1,0 +1,1 @@
+src/test/deca/context/invalid/Objet/ListDeclClass-ProtectField.deca:16:12: (RULE 3.66) Protected field is not visible in the current scope.

@@ -1,19 +1,21 @@
 package fr.ensimag.deca.tools;
 
 import fr.ensimag.deca.tools.CodeAnalyzer;
-import org.apache.log4j.Logger;
-import org.apache.commons.lang.Validate;
+import fr.ensimag.deca.tools.DecacInternalError;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
+import org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  *
  * @author gl49
  */
-public class TestCodeAnalyzer {
+public class CodeAnalyzerTest {
     
-    private static final Logger LOG = Logger.getLogger(TestCodeAnalyzer.class);
-            
     /* Must return 7 */
-    private static int testOne() {
+    @Test
+    public void testOne() {
         
         CodeAnalyzer codeAnalyzer = new CodeAnalyzer();
         
@@ -25,37 +27,31 @@ public class TestCodeAnalyzer {
         codeAnalyzer.incrPushCount(5); //stack:7
         codeAnalyzer.incrPopCount(3);  //stack:4
         //needed:7
-        return codeAnalyzer.getNeededStackSize();
+        assertEquals(7, codeAnalyzer.getNeededStackSize());
     }
     
     /* Must return 2 */
-    private static int testTwo() {
+    @Test
+    public void testTwo() {
         
         CodeAnalyzer codeAnalyzer = new CodeAnalyzer();
-        
         codeAnalyzer.incrPushCount(1); //stack:1
         codeAnalyzer.incrPushCount(1); //stack:2
         codeAnalyzer.incrPopCount(1);  //stack:1
         codeAnalyzer.incrPopCount(1);  //stack:0
         codeAnalyzer.incrPushCount(1); //stack:1
         //needed:2
-        return codeAnalyzer.getNeededStackSize();
+        assertEquals(2, codeAnalyzer.getNeededStackSize());
     }
     
     
     /* Must return 0 */
-    private static int testThree() {
+    @Test
+    public void testThree() {
         CodeAnalyzer codeAnalyzer = new CodeAnalyzer();
         
         codeAnalyzer.incrPopCount(1);
         
-        return codeAnalyzer.getNeededStackSize();
+        assertEquals(0, codeAnalyzer.getNeededStackSize());
     }
-
-    public static void main(String[] args) {
-        Validate.isTrue(testOne() == 7);
-        Validate.isTrue(testTwo() == 2);
-        Validate.isTrue(testThree() == 0);
-    }
-}
-        
+}     

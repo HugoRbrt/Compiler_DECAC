@@ -2,7 +2,7 @@
 //      calling a method a a on-class variable
 //
 // Results:
-//      RUle (3.71) Cannot call method on a non-class type
+//      Line 20 : Rule (3.71) Cannot call method on a non-class type
 //
 // History:
 //      created on 17/1/2022

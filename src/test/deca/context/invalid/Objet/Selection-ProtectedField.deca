@@ -3,7 +3,7 @@
 //
 // Result:
 //      Contextual Error
-//      Line 18: (RULE 3.65) Field or method selection applied to variable of non-class type.
+//      Line 18: (RULE 3.66) Selecting class not a subclass of current class
 //
 // History:
 //      Created in 17/1/2022

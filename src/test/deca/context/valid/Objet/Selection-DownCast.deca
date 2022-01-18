@@ -1,0 +1,27 @@
+// Description:
+//       Casting down and trying to access a field
+//
+// Results:
+//      nothing
+//
+// History:
+//      created on 17/1/2022
+
+class A {
+    int x;
+    void foo() {
+    }
+}
+
+class B extends A{
+    int y;
+    int fooB() {
+
+    }
+}
+
+{
+    A a = new A();
+    B b = (B) (a);
+    print(b.x);
+}

@@ -1,0 +1,1 @@
+src/test/deca/context/invalid/Objet/Field-Parent-Method.deca:17:8: (RULE 2.5) Illegal override: method --> field.

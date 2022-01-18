@@ -7,8 +7,10 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.Definition;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
 
@@ -60,6 +62,29 @@ public class Assign extends AbstractBinaryExpr {
         return "=";
     }
 
+    protected void codeGenInst(DecacCompiler compiler){
+        RegisterOffset offset;
+        GPRegister usedRegister = compiler.getListRegister().getRegister(compiler);
+        //on recupere a quelle adresse est stocké l'element de gauche :
+        if(super.getLeftOperand() instanceof Selection){
+            RegisterOffset r = compiler.getstackTable().get(compiler.getSymbTable().get(((Identifier)((Selection) super.getLeftOperand()).getSelectingClass()).getName().getName()));
+            compiler.addInstruction(new LOAD(r, usedRegister));
+            offset = new RegisterOffset(((Selection) super.getLeftOperand()).getSelectedField().getFieldDefinition().getIndex(), usedRegister);
+        }
+        else{
+            offset = compiler.getstackTable().get(
+                    ((Identifier) super.getLeftOperand()).getName());
+        }
+        //droite dans R0
+        super.getRightOperand().codeGenInst(compiler);
+        //on stock droite dans gauche
+        compiler.addInstruction(new STORE(Register.R0, offset));
+        if(super.getLeftOperand() instanceof Selection){
+            compiler.getListRegister().freeRegister(usedRegister, compiler);
+        }
+    }
+
+    //codegen(left : R2, right : R0)
     public void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler){
         RegisterOffset offset = compiler.getstackTable().get(
             ((Identifier) super.getLeftOperand()).getName());

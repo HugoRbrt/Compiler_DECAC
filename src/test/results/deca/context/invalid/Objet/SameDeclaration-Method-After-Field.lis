@@ -1,0 +1,1 @@
+src/test/deca/context/invalid/Objet/SameDeclaration-Method-After-Field.deca:12:9: (RULE 2.6) Method or field has already been declared.

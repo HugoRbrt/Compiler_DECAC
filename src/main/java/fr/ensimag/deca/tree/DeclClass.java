@@ -61,6 +61,7 @@ public class DeclClass extends AbstractDeclClass {
         EnvironmentType envT = compiler.getEnvTypes();
         SymbolTable.Symbol nameSymb = className.getName();
         superClass.setType(superClass.verifyType(compiler));
+        superClass.setDefinition(envT.get(superClass.getName()));
         ClassDefinition superCl = (ClassDefinition) envT.get(superClass.getName());
         ClassType cl = new ClassType(nameSymb, getLocation(), superCl);
         try {

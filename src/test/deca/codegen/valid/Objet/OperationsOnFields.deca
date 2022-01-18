@@ -1,0 +1,32 @@
+// Description:
+//      Program doing operations on fields
+//
+// Result:
+//      OK1 OK2 OK3 OK4
+//
+// History:
+//      created on 17/1/2022
+
+
+class A {
+    int x = 2;
+    boolean b = false;
+}
+
+class B {
+    int y = 3;
+    float z = 4.0;
+}
+
+{
+    A a = new A();
+    B b = new B();
+
+    println(a.x + b.y);
+    if (a.b) {
+        print("OK");
+    }
+
+    println(a.x * b.y);
+}
+

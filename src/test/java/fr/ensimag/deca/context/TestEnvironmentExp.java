@@ -5,6 +5,8 @@ import fr.ensimag.deca.tools.SymbolTable;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import org.junit.jupiter.api.Test;
+import org.mockito.MockitoAnnotations;
 
 public class TestEnvironmentExp {
 
