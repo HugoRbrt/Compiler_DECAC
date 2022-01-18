@@ -7,15 +7,4 @@
 // History:
 //    created on 05/01/2022
 
-class A{
-    float a;
-}
-class B{
-    int b;
-}
-{
-    A kayak = new A();
-    B canoe = new B();
-    kayak.a = 2.0;
-    print(kayak.a);
-}
+{ println("Hello, World"); }
