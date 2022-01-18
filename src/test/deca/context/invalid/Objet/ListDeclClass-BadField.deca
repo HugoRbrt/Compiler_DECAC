@@ -2,7 +2,7 @@
 //      Accessing a non declared field
 //
 // Results:
-//      RUle (3.70) Field not found
+//      Line 17 : Rule (0.1) Variable not found
 //
 // History:
 //      created on 17/1/2022
@@ -13,5 +13,6 @@ class A {
 
 {
     A a = new A();
+    int y;
     print(a.y);
 }

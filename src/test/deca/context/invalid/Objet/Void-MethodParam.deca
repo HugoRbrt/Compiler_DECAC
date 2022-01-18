@@ -2,7 +2,7 @@
 //      Method with a void type parameter
 //
 // Results:
-//      RUle (2.9) Method parameter cannot be void
+//      Line 19 : Rule (2.9) Method parameter cannot be void
 //
 // History:
 //      created on 17/1/2022

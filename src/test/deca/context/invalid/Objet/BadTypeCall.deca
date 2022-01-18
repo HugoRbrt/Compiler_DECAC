@@ -2,7 +2,7 @@
 //      assigning the result of a function call to a different type
 //
 // Results:
-//      RUle (3.28) Impossible type assignment
+//      Line 19 : Rule (3.28) Impossible type assignment
 //
 // History:
 //      created on 17/1/2022

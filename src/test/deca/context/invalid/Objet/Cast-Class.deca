@@ -1,0 +1,23 @@
+// Description:
+//      Casting on a different class with no relationship
+//
+// Results:
+//      Line 12 : Rule (3.39) Illegal Cast
+//
+// History:
+//      created on 17/1/2022
+
+class A {
+    protected int x;
+    void foo() {
+    }
+}
+
+class B {
+    boolean y;
+}
+
+{
+    A a = new A();
+    B b = (B) (a);
+}

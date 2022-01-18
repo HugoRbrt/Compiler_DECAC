@@ -12,5 +12,6 @@ class A {
 }
 
 {
-    print(A.x);
+    A a = new A();
+    print(a.x);
 }

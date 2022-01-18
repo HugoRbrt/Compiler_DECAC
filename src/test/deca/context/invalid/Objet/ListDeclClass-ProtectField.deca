@@ -2,7 +2,7 @@
 //      Accessing a protected field in a class
 //
 // Results:
-//      RUle (3.66) Protected field
+//      Line 16 : Rule (3.66) Protected field
 //
 // History:
 //      created on 17/1/2022
