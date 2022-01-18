@@ -50,7 +50,7 @@ public class Initialization extends AbstractInitialization {
     protected void codeGenDeclVar(DecacCompiler compiler, AbstractIdentifier varName){
         expression.codeGenInst(compiler);
         RegisterOffset r = compiler.getstackTable().get(varName.getName());
-        compiler.addInstruction(new STORE(compiler.getListRegister().R0, r));
+        compiler.addInstruction(new STORE(Register.R0, r));
         compiler.incrDeclaredVariables(1);
     }
 

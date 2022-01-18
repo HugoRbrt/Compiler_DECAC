@@ -49,10 +49,10 @@ public class New extends AbstractExpr {
         compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Stack overflow , a real one")));
         compiler.addInstruction(new LEA(compiler.getstackTable().get(instantiation.getName()), compiler.getListRegister().R0));
         //comment obtenir k ?
-        compiler.addInstruction(new STORE(compiler.getListRegister().R0, new RegisterOffset(0, r)));
+        compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(0, r)));
         compiler.addInstruction(new PUSH(r));
-        compiler.addInstruction(new BSR(new Label("init_"+instantiation.getName().getName())));
-        compiler.addInstruction(new POP(compiler.getListRegister().R0));
+        compiler.addInstruction(new BSR(new Label("init."+instantiation.getName().getName())));
+        compiler.addInstruction(new POP(Register.R0));
         compiler.getListRegister().freeRegister(r, compiler);
 
 

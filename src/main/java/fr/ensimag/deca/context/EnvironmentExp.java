@@ -63,8 +63,8 @@ public class EnvironmentExp {
         }
         for(Symbol s : environment.keySet()){
             if(environment.get(s).isMethod()){
-                if(!s.getName().contains("code_")){
-                    s.setName("code_"+className.toStringName()+"_"+s.getName());
+                if(!s.getName().contains("code.")){
+                    s.setName("code."+className.toStringName()+"."+s.getName());
                 }
                 symbolList[((MethodDefinition)environment.get(s)).getIndex() - 1] = s;
             }
