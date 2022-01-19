@@ -86,7 +86,10 @@ public abstract class AbstractExpr extends AbstractInst {
             throws ContextualError {
         Type type2 = this.verifyExpr(compiler, localEnv, currentClass);
         if (!ContextTools.assignCompatible(compiler.getEnvTypes(), expectedType, type2)) {
-            throw new ContextualError("(RULE 3.28) Incompatible type assignment.", getLocation());
+            throw new ContextualError(
+                    "(RULE 3.28) Incompatible type assignment. Lvalue is of type " +
+                    expectedType.getName() + ", assigned value is of type " + type2.getName()
+                    + ".", getLocation());
         }
         if (type2.isInt() && expectedType.isFloat()) {
             return new ConvFloat(this);
@@ -116,7 +119,9 @@ public abstract class AbstractExpr extends AbstractInst {
             ClassDefinition currentClass) throws ContextualError {
             Type currentType = this.verifyExpr(compiler, localEnv, currentClass);
         if (!currentType.isBoolean()) {
-            throw new ContextualError("(RULE 3.29) Condition must be a boolean expression.", getLocation());
+            throw new ContextualError(
+                    "(RULE 3.29) Condition must be a boolean expression: (\u001B[31m" +
+                    currentType.getName() + "\u001B[0m)", getLocation());
         }
     }
 

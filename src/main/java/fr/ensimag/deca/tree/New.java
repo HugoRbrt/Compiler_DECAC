@@ -22,7 +22,9 @@ public class New extends AbstractExpr {
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass) throws ContextualError {
         Type currentType = instantiation.verifyType(compiler);
         if (!currentType.isClass()) {
-            throw new ContextualError("(RULE 3.42) New instance must be of a class type.", getLocation());
+            throw new ContextualError(
+                    "(RULE 3.42) New instance must be of a class type: new \u001B[31m" +
+                    instantiation.getName() + "\u001B[0m().", getLocation());
         }
         instantiation.setDefinition(compiler.getEnvTypes().get(instantiation.getName(), instantiation.getLocation()));
         setType(currentType);

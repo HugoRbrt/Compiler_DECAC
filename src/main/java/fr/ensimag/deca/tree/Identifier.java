@@ -172,9 +172,10 @@ public class Identifier extends AbstractIdentifier {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-        ExpDefinition def = localEnv.get(this.getName());
+        ExpDefinition def = localEnv.get(name);
         if (def == null) {
-            throw new ContextualError("(RULE 0.1) variable has not been declared.", getLocation());
+            throw new ContextualError(
+                    "(RULE 0.1) variable '" + name + "' has not been declared.", getLocation());
         }
         Type currentType = def.getType();
         setDefinition(localEnv.get(getName()));
@@ -224,6 +225,11 @@ public class Identifier extends AbstractIdentifier {
             s.print(d);
             s.println();
         }
+    }
+
+    @Override
+    public String toString() {
+        return name.toString();
     }
 
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex){

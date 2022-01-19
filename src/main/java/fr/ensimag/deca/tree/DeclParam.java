@@ -23,7 +23,8 @@ public class DeclParam extends AbstractDeclParam {
         Type currentType = type.verifyType(compiler);
         if (currentType.isVoid()) {
             throw new ContextualError(
-                    "(RULE 2.9) Parameter cannot be void type.", type.getLocation());
+                    "(RULE 2.9) Parameter cannot be of type void: \u001B[31mvoid\u001B[0m " +
+                    paramName.getName(), type.getLocation());
         }
         type.setDefinition(compiler.getEnvTypes().get(type.getName(), type.getLocation()));
         type.setType(currentType);

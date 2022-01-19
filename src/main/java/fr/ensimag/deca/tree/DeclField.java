@@ -53,13 +53,14 @@ public class DeclField extends AbstractDeclField {
     protected void verifyField(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass, int counter) throws ContextualError {
         Type currentType = type.verifyType(compiler);
+        SymbolTable.Symbol f = fieldName.getName();
         if (currentType.isVoid()) {
             throw new ContextualError(
-                    "(RULE 2.5) Field cannot be void type.", type.getLocation());
+                    "(RULE 2.5) Field cannot be of type void: \u001B[31mvoid\u001B[0m " +
+                    f, type.getLocation());
         }
         type.setDefinition(compiler.getEnvTypes().get(type.getName(), type.getLocation()));
         type.setType(currentType);
-        SymbolTable.Symbol f = fieldName.getName();
         ExpDefinition def = localEnv.get(f);
         if (def == null || def.isField()) {
             try {
@@ -67,12 +68,12 @@ public class DeclField extends AbstractDeclField {
                         currentType, fieldName.getLocation(), visibility, currentClass, counter));
             } catch (EnvironmentExp.DoubleDefException e) {
                 throw new ContextualError(
-                        "(RULE 2.4) Method or field has already been declared.",
+                        "(RULE 2.4) Method or field '" + f + "' has already been declared.",
                         fieldName.getLocation());
             }
         } else {
             throw new ContextualError(
-                    "(RULE 2.5) Illegal override: method --> field.",
+                    "(RULE 2.5) Illegal override of '" + f + "': method --> field.",
                     fieldName.getLocation());
         }
         fieldName.setDefinition(localEnv.get(f));
