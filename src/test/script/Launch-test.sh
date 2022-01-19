@@ -47,8 +47,8 @@ test_invalid () {
     # $2 = lex or synt or context
 
     test_"$2" $TESTPATH/$1.deca 1> tempor.gl49 2>> tempor.gl49
-    # invalid include tests are special so they were manually verified
-    if echo $TESTPATH/$1.deca 2>&1 | grep -q -e "Include"
+    # invalid include tests are special so they were manually verified, Large-FloatLiteral was manually tested also
+    if echo $TESTPATH/$1.deca 2>&1 | grep -q -e "Include" -e "Large-FloatLiteral"
         then
             test_"$2" $TESTPATH/$1.deca 1> $TMP/$1.listmp 2>> $TMP/$1.listmp
             echo "${GREEN}[KO] : $1 ${NC}"
@@ -73,7 +73,7 @@ test_valid () {
     # $2 = lex or synt or context
 
     test_"$2" $TESTPATH/$1.deca 1> tempor.gl49 2>> tempor.gl49
-    if grep -q -e "$1.deca" -e "AssertionError" < tempor.gl49
+    if grep -q -e "$1.deca" -e "Error" -e "Exception"< tempor.gl49
         then 	# unexpected fail
             echo "${RED}[KO] : $1 ${NC}"
             exitnum=$(($exitnum + 1))

@@ -490,12 +490,30 @@ type returns[AbstractIdentifier tree]
     ;
 
 literal returns[AbstractExpr tree]
+@init   {
+            // to treat exceptions with the right location
+            $tree = new IntLiteral(-1);
+            setLocation($tree, $start);
+            Location tmploc = $tree.getLocation();
+        }
     : INT {
-        $tree = new IntLiteral(Integer.parseInt($INT.text));
+        try {
+            $tree = new IntLiteral(Integer.parseInt($INT.text));
+        } catch (NumberFormatException e) {
+            System.err.println(tmploc.getFilename() + ":" + tmploc.getLine()
+                + ":" + tmploc.getPositionInLine() + ": Int literal out of expected range");
+            throw e;
+        }
         LOG.trace($tree);
         }
     | fd=FLOAT {
-        $tree = new FloatLiteral(Float.parseFloat($fd.text));
+        try {
+            $tree = new FloatLiteral(Float.parseFloat($fd.text));
+        } catch (NumberFormatException e) {
+            System.err.println(tmploc.getFilename() + ":" + tmploc.getLine()
+                + ":" + tmploc.getPositionInLine() + ": Int literal out of expected range");
+            throw e;
+        }
         LOG.trace($tree);
         }
     | STRING {
@@ -641,6 +659,7 @@ decl_method returns [AbstractDeclMethod tree]
             LOG.trace($tree);
         }
       | ASM OPARENT code=multi_line_string CPARENT SEMI {
+            
         }
       ) {
         }

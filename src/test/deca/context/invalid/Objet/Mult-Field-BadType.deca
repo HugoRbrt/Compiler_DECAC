@@ -2,7 +2,7 @@
 //      Doing operations on  public fields in main
 //
 // Results:
-//      (RULE 3.33) Illegal operand type.
+//      nothing
 //
 // History:
 //      created on 19/1/2022
@@ -12,7 +12,7 @@ class A {
 }
 
 class B {
-    float x;
+    float x ;
 }
 
 {

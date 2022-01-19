@@ -238,6 +238,14 @@ public class DecacCompiler implements Runnable {
             LOG.debug("stack overflow", e);
             err.println("Stack overflow while compiling file " + sourceFile + ".");
             return true;
+        } catch (NumberFormatException e) {
+            LOG.debug("Number exception caught.");
+            return true;
+        } catch (IllegalArgumentException e) {
+            LOG.debug("Error : Number exception caught");
+            err.println("Float literal out of range:");
+            err.println(e.getMessage());
+            return true;
         } catch (Exception e) {
             LOG.fatal("Exception raised while compiling file " + sourceFile
                     + ":", e);

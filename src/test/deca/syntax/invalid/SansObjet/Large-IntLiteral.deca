@@ -1,0 +1,12 @@
+// Description:
+//    Declaration of a int variable using a very large int literal
+// 
+// Results:
+//     Parsing error line 11
+// 
+// Historique: 
+//    cree le 19/01/2022
+
+{
+    int x =  9999999999999999999999999999999999999999999;
+}
