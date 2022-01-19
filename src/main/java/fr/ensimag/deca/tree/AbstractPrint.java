@@ -59,7 +59,7 @@ public abstract class AbstractPrint extends AbstractInst {
 
     @Override
     protected void codeGenInstARM(DecacCompiler compiler) {
-        System.out.println(getArguments().getList());
+        // System.out.println(getArguments().getList());
         for (AbstractExpr a : getArguments().getList()) {
             a.codeGenPrintARM(compiler, printHex);
             compiler.addInstruction(new mov(ARMRegister.r7,4));

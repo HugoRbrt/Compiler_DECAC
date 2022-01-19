@@ -254,12 +254,15 @@ public class Identifier extends AbstractIdentifier {
     }
 
     protected void codeGenPrintARM(DecacCompiler compiler, boolean printHex){
+        /*
         if (getDefinition().isExpression()) {
             // Non testé
             compiler.addInstruction(new mov(ARMRegister.r0,1));
             compiler.addInstruction(new ldr(ARMRegister.r1, "=" + this.name.toString()));
         }
-            
+        */  
+        // Ici on ne gère pas les expressions qui sont en fait déjà géré par ARM car les variables sont déclarés dans la section data
+        // il suffit donc de récupérer le nom de la variable directement. Pas besoin de passer par la StackHashTable. 
         if (definition.getType().isInt()) {
             compiler.addInstruction(new mov(ARMRegister.r0,1));
             compiler.addInstruction(new ldr(ARMRegister.r1, "=" + this.name.toString()));

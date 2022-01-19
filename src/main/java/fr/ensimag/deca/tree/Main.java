@@ -58,13 +58,10 @@ public class Main extends AbstractMain {
         declVariables.codeGenListDeclVarARM(compiler);
         compiler.addARMComment("Beginning of main ARM instructions:");
         compiler.addARMBlock("_start:");
+        compiler.addInstruction(new push(ARMRegister.lr));
+        compiler.addInstruction(new bl("_varDeclAssign"));
         //ARMRegister R = compiler.getListRegisterARM();
         insts.codeGenListInstARM(compiler);
-        compiler.addARMBlock("Z = 0");
-        compiler.addInstruction(new mov(ARMRegister.getR(0),0));
-        compiler.addInstruction(new mov(ARMRegister.getR(7),1));
-        compiler.addInstruction(new svc(0));
-
     }
     
     @Override

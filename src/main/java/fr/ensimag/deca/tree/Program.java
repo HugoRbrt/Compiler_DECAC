@@ -4,6 +4,7 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.instructions.HALT;
+import fr.ensimag.ima.pseudocode.instructionsARM.b;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
@@ -63,11 +64,12 @@ public class Program extends AbstractProgram {
     public void codeGenProgramARM(DecacCompiler compiler) {
         // A FAIRE: compléter ce squelette très rudimentaire de code
         compiler.addARMBlock(".text");
-        compiler.addARMBlock(".global _varDeclAssign");
+        compiler.addARMBlock(".global _start");
         compiler.addARMComment("ARM program");
         //creation of ARM Register
         compiler.setListRegisterARM(new ARMRegister());
         main.codeGenMainARM(compiler);
+        compiler.addInstruction(new b("_end"));
     }
     
 

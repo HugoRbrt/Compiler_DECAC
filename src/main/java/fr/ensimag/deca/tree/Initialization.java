@@ -11,6 +11,7 @@ import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
 import fr.ensimag.ima.pseudocode.instructionsARM.str;
+import fr.ensimag.ima.pseudocode.instructionsARM.ldr;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
@@ -63,7 +64,8 @@ public class Initialization extends AbstractInitialization {
         // ARM Code for declaration
         // peut être faudra-t-il initialiser r0 ici
         expression.codeGenInstARM(compiler); // we admit that the result will be in register r0.  
-        compiler.addInstruction(new str(ARMRegister.getR(0), "=" + varName.getName().getName()));
+        compiler.addInstruction(new ldr(ARMRegister.getR(1), "adr_" + varName.getName().getName()));
+        compiler.addInstruction(new str(ARMRegister.getR(0), "[r1]"));
         compiler.incrDeclaredVariables(1);
     }
 
