@@ -4,12 +4,20 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.instructions.RTS;
+import org.apache.log4j.Logger;
 
 import java.io.PrintStream;
 
 public class ListDeclField extends TreeList<AbstractDeclField> {
+    private static final Logger LOG = Logger.getLogger(DecacCompiler.class);
+
     @Override
-    public void decompile(IndentPrintStream s) {}
+    public void decompile(IndentPrintStream s) {
+        for (AbstractDeclField decl: this.getList()) {
+            decl.decompile(s);
+            s.println(";");
+        }
+    }
 
     @Override
     protected void prettyPrintChildren(PrintStream s, String prefix) {

@@ -5,8 +5,12 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable;
 
 public class ListDeclMethod extends TreeList<AbstractDeclMethod> {
+
     @Override
     public void decompile(IndentPrintStream s) {
+        for (AbstractDeclMethod decl: this.getList()) {
+            decl.decompile(s);
+        }
     }
 
     protected void codeGenTable(DecacCompiler compiler, SymbolTable.Symbol classSymbol) {

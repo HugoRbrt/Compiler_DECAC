@@ -18,6 +18,14 @@ public class MethodAsmBody extends AbstractMethodBody {
 
     @Override
     public void decompile(IndentPrintStream s) {
+        s.println("{");
+        s.indent();
+        s.print("\"");
+        s.print(asmCode.getValue());
+        s.print("\"");
+        s.println();
+        s.unindent();
+        s.println("}");
     }
 
     @Override

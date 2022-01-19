@@ -44,11 +44,6 @@ public class DeclClass extends AbstractDeclClass {
         return superClass;
     }
 
-    @Override
-    public void decompile(IndentPrintStream s) {
-        s.print("class { ... A FAIRE ... }");
-    }
-
     /**
      * Contextual class declaration check. First checks whether the superclass exists, then checks
      * whether the class hasn't already been declared.
@@ -100,6 +95,20 @@ public class DeclClass extends AbstractDeclClass {
         for (AbstractDeclMethod m: methods.getList()) {
             m.verifyMethodBody(compiler,cl.getMembers(), cl);
         }
+    }
+
+    @Override
+    public void decompile(IndentPrintStream s) {
+        s.print("class ");
+        className.decompile(s);
+        s.print(" extends ");
+        superClass.decompile(s);
+        s.println(" {");
+        s.indent();
+        fields.decompile(s);
+        methods.decompile(s);
+        s.unindent();
+        s.println("}");
     }
 
 

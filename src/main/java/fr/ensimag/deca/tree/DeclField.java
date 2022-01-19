@@ -86,7 +86,13 @@ public class DeclField extends AbstractDeclField {
     }
 
     @Override
-    public void decompile(IndentPrintStream s) {}
+    public void decompile(IndentPrintStream s) {
+        s.print(visibility == Visibility.PUBLIC ? "" : "protected ");
+        type.decompile(s);
+        s.print(" ");
+        fieldName.decompile(s);
+        initialization.decompile(s);
+    }
 
     @Override
     String prettyPrintNode() {

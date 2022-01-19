@@ -7,6 +7,8 @@ import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Signature;
 import fr.ensimag.deca.tools.IndentPrintStream;
 
+import java.util.Iterator;
+
 public class ListDeclParam extends TreeList<AbstractDeclParam> {
 
     public Signature verifySignature(DecacCompiler compiler) throws ContextualError {
@@ -28,5 +30,14 @@ public class ListDeclParam extends TreeList<AbstractDeclParam> {
 
     @Override
     public void decompile(IndentPrintStream s) {
+        s.print("(");
+        for(Iterator<AbstractDeclParam> it = this.iterator(); it.hasNext();) {
+            AbstractDeclParam decl = it.next();
+            decl.decompile(s);
+            if (it.hasNext()) {
+                s.print(", ");
+            }
+        }
+        s.print(")");
     }
 }

@@ -34,6 +34,7 @@ public class This extends AbstractExpr {
 
     @Override
     public void decompile(IndentPrintStream s) {
+        if (!addedByParse) { s.print("this"); }
     }
 
     @Override
