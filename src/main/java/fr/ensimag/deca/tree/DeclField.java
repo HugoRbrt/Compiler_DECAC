@@ -6,6 +6,7 @@ import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
@@ -105,5 +106,10 @@ public class DeclField extends AbstractDeclField {
         type.iter(f);
         fieldName.iter(f);
         initialization.iter(f);
+    }
+    protected void codeGen(DecacCompiler compiler, int fieldCounter){
+        initialization.codeGenDeclField(compiler);
+        compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.R1));
+        compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(fieldCounter+1, Register.R1)));
     }
 }

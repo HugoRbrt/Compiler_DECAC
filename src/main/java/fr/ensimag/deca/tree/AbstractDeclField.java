@@ -35,9 +35,5 @@ public abstract class AbstractDeclField extends Tree {
      *
      * @param compiler
      */
-    protected void codeGen(DecacCompiler compiler, int fieldCounter){
-        compiler.addInstruction(new LOAD(new ImmediateInteger(0), Register.R0));
-        compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.R1));
-        compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(fieldCounter+1, Register.R1)));
-    }
+    abstract protected void codeGen(DecacCompiler compiler, int fieldCounter);
 }

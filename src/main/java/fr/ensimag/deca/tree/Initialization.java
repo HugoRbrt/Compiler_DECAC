@@ -54,6 +54,11 @@ public class Initialization extends AbstractInitialization {
         compiler.incrDeclaredVariables(1);
     }
 
+    @Override
+    protected void codeGenDeclField(DecacCompiler compiler){
+        expression.codeGenInst(compiler);
+    }
+
 
     @Override
     public void decompile(IndentPrintStream s) {
