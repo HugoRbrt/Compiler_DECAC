@@ -659,7 +659,6 @@ decl_method returns [AbstractDeclMethod tree]
             $tree = new DeclMethod($type.tree, $ident.tree, $params.tree, mBody);
             LOG.trace($tree);
         }
-<<<<<<< HEAD
       | as=ASM OPARENT code=multi_line_string CPARENT SEMI {
             StringLiteral s = new StringLiteral($code.text);
             setLocation(s, $code.start);
