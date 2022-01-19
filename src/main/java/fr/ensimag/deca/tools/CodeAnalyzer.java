@@ -36,7 +36,7 @@ public class CodeAnalyzer {
     private int diffPushPop = 0;
 
     public int getNbDeclaredVariables() {
-        return nbDeclaredVariables;
+        return nbDeclaredVariables + methodsTableSize;
     }
 
     public int getNeededStackSize() {
