@@ -1,0 +1,22 @@
+// Description:
+//      Doing operations on  protecetd fields in main
+//
+// Results:
+//      (RULE 3.66) Protected field is not visible in the current scope.
+//
+// History:
+//      created on 19/1/2022
+
+class A {
+    protected int x;
+}
+
+class B {
+    protected int x;
+}
+
+{
+    A a = new A();
+    B b = new B();
+    float y = a.x + b.x;
+}

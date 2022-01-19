@@ -1,0 +1,18 @@
+// Description:
+//      Doing operations on  public fields in main
+//
+// Results:
+//      (RULE 3.37) Illegal operand type.
+//
+// History:
+//      created on 19/1/2022
+
+class A {
+    boolean x;
+}
+
+
+{
+    A a = new A();
+    boolean y = !a;
+}

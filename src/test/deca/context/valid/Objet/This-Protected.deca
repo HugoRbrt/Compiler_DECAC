@@ -1,0 +1,25 @@
+// Description:
+//      Using This on a protected field in parent class
+//
+// Results:
+//      nothing
+//
+// History:
+//      created on 19/1/2022
+
+class A {
+    protected int x;
+    void foo() {
+    }
+}
+
+class B extends A{
+    boolean y;
+    void init() {
+        this.x = 0;
+        this.y = true;
+    }
+}
+
+{
+}
