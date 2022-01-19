@@ -12,7 +12,7 @@
       |            type: float
       |            +> [11, 15] ReadFloat
       |            |  type: float
-      |            `> ConvFloat
+      |            `> [11, 29] ConvFloat
       |               type: float
       |               `> [11, 29] Int (3)
       |                  type: int

@@ -25,6 +25,7 @@
    |      +> [16, 6] Identifier (B)
    |      |  definition: type defined at [16, 0], type=B
    |      +> [16, 16] Identifier (A)
+   |      |  definition: type defined at [10, 0], type=A
    |      +> ListDeclField [List with 1 elements]
    |      |  []> [17, 8] [visibility=PUBLIC] DeclField
    |      |      +> [17, 4] Identifier (int)

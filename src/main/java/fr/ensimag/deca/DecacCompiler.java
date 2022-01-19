@@ -285,7 +285,7 @@ public class DecacCompiler implements Runnable {
 
     /**
      * function that makes the class to implements Runnable interface
-     * by calling compile() function (usefull for -p decac option )
+     * by calling compile() function (usefull for -P decac option )
      */
     public void run(){
         compile();
@@ -398,8 +398,11 @@ public class DecacCompiler implements Runnable {
     }
     
     public void incrDeclaredVariables(int nbVariables) {
-        LOG.debug(nbVariables);
         codeAnalyzer.incrDeclaredVariables(nbVariables);
+    }
+    
+    public void incrMethodsTableSize(int neededSize) {
+        codeAnalyzer.incrMethodsTableSize(neededSize);
     }
     
 }

@@ -1,0 +1,22 @@
+// Description:
+//      Doing operations on  public fields in main
+//
+// Results:
+//      nothing
+//
+// History:
+//      created on 19/1/2022
+
+class A {
+    float x;
+}
+
+class B {
+    int x;
+}
+
+{
+    A a = new A();
+    B b = new B();
+    int y = (int) (-a.x * b.x);
+}

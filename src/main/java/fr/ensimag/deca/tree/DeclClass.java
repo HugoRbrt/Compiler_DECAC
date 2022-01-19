@@ -125,6 +125,7 @@ public class DeclClass extends AbstractDeclClass {
         compiler.getstackTable().put(className.getName(), Register.GB);
         compiler.addInstruction(new LEA(superClassAdress, Register.R0));
         compiler.addInstruction(new STORE(Register.R0, compiler.getstackTable().get(className.getName())));
+        compiler.incrMethodsTableSize(2);
 
         SymbolTable.Symbol[] s = new SymbolTable.Symbol[className.getClassDefinition().getNumberOfMethods()];
         className.getClassDefinition().getMembers().getSymbolMethod(s, className.getClassDefinition());
@@ -134,6 +135,7 @@ public class DeclClass extends AbstractDeclClass {
             compiler.getstackTable().put(symbol, Register.GB);
             compiler.addInstruction(new LOAD(new LabelOperand(new Label(symbol.getName())), Register.R0));
             compiler.addInstruction(new STORE(Register.R0, compiler.getstackTable().get(symbol)));
+            compiler.incrMethodsTableSize(2);
         }
     }
 

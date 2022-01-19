@@ -1,0 +1,23 @@
+// Description:
+//          using this with a non-existent method
+//
+// Results:
+//      Line 15 : (RULE 0.1) variable has not been declared.
+//
+// History:
+//      created on 19/1/2022
+
+class A {
+    void foo() {
+
+    }
+}
+
+class B extends A {
+    void init() {
+        this.fooo();
+    }
+}
+
+{
+}

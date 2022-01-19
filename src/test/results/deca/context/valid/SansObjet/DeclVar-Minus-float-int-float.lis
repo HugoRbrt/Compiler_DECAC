@@ -26,7 +26,7 @@
       |      `> [13, 12] Initialization
       |         `> [13, 16] Minus
       |            type: float
-      |            +> ConvFloat
+      |            +> [13, 14] ConvFloat
       |            |  type: float
       |            |  `> [13, 14] Identifier (x)
       |            |     definition: variable defined at [11, 8], type=int

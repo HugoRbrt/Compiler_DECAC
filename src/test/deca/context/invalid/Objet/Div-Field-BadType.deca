@@ -1,0 +1,22 @@
+// Description:
+//      Doing operations on  public fields in main
+//
+// Results:
+//      (RULE 3.33) Illegal operand type.
+//
+// History:
+//      created on 19/1/2022
+
+class A {
+    boolean x;
+}
+
+class B {
+    int x;
+}
+
+{
+    A a = new A();
+    B b = new B();
+    print(a.x / b.x);
+}

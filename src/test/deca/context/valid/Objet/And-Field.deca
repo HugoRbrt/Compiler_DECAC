@@ -1,0 +1,22 @@
+// Description:
+//      Doing operations on  public fields in main
+//
+// Results:
+//      nothing
+//
+// History:
+//      created on 19/1/2022
+
+class A {
+    boolean x;
+}
+
+class B {
+    boolean x;
+}
+
+{
+    A a = new A();
+    B b = new B();
+    boolean z = a.x && b.x;
+}

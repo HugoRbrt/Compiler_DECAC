@@ -1,0 +1,22 @@
+// Description:
+//      Doing operations on  public fields in main using bad types
+//
+// Results:
+//      (RULE 3.33) Illegal operand type.
+//
+// History:
+//      created on 19/1/2022
+
+class A {
+    int x;
+}
+
+class B {
+    boolean x;
+}
+
+{
+    A a = new A();
+    B b = new B();
+    float y = a.x + b.x;
+}

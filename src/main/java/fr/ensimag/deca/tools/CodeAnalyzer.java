@@ -24,16 +24,23 @@ public class CodeAnalyzer {
     private int stackSizeInstructions = 0;
 
     /**
+     * Number of declared methods in the program
+     */
+    private int methodsTableSize = 0;
+    
+    /**
+    
+    /**
      * Special counter to keep track of a the number of PUSH - POP
      */
     private int diffPushPop = 0;
 
     public int getNbDeclaredVariables() {
-        return nbDeclaredVariables;
+        return nbDeclaredVariables + methodsTableSize;
     }
 
     public int getNeededStackSize() {
-        return stackSizeInstructions + nbDeclaredVariables;
+        return stackSizeInstructions + nbDeclaredVariables + methodsTableSize;
     }
 
     /**
@@ -63,7 +70,14 @@ public class CodeAnalyzer {
      */
     public void incrDeclaredVariables(int nbVariables) {
         nbDeclaredVariables += nbVariables;
-        LOG.debug("Tracked variables :" + Integer.toString(nbDeclaredVariables));
     }
+    
+    /**
+     * @args nbMethods : size of a new method and class in terms of stack count
+     */
+    public void incrMethodsTableSize(int neededSize) {
+        methodsTableSize += neededSize;
+    }
+    
 
 }

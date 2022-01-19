@@ -65,6 +65,7 @@
    |  ||  +> [25, 6] Identifier (B)
    |  ||  |  definition: type defined at [25, 0], type=B
    |  ||  +> [25, 16] Identifier (A)
+   |  ||  |  definition: type defined at [10, 0], type=A
    |  ||  +> ListDeclField [List with 1 elements]
    |  ||  |  []> [26, 8] [visibility=PUBLIC] DeclField
    |  ||  |      +> [26, 4] Identifier (int)
@@ -100,6 +101,7 @@
    |      +> [33, 6] Identifier (C)
    |      |  definition: type defined at [33, 0], type=C
    |      +> [33, 16] Identifier (A)
+   |      |  definition: type defined at [10, 0], type=A
    |      +> ListDeclField [List with 1 elements]
    |      |  []> [34, 8] [visibility=PUBLIC] DeclField
    |      |      +> [34, 4] Identifier (int)

@@ -1,0 +1,18 @@
+// Description:
+//      Doing operations on  public fields in main
+//
+// Results:
+//      nothing
+//
+// History:
+//      created on 19/1/2022
+
+class A {
+    boolean x;
+}
+
+
+{
+    A a = new A();
+    boolean y = !a.x;
+}

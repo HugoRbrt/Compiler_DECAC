@@ -1,1 +1,1 @@
-src/test/deca/syntax/invalid/SansObjet/AndExpr2-WrongOperand.deca:12:13: extraneous input 'print' expecting {FLOAT, INT, '(', '-', '!', 'false', 'null', 'readInt', 'readFloat', 'true', IDENT, STRING, NEW, THIS}
+src/test/deca/syntax/invalid/SansObjet/AndExpr2-WrongOperand.deca:12:13: extraneous input 'print' expecting {FLOAT, INT, '(', '-', '!', 'false', 'new', 'null', 'readInt', 'readFloat', 'this', 'true', IDENT, STRING}

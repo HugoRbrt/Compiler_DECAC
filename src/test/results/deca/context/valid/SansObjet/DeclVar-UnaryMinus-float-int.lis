@@ -16,7 +16,7 @@
       |      +> [12, 10] Identifier (z)
       |      |  definition: variable defined at [12, 10], type=float
       |      `> [12, 12] Initialization
-      |         `> ConvFloat
+      |         `> [12, 14] ConvFloat
       |            type: float
       |            `> [12, 14] UnaryMinus
       |               type: int
