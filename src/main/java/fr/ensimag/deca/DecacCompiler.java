@@ -59,6 +59,7 @@ public class DecacCompiler implements Runnable {
     private StackHashTableSymbol stackTable = new StackHashTableSymbol();
     private CodeAnalyzer codeAnalyzer = new CodeAnalyzer();
     private ErrorManager errorManager = new ErrorManager();
+    private boolean emitWarnings = false;
 
     public DecacCompiler(CompilerOptions compilerOptions, File source) {
         super();
@@ -196,8 +197,8 @@ public class DecacCompiler implements Runnable {
     public Register getListRegister() {
         return ListRegister;
     }
-    
 
+    public boolean getEmitWarnings() { return emitWarnings; }
 
     /**
      * The main program. Every instruction generated will eventually end up here.
@@ -310,6 +311,9 @@ public class DecacCompiler implements Runnable {
         if (prog == null) {
             LOG.info("Parsing failed");
             return true;
+        }
+        if (compilerOptions.getWarnings()) {
+            emitWarnings = true;
         }
         assert(prog.checkAllLocations());
         // Decompile

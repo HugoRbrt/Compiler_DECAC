@@ -19,21 +19,24 @@ public class Return extends AbstractInst {
     @Override
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass, Type returnType) throws ContextualError {
-        Type currentType = returnExpr.verifyExpr(compiler, localEnv, currentClass);
-        returnExpr.setType(currentType);
         if (returnType.isVoid()) {
             throw new ContextualError(
-                    "(RULE 3.24) 'return' statement applied to an expression of type void.",
+                    (currentClass == null ? "(RULE 3.24) 'return' statement inapplicable in main program." :
+                    "(RULE 3.24) 'return' statement inapplicable in method of return type void."),
                     returnExpr.getLocation());
         }
-        /* Extra rule added, not required by specification. Keep or remove?
-        *  Assignment will take care of incorrect return values; only useful
-        *  in case of method call without assignment.
+        Type currentType = returnExpr.verifyExpr(compiler, localEnv, currentClass);
+        returnExpr.setType(currentType);
+        /* Not required by specification: print warning.
         */
-        if (!returnType.sameType(currentType)) {
-            throw new ContextualError(
-                    "(RULE 3.24) Incompatible return expression type.",
-                    returnExpr.getLocation());
+        if (!returnType.sameType(currentType) && compiler.getEmitWarnings()) {
+            StringBuilder sb = new StringBuilder(getLocation().toString());
+            sb.deleteCharAt(0); sb.deleteCharAt(sb.length()-1);
+            int i = sb.indexOf((", "));
+            sb.setCharAt(i, ':'); sb.deleteCharAt(i+1);
+            System.err.println(
+                    "[\u001B[31mWARNING\u001B[0m]" + getLocation().getFilename() + " " +
+                    sb + ":Type of return expression is inconsistent with method return type.");
         }
     }
 

@@ -636,13 +636,21 @@ decl_field[Visibility v, AbstractIdentifier t] returns [AbstractDeclField tree]
 // Class-related
 decl_method returns [AbstractDeclMethod tree]
     : type ident OPARENT params=list_params CPARENT (block {
-            $tree = new DeclMethod($type.tree, $ident.tree, $params.tree, new Main($block.decls, $block.insts));
-            setLocation($tree, $type.start);
+            MethodBody mBody = new MethodBody($block.decls, $block.insts);
+            setLocation(mBody, $block.start);
+            $tree = new DeclMethod($type.tree, $ident.tree, $params.tree, mBody);
             LOG.trace($tree);
         }
-      | ASM OPARENT code=multi_line_string CPARENT SEMI {
+      | as=ASM OPARENT code=multi_line_string CPARENT SEMI {
+            StringLiteral s = new StringLiteral($code.text);
+            setLocation(s, $code.start);
+            MethodAsmBody asmBody = new MethodAsmBody(s);
+            setLocation(asmBody, $as);
+            $tree = new DeclMethod($type.tree, $ident.tree, $params.tree, asmBody);
+            LOG.trace($tree);
         }
       ) {
+            setLocation($tree, $type.start);
         }
     ;
 

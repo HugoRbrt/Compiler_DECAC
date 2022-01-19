@@ -19,10 +19,10 @@ public class DeclMethod extends AbstractDeclMethod {
     final private AbstractIdentifier returnType;
     final private AbstractIdentifier methodName;
     final private ListDeclParam declParameters;
-    final private Main block;
+    final private AbstractMethodBody block;
 
     public DeclMethod(AbstractIdentifier returnType, AbstractIdentifier methodName,
-            ListDeclParam declParameters, Main block) {
+            ListDeclParam declParameters, AbstractMethodBody block) {
         Validate.notNull(returnType);
         Validate.notNull(methodName);
         Validate.notNull(declParameters);
@@ -100,7 +100,7 @@ public class DeclMethod extends AbstractDeclMethod {
     protected void verifyMethodBody(DecacCompiler compiler, EnvironmentExp classEnv, ClassDefinition currentClass)
             throws ContextualError {
         EnvironmentExp localEnv = declParameters.verifyListDeclParam(compiler, classEnv);
-        block.verifyMain(compiler, localEnv, currentClass, returnType.getType());
+        block.verifyMethodBody(compiler, localEnv, currentClass, returnType.getType());
     }
 
     @Override
@@ -112,7 +112,7 @@ public class DeclMethod extends AbstractDeclMethod {
         returnType.prettyPrint(s, prefix, false);
         methodName.prettyPrint(s, prefix, false);
         declParameters.prettyPrint(s, prefix, false, false);
-        block.prettyPrintChildren(s, prefix);
+        block.prettyPrint(s, prefix, true);
     }
 
     @Override
