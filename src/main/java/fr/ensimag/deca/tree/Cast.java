@@ -3,15 +3,9 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.ima.pseudocode.instructions.INT;
-import fr.ensimag.ima.pseudocode.instructions.FLOAT;
-import fr.ensimag.ima.pseudocode.instructions.LOAD;
-import fr.ensimag.ima.pseudocode.instructions.BOV;
-import fr.ensimag.ima.pseudocode.instructions.WINT;
-import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
-import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
+import fr.ensimag.ima.pseudocode.*;
+import fr.ensimag.ima.pseudocode.instructions.*;
 import fr.ensimag.deca.context.Type;
-import fr.ensimag.ima.pseudocode.GPRegister;
 
 import java.io.PrintStream;
 
@@ -52,14 +46,31 @@ public class Cast extends AbstractExpr {
         // we only add the instruction if the cast is really needed
         if (!type.getDefinition().getType().sameType(expression.getType())) {
             if(type.getDefinition().getType().isInt()){
-                compiler.addInstruction(new INT(compiler.getListRegister().R0,compiler.getListRegister().R1));
+                compiler.addInstruction(new INT(Register.R0, Register.R1));
                 compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Float arithmetic overflow")));
+            }
+            else if(type.getDefinition().getType().isClass()){
+                Label beginElse = new Label();
+                Label endElse = new Label();
+
+                //condition instructions
+                InstanceOf instance = new InstanceOf(expression, type);
+                instance.codeGenInst(compiler);
+                compiler.addInstruction(new CMP(new ImmediateInteger(1), Register.R0));
+                compiler.addInstruction(new BNE(beginElse));
+                //then instructions
+                compiler.addInstruction(new LOAD(compiler.getstackTable().get(((Identifier)expression).getName()), Register.R1));
+                compiler.addInstruction(new BRA(endElse));
+                compiler.addLabel(beginElse);
+                //else instructions
+                compiler.addInstruction(new BRA(compiler.getErrorManager().getErrorLabel("impossible_conversion")));
+                compiler.addLabel(endElse);
             }
             else if(type.getDefinition().getType().isFloat()){
-                compiler.addInstruction(new FLOAT(compiler.getListRegister().R0,compiler.getListRegister().R1));
+                compiler.addInstruction(new FLOAT(Register.R0, Register.R1));
                 compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Float arithmetic overflow")));
             }
-            compiler.addInstruction(new LOAD(compiler.getListRegister().R1, compiler.getListRegister().R0));
+            compiler.addInstruction(new LOAD(Register.R1, Register.R0));
         }
     }
 
@@ -69,7 +80,7 @@ public class Cast extends AbstractExpr {
 
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex){
         codeGenInst(compiler);
-        compiler.addInstruction(new LOAD(compiler.getListRegister().R0, compiler.getListRegister().R1));
+        compiler.addInstruction(new LOAD(Register.R0, Register.R1));
         if(type.getDefinition().getType().isInt()){
             compiler.addInstruction(new WINT());
         }

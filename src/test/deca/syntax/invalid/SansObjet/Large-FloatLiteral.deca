@@ -1,0 +1,13 @@
+// Description:
+//    Declaration of a float variable using a very large float literal
+// 
+// Results:
+//     Parsing error line 11
+// 
+// Historique: 
+//    cree le 19/01/2022
+
+{
+  float x =  999999999999999999999999999999999999999999999999999999999999999999999999999999999999999.9999999999999999999999999999999999999999999999999999999999999999999999;
+  print(x);
+}
