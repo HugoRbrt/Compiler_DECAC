@@ -63,21 +63,23 @@ public class DeclMethod extends AbstractDeclMethod {
         ExpDefinition def = localEnv.getCurrent(m);
         if (def != null) {
             throw new ContextualError(
-                    "(RULE 2.6) Method or field has already been declared.",
+                    "(RULE 2.6) Method or field '" + m + "' has already been declared.",
                     methodName.getLocation());
         }
         def = localEnv.get(m);
         if (def != null && !def.isMethod()) {
             throw new ContextualError(
-                    "(RULE 2.7) Illegal override: field --> method.",
+                    "(RULE 2.7) Illegal override of '" + m + "': field --> method.",
                     methodName.getLocation());
         }
         if (def != null && def.isMethod()) {
             MethodDefinition mdef = (MethodDefinition) def;
-            if (!(mdef.getSignature().equals(sig) && ContextTools.subtype(
+            Signature sigToOverride = mdef.getSignature();
+            if (!(sigToOverride.equals(sig) && ContextTools.subtype(
                     compiler.getEnvTypes(), currentType, mdef.getType()))) {
                 throw new ContextualError(
-                        "(RULE 2.7) Invalid method override.", methodName.getLocation());
+                        "(RULE 2.7) Invalid method override. Signature of '" + m +
+                        "' is (" + sigToOverride +").", methodName.getLocation());
             }
             counter = mdef.getIndex();
         } else {

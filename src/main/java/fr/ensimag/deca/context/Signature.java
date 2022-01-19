@@ -30,6 +30,16 @@ public class Signature {
     }
 
     @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Type t: args) {
+            sb.append(t).append(", ");
+        }
+        String sig = sb.toString();
+        return sig.substring(0, sig.length()-2);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

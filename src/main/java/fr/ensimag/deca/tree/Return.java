@@ -23,7 +23,7 @@ public class Return extends AbstractInst {
         returnExpr.setType(currentType);
         if (returnType.isVoid()) {
             throw new ContextualError(
-                    "(RULE 3.24) Incorrect usage of 'return' instruction.",
+                    "(RULE 3.24) 'return' statement applied to an expression of type void.",
                     returnExpr.getLocation());
         }
         /* Extra rule added, not required by specification. Keep or remove?

@@ -3,6 +3,7 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.deca.tools.SymbolTable;
 import org.apache.commons.lang.Validate;
 
 import java.io.PrintStream;
@@ -42,12 +43,13 @@ public class MethodCall extends AbstractExpr {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
+        SymbolTable.Symbol m = methodName.getName();
         ClassType currentType = callingClass.verifyExpr(compiler, localEnv, currentClass).asClassType(
-                "(RULE 3.71) Field or method selection applied to expression of non-class type.",
-                getLocation());
+                "(RULE 3.71) Method selection applied to expression of non-class type: (\u001B[31m" +
+                callingClass.getType().toString() + "\u001B[0m)." + m,  getLocation());
         EnvironmentExp classEnv = currentType.getDefinition().getMembers();
         Type returnType = methodName.verifyExpr(compiler, classEnv, currentClass);
-        if (!classEnv.get(methodName.getName()).isMethod()) {
+        if (!classEnv.get(m).isMethod()) {
             throw new ContextualError(
                     "(RULE 3.41) Invalid method call.", getLocation());
         }
@@ -57,7 +59,9 @@ public class MethodCall extends AbstractExpr {
         }
         MethodDefinition mdef = methodName.getMethodDefinition();
         if (!mdef.getSignature().equals(sig)) {
-            throw new ContextualError("(RULE 3.72) Invalid parameter list.", getLocation());
+            throw new ContextualError(
+                    "(RULE 3.72) Invalid parameter list: signature of '" +
+                    m + "' is (" + mdef.getSignature() +").", getLocation());
         }
         setType(returnType);
         return returnType;

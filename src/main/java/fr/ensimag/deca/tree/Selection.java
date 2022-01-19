@@ -4,12 +4,10 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.ImmediateFloat;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
-import fr.ensimag.ima.pseudocode.instructions.LOAD;
-import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
-import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
-import fr.ensimag.ima.pseudocode.instructions.WINT;
+import fr.ensimag.ima.pseudocode.instructions.*;
 
 import java.io.PrintStream;
 
@@ -34,26 +32,33 @@ public class Selection extends AbstractLValue {
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
         ClassType currentType = selectingClass.verifyExpr(compiler, localEnv, currentClass).asClassType(
-                "(RULE 3.65) Field or method selection applied to expression of non-class type.",
+                "(RULE 3.65) Field selection applied to expression of non-class type: (\u001B[31m" +
+                selectingClass.getType().toString() + "\u001B[0m)." + selectedField.toString(),
                 getLocation());
         Type fieldType = selectedField.verifyExpr(
                 compiler, currentType.getDefinition().getMembers(), currentClass);
         setType(fieldType);
-        if (selectedField.getDefinition().isField() && selectedField.getFieldDefinition().getVisibility() == Visibility.PROTECTED) {
+        if (selectedField.getDefinition().isField() &&
+                selectedField.getFieldDefinition().getVisibility() == Visibility.PROTECTED) {
+            ClassType classOfOrigin = selectedField.getFieldDefinition().getContainingClass().getType();
             if (currentClass == null) {
                 throw new ContextualError(
-                        "(RULE 3.66) Protected field is not visible in the current scope.",
-                        selectedField.getLocation());
+                        "(RULE 3.66) Protected field is not visible in the current scope. Field '" +
+                        selectedField.getName() + "' declared in class " + classOfOrigin.getName() +
+                        ", current scope is main program.",  selectedField.getLocation());
             }
-            if (!currentClass.getType().isSubClassOf(selectedField.getFieldDefinition().getContainingClass().getType())) {
+            if (!currentClass.getType().isSubClassOf(classOfOrigin)) {
                 throw new ContextualError(
-                        "(RULE 3.66) Protected field is not visible in the current scope.",
+                        "(RULE 3.66) Protected field is not visible in the current scope. Field '" +
+                        selectedField.getName() + "' declared in class " + classOfOrigin.getName() +
+                        ", current scope is class " + currentClass.getType().getName() + ".",
                         selectedField.getLocation());
             }
             if (!currentType.isSubClassOf(currentClass.getType())) {
                     throw new ContextualError(
-                            "(RULE 3.66) Selecting class not a subclass of current class.",
-                            selectingClass.getLocation());
+                            "(RULE 3.66) Selecting class is not a subclass of the current class. Selecting class is " +
+                            selectingClass.getType().getName() +", current class is " + currentClass.getType().getName()
+                            + ".", selectingClass.getLocation());
             }
         }
         return fieldType;
@@ -77,10 +82,12 @@ public class Selection extends AbstractLValue {
 
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex) {
         //on recupère l'adresse de l'objet dans R0
-
-
-        RegisterOffset r = compiler.getstackTable().get(compiler.getSymbTable().get(((Identifier)selectingClass).getName().getName()));
-        compiler.addInstruction(new LOAD(r, Register.R0));
+        if(selectingClass instanceof Cast){
+            selectingClass.codeGenInst(compiler);
+        }else{
+            RegisterOffset r = compiler.getstackTable().get(compiler.getSymbTable().get(((Identifier)selectingClass).getName().getName()));
+            compiler.addInstruction(new LOAD(r, Register.R0));
+        }
         compiler.addInstruction(new LOAD(new RegisterOffset( selectedField.getFieldDefinition().getIndex() , Register.R0), Register.R1));
         if(selectedField.getType().isInt()){
             compiler.addInstruction(new WINT());

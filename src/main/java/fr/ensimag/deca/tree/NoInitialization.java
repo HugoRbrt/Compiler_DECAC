@@ -7,8 +7,11 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.instructions.ADDSP;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+
 import java.io.PrintStream;
 
 /**
@@ -57,6 +60,11 @@ public class NoInitialization extends AbstractInitialization {
     @Override
     public void codeGenDeclVar(DecacCompiler compiler, AbstractIdentifier varName) {
         compiler.incrDeclaredVariables(1);
+    }
+
+    @Override
+    public void codeGenDeclField(DecacCompiler compiler) {
+        compiler.addInstruction(new LOAD(new ImmediateInteger(0), Register.R0));
     }
 
 }

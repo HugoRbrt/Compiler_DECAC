@@ -22,7 +22,7 @@ public class This extends AbstractExpr {
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass) throws ContextualError {
         if (currentClass == null && !addedByParse) {
             throw new ContextualError(
-                    "(RULE 3.43) 'This' reference outside of class scope.", getLocation());
+                    "(RULE 3.43) 'this' reference used outside of class scope.", getLocation());
         }
         if (currentClass == null && addedByParse) {
             throw new ContextualError(
