@@ -14,6 +14,8 @@ import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
 
+import java.util.Objects;
+
 /**
  * Assignment, i.e. lvalue = expr.
  *
@@ -65,6 +67,7 @@ public class Assign extends AbstractBinaryExpr {
     protected void codeGenInst(DecacCompiler compiler){
         RegisterOffset targetField;
         GPRegister targetObject = null;
+        GPRegister storePossibleObject = null;
         //on recupere a quelle adresse est stocké l'element de gauche :
         if(super.getLeftOperand() instanceof Selection){
             targetObject = compiler.getListRegister().getRegister(compiler);
@@ -78,19 +81,26 @@ public class Assign extends AbstractBinaryExpr {
                 compiler.addInstruction(new LOAD(r, targetObject));
             }
             targetField = new RegisterOffset(((Selection) super.getLeftOperand()).getSelectedField().getFieldDefinition().getIndex(), targetObject);
-            //targetObject represente l'objet que l'on manipule
-            //targetField n(Rk) represente le champ que l'on veut assigner
         }
         else{
             targetField = compiler.getstackTable().get(
                     ((Identifier) super.getLeftOperand()).getName());
+            if(Objects.isNull(targetField.getRegister())){
+                storePossibleObject = compiler.getListRegister().getRegister(compiler);
+                compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), storePossibleObject));
+                targetField = new RegisterOffset(targetField.getOffset(), storePossibleObject);
+            }
         }
         //we store right operand in R0
         super.getRightOperand().codeGenInst(compiler);
         //on stock right result into the left operand
         compiler.addInstruction(new STORE(Register.R0, targetField));
         if(super.getLeftOperand() instanceof Selection){
+            assert targetObject != null;//defensive programming
             compiler.getListRegister().freeRegister(targetObject, compiler);
+        }
+        if(storePossibleObject != null){
+            compiler.getListRegister().freeRegister(storePossibleObject, compiler);
         }
     }
 

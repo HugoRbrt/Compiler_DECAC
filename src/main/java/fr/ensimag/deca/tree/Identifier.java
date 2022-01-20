@@ -16,6 +16,7 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.ima.pseudocode.ImmediateString;
 import java.io.PrintStream;
+import java.util.Objects;
 
 import fr.ensimag.ima.pseudocode.instructions.*;
 import org.apache.commons.lang.Validate;
@@ -255,7 +256,12 @@ public class Identifier extends AbstractIdentifier {
     protected void codeGenInst(DecacCompiler compiler) {
         if(getDefinition().isExpression()){
             RegisterOffset R = compiler.getstackTable().get(this.getName());
-            compiler.addInstruction(new LOAD(R, Register.R0));
+            if(Objects.isNull(R.getRegister())){
+                compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.R1));
+                compiler.addInstruction(new LOAD(new RegisterOffset(R.getOffset(), Register.R1), Register.R0));
+            }else{
+                compiler.addInstruction(new LOAD(R, Register.R0));
+            }
         }
     }
 }

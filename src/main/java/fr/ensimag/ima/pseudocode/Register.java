@@ -4,6 +4,8 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.instructions.PUSH;
 import fr.ensimag.ima.pseudocode.instructions.POP;
 
+import java.util.Objects;
+
 
 /**
  * Register operand (including special registers like SP).

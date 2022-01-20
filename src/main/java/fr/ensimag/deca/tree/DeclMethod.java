@@ -154,8 +154,9 @@ public class DeclMethod extends AbstractDeclMethod {
         }
         compiler.addLabel(endOfMethod);
         compiler.addInstruction(new RTS());
-
-
         tstoline.setInstruction(new TSTO(compiler.getCodeAnalyzer().getNeededStackSize())); // on recupere de codeAnalyzer le vrai nombre et on le set
+        for(AbstractDeclParam p : declParameters.getList()){
+            compiler.getstackTable().remove(p.getName());
+        }
     }
 }

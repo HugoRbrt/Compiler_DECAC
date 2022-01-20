@@ -55,6 +55,13 @@ public class StackHashTableSymbol {
         map.put(name,R);
     }
 
+    public void remove(Symbol name){
+        if (!map.containsKey(name)) {
+            throw new IllegalArgumentException("symbol " + name.getName() + " not found in StackHashTableSymbol");
+        }
+        map.remove(name);
+    }
+
     public void clear(){
         map.clear();
     }

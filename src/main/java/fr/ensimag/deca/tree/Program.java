@@ -55,6 +55,17 @@ public class Program extends AbstractProgram {
         compiler.setListRegister(new Register(compiler.getCompilerOptions().getRegisters()));
         classes.codeGenTable(compiler);
         main.codeGenMain(compiler);
+
+        // after analysis of the program, we generate the TSTO instruction
+        int d1 = compiler.getCodeAnalyzer().getNeededStackSize();
+        int d2 = compiler.getCodeAnalyzer().getNbDeclaredVariables();
+        if(!compiler.getCompilerOptions().getArmBool()){
+            compiler.getErrorManager().setTstoArg(d1);
+            compiler.getErrorManager().setAddspArg(d2);
+
+            compiler.getErrorManager().addTstoCheck(compiler);
+            compiler.getErrorManager().genCodeErrorManager(compiler);
+        }
         classes.codeGen(compiler);
     }
 

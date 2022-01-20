@@ -32,6 +32,10 @@ public class DeclField extends AbstractDeclField {
         this.initialization = initialization;
     }
 
+    public AbstractIdentifier getFieldName() {
+        return fieldName;
+    }
+
     public AbstractInitialization getInit() { return initialization; }
 
     /**

@@ -156,6 +156,6 @@ public class DeclClass extends AbstractDeclClass {
         compiler.addComment(" --------------------------------------------------");
         compiler.getstackTable().put(className.getName(), Register.GB);
         fields.codeGen(compiler, className, superClass);
-        methods.codeGen(compiler, stringClassName );
+        methods.codeGen(compiler, stringClassName, fields.getList() );
     }
 }
