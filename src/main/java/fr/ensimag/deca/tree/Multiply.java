@@ -5,6 +5,7 @@ import fr.ensimag.ima.pseudocode.ARMRegister;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.instructions.MUL;
 import fr.ensimag.ima.pseudocode.instructions.BOV;
+import fr.ensimag.ima.pseudocode.instructionsARM.mul;
 
 /**
  * @author gl49
@@ -23,7 +24,7 @@ public class Multiply extends AbstractOpArith {
     }
 
     public void codeGenOperationsARM(ARMRegister Reg1, ARMRegister storedRegister, DecacCompiler compiler){
-        // TODO
+        compiler.addInstruction(new mul(storedRegister, Reg1, storedRegister));
     }
 
     @Override

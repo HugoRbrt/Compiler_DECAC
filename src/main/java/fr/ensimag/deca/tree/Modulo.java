@@ -9,6 +9,9 @@ import fr.ensimag.ima.pseudocode.instructions.REM;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.BEQ;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructionsARM.mov;
+import fr.ensimag.ima.pseudocode.instructionsARM.push;
+import fr.ensimag.ima.pseudocode.instructionsARM.bl;
 
 /**
  *
@@ -45,6 +48,11 @@ public class Modulo extends AbstractOpArith {
     }
 
     public void codeGenOperationsARM(ARMRegister Reg1, ARMRegister storedRegister, DecacCompiler compiler){
-        // TODO
+        compiler.addInstruction(new mov(ARMRegister.getR(0), Reg1));
+        compiler.addInstruction(new mov(ARMRegister.getR(1), storedRegister));
+        compiler.addInstruction(new mov(ARMRegister.getR(3), ARMRegister.lr));
+        compiler.addInstruction(new push(ARMRegister.getR(3)));
+        compiler.addInstruction(new bl("_divide"));
+        compiler.addInstruction(new mov(ARMRegister.getR(0), ARMRegister.getR(2)));
     }
 }
