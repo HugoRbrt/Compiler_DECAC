@@ -7,6 +7,7 @@ import fr.ensimag.deca.tools.SymbolTable;
 import org.apache.commons.lang.Validate;
 
 import java.io.PrintStream;
+import java.util.Iterator;
 
 public class MethodCall extends AbstractExpr {
     private AbstractExpr callingClass;  //Can be This
@@ -69,6 +70,20 @@ public class MethodCall extends AbstractExpr {
 
     @Override
     public void decompile(IndentPrintStream s) {
+        callingClass.decompile(s);
+        if (!callingClass.getAddedByParse()) {
+            s.print(".");
+        }
+        methodName.decompile(s);
+        s.print('(');
+        for(Iterator<AbstractExpr> it = methodArgs.iterator(); it.hasNext();) {
+            AbstractExpr decl = it.next();
+            decl.decompile(s);
+            if (it.hasNext()) {
+                s.print(", ");
+            }
+        }
+        s.print(")");
     }
 
     @Override

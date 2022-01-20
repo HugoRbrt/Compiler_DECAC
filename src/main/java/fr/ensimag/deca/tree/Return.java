@@ -1,10 +1,7 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ClassDefinition;
-import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.EnvironmentExp;
-import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
 
 import java.io.PrintStream;
@@ -30,15 +27,15 @@ public class Return extends AbstractInst {
         /* Not required by specification: print warning.
         */
         if (!returnType.sameType(currentType) && compiler.getEmitWarnings()) {
-            StringBuilder sb = new StringBuilder(getLocation().toString());
-            sb.deleteCharAt(0); sb.deleteCharAt(sb.length()-1);
-            int i = sb.indexOf((", "));
-            sb.setCharAt(i, ':'); sb.deleteCharAt(i+1);
-            System.err.println(
-                    "[\u001B[31mWARNING\u001B[0m]" + getLocation().getFilename() + " " +
-                    sb + ":Type of return expression is inconsistent with method return type.");
+            Warning warning = new Warning(
+                    "Type of return expression is inconsistent with method return type.",
+                    getLocation());
+            warning.emit();
         }
     }
+
+    @Override
+    public boolean checkLast() { return true; }
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) {

@@ -41,6 +41,8 @@ public abstract class AbstractExpr extends AbstractInst {
     }
     private Type type;
 
+    public boolean getAddedByParse() { return false; }
+
     @Override
     protected void checkDecoration() {
         if (getType() == null) {

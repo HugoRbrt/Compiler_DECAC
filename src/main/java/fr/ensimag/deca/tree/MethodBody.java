@@ -1,10 +1,7 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ClassDefinition;
-import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.EnvironmentExp;
-import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.instructions.HALT;
 import org.apache.commons.lang.Validate;
@@ -29,6 +26,12 @@ public class MethodBody extends AbstractMethodBody {
                 ClassDefinition currentClass, Type returnType) throws ContextualError {
         declVariables.verifyListDeclVariable(compiler, localEnv, currentClass);
         insts.verifyListInst(compiler, localEnv, currentClass, returnType);
+        if (insts.isEmpty() && !returnType.isVoid()) {
+            Warning warning = new Warning(
+                    "No return statement in non-void method.",
+                    getLocation());
+            warning.emit();
+        }
     }
 
     @Override

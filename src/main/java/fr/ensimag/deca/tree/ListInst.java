@@ -1,14 +1,13 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ClassDefinition;
-import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Label;
 import org.apache.log4j.Logger;
+
+import java.util.Iterator;
 
 /**
  * @author gl49
@@ -27,8 +26,21 @@ public class ListInst extends TreeList<AbstractInst> {
     public void verifyListInst(DecacCompiler compiler, EnvironmentExp localEnv,
                     ClassDefinition currentClass, Type returnType)
             throws ContextualError {
-        for (AbstractInst inst : this.getList()) {
-            inst.verifyInst(compiler, localEnv, currentClass, returnType);
+        if (compiler.getEmitWarnings() && currentClass != null) {
+            for (Iterator<AbstractInst> it = this.iterator(); it.hasNext();) {
+                AbstractInst inst = it.next();
+                inst.verifyInst(compiler, localEnv, currentClass, returnType);
+                if (!it.hasNext() && !inst.checkLast()) {
+                    Warning warning = new Warning(
+                            "Last instruction of non-void method is not a return statement.",
+                            inst.getLocation());
+                    warning.emit();
+                }
+            }
+        } else {
+            for (AbstractInst inst : this.getList()) {
+                inst.verifyInst(compiler, localEnv, currentClass, returnType);
+            }
         }
     }
 
