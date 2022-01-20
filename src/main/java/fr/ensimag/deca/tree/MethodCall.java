@@ -4,6 +4,7 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable;
+import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
@@ -124,7 +125,7 @@ public class MethodCall extends AbstractExpr {
 
     protected void codeGenInst(DecacCompiler compiler) {
         //we add the calling class in the stack
-        Register usedRegister = compiler.getListRegister().getRegister(compiler);
+        GPRegister usedRegister = compiler.getListRegister().getRegister(compiler);
         compiler.addInstruction(new ADDSP(methodArgs.size()));
         compiler.addInstruction(new LOAD(compiler.getstackTable().get(((Identifier)callingClass).getName()), usedRegister));
         compiler.addInstruction(new STORE(usedRegister, new RegisterOffset(0, Register.SP)));
@@ -148,5 +149,7 @@ public class MethodCall extends AbstractExpr {
         compiler.addInstruction(new BSR(new RegisterOffset(methodName.getMethodDefinition().getIndex(), usedRegister)));
         //we remove arguments from the stack
         compiler.addInstruction(new SUBSP(methodArgs.size()));
+
+        compiler.getListRegister().freeRegister(usedRegister, compiler);
     }
 }

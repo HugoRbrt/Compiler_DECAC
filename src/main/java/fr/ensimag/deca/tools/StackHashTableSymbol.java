@@ -51,6 +51,13 @@ public class StackHashTableSymbol {
         size++;
     }
 
+    public void put(Symbol name, RegisterOffset R){
+        map.put(name,R);
+    }
+
+    public void clear(){
+        map.clear();
+    }
 
     @Override
     public String toString() {

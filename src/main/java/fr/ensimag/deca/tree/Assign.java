@@ -63,24 +63,34 @@ public class Assign extends AbstractBinaryExpr {
     }
 
     protected void codeGenInst(DecacCompiler compiler){
-        RegisterOffset offset;
-        GPRegister usedRegister = compiler.getListRegister().getRegister(compiler);
+        RegisterOffset targetField;
+        GPRegister targetObject = null;
         //on recupere a quelle adresse est stocké l'element de gauche :
         if(super.getLeftOperand() instanceof Selection){
-            RegisterOffset r = compiler.getstackTable().get(compiler.getSymbTable().get(((Identifier)((Selection) super.getLeftOperand()).getSelectingClass()).getName().getName()));
-            compiler.addInstruction(new LOAD(r, usedRegister));
-            offset = new RegisterOffset(((Selection) super.getLeftOperand()).getSelectedField().getFieldDefinition().getIndex(), usedRegister);
+            targetObject = compiler.getListRegister().getRegister(compiler);
+            AbstractExpr selectingClass = ((Selection) super.getLeftOperand()).getSelectingClass();
+            //il manque la cas This et Cast
+            if(selectingClass instanceof This || selectingClass instanceof Cast){
+                selectingClass.codeGenInst(compiler);
+                compiler.addInstruction(new LOAD(Register.R0, targetObject));
+            }else{
+                RegisterOffset r = compiler.getstackTable().get(compiler.getSymbTable().get(((Identifier)selectingClass).getName().getName()));
+                compiler.addInstruction(new LOAD(r, targetObject));
+            }
+            targetField = new RegisterOffset(((Selection) super.getLeftOperand()).getSelectedField().getFieldDefinition().getIndex(), targetObject);
+            //targetObject represente l'objet que l'on manipule
+            //targetField n(Rk) represente le champ que l'on veut assigner
         }
         else{
-            offset = compiler.getstackTable().get(
+            targetField = compiler.getstackTable().get(
                     ((Identifier) super.getLeftOperand()).getName());
         }
-        //droite dans R0
+        //we store right operand in R0
         super.getRightOperand().codeGenInst(compiler);
-        //on stock droite dans gauche
-        compiler.addInstruction(new STORE(Register.R0, offset));
+        //on stock right result into the left operand
+        compiler.addInstruction(new STORE(Register.R0, targetField));
         if(super.getLeftOperand() instanceof Selection){
-            compiler.getListRegister().freeRegister(usedRegister, compiler);
+            compiler.getListRegister().freeRegister(targetObject, compiler);
         }
     }
 
