@@ -72,6 +72,7 @@ public class ARMFunctionManager {
     }
 
     public void genCodeEndProgram(DecacCompiler compiler) {
+        compiler.addARMBlock(".text");
         Label _end = new Label("_end", true);
         compiler.addLabel(_end);
         compiler.addInstruction(new mov(ARMRegister.getR(0), 0));

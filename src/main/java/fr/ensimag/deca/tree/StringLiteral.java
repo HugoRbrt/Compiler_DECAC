@@ -80,6 +80,9 @@ public class StringLiteral extends AbstractStringLiteral {
         compiler.add(new ARMLine(msgName+":"));
         compiler.add(new ARMLine(".ascii " +"\"" + value + "\""));
         compiler.add(new ARMLine(lenMsgName+" = . - "+msgName));
+        compiler.add(new ARMLine(".text"));
+        compiler.addInstruction(new mov(ARMRegister.r7,4));
+        compiler.addInstruction(new svc(0));
     }
 
     @Override

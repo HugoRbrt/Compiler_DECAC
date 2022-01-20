@@ -112,12 +112,12 @@ public class ARMRegister extends DVal {
     /**
      * Convenience shortcut for r[2]
      */
-    public static final ARMGPRegister r2 = r[1];
+    public static final ARMGPRegister r2 = r[2];
 
     /**
      * Convenience shortcut for r[3]
      */
-    public static final ARMGPRegister r3 = r[1];
+    public static final ARMGPRegister r3 = r[3];
 
 
     /**
