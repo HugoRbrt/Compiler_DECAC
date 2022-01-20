@@ -344,7 +344,7 @@ public class DecacCompiler implements Runnable {
         // after analysis of the program, we generate the TSTO instruction
         int d1 = codeAnalyzer.getNeededStackSize();
         int d2 = codeAnalyzer.getNbDeclaredVariables();
-        if(Objects.isNull(this.compilerOptions) || !this.compilerOptions.getArmBool()){
+        if(!this.compilerOptions.getArmBool()){
             errorManager.setTstoArg(d1);
             errorManager.setAddspArg(d2);
         
