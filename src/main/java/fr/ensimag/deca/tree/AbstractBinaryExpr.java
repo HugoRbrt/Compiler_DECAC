@@ -7,6 +7,8 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.ARMRegister;
+import fr.ensimag.ima.pseudocode.ARMGPRegister;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.POP;
 import fr.ensimag.ima.pseudocode.instructions.WINT;
@@ -15,6 +17,8 @@ import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
 import fr.ensimag.ima.pseudocode.ImmediateString;
 import fr.ensimag.deca.tree.FloatLiteral;
 import fr.ensimag.deca.tree.IntLiteral;
+import fr.ensimag.ima.pseudocode.instructionsARM.mov;
+
 
 /**
  * Binary expressions.
@@ -67,6 +71,18 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
         }
     }
 
+    protected void codeGenInstARM(DecacCompiler compiler){
+        if(rightOperand instanceof StringLiteral){
+            compiler.getIdentMap().setIdentString(((AbstractIdentifier)leftOperand).getName(), ((StringLiteral)rightOperand).getValue());
+        }else{
+            leftOperand.codeGenInstARM(compiler);
+            ARMGPRegister usedRegister = ARMRegister.getR(1);
+            compiler.addInstruction(new mov(usedRegister, ARMRegister.getR(0)));
+            rightOperand.codeGenInstARM(compiler);
+            this.codeGenOperationsARM(usedRegister, ARMRegister.getR(0), compiler);
+        }
+    }
+
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex){
         if(rightOperand instanceof StringLiteral){
             compiler.getIdentMap().setIdentString(((AbstractIdentifier)leftOperand).getName(), ((StringLiteral)rightOperand).getValue());
@@ -86,8 +102,18 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
         }
     }
 
+    protected void codeGenPrintARM(DecacCompiler compiler, boolean printHex){
+        if(rightOperand instanceof StringLiteral){
+            compiler.getIdentMap().setIdentString(((AbstractIdentifier)leftOperand).getName(), ((StringLiteral)rightOperand).getValue());
+        }else{
+            codeGenInstARM(compiler);
+            compiler.addInstruction(new mov(ARMRegister.getR(1), ARMRegister.getR(0)));
+        }
+    }
+
     abstract void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler);
 
+    abstract void codeGenOperationsARM(ARMRegister Reg1, ARMRegister storedRegister, DecacCompiler compiler);
 
     @Override
     public void decompile(IndentPrintStream s) {

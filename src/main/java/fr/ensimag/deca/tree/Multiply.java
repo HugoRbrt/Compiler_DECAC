@@ -1,6 +1,7 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.ARMRegister;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.instructions.MUL;
 import fr.ensimag.ima.pseudocode.instructions.BOV;
@@ -19,6 +20,10 @@ public class Multiply extends AbstractOpArith {
         if(super.getLeftOperand() instanceof FloatLiteral || super.getRightOperand() instanceof FloatLiteral){
             compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Float arithmetic overflow")));
         }
+    }
+
+    public void codeGenOperationsARM(ARMRegister Reg1, ARMRegister storedRegister, DecacCompiler compiler){
+        // TODO
     }
 
     @Override

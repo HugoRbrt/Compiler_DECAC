@@ -282,4 +282,11 @@ public class Identifier extends AbstractIdentifier {
             compiler.addInstruction(new LOAD(R, Register.R0));
         }
     }
+
+    @Override
+    protected void codeGenInstARM(DecacCompiler compiler) {
+        if(getDefinition().isExpression()){
+            compiler.addInstruction(new ldr(ARMRegister.r0, "=" + this.name.toString()));
+        }
+    }
 }

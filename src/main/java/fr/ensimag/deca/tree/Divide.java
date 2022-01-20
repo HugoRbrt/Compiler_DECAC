@@ -1,6 +1,7 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.ARMRegister;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.ImmediateFloat;
 import fr.ensimag.deca.DecacCompiler;
@@ -43,4 +44,9 @@ public class Divide extends AbstractOpArith {
         }
         compiler.addInstruction(new LOAD(Reg1, storedRegister));
     }
+
+    public void codeGenOperationsARM(ARMRegister Reg1, ARMRegister storedRegister, DecacCompiler compiler){
+        // TODO
+    }
+
 }

@@ -4,6 +4,7 @@ import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.ARMRegister;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 
 /**
@@ -38,4 +39,5 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
     }
 
     abstract void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler);
+    abstract void codeGenOperationsARM(ARMRegister Reg1, ARMRegister storedRegister, DecacCompiler compiler);
 }

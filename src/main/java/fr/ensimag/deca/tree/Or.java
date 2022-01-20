@@ -1,6 +1,7 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.ARMRegister;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.instructions.ADD;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
@@ -27,6 +28,10 @@ public class Or extends AbstractOpBool {
         compiler.addInstruction(new ADD(Reg1, storedRegister));
         compiler.addInstruction(new CMP(new ImmediateInteger(0), storedRegister));
         compiler.addInstruction(new SNE(compiler.getListRegister().R0));
+    }
+
+    public void codeGenOperationsARM(ARMRegister Reg1, ARMRegister storedRegister, DecacCompiler compiler){
+        // TODO
     }
 
 }

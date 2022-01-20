@@ -8,6 +8,7 @@ import fr.ensimag.deca.context.Definition;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.ARMRegister;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
@@ -64,5 +65,9 @@ public class Assign extends AbstractBinaryExpr {
         RegisterOffset offset = compiler.getstackTable().get(
             ((Identifier) super.getLeftOperand()).getName());
         compiler.addInstruction(new STORE(storedRegister, offset));
+    }
+
+    public void codeGenOperationsARM(ARMRegister Reg1, ARMRegister storedRegister, DecacCompiler compiler){
+        // TODO
     }
 }

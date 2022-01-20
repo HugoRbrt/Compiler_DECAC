@@ -3,6 +3,7 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.ARMRegister;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.instructions.REM;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
@@ -41,5 +42,9 @@ public class Modulo extends AbstractOpArith {
         compiler.addInstruction(new BEQ(compiler.getErrorManager().getErrorLabel("Division by zero")));
         compiler.addInstruction(new REM(storedRegister, Reg1));
         compiler.addInstruction(new LOAD(Reg1, storedRegister));
+    }
+
+    public void codeGenOperationsARM(ARMRegister Reg1, ARMRegister storedRegister, DecacCompiler compiler){
+        // TODO
     }
 }
