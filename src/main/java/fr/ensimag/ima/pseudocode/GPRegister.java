@@ -40,6 +40,7 @@ public class GPRegister extends Register {
         return nbPushOnRegister;
     }
     
+
     
     /**
      * @return true if the register is available for use, else false
@@ -58,7 +59,6 @@ public class GPRegister extends Register {
      * Makes the register unavailable for saves
      */
     public void use(){
-        assert(availability);
         availability=false;
     }
 
@@ -87,4 +87,10 @@ public class GPRegister extends Register {
         return s;
     }    
 
+    // Try not to abuse this function and use the incr and decr methods
+    // We only want to use this with 0
+    public void setNbPushOnRegister(int number) {
+        assert(number == 0);
+        nbPushOnRegister = 0;
+    }
 }
