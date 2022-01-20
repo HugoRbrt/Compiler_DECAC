@@ -1,5 +1,6 @@
 package fr.ensimag.deca.context;
 
+import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.deca.tree.AbstractIdentifier;
 import fr.ensimag.deca.tree.DeclClass;
@@ -67,16 +68,15 @@ public class EnvironmentExp {
         return null;
     }
 
-    public void getSymbolMethod(Symbol[] symbolList, ClassDefinition className){
+    public void getSymbolMethod(SymbolTable symbolTable, Symbol[] symbolList, ClassDefinition className){
         if(parentEnvironment != null){
-            parentEnvironment.getSymbolMethod(symbolList, className.getSuperClass());
+            parentEnvironment.getSymbolMethod(symbolTable, symbolList, className.getSuperClass());
         }
+        //ajouter les symboles dans la table sans se poser de questions (les overrides seront fait automatiquement)
         for(Symbol s : environment.keySet()){
             if(environment.get(s).isMethod()){
-                if(!s.getName().contains("code.")){
-                    s.setName("code."+className.toStringName()+"."+s.getName());
-                }
-                symbolList[((MethodDefinition)environment.get(s)).getIndex() - 1] = s;
+                Symbol symbol = symbolTable.create("code."+className.toStringName()+"."+s.getName());
+                symbolList[((MethodDefinition)environment.get(s)).getIndex() - 1] = symbol;
             }
         }
     }

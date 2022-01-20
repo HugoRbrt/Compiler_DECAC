@@ -417,4 +417,8 @@ public class DecacCompiler implements Runnable {
         codeAnalyzer.incrMethodsTableSize(neededSize);
     }
     
+    public void resetCodeAnalyzer() {
+        codeAnalyzer = new CodeAnalyzer();
+    }
+    
 }
