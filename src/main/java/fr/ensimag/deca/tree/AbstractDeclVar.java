@@ -58,10 +58,4 @@ public abstract class AbstractDeclVar extends Tree {
      */
     protected abstract void codeGenDeclVarAllocARM(DecacCompiler compiler);
 
-    /**
-     * Generate assembly code for the ARM instruction in order to get an address.
-     *
-     * @param compiler
-     */
-    protected abstract void codeGenDeclVarCreateAddrARM(DecacCompiler compiler);
 }

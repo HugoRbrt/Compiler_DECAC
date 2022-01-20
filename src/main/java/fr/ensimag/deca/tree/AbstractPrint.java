@@ -8,6 +8,7 @@ import fr.ensimag.ima.pseudocode.ARMLine;
 import fr.ensimag.ima.pseudocode.instructionsARM.ldr;
 import fr.ensimag.ima.pseudocode.instructionsARM.mov;
 import fr.ensimag.ima.pseudocode.instructionsARM.svc;
+import fr.ensimag.ima.pseudocode.instructionsARM.bl;
 import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.ima.pseudocode.Label;
 import java.io.PrintStream;
@@ -62,8 +63,6 @@ public abstract class AbstractPrint extends AbstractInst {
         // System.out.println(getArguments().getList());
         for (AbstractExpr a : getArguments().getList()) {
             a.codeGenPrintARM(compiler, printHex);
-            compiler.addInstruction(new mov(ARMRegister.r7,4));
-            compiler.addInstruction(new svc(0));
         }
     }
 

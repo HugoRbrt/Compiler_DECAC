@@ -96,14 +96,7 @@ public class DeclVar extends AbstractDeclVar {
         }    
     }
 
-    /*
-     * Allocate adresse in ARM memory
-     */
-    protected void codeGenDeclVarCreateAddrARM(DecacCompiler compiler){
-        if(!varName.getDefinition().getType().isString()){//si on veut declarer un string, il faut juste creer le symbol en java
-            compiler.addARMBlock("adr_" + varName.getName().getName() + ": .word " + varName.getName().getName());
-        }    
-    }
+
 
     @Override
     protected

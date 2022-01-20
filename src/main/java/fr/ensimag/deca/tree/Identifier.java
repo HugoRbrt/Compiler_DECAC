@@ -287,6 +287,8 @@ public class Identifier extends AbstractIdentifier {
     protected void codeGenInstARM(DecacCompiler compiler) {
         if(getDefinition().isExpression()){
             compiler.addInstruction(new ldr(ARMRegister.r0, "=" + this.name.toString()));
+            compiler.addInstruction(new ldr(ARMRegister.r0, "[r0]"));
+  
         }
     }
 }

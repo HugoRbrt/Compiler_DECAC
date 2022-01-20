@@ -60,15 +60,11 @@ public class ListDeclVar extends TreeList<AbstractDeclVar> {
         }
 
         compiler.addARMBlock(".text");
-        for (AbstractDeclVar i : getList()) {
-            i.codeGenDeclVarCreateAddrARM(compiler);
-        }
 
         compiler.addARMBlock("_varDeclAssign:");
         for (AbstractDeclVar i : getList()) {
             i.codeGenDeclVarARM(compiler);
         }
-        compiler.addInstruction(new pop(ARMRegister.lr));
         compiler.addInstruction(new mov(ARMRegister.pc, ARMRegister.lr));
 
     }

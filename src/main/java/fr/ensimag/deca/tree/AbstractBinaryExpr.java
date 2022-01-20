@@ -14,6 +14,7 @@ import fr.ensimag.ima.pseudocode.instructions.POP;
 import fr.ensimag.ima.pseudocode.instructions.WINT;
 import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
 import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
+import fr.ensimag.ima.pseudocode.instructionsARM.bl;
 import fr.ensimag.ima.pseudocode.ImmediateString;
 import fr.ensimag.deca.tree.FloatLiteral;
 import fr.ensimag.deca.tree.IntLiteral;
@@ -107,7 +108,7 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
             compiler.getIdentMap().setIdentString(((AbstractIdentifier)leftOperand).getName(), ((StringLiteral)rightOperand).getValue());
         }else{
             codeGenInstARM(compiler);
-            compiler.addInstruction(new mov(ARMRegister.getR(1), ARMRegister.getR(0)));
+            compiler.addInstruction(new bl("_printrelatif"));
         }
     }
 

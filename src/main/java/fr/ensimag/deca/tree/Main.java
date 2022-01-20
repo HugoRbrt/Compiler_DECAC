@@ -58,7 +58,6 @@ public class Main extends AbstractMain {
         declVariables.codeGenListDeclVarARM(compiler);
         compiler.addARMComment("Beginning of main ARM instructions:");
         compiler.addARMBlock("_start:");
-        compiler.addInstruction(new push(ARMRegister.lr));
         compiler.addInstruction(new bl("_varDeclAssign"));
         //ARMRegister R = compiler.getListRegisterARM();
         insts.codeGenListInstARM(compiler);
