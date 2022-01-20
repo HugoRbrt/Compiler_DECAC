@@ -16,7 +16,7 @@ import org.mockito.MockitoAnnotations;
  * Initial version : 13/1/2022
  * @author Paul
  */
-public class GPRegisterTest {
+public class RegisterTest {
     
     @Test
     public void fillingRegistersTest() {

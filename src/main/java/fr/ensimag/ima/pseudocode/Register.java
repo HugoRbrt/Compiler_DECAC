@@ -19,12 +19,6 @@ public class Register extends DVal {
     private static int maxIndex = 16;
     
     /**
-     * current index for a supposedly available register
-    */
-    private int currentIndex = 2;
-    
-    
-    /**
     * public constructor to access them more easily
     */
     public Register() {
@@ -107,36 +101,52 @@ public class Register extends DVal {
     /**
      * @return a register. This register is taken as the first available
      * register. If no such register is found, we return the last one
-     * and indicate that it will need to be pushed
+     * and indicate that it will need to be pushed.
      */
     public GPRegister getRegister(DecacCompiler compiler){
         
-        for (int k = currentIndex; k < maxIndex; k++) {
-            // if the register is available
+        // we try to find an available register
+        GPRegister targetRegister;
+        boolean needStackUse = false;
+        
+        for (int k = 2; k < maxIndex; k++) {
             if (R[k].available()) {
-                // we make it unavailable and say that we do not need to push it
                 R[k].use();
-                // we update the index for a supposedly free register
-                currentIndex = k+1;
                 return R[k];
             }
         }
         
-        // if we arrive here, no available register was found
-        // in this case, we take the last register and push it
-        // before using it
-        GPRegister pushedRegister = R[maxIndex-1]; // for now
-        assert !(pushedRegister.available());
-        pushedRegister.incrNbPushOnRegister(1);
+        // If we get here, it means all the registers (but R0 and R1)
+        // contain a saved value
+        // In this case we will need to use a PUSH instruction on the register
+        // we target
+        // However, our targetting method is taking the register with the
+        // minimum number of PUSH on it
         
-        compiler.addInstruction(new PUSH(pushedRegister));
+        // we want the register with the least number of push
+        int minimumPush = R[2].getNbPushOnRegister();
+        targetRegister = R[2];
+        
+        for (int j = 2; j < maxIndex; j++) {
+            int nbPushOnRegister = R[j].getNbPushOnRegister();
+            if (nbPushOnRegister < minimumPush) {
+                minimumPush = nbPushOnRegister;
+                targetRegister = R[j];
+            }
+        }
+        
+        // at this point, targetRegister contains the register with the
+        // least amount of Push on it
+        assert !(targetRegister.available());
+        targetRegister.incrNbPushOnRegister(1);
         compiler.incrPushCount(1);
-        
-        return R[maxIndex-1];
+        compiler.addInstruction(new PUSH(targetRegister));
+
+        return targetRegister;
     }
     
     /**
-     * free register given in argument and set its needPush field to false
+     * free register given in argument and set its needPush field to false.
      */
     public void freeRegister(GPRegister usedRegister, DecacCompiler compiler) {
         // if register is free, do nothing
@@ -152,14 +162,19 @@ public class Register extends DVal {
             } else {
                 // we do not need to pop and just make it free
                 usedRegister.free();
-                // we update the index of an available register
-                int regNb = usedRegister.getNumber();
-            
-                if (regNb < currentIndex) {
-                    currentIndex = regNb;
-                }
+
             }
         }
-        
+    }
+    
+    /**
+     * Use all registers and put their PUSH counts to 0.
+     * This method will be used by the code generation for functions
+     */
+    public void useAllRegisters() {
+        for (int k = 2; k < maxIndex; k++) {
+            R[k].use();
+            R[k].setNbPushOnRegister(0);
+        }
     }
 }

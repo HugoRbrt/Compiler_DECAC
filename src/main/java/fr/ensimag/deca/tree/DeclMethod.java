@@ -4,13 +4,11 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable;
-import fr.ensimag.ima.pseudocode.Label;
-import fr.ensimag.ima.pseudocode.LabelOperand;
-import fr.ensimag.ima.pseudocode.Register;
-import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.*;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.RTS;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
+import fr.ensimag.ima.pseudocode.instructions.TSTO;
 import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
 import org.apache.commons.lang.Validate;
 
@@ -138,6 +136,13 @@ public class DeclMethod extends AbstractDeclMethod {
 
     protected void codeGen(DecacCompiler compiler, String className){
         compiler.addLabel(new Label("code."+className+"."+methodName.getName().getName()));
+        // Line tstoline = new Line(new TSTO(0)); // creation de la ligne
+        // compiler.add(tstoline);
+        // des BOV et tout ça peut être pareil
+        // codegen des instructions
+        // tstoline.setInstruction(new TSTO(42)); // on recupere de codeAnalyzer le vrai nombre et on le set
+
+
         //il faudra ajouter dans la pile une case mémoire correspondant à la méthde ajouté
         //TODO
         compiler.addInstruction(new RTS());

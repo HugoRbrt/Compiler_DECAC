@@ -80,11 +80,13 @@ public class ErrorManager {
      * ErrorManager generates codes for errors that are put there
      */
     public void genCodeErrorManager(DecacCompiler compiler) {
-        compiler.addComment(" --------------------------------------------------");
-        compiler.addComment("             Error messages");
-        compiler.addComment(" --------------------------------------------------");
-        errorMap.forEach((name, label)
+        if (!compiler.getCompilerOptions().getNoCheck()) {
+            compiler.addComment(" --------------------------------------------------");
+            compiler.addComment("             Error messages");
+            compiler.addComment(" --------------------------------------------------");
+            errorMap.forEach((name, label)
                 -> genCodeError(label, "ERROR: " + name, compiler));
+        }
     }
 
 
@@ -94,9 +96,11 @@ public class ErrorManager {
      */
     public void addTstoCheck(DecacCompiler compiler) {
         // Start point for the program
-        compiler.addFirstInstruction(new ADDSP(addspArg));
-        compiler.addFirstInstruction(new BOV(errorMap.get("Stack overflow , a real one")));
-        compiler.addFirstInstruction(new TSTO(tstoArg));
+        if (!compiler.getCompilerOptions().getNoCheck()) {
+            compiler.addFirstInstruction(new ADDSP(addspArg));
+            compiler.addFirstInstruction(new BOV(errorMap.get("Stack overflow , a real one")));
+            compiler.addFirstInstruction(new TSTO(tstoArg));
+        }
     }
 
 
@@ -106,10 +110,12 @@ public class ErrorManager {
      * @params compiler : the compiler to write in
      */
     private void genCodeError(Label label, String msg, DecacCompiler compiler) {
-        compiler.addLabel(label);
-        compiler.addInstruction(new WSTR(new ImmediateString(msg)));
-        compiler.addInstruction(new WNL());
-        compiler.addInstruction(new ERROR());
+        if (!compiler.getCompilerOptions().getNoCheck()) {
+            compiler.addLabel(label);
+            compiler.addInstruction(new WSTR(new ImmediateString(msg)));
+            compiler.addInstruction(new WNL());
+            compiler.addInstruction(new ERROR());
+        }
     }
 
 }
