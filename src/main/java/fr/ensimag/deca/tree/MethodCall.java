@@ -139,7 +139,9 @@ public class MethodCall extends AbstractExpr {
         //we verify that the calling class is not null
         compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.SP), usedRegister));
         compiler.addInstruction((new CMP(new NullOperand(), usedRegister)));
-        compiler.addInstruction(new BEQ(compiler.getErrorManager().getErrorLabel("null_dereferencing")));
+        if (!compiler.getCompilerOptions().getNoCheck()) {
+            compiler.addInstruction(new BEQ(compiler.getErrorManager().getErrorLabel("null_dereferencing")));
+        }
         //we get the list of methods for the corresponding class
         compiler.addInstruction(new LOAD(new RegisterOffset(0, usedRegister), usedRegister));
         //we call the method with the right index

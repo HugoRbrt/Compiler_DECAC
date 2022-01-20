@@ -136,7 +136,9 @@ public class DeclMethod extends AbstractDeclMethod {
         compiler.getstackTable().setEnfOfCurrentMethod(endOfMethod);
         Line tstoline = new Line(new TSTO(0)); // creation de la ligne
         compiler.add(tstoline);
-        compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Stack overflow , a real one")));
+        if (!compiler.getCompilerOptions().getNoCheck()) {
+            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Stack overflow , a real one")));
+        }
         block.codeGenMethodBody(compiler);
         if(!returnType.getType().isVoid()){
             compiler.addInstruction(new WSTR(new ImmediateString("Error : end of the method " +className+"."+methodName.getName().getName() + " without return")));
