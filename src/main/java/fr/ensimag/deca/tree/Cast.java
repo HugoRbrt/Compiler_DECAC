@@ -60,7 +60,7 @@ public class Cast extends AbstractExpr {
                 instance.codeGenInst(compiler);
                 compiler.addInstruction(new CMP(new ImmediateInteger(1), Register.R0));
                 compiler.addInstruction(new BNE(beginElse));
-                //then instructions
+                //then instructions§
                 compiler.addInstruction(new LOAD(compiler.getstackTable().get(((Identifier)expression).getName()), Register.R1));
                 compiler.addInstruction(new BRA(endElse));
                 compiler.addLabel(beginElse);

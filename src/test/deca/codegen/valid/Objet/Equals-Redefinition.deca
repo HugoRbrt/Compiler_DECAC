@@ -15,11 +15,10 @@ class A {
     }
 
     boolean equals(Object other) {
-	if (! (other instanceof A)) {
-            return false;
+        if (! (other instanceof A)) {
+                return false;
         }
-        other = (A) (other);
-        return (this.x == other.x)
+        return (this.x == ((A)(other)).x);
     }
 
 }
