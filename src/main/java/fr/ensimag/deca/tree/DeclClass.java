@@ -11,6 +11,7 @@ import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.LEA;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
+import net.bytebuddy.implementation.bind.annotation.SuperCall;
 import org.apache.commons.lang.Validate;
 
 import java.io.PrintStream;
@@ -154,7 +155,7 @@ public class DeclClass extends AbstractDeclClass {
         compiler.addComment("             Class "+ stringClassName);
         compiler.addComment(" --------------------------------------------------");
         compiler.getstackTable().put(className.getName(), Register.GB);
-        fields.codeGen(compiler, stringClassName);
+        fields.codeGen(compiler, className, superClass);
         methods.codeGen(compiler, stringClassName );
     }
 }
