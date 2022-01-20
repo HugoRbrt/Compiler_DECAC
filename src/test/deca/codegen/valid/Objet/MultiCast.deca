@@ -1,0 +1,32 @@
+// Description:
+//    Twisted example with multiple casts
+//
+// Results:
+//    OK
+//
+// History:
+// Created on 20/1/2022
+
+
+class A {
+    int x;
+    int y;
+
+    void get() {}
+}
+
+
+class B extends A {
+    int z;
+
+    void get() {}
+    void newgget() {}
+}
+
+class C extends B { int x; }
+class D extends C { int z; }
+
+{
+    D d = new D();
+    A a = (A) ((B) ((C) ((D) (d))));
+}
