@@ -71,7 +71,7 @@ public class ARMRegister extends DVal {
     /**
      * Intra Procedural register
      */
-    public static final ARMRegister ip = new ARMRegister("lb");
+    public static final ARMRegister ip = new ARMRegister("ip");
     /**
      * Stack Pointer
      */
