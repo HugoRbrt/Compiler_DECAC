@@ -43,8 +43,8 @@ public class ErrorManager {
         errorMap.put("Stack overflow , a real one", stackOverflowLabel);
         Label divByZeroLabel = new Label("division_by_zero");
         errorMap.put("Division by zero", divByZeroLabel);
-        //Label nullReferenceLabel = new Label("null_dereferencing");
-        //errorMap.put("null_dereferencing", nullReferenceLabel);
+        Label nullReferenceLabel = new Label("null_dereferencing");
+        errorMap.put("null_dereferencing", nullReferenceLabel);
         Label ioErrorLabel = new Label("input_output_error");
         errorMap.put("input_output", ioErrorLabel);
         //Label heapOverflowLabel = new Label("heap_overflow");

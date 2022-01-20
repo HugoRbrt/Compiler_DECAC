@@ -3,6 +3,7 @@ package fr.ensimag.deca.tools;
 import java.util.HashMap;
 import java.util.Map;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.Register;
 
@@ -21,7 +22,16 @@ import fr.ensimag.ima.pseudocode.Register;
  */
 public class StackHashTableSymbol {
     private Map<Symbol, RegisterOffset> map = new HashMap<Symbol, RegisterOffset>();
+    private Label enfOfCurrentMethod;
     private int size = 1;
+
+    public void setEnfOfCurrentMethod(Label enfOfCurrentMethod) {
+        this.enfOfCurrentMethod = enfOfCurrentMethod;
+    }
+
+    public Label getEnfOfCurrentMethod() {
+        return enfOfCurrentMethod;
+    }
 
     /**
      * Create or reuse a symbol.
