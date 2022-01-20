@@ -21,7 +21,7 @@ public class Minus extends AbstractOpArith {
         //b : storedRegister
         //return storedRegister
         compiler.addInstruction(new SUB(Reg1, storedRegister));
-        if (getType().isFloat()) {
+        if (getType().isFloat() && !compiler.getCompilerOptions().getNoCheck()) {
             compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Float arithmetic overflow")));
         }
         compiler.addInstruction(new OPP(storedRegister, storedRegister));

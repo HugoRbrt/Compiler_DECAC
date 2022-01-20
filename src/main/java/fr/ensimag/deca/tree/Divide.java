@@ -31,13 +31,19 @@ public class Divide extends AbstractOpArith {
     public void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler){
         if(getType().isFloat()){
             compiler.addInstruction(new CMP(new ImmediateFloat(0.F), storedRegister));
-            compiler.addInstruction(new BEQ(compiler.getErrorManager().getErrorLabel("Division by zero")));
+            if (!compiler.getCompilerOptions().getNoCheck()) {
+                compiler.addInstruction(new BEQ(compiler.getErrorManager().getErrorLabel("Division by zero")));
+            }
             compiler.addInstruction(new DIV(storedRegister, Reg1));
-            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Float arithmetic overflow")));
+            if (!compiler.getCompilerOptions().getNoCheck()) {
+                compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Float arithmetic overflow")));
+            }
         }
         else if(getType().isInt()){
             compiler.addInstruction(new CMP(new ImmediateInteger(0), storedRegister));
-            compiler.addInstruction(new BEQ(compiler.getErrorManager().getErrorLabel("Division by zero")));
+            if (!compiler.getCompilerOptions().getNoCheck()) {
+                compiler.addInstruction(new BEQ(compiler.getErrorManager().getErrorLabel("Division by zero")));
+            }
             compiler.addInstruction(new QUO(storedRegister, Reg1));
         }
         compiler.addInstruction(new LOAD(Reg1, storedRegister));

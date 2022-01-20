@@ -47,7 +47,9 @@ public class Cast extends AbstractExpr {
         if (!type.getDefinition().getType().sameType(expression.getType())) {
             if(type.getDefinition().getType().isInt()){
                 compiler.addInstruction(new INT(Register.R0, Register.R1));
-                compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Float arithmetic overflow")));
+                if (!compiler.getCompilerOptions().getNoCheck()) {
+                    compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Float arithmetic overflow")));
+                }     
             }
             else if(type.getDefinition().getType().isClass()){
                 Label beginElse = new Label();
@@ -58,17 +60,21 @@ public class Cast extends AbstractExpr {
                 instance.codeGenInst(compiler);
                 compiler.addInstruction(new CMP(new ImmediateInteger(1), Register.R0));
                 compiler.addInstruction(new BNE(beginElse));
-                //then instructions
+                //then instructions§
                 compiler.addInstruction(new LOAD(compiler.getstackTable().get(((Identifier)expression).getName()), Register.R1));
                 compiler.addInstruction(new BRA(endElse));
                 compiler.addLabel(beginElse);
                 //else instructions
-                compiler.addInstruction(new BRA(compiler.getErrorManager().getErrorLabel("impossible_conversion")));
+                if (!compiler.getCompilerOptions().getNoCheck()) {
+                    compiler.addInstruction(new BRA(compiler.getErrorManager().getErrorLabel("impossible_conversion")));
+                }
                 compiler.addLabel(endElse);
             }
             else if(type.getDefinition().getType().isFloat()){
                 compiler.addInstruction(new FLOAT(Register.R0, Register.R1));
-                compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Float arithmetic overflow")));
+                if (!compiler.getCompilerOptions().getNoCheck()) {
+                    compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Float arithmetic overflow")));
+                }
             }
             compiler.addInstruction(new LOAD(Register.R1, Register.R0));
         }

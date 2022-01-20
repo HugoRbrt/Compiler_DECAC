@@ -21,8 +21,8 @@ public class ListDeclMethod extends TreeList<AbstractDeclMethod> {
     }
 
     protected void codeGen(DecacCompiler compiler, String className) {
-        //il faut ajouter à la pile GB une case memoire pour chaque methode en plus de des méthodes de la superclasse
         for (AbstractDeclMethod method: getList()) {
+            compiler.getstackTable().clear();
             method.codeGen(compiler, className);
         }
     }

@@ -41,7 +41,7 @@ public class StackHashTableSymbol {
      */
     public RegisterOffset get(Symbol name) {
         if (!map.containsKey(name)) {
-            throw new IllegalArgumentException("symbol not found in StackHashTableSymbol");
+            throw new IllegalArgumentException("symbol " + name.getName() + " not found in StackHashTableSymbol");
         }
         return map.get(name);
     }
@@ -51,6 +51,13 @@ public class StackHashTableSymbol {
         size++;
     }
 
+    public void put(Symbol name, RegisterOffset R){
+        map.put(name,R);
+    }
+
+    public void clear(){
+        map.clear();
+    }
 
     @Override
     public String toString() {

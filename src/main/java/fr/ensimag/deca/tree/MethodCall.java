@@ -4,6 +4,7 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable;
+import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
@@ -124,7 +125,7 @@ public class MethodCall extends AbstractExpr {
 
     protected void codeGenInst(DecacCompiler compiler) {
         //we add the calling class in the stack
-        Register usedRegister = compiler.getListRegister().getRegister(compiler);
+        GPRegister usedRegister = compiler.getListRegister().getRegister(compiler);
         compiler.addInstruction(new ADDSP(methodArgs.size()));
         compiler.addInstruction(new LOAD(compiler.getstackTable().get(((Identifier)callingClass).getName()), usedRegister));
         compiler.addInstruction(new STORE(usedRegister, new RegisterOffset(0, Register.SP)));
@@ -139,12 +140,16 @@ public class MethodCall extends AbstractExpr {
         //we verify that the calling class is not null
         compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.SP), usedRegister));
         compiler.addInstruction((new CMP(new NullOperand(), usedRegister)));
-        compiler.addInstruction(new BEQ(compiler.getErrorManager().getErrorLabel("null_dereferencing")));
+        if (!compiler.getCompilerOptions().getNoCheck()) {
+            compiler.addInstruction(new BEQ(compiler.getErrorManager().getErrorLabel("null_dereferencing")));
+        }
         //we get the list of methods for the corresponding class
         compiler.addInstruction(new LOAD(new RegisterOffset(0, usedRegister), usedRegister));
         //we call the method with the right index
         compiler.addInstruction(new BSR(new RegisterOffset(methodName.getMethodDefinition().getIndex(), usedRegister)));
         //we remove arguments from the stack
         compiler.addInstruction(new SUBSP(methodArgs.size()));
+
+        compiler.getListRegister().freeRegister(usedRegister, compiler);
     }
 }

@@ -30,7 +30,9 @@ public class ReadFloat extends AbstractReadExpr {
 
     public void codeGenInst(DecacCompiler compiler) {
         compiler.addInstruction(new RFLOAT());
-        compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("input_output")));
+        if (!compiler.getCompilerOptions().getNoCheck()) {
+            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("input_output")));
+        }
         compiler.addInstruction(new LOAD(compiler.getListRegister().R1, compiler.getListRegister().R0));
     }
 

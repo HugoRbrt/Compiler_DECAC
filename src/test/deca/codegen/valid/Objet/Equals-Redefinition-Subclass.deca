@@ -15,11 +15,11 @@ class A {
     }
 
     boolean equals(Object other) {
-	if (! (other instanceof A)) {
-            return false;
+        if (! (other instanceof A)) {
+                return false;
         }
         other = (A) (other);
-        return (this.x == other.x)
+        return (this.x == ((A)(other)).x);
     }
 }
 
@@ -30,7 +30,7 @@ class B extends A {
             return false;
         }
         other = (B) (other);
-        return (this.x == other.x)
+        return (this.x == ((B)(other)).x);
     }
 }
 

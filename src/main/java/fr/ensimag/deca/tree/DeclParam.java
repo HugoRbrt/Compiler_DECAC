@@ -6,6 +6,7 @@ import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.ParamDefinition;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.deca.tools.SymbolTable;
 
 import java.io.PrintStream;
 
@@ -16,6 +17,10 @@ public class DeclParam extends AbstractDeclParam {
     public DeclParam(AbstractIdentifier type, AbstractIdentifier paramName) {
         this.type = type;
         this.paramName = paramName;
+    }
+
+    public SymbolTable.Symbol getName(){
+        return paramName.getName();
     }
 
     @Override

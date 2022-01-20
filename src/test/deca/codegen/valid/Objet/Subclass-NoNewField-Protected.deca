@@ -9,7 +9,10 @@
 //      created on 17/1/2022
 
 class C {
-    protected int x = 1;	
+    protected int x = 1;
+    int getX() {
+        return x;
+    }
 }
 
 class D extends C {
@@ -17,5 +20,5 @@ class D extends C {
 
 {
     D d = new D();
-    println(d.x);
+    println(d.getX());
 }

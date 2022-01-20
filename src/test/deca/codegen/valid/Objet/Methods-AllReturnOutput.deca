@@ -29,8 +29,7 @@ class A {
     }
 
     void signatureVoidWith() {
-	print(" OK2");
-	return;
+        print(" OK2");
     }
 
     void signatureVoidWithout() {
@@ -40,12 +39,12 @@ class A {
 
 {
     A instance = new A();
-    A instanceBis = A.signatureA();
+    A instanceBis = instance.signatureA();
     if (instance.equals(instanceBis)) {
         println("equal");
     } 
     println(instanceBis.signatureInt(1), " ", instance.signatureFloat(2.0));
-    if instance.signatureBoolean(0) {
+    if (instance.signatureBoolean(0)) {
         print("OK1");
     }
     A.signatureVoidWith();

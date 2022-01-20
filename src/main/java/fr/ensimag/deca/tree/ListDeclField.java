@@ -3,6 +3,7 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.instructions.BRA;
 import fr.ensimag.ima.pseudocode.instructions.RTS;
 import org.apache.log4j.Logger;
 
@@ -28,13 +29,13 @@ public class ListDeclField extends TreeList<AbstractDeclField> {
         }
     }
 
-    protected void codeGen(DecacCompiler compiler, String className) {
-        compiler.addLabel(new Label("init."+className));
-        int fieldCounter=0;
+    protected void codeGen(DecacCompiler compiler, AbstractIdentifier className,AbstractIdentifier superClass) {
+        compiler.addLabel(new Label("init."+className.getName().getName()));
+        int fieldCounter = className.getClassDefinition().getNumberOfFields() - getList().size();
         for (AbstractDeclField field: getList()) {
             field.codeGen(compiler, fieldCounter);
             fieldCounter++;
         }
-        compiler.addInstruction(new RTS());
+        compiler.addInstruction(new BRA(new Label("init."+superClass)));
     }
 }
