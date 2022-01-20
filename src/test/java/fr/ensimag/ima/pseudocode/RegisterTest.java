@@ -26,39 +26,59 @@ public class RegisterTest {
         Register bench = new Register("TestBench", indexMax);
         DecacCompiler mockCompiler = mock(DecacCompiler.class);
         
+        System.out.println(bench.debugDisplay());
+        
         // table to get the registers concerned by loop
-        GPRegister[] registerTab = new GPRegister[indexMax + 5];
+        GPRegister[] registerTab = new GPRegister[indexMax - 3];
         
         // getting the registers in order 17 times
-        for (int k = 2; k < indexMax + 5; k++) {
+        for (int k = 0; k < indexMax - 3; k++) {
             registerTab[k] = bench.getRegister(mockCompiler);
         }
         
-        for (int k = indexMax - 1; k > 1; k--) {
+        System.out.println(bench.debugDisplay());
+        
+        for (int k = 0; k < indexMax - 3; k++) {
             bench.freeRegister(registerTab[k], mockCompiler);
         }
         
-        assertEquals(4, registerTab[indexMax].getNbPushOnRegister());
-        assertEquals(true, registerTab[3].available());
+        System.out.println(bench.debugDisplay());
         
-        for (int i = 0; i < 2; i++) {
-            bench.freeRegister(registerTab[indexMax-1], mockCompiler);
+        /* Intensive use of registers */
+        registerTab = new GPRegister[indexMax+1];
+        for (int k = 0; k < indexMax + 1; k++) {
+            registerTab[k] = bench.getRegister(mockCompiler);
         }
 
-        for (int k = 2; k < indexMax + 5; k++) {
-            registerTab[k] = bench.getRegister(mockCompiler);
+        System.out.println(bench.debugDisplay());
+        for (int k = 0; k <= 5; k++) {
+            bench.freeRegister(registerTab[k], mockCompiler);
         }
-        
-        for (int k = indexMax - 1; k > 1; k--) {
+        for (int k = 6; k < indexMax-3; k++) {
             bench.freeRegister(registerTab[k], mockCompiler);
         }
         
-        for (int i = 0; i < 9; i++) {
-            bench.freeRegister(registerTab[indexMax-1], mockCompiler);
+        System.out.println(bench.debugDisplay());
+        
+        for (int k = indexMax - 2; k < indexMax + 1; k++ ) {
+            bench.freeRegister(registerTab[k], mockCompiler);
         }
         
-        assertEquals(true, registerTab[12].available());
-        assertEquals(0, registerTab[12].getNbPushOnRegister());
+        
+        System.out.println(bench.debugDisplay());
+        
+        /* Using all the registers a certain amount of time then pop them */
+        registerTab = new GPRegister[3 * indexMax];
+        
+        for (int k = 0; k < 3 * indexMax; k++) {
+            registerTab[k] = bench.getRegister(mockCompiler);
+        }
+        
+        System.out.println(bench.debugDisplay());
+        
+        bench.useAllRegisters();
+        
+        System.out.println(bench.debugDisplay());
     }
 
 }       
