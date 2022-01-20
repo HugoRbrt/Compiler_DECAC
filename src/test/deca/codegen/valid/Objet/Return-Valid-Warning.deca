@@ -1,0 +1,22 @@
+// Description:
+//      Method with return statement type inconsistent with method signature.
+//      The method is called without being used in an assignment, so the compiler
+//      does not signal an error.
+//
+// Result:
+//     (void)
+//
+// History:
+//      Created on /1/2022
+
+class A {
+    boolean check() {
+        int x;
+        return x;
+    }
+}
+
+{
+    A a = new A();
+    a.check();
+}
