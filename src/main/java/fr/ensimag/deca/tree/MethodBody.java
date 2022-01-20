@@ -26,7 +26,7 @@ public class MethodBody extends AbstractMethodBody {
                 ClassDefinition currentClass, Type returnType) throws ContextualError {
         declVariables.verifyListDeclVariable(compiler, localEnv, currentClass);
         insts.verifyListInst(compiler, localEnv, currentClass, returnType);
-        if (insts.isEmpty() && !returnType.isVoid()) {
+        if (compiler.getEmitWarnings() && insts.isEmpty() && !returnType.isVoid()) {
             Warning warning = new Warning(
                     "No return statement in non-void method.",
                     getLocation());

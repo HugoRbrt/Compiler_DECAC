@@ -127,6 +127,10 @@ public abstract class AbstractExpr extends AbstractInst {
         }
     }
 
+    protected void divideCheck() {
+        // NO OP (overriden in Divide class)
+    }
+
     /**
      * Generate code to print the expression
      *
