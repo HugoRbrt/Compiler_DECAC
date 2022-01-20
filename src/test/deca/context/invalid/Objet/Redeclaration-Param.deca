@@ -1,0 +1,15 @@
+// Description:
+//      Declaring two parameters with the same identifier in the same signature.
+//
+// Results:
+//      11:26: (RULE 3.17) Parameter has already been declared.
+//
+// History:
+//      created on 20/1/2022
+
+class A {
+    void foo(int x, float x) {}
+}
+
+{
+}
