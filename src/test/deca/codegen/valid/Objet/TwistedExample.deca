@@ -2,7 +2,7 @@
 //    Twisted example for casts
 //
 // Results:
-//    OK
+//    2
 //
 // History:
 // Created on 20/1/2022
@@ -12,14 +12,14 @@ class A {
     int x;
     int y;
 
-    void get() {}
+    int get() { return 1; }
 }
 
 
 class B extends A {
     int z;
 
-    void get() {}
+    int get() { return 2; }
     void newgget() {}
 }
 
@@ -27,4 +27,6 @@ class B extends A {
 {
     B b = new B();
     A a = (A) (b);
+
+    println(a.get());
 }

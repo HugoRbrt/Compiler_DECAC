@@ -40,7 +40,7 @@ class B extends A {
     A a = new A();
     B b = new B();
 
-    if ( a.equals(b) ) { // we have (b instance of A && b.x == a.x)
+    if ( a.equals(b))  { // we have (b instance of A && b.x == a.x)
         print("OK1 ");
     }
     

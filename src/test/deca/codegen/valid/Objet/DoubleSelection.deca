@@ -1,0 +1,24 @@
+// Description:
+//    Program testing the good management of double selection
+//    on fields
+//
+// Results:
+//    1
+//
+// History:
+// Created on 20/1/2022
+
+
+class A {
+    int x = 1;
+}
+
+class C {
+	A a = new A();
+}
+
+
+{
+    C c = new C();
+    println((c.a).x);
+}

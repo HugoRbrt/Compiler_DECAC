@@ -1,0 +1,24 @@
+// Description:
+//    Tests with confusing idents to pressure the parser
+//
+// Results:
+//    OK0 OK0
+//
+// History:
+// Created on 20/1/2022
+
+
+class x {
+    
+    int y = 1;
+    void x(int x) { println("OK", x); }
+    void fun(int y) { y = y; println("OK", y); }
+
+}
+
+
+{
+    x x = new x();
+    x.x(0);
+    x.fun(0);
+}
