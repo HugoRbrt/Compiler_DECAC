@@ -134,6 +134,8 @@ public class DeclMethod extends AbstractDeclMethod {
         compiler.addLabel(new Label("code."+className+"."+methodName.getName().getName()));
         Label endOfMethod = new Label("fin."+className+"."+methodName.getName().getName());
         compiler.getstackTable().setEnfOfCurrentMethod(endOfMethod);
+        compiler.getListRegister().useAllRegisters();
+        compiler.resetCodeAnalyzer();
         Line tstoline = new Line(new TSTO(0)); // creation de la ligne
         compiler.add(tstoline);
         if (!compiler.getCompilerOptions().getNoCheck()) {
@@ -152,6 +154,8 @@ public class DeclMethod extends AbstractDeclMethod {
         }
         compiler.addLabel(endOfMethod);
         compiler.addInstruction(new RTS());
-        tstoline.setInstruction(new TSTO(42)); // on recupere de codeAnalyzer le vrai nombre et on le set
+
+
+        tstoline.setInstruction(new TSTO(compiler.getCodeAnalyzer().getNeededStackSize())); // on recupere de codeAnalyzer le vrai nombre et on le set
     }
 }
