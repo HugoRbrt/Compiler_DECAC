@@ -1,0 +1,369 @@
+/*start main program*/
+.text
+.global _start
+/*ARM program*/
+/*Beginning of main ARM instructions:*/
+_start: 
+	mov r0, #(-100)
+	//bl printnumber
+	mov r1, #10
+	mov r3, pc
+	add r3, r3, #8
+	push {r3}
+	bl bouclefor
+	// mov r0, #65536
+	// add r0, r0, #1
+	bl printrelatif
+	//bl divide
+	//bl printint	
+	//mov r0, r2
+	//bl printint	
+	b end
+	
+bouclefor:
+	mov r5, #100
+	cmp r0, r5
+	popgt {r3}
+	movgt pc, r3
+	bl printrelatif
+	bl printnewline
+	add r0, r0, #1
+	b bouclefor
+	
+printrelatif:
+	push {r0, r1, lr}
+	cmp r0, #0
+	movmi r1, #0
+	submi r0, r1, r0
+	blmi printminus
+	cmp r0, #0
+	blmi printnumber
+	blpl printnumber
+	pop {r0, r1, lr}
+	mov pc, lr
+	
+	
+divide:
+	Z = 0
+	EQ = 0
+	cmp r0, r1
+	poplo {r3}
+	movlo pc, r3
+	
+	sub r0, r0, r1
+	add r2, r2, #1
+	b divide
+
+printnumber:
+	push {r0, r1, r2, lr}
+	
+	Z = 0
+	EQ = 0
+	mov r4, r0
+	cmp r0, #10
+	
+	/* Si on est plus petit que 10 on passe direct Ã  l'affichage */
+	bllo printint
+	poplo {r0, r1, r2, lr}
+	movlo pc, lr
+	
+	/* Sinon on fait la division */
+	movgt r1, #10
+	moveq r1, #10
+	movgt r2, #0
+	moveq r2, #0
+	movgt r3, pc
+	moveq r3, pc
+	addgt r3, r3, #8
+	addeq r3, r3, #8
+	pushgt {r3}
+	pusheq {r3}
+	blgt divide	
+	bleq divide
+	//bl printError
+	cmp r4, #10
+	movgt r1, r0
+	moveq r1, r0
+	movgt r0, r2
+	moveq r0, r2
+	blgt printnumber
+	cmp r4, #10
+	bleq printnumber
+	
+	
+	
+	//bllo printError
+	movlo r0, r1 
+	bllo printint
+	
+
+	
+	pop {r0, r1, r2, lr}
+	mov pc, lr
+
+printint:
+	push {r0, lr}
+	
+	Z = 0
+	cmp r0, #0
+	bleq print0
+	
+	Z = 0
+	cmp r0, #1
+	bleq print1
+	
+	Z = 0
+	cmp r0, #2
+	bleq print2
+	
+	Z = 0
+	cmp r0, #3
+	bleq print3
+	
+	Z = 0
+	cmp r0, #4
+	bleq print4
+	
+	Z = 0
+	cmp r0, #5
+	bleq print5
+	
+	Z = 0
+	cmp r0, #6
+	bleq print6
+	
+	Z = 0
+	cmp r0, #7
+	bleq print7
+	
+	Z = 0
+	cmp r0, #8
+	bleq print8
+	
+	Z = 0
+	cmp r0, #9
+	bleq print9
+	
+	pop {r0, lr}
+	mov pc, lr
+	
+	
+
+printError:
+	push {r0, r1, r2}
+	mov r0, #1
+	ldr r1, =nonprintable
+	ldr r2, =lennonprintable
+	mov r7, #4
+	svc #0
+	pop {r0, r1, r2} 
+	mov pc, lr
+	
+.data
+nonprintable:
+.ascii "Non printable number (to high)"
+lennonprintable = . - nonprintable
+
+/* ///////////// new line ///////////// */
+.text
+printnewline:
+	push {r0, r1, r2}
+	mov r0, #1
+	ldr r1, =newline
+	ldr r2, =lennewline
+	mov r7, #4
+	svc #0
+	pop {r0, r1, r2} 
+	mov pc, lr
+	
+.data
+newline:
+.ascii "\n"
+lennewline = . - newline
+
+/* ///////////// minus ///////////// */
+.text
+printminus:
+	push {r0, r1, r2}
+	mov r0, #1
+	ldr r1, =minus
+	ldr r2, =lenminus
+	mov r7, #4
+	svc #0
+	pop {r0, r1, r2} 
+	mov pc, lr
+	
+.data
+minus:
+.ascii "-"
+lenminus = . - minus
+
+/* ///////////// Affichage de 0 ///////////// */
+.text
+print0:	
+	push {r0, r1, r2}
+	mov r0, #1
+	ldr r1, =int0
+	ldr r2, =lenint0
+	mov r7, #4
+	svc #0
+	pop {r0, r1, r2}
+	mov pc, lr
+	
+.data
+int0:
+.ascii "0"
+lenint0 = . - int0
+
+/* ///////////// Affichage de 1 ///////////// */
+.text
+print1:	
+	push {r0, r1, r2}
+	mov r0, #1
+	ldr r1, =int1
+	ldr r2, =lenint1
+	mov r7, #4
+	svc #0
+	pop {r0, r1, r2}
+	mov pc, lr
+.data
+int1:
+.ascii "1"
+lenint1 = . - int1
+
+/* ///////////// Affichage de 2 ///////////// */
+.text
+print2:	
+	push {r0, r1, r2}
+	mov r0, #1
+	ldr r1, =int2
+	ldr r2, =lenint2
+	mov r7, #4
+	svc #0
+	pop {r0, r1, r2}
+	mov pc, lr
+.data
+int2:
+.ascii "2"
+lenint2 = . - int2
+
+/* ///////////// Affichage de 3 ///////////// */
+.text
+print3:	
+	push {r0, r1, r2}
+	mov r0, #1
+	ldr r1, =int3
+	ldr r2, =lenint3
+	mov r7, #4
+	svc #0
+	pop {r0, r1, r2}
+	mov pc, lr
+.data
+int3:
+.ascii "3"
+lenint3 = . - int3
+
+/* ///////////// Affichage de 4 ///////////// */
+.text
+print4:	
+	push {r0, r1, r2}
+	mov r0, #1
+	ldr r1, =int4
+	ldr r2, =lenint4
+	mov r7, #4
+	svc #0
+	pop {r0, r1, r2}
+	mov pc, lr
+.data
+int4:
+.ascii "4"
+lenint4 = . - int4
+
+/* ///////////// Affichage de 5 ///////////// */
+.text
+print5:	
+	push {r0, r1, r2}
+	mov r0, #1
+	ldr r1, =int5
+	ldr r2, =lenint5
+	mov r7, #4
+	svc #0
+	pop {r0, r1, r2}
+	mov pc, lr
+.data
+int5:
+.ascii "5"
+lenint5 = . - int5
+
+/* ///////////// Affichage de 6 ///////////// */
+.text
+print6:	
+	push {r0, r1, r2}
+	mov r0, #1
+	ldr r1, =int6
+	ldr r2, =lenint6
+	mov r7, #4
+	svc #0
+	pop {r0, r1, r2}
+	mov pc, lr
+.data
+int6:
+.ascii "6"
+lenint6 = . - int6
+
+/* ///////////// Affichage de 7 ///////////// */
+.text
+print7:	
+	push {r0, r1, r2}
+	mov r0, #1
+	ldr r1, =int7
+	ldr r2, =lenint7
+	mov r7, #4
+	svc #0
+	pop {r0, r1, r2}
+	mov pc, lr
+.data
+int7:
+.ascii "7"
+lenint7 = . - int7
+
+/* ///////////// Affichage de 8 ///////////// */
+.text
+print8:	
+	push {r0, r1, r2}
+	mov r0, #1
+	ldr r1, =int8
+	ldr r2, =lenint8
+	mov r7, #4
+	svc #0
+	pop {r0, r1, r2}
+	mov pc, lr
+.data
+int8:
+.ascii "8"
+lenint8 = . - int8
+
+/* ///////////// Affichage de 9 ///////////// */
+.text
+print9:	
+	push {r0, r1, r2}
+	mov r0, #1
+	ldr r1, =int9
+	ldr r2, =lenint9
+	mov r7, #4
+	svc #0
+	pop {r0, r1, r2}
+	mov pc, lr
+.data
+int9:
+.ascii "9"
+lenint9 = . - int9
+
+.text
+/*end program*/	
+end:	
+	mov r0, #0
+	mov r7, #1
+	svc #0
+/*end main program*/
+

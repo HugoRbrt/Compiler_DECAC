@@ -107,7 +107,6 @@ public class Register extends DVal {
         
         // we try to find an available register
         GPRegister targetRegister;
-        boolean needStackUse = false;
         
         for (int k = 2; k < maxIndex; k++) {
             if (R[k].available()) {
@@ -128,9 +127,9 @@ public class Register extends DVal {
         targetRegister = R[2];
         
         for (int j = 2; j < maxIndex; j++) {
-            int nbPushOnRegister = R[j].getNbPushOnRegister();
-            if (nbPushOnRegister < minimumPush) {
-                minimumPush = nbPushOnRegister;
+            int nbPush = R[j].getNbPushOnRegister();
+            if (nbPush < minimumPush) {
+                minimumPush = nbPush;
                 targetRegister = R[j];
             }
         }

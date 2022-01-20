@@ -53,6 +53,7 @@ public class GPRegister extends Register {
     GPRegister(String name, int number) {
         super(name);
         this.number = number;
+        this.availability = true;
     }
 
     /**
