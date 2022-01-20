@@ -14,6 +14,8 @@ import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
 
+import java.util.Objects;
+
 /**
  * Assignment, i.e. lvalue = expr.
  *
@@ -63,24 +65,42 @@ public class Assign extends AbstractBinaryExpr {
     }
 
     protected void codeGenInst(DecacCompiler compiler){
-        RegisterOffset offset;
-        GPRegister usedRegister = compiler.getListRegister().getRegister(compiler);
+        RegisterOffset targetField;
+        GPRegister targetObject = null;
+        GPRegister storePossibleObject = null;
         //on recupere a quelle adresse est stocké l'element de gauche :
         if(super.getLeftOperand() instanceof Selection){
-            RegisterOffset r = compiler.getstackTable().get(compiler.getSymbTable().get(((Identifier)((Selection) super.getLeftOperand()).getSelectingClass()).getName().getName()));
-            compiler.addInstruction(new LOAD(r, usedRegister));
-            offset = new RegisterOffset(((Selection) super.getLeftOperand()).getSelectedField().getFieldDefinition().getIndex(), usedRegister);
+            targetObject = compiler.getListRegister().getRegister(compiler);
+            AbstractExpr selectingClass = ((Selection) super.getLeftOperand()).getSelectingClass();
+            //il manque la cas This et Cast
+            if(selectingClass instanceof This || selectingClass instanceof Cast){
+                selectingClass.codeGenInst(compiler);
+                compiler.addInstruction(new LOAD(Register.R0, targetObject));
+            }else{
+                RegisterOffset r = compiler.getstackTable().get(compiler.getSymbTable().get(((Identifier)selectingClass).getName().getName()));
+                compiler.addInstruction(new LOAD(r, targetObject));
+            }
+            targetField = new RegisterOffset(((Selection) super.getLeftOperand()).getSelectedField().getFieldDefinition().getIndex(), targetObject);
         }
         else{
-            offset = compiler.getstackTable().get(
+            targetField = compiler.getstackTable().get(
                     ((Identifier) super.getLeftOperand()).getName());
+            if(Objects.isNull(targetField.getRegister())){
+                storePossibleObject = compiler.getListRegister().getRegister(compiler);
+                compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), storePossibleObject));
+                targetField = new RegisterOffset(targetField.getOffset(), storePossibleObject);
+            }
         }
-        //droite dans R0
+        //we store right operand in R0
         super.getRightOperand().codeGenInst(compiler);
-        //on stock droite dans gauche
-        compiler.addInstruction(new STORE(Register.R0, offset));
+        //on stock right result into the left operand
+        compiler.addInstruction(new STORE(Register.R0, targetField));
         if(super.getLeftOperand() instanceof Selection){
-            compiler.getListRegister().freeRegister(usedRegister, compiler);
+            assert targetObject != null;//defensive programming
+            compiler.getListRegister().freeRegister(targetObject, compiler);
+        }
+        if(storePossibleObject != null){
+            compiler.getListRegister().freeRegister(storePossibleObject, compiler);
         }
     }
 

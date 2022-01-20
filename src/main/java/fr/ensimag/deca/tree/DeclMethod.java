@@ -5,11 +5,7 @@ import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.ima.pseudocode.*;
-import fr.ensimag.ima.pseudocode.instructions.LOAD;
-import fr.ensimag.ima.pseudocode.instructions.RTS;
-import fr.ensimag.ima.pseudocode.instructions.STORE;
-import fr.ensimag.ima.pseudocode.instructions.TSTO;
-import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
+import fr.ensimag.ima.pseudocode.instructions.*;
 import org.apache.commons.lang.Validate;
 
 import java.io.PrintStream;
@@ -136,15 +132,31 @@ public class DeclMethod extends AbstractDeclMethod {
 
     protected void codeGen(DecacCompiler compiler, String className){
         compiler.addLabel(new Label("code."+className+"."+methodName.getName().getName()));
-        // Line tstoline = new Line(new TSTO(0)); // creation de la ligne
-        // compiler.add(tstoline);
-        // des BOV et tout ça peut être pareil
-        // codegen des instructions
-        // tstoline.setInstruction(new TSTO(42)); // on recupere de codeAnalyzer le vrai nombre et on le set
-
-
-        //il faudra ajouter dans la pile une case mémoire correspondant à la méthde ajouté
-        //TODO
+        Label endOfMethod = new Label("fin."+className+"."+methodName.getName().getName());
+        compiler.getstackTable().setEnfOfCurrentMethod(endOfMethod);
+        compiler.getListRegister().useAllRegisters();
+        compiler.resetCodeAnalyzer();
+        Line tstoline = new Line(new TSTO(0)); // creation de la ligne
+        compiler.add(tstoline);
+        if (!compiler.getCompilerOptions().getNoCheck()) {
+            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Stack overflow , a real one")));
+        }
+        int counter = -3;
+        for(AbstractDeclParam p : declParameters.getList()){
+            compiler.getstackTable().put(p.getName() , new RegisterOffset(counter, Register.LB));
+            counter--;
+        }
+        block.codeGenMethodBody(compiler);
+        if(!returnType.getType().isVoid()){
+            compiler.addInstruction(new WSTR(new ImmediateString("Error : end of the method " +className+"."+methodName.getName().getName() + " without return")));
+            compiler.addInstruction(new WNL());
+            compiler.addInstruction(new ERROR());
+        }
+        compiler.addLabel(endOfMethod);
         compiler.addInstruction(new RTS());
+        tstoline.setInstruction(new TSTO(compiler.getCodeAnalyzer().getNeededStackSize())); // on recupere de codeAnalyzer le vrai nombre et on le set
+        for(AbstractDeclParam p : declParameters.getList()){
+            compiler.getstackTable().remove(p.getName());
+        }
     }
 }

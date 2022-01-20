@@ -36,12 +36,9 @@ public class MethodBody extends AbstractMethodBody {
 
     @Override
     protected void codeGenMethodBody(DecacCompiler compiler) {
-        compiler.addComment(" --------------------------------------------------");
         compiler.addComment("             Method Body");
-        compiler.addComment(" --------------------------------------------------");
         declVariables.codeGenListDeclVar(compiler);
         insts.codeGenListInst(compiler);
-        compiler.addInstruction(new HALT());
     }
 
     @Override

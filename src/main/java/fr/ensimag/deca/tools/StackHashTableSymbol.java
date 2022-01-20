@@ -3,6 +3,7 @@ package fr.ensimag.deca.tools;
 import java.util.HashMap;
 import java.util.Map;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.Register;
 
@@ -21,7 +22,16 @@ import fr.ensimag.ima.pseudocode.Register;
  */
 public class StackHashTableSymbol {
     private Map<Symbol, RegisterOffset> map = new HashMap<Symbol, RegisterOffset>();
+    private Label enfOfCurrentMethod;
     private int size = 1;
+
+    public void setEnfOfCurrentMethod(Label enfOfCurrentMethod) {
+        this.enfOfCurrentMethod = enfOfCurrentMethod;
+    }
+
+    public Label getEnfOfCurrentMethod() {
+        return enfOfCurrentMethod;
+    }
 
     /**
      * Create or reuse a symbol.
@@ -31,7 +41,7 @@ public class StackHashTableSymbol {
      */
     public RegisterOffset get(Symbol name) {
         if (!map.containsKey(name)) {
-            throw new IllegalArgumentException("symbol not found in StackHashTableSymbol");
+            throw new IllegalArgumentException("symbol " + name.getName() + " not found in StackHashTableSymbol");
         }
         return map.get(name);
     }
@@ -41,6 +51,20 @@ public class StackHashTableSymbol {
         size++;
     }
 
+    public void put(Symbol name, RegisterOffset R){
+        map.put(name,R);
+    }
+
+    public void remove(Symbol name){
+        if (!map.containsKey(name)) {
+            throw new IllegalArgumentException("symbol " + name.getName() + " not found in StackHashTableSymbol");
+        }
+        map.remove(name);
+    }
+
+    public void clear(){
+        map.clear();
+    }
 
     @Override
     public String toString() {

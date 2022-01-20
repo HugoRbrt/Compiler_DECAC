@@ -84,6 +84,9 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
         compiler.addComment(" --------------------------------------------------");
 
         compiler.addComment(" ---------- equals Method");
+        compiler.addLabel(new Label("init.Object"));
+        compiler.addInstruction(new RTS());
+
         Symbol equalsObjectSymbol = compiler.getSymbTable().get("code.Object.equals");
         compiler.addLabel(new Label(equalsObjectSymbol.getName()));
         compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.R1), Register.R1));

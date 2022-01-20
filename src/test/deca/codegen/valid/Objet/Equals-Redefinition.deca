@@ -15,11 +15,10 @@ class A {
     }
 
     boolean equals(Object other) {
-	if (! (other instanceof A)) {
-            return false;
+        if (! (other instanceof A)) {
+                return false;
         }
-        other = (A) (other);
-        return (this.x == other.x)
+        return (this.x == ((A)(other)).x);
     }
 
 }
@@ -28,12 +27,12 @@ class A {
     A a = new A();
     A other = new A();
 
-    if ( a.equals( other) ) {
+    if ( a.equals((Object) (other)) ) {
         print("OK1 ");
     }
     
     other.setX(2);
-    if ( ! a.equals(other) ) {
+    if ( ! a.equals((Object) (other)) ) {
         print("OK2");
     }
 }

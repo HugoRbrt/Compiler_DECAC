@@ -24,13 +24,12 @@ class A {
         return (x == y);
     }
 
-    float signatureFloat(int y) {
+    float signatureFloat(float y) {
         return ( (float) (x+y) );
     }
 
     void signatureVoidWith() {
-	print(" OK2");
-	return;
+        print(" OK2");
     }
 
     void signatureVoidWithout() {
@@ -40,16 +39,16 @@ class A {
 
 {
     A instance = new A();
-    A instanceBis = A.signatureA();
-    if (instance.equals(instanceBis)) {
+    A instanceBis = instance.signatureA();
+    if (instance.equals((Object) (instanceBis))) {
         println("equal");
     } 
     println(instanceBis.signatureInt(1), " ", instance.signatureFloat(2.0));
-    if instance.signatureBoolean(0) {
+    if (instance.signatureBoolean(0)) {
         print("OK1");
     }
-    A.signatureVoidWith();
-    A.signatureVoidWithout();
+    instance.signatureVoidWith();
+    instanceBis.signatureVoidWithout();
 }
 
 

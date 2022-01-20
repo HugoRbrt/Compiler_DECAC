@@ -3,6 +3,10 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+
+import java.util.List;
 
 public class ListDeclMethod extends TreeList<AbstractDeclMethod> {
 
@@ -20,9 +24,14 @@ public class ListDeclMethod extends TreeList<AbstractDeclMethod> {
         }
     }
 
-    protected void codeGen(DecacCompiler compiler, String className) {
-        //il faut ajouter à la pile GB une case memoire pour chaque methode en plus de des méthodes de la superclasse
+    protected void codeGen(DecacCompiler compiler, String className, List<AbstractDeclField> fieldsList) {
         for (AbstractDeclMethod method: getList()) {
+            compiler.getstackTable().clear();
+            int counter = 1;
+            for (AbstractDeclField f : fieldsList){
+                compiler.getstackTable().put(((DeclField)f).getFieldName().getName(), new RegisterOffset(counter, null));
+                counter++;
+            }
             method.codeGen(compiler, className);
         }
     }

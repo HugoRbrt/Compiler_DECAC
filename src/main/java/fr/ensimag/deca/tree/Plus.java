@@ -16,7 +16,7 @@ public class Plus extends AbstractOpArith {
 
     public void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler){
         compiler.addInstruction(new ADD(Reg1, storedRegister));
-        if (getType().isFloat()) {
+        if (getType().isFloat() && !compiler.getCompilerOptions().getNoCheck()) {
             compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Float arithmetic overflow")));
         }
     }

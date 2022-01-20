@@ -1,0 +1,32 @@
+// Description:
+//    Twisted example for casts
+//
+// Results:
+//    2
+//
+// History:
+// Created on 20/1/2022
+
+
+class A {
+    int x;
+    int y;
+
+    int get() { return 1; }
+}
+
+
+class B extends A {
+    int z;
+
+    int get() { return 2; }
+    void newgget() {}
+}
+
+
+{
+    B b = new B();
+    A a = (A) (b);
+
+    println(a.get());
+}

@@ -28,6 +28,7 @@ import java.lang.Runnable;
 
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 
 /**
@@ -244,6 +245,7 @@ public class DecacCompiler implements Runnable {
             return true;
         } catch (IllegalArgumentException e) {
             LOG.debug("Error : Number exception caught");
+            LOG.debug(ExceptionUtils.getStackTrace(e));
             err.println("Float literal out of range:");
             err.println(e.getMessage());
             return true;
@@ -340,17 +342,6 @@ public class DecacCompiler implements Runnable {
         }
 
         prog.codeGenProgram(this);
-        
-        // after analysis of the program, we generate the TSTO instruction
-        int d1 = codeAnalyzer.getNeededStackSize();
-        int d2 = codeAnalyzer.getNbDeclaredVariables();
-        if(!this.compilerOptions.getArmBool()){
-            errorManager.setTstoArg(d1);
-            errorManager.setAddspArg(d2);
-        
-            errorManager.addTstoCheck(this);
-            errorManager.genCodeErrorManager(this);
-        }
         
         LOG.debug("Generated assembly code:" + nl + program.display());
         LOG.info("Output file assembly file is: " + destName);
