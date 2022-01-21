@@ -26,7 +26,6 @@ public class ListDeclMethod extends TreeList<AbstractDeclMethod> {
 
     protected void codeGen(DecacCompiler compiler, String className, List<AbstractDeclField> fieldsList) {
         for (AbstractDeclMethod method: getList()) {
-            compiler.getstackTable().clear();
             int counter = 1;
             for (AbstractDeclField f : fieldsList){
                 compiler.getstackTable().put(((DeclField)f).getFieldName().getName(), new RegisterOffset(counter, null));

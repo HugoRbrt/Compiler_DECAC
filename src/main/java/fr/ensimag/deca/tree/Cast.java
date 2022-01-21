@@ -61,7 +61,11 @@ public class Cast extends AbstractExpr {
                 compiler.addInstruction(new CMP(new ImmediateInteger(1), Register.R0));
                 compiler.addInstruction(new BNE(beginElse));
                 //then instructions§
-                compiler.addInstruction(new LOAD(compiler.getstackTable().get(((Identifier)expression).getName()), Register.R1));
+                if(expression instanceof Identifier){
+                    compiler.addInstruction(new LOAD(compiler.getstackTable().get(((Identifier)expression).getName()), Register.R1));
+                }else{//if expression is not an identifier, the result of expression is store in R0
+                    compiler.addInstruction(new LOAD(Register.R0, Register.R1));
+                }
                 compiler.addInstruction(new BRA(endElse));
                 compiler.addLabel(beginElse);
                 //else instructions

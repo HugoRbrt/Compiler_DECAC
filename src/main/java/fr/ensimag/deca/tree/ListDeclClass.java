@@ -95,6 +95,10 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
         compiler.addInstruction(new SEQ(Register.R0));
         compiler.addInstruction(new RTS());
 
+        for( Symbol s: compiler.getstackTable().getListDeclVar()){
+            compiler.getstackTable().remove(s);
+        }
+
         for (AbstractDeclClass decl: getList()) {
             decl.codeGen(compiler);
         }
