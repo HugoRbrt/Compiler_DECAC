@@ -127,7 +127,13 @@ public class MethodCall extends AbstractExpr {
         //we add the calling class in the stack
         GPRegister usedRegister = compiler.getListRegister().getRegister(compiler);
         compiler.addInstruction(new ADDSP(methodArgs.size()));
-        compiler.addInstruction(new LOAD(compiler.getstackTable().get(((Identifier)callingClass).getName()), usedRegister));
+        if(callingClass instanceof Identifier){
+            compiler.addInstruction(new LOAD(compiler.getstackTable().get(((Identifier)callingClass).getName()), usedRegister));
+        }
+        else{
+            callingClass.codeGenInst(compiler);
+            compiler.addInstruction(new LOAD(Register.R0, usedRegister));
+        }
         compiler.addInstruction(new STORE(usedRegister, new RegisterOffset(0, Register.SP)));
         //we add arguments one by one
         int counter = 1;

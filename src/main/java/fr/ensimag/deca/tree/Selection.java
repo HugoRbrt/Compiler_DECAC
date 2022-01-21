@@ -131,8 +131,13 @@ public class Selection extends AbstractLValue {
             selectingClass.codeGenInst(compiler);
             offset = new RegisterOffset(selectedField.getFieldDefinition().getIndex(), Register.R0);
         }else{
-            r = compiler.getstackTable().get(compiler.getSymbTable().get(((Identifier)selectingClass).getName().getName()));
-            compiler.addInstruction(new LOAD(r, Register.R1));
+            if(selectingClass instanceof Identifier){
+                r = compiler.getstackTable().get(compiler.getSymbTable().get(((Identifier)selectingClass).getName().getName()));
+                compiler.addInstruction(new LOAD(r, Register.R1));
+            }else{
+                selectingClass.codeGenInst(compiler);
+                compiler.addInstruction(new LOAD(Register.R0, Register.R1));
+            }
             offset = new RegisterOffset(selectedField.getFieldDefinition().getIndex(), Register.R1);
         }
         compiler.addInstruction(new LOAD(offset, Register.R0));
