@@ -11,7 +11,9 @@ import fr.ensimag.ima.pseudocode.ARMLine;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
 import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
+import fr.ensimag.ima.pseudocode.instructionsARM.*;
 import fr.ensimag.ima.pseudocode.ImmediateFloat;
+import fr.ensimag.ima.pseudocode.LabelARM;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
@@ -58,7 +60,17 @@ public class FloatLiteral extends AbstractExpr {
 
     @Override
     protected void codeGenPrintARM(DecacCompiler compiler, boolean printHex) {
-        compiler.add(new ARMLine(".ascii " +"\"" + value + "\""));
+        LabelARM tmplabel = new LabelARM();
+        compiler.addARMBlock(".data");
+        compiler.addARMBlock(tmplabel + ": " + ".float " + value);  //label with name of variable 
+        compiler.addARMBlock(".text");
+        compiler.addInstruction(new ldr(ARMRegister.r0, "=" + tmplabel));
+        compiler.addInstruction(new vldr(ARMRegister.s0, "[r0]"));
+        //compiler.addInstruction(new vcvt(ARMRegister.d0, ARMRegister.s0));
+        compiler.addARMBlock("        vcvt.f64.f32 d0, s0");
+        compiler.addInstruction(new vmov(ARMRegister.r2, ARMRegister.r3, ARMRegister.d0));
+        compiler.addInstruction(new ldr(ARMRegister.r0, "=flottant"));        
+        compiler.addInstruction(new bl("printf"));
     }
 
     @Override
@@ -84,5 +96,16 @@ public class FloatLiteral extends AbstractExpr {
     public void codeGenInst(DecacCompiler compiler){
         compiler.addInstruction(new LOAD(new ImmediateFloat(value), compiler.getListRegister().R0));
     }
+
+    public void codeGenInstARM(DecacCompiler compiler){
+        LabelARM tmplabel = new LabelARM();
+        compiler.addARMBlock(".data");
+        compiler.addARMBlock(tmplabel + ": " + ".float " + value);  //label with name of variable 
+        compiler.addARMBlock(".text");
+        compiler.addInstruction(new ldr(ARMRegister.r0, "=" + tmplabel));
+        compiler.addInstruction(new vldr(ARMRegister.s0, "[r0]"));
+        compiler.addInstruction(new vmov(ARMRegister.r0, ARMRegister.s0));
+    }
+      
 
 }

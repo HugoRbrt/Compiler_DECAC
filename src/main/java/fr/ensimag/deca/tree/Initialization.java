@@ -51,8 +51,6 @@ public class Initialization extends AbstractInitialization {
 
     @Override
     protected void codeGenDeclVar(DecacCompiler compiler, AbstractIdentifier varName){
-    //pas encore fonctionnel, codegen de abstractexpr doit etre entierement realisé avant
-    //RegistreRetourExpr correspond au registre contenant la valeur calculé de expr
         expression.codeGenInst(compiler);
         RegisterOffset r = compiler.getstackTable().get(varName.getName());
         compiler.addInstruction(new STORE(compiler.getListRegister().R0, r));
@@ -61,8 +59,6 @@ public class Initialization extends AbstractInitialization {
 
     @Override
     protected void codeGenDeclVarARM(DecacCompiler compiler, AbstractIdentifier varName){
-        // ARM Code for declaration
-        // peut être faudra-t-il initialiser r0 ici
         expression.codeGenInstARM(compiler); // we admit that the result will be in register r0.  
         compiler.addInstruction(new ldr(ARMRegister.getR(1), "=" + varName.getName().getName()));
         compiler.addInstruction(new str(ARMRegister.getR(0), "[r1]"));

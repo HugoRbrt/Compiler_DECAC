@@ -82,7 +82,6 @@ public class DeclVar extends AbstractDeclVar {
             }
             compiler.getIdentMap().setIdentString(((AbstractIdentifier)varName).getName(),value);
         }else{
-            //compiler.getSymbTable().create(varName.getName().getName());
             initialization.codeGenDeclVarARM(compiler, varName);
         }
     }
@@ -92,7 +91,15 @@ public class DeclVar extends AbstractDeclVar {
      */
     protected void codeGenDeclVarAllocARM(DecacCompiler compiler){
         if(!varName.getDefinition().getType().isString()){//si on veut declarer un string, il faut juste creer le symbol en java
-            compiler.addARMBlock(varName.getName().getName() + ": " + ".word 0");  //label with name of variable   
+            if (varName.getDefinition().getType().isBoolean()) {
+                compiler.addARMBlock(varName.getName().getName() + ": " + ".int 0");  //label with name of variable   
+            }
+            if (varName.getDefinition().getType().isInt()) {
+                compiler.addARMBlock(varName.getName().getName() + ": " + ".int 0");  //label with name of variable   
+            }
+            if (varName.getDefinition().getType().isFloat()) {
+                compiler.addARMBlock(varName.getName().getName() + ": " + ".float 0");  //label with name of variable   
+            }
         }    
     }
 

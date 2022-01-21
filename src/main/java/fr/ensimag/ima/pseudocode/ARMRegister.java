@@ -1,8 +1,7 @@
 package fr.ensimag.ima.pseudocode;
 
 import fr.ensimag.deca.DecacCompiler;
-//import fr.ensimag.ima.pseudocode.instructionsARM.pop;
-//import fr.ensimag.ima.pseudocode.instructionsARM.push;
+
 
 
 /**
@@ -92,11 +91,38 @@ public class ARMRegister extends DVal {
      * made immutable, use getR(i) to access it.
      */
     protected static final ARMGPRegister[] r = initRegisters();
+    
+    /**
+     * General Purpose s Registers. Array is private because Java arrays cannot be
+     * made immutable, use getS(i) to access it.
+     */
+    protected static final ARMGPRegister[] s = initRegisters("s");
+
+    /**
+     * General Purpose d Registers. Array is private because Java arrays cannot be
+     * made immutable, use getD(i) to access it.
+     */
+    protected static final ARMGPRegister[] d = initRegisters("d");
+    
     /**
      * General Purpose Registers
      */
     public static ARMGPRegister getR(int i) {
         return r[i];
+    }
+
+    /**
+     * General Purpose s Registers
+     */
+    public static ARMGPRegister getS(int i) {
+        return s[i];
+    }
+
+    /**
+     * General Purpose d Registers
+     */
+    public static ARMGPRegister getD(int i) {
+        return d[i];
     }
 
     /**
@@ -119,6 +145,26 @@ public class ARMRegister extends DVal {
      */
     public static final ARMGPRegister r3 = r[3];
 
+    /**
+     * Convenience shortcut for s[0]
+     */
+    public static final ARMGPRegister s0 = s[0];
+
+    /**
+     * Convenience shortcut for s[1]
+     */
+    public static final ARMGPRegister s1 = s[1];
+
+    /**
+     * Convenience shortcut for d[0]
+     */
+    public static final ARMGPRegister d0 = d[0];
+
+    /**
+     * Convenience shortcut for d[1]
+     */
+    public static final ARMGPRegister d1 = d[1];
+
 
     /**
      * Convenience shortcut for r[7]
@@ -134,6 +180,13 @@ public class ARMRegister extends DVal {
         return res;
     }
 
+    static private ARMGPRegister[] initRegisters(String letter) {
+        ARMGPRegister [] res = new ARMGPRegister[maxIndex];
+        for (int i = 0; i < maxIndex; i++) {
+            res[i] = new ARMGPRegister(letter + i, i);
+        }
+        return res;
+    }
     
     /**
      * @return a register. This register is taken as the first available
