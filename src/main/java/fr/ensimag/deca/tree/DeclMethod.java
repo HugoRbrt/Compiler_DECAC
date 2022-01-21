@@ -146,8 +146,10 @@ public class DeclMethod extends AbstractDeclMethod {
         Label endOfMethod = new Label("fin."+className+"."+methodName.getName().getName());
         compiler.getstackTable().setEnfOfCurrentMethod(endOfMethod);
         compiler.getListRegister().useAllRegisters();
+        Line tstoline;
         compiler.resetCodeAnalyzer();
-        Line tstoline = new Line(new TSTO(0)); // creation de la ligne
+        tstoline = new Line(new TSTO(0)); // creation de la ligne
+
         compiler.add(tstoline);
         if (!compiler.getCompilerOptions().getNoCheck()) {
             compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Stack overflow , a real one")));

@@ -96,8 +96,8 @@ public class ErrorManager {
      */
     public void addTstoCheck(DecacCompiler compiler) {
         // Start point for the program
+        compiler.addFirstInstruction(new ADDSP(addspArg));
         if (!compiler.getCompilerOptions().getNoCheck()) {
-            compiler.addFirstInstruction(new ADDSP(addspArg));
             compiler.addFirstInstruction(new BOV(errorMap.get("Stack overflow , a real one")));
             compiler.addFirstInstruction(new TSTO(tstoArg));
         }

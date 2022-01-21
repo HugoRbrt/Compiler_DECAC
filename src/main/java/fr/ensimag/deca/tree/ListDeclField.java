@@ -33,7 +33,9 @@ public class ListDeclField extends TreeList<AbstractDeclField> {
     protected void codeGen(DecacCompiler compiler, AbstractIdentifier className,AbstractIdentifier superClass) {
         compiler.addLabel(new Label("init."+className.getName().getName()));
         compiler.addInstruction(new TSTO(className.getClassDefinition().getNumberOfFields()));
-        compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Stack overflow , a real one")));
+        if (!compiler.getCompilerOptions().getNoCheck()) {
+            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Stack overflow , a real one")));
+        }
         //on initialise tout a 0
         for (AbstractDeclField field: getList()) {
             field.codeGen(compiler, ((DeclField)field).getFieldName().getFieldDefinition().getIndex());
