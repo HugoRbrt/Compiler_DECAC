@@ -170,6 +170,22 @@ public class Identifier extends AbstractIdentifier {
         this.name = name;
     }
 
+    /**
+     * Context check first, second and third pass. Checks whether the identifier
+     * exists in the current environment (i.e. has been declared).
+     *
+     * @param compiler  (contains the "env_types" attribute)
+     * @param localEnv
+     *            Environment in which the expression should be checked
+     *            (corresponds to the "env_exp" attribute)
+     * @param currentClass
+     *            Definition of the class containing the expression
+     *            (corresponds to the "class" attribute)
+     *             is null in the main bloc.
+     * @return
+     * @throws ContextualError
+     *            Thrown if the identifier has not been declared.
+     */
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {

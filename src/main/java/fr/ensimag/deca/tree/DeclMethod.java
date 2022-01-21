@@ -28,7 +28,7 @@ public class DeclMethod extends AbstractDeclMethod {
     }
 
     /**
-     * Context check second pass. Checks return type, then checks if the method
+     * Context check second pass. Checks return type, then checks whether the method
      * name is already in use in the current environment (illegal). If not, checks
      * whether the name is used in superclass environments. If that is the case,
      * checks whether the name is used as a field name in any environment (illegal).
@@ -91,6 +91,17 @@ public class DeclMethod extends AbstractDeclMethod {
         methodName.setType(currentType);
     }
 
+    /**
+     * Context check third pass. Creates the method body's environment by
+     * combining the classEnv environment with the environment created during
+     * the argument list check, and then passes the new environment to the
+     * method body check.
+     *
+     * @param compiler
+     * @param classEnv
+     * @param currentClass
+     * @throws ContextualError
+     */
     @Override
     protected void verifyMethodBody(DecacCompiler compiler, EnvironmentExp classEnv, ClassDefinition currentClass)
             throws ContextualError {

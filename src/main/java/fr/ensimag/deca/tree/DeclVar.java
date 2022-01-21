@@ -33,6 +33,22 @@ public class DeclVar extends AbstractDeclVar {
 
     public AbstractInitialization getInit() { return initialization; }
 
+    /**
+     * Context check third pass: checking variable declarations in method
+     * bodies and the main program. Checks the type of the declaration,
+     * whether the initialization is compatible with the variable being
+     * declared, and whether the variable has already been declared.
+     *
+     * @param compiler contains "env_types" attribute
+     * @param localEnv
+     *   its "parentEnvironment" corresponds to the "env_exp_sup" attribute
+     *   in precondition, its "current" dictionary corresponds to
+     *      the "env_exp" attribute
+     *   in postcondition, its "current" dictionary corresponds to
+     *      the synthetized attribute
+     * @param currentClass
+     * @throws ContextualError
+     */
     @Override
     protected void verifyDeclVar(DecacCompiler compiler,
             EnvironmentExp localEnv, ClassDefinition currentClass)

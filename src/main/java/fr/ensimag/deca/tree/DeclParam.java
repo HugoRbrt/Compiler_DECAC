@@ -23,6 +23,13 @@ public class DeclParam extends AbstractDeclParam {
         return paramName.getName();
     }
 
+    /**
+     * Context check second pass. Checks whether a method parameter's type
+     * exists and is not void.
+     *
+     * @return
+     * @throws ContextualError
+     */
     @Override
     public Type verifySignature(DecacCompiler compiler) throws ContextualError {
         Type currentType = type.verifyType(compiler);
@@ -36,6 +43,16 @@ public class DeclParam extends AbstractDeclParam {
         return currentType;
     }
 
+    /**
+     * Context check third pass. The parameter is known to be correct (that
+     * check was done on the second pass), but the compiler must also check
+     * whether the parameter has already been declared within the argument
+     * list.
+     *
+     * @param compiler
+     * @param localEnv
+     * @throws ContextualError
+     */
     @Override
     protected void verifyDeclParam(DecacCompiler compiler, EnvironmentExp localEnv)
             throws ContextualError {
