@@ -2,8 +2,8 @@
 //      Valid program assigning a subclass to an instance of the mother class
 //
 // Result:
-//      A: 01
-//      A': 012
+//      A: 0
+//      A': 0
 //
 // History:
 //      created on 17/1/2022
