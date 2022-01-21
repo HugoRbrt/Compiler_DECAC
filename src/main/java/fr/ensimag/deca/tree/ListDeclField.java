@@ -3,8 +3,8 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.Label;
-import fr.ensimag.ima.pseudocode.instructions.BRA;
-import fr.ensimag.ima.pseudocode.instructions.RTS;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.*;
 import org.apache.log4j.Logger;
 
 import java.io.PrintStream;
@@ -31,11 +31,26 @@ public class ListDeclField extends TreeList<AbstractDeclField> {
 
     protected void codeGen(DecacCompiler compiler, AbstractIdentifier className,AbstractIdentifier superClass) {
         compiler.addLabel(new Label("init."+className.getName().getName()));
+        compiler.addInstruction(new TSTO(className.getClassDefinition().getNumberOfFields()));
+        compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Stack overflow , a real one")));
+        //on initialise tout a 0
         int fieldCounter = className.getClassDefinition().getNumberOfFields() - getList().size();
         for (AbstractDeclField field: getList()) {
-            field.codeGen(compiler, fieldCounter);
+            field.codeGen(compiler, ((DeclField)field).getFieldName().getFieldDefinition().getIndex());
             fieldCounter++;
         }
-        compiler.addInstruction(new BRA(new Label("init."+superClass)));
+        // on appel la methode init de la superclasse
+        compiler.addInstruction(new PUSH(Register.R1));
+        compiler.addInstruction(new BSR(new Label("init."+superClass)));
+        compiler.addInstruction(new SUBSP(1));
+        //on reinitialize uniquement les champ qui ont une initialization
+        fieldCounter = className.getClassDefinition().getNumberOfFields() - getList().size();
+        for (AbstractDeclField field: getList()) {
+            if(field.getInit() instanceof Initialization){
+                field.codeGen(compiler, fieldCounter);
+            }
+            fieldCounter++;
+        }
+        compiler.addInstruction(new RTS());
     }
 }
