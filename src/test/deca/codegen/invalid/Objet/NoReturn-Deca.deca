@@ -20,4 +20,5 @@ class A {
 
 {
     A a = new A();
+    a.function(1);
 }
