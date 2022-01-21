@@ -73,15 +73,11 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
     }
 
     protected void codeGenInstARM(DecacCompiler compiler){
-        if(rightOperand instanceof StringLiteral){
-            compiler.getIdentMap().setIdentString(((AbstractIdentifier)leftOperand).getName(), ((StringLiteral)rightOperand).getValue());
-        }else{
-            leftOperand.codeGenInstARM(compiler);
-            ARMGPRegister usedRegister = ARMRegister.getR(1);
-            compiler.addInstruction(new mov(usedRegister, ARMRegister.getR(0)));
-            rightOperand.codeGenInstARM(compiler);
-            this.codeGenOperationsARM(usedRegister, ARMRegister.getR(0), compiler);
-        }
+        leftOperand.codeGenInstARM(compiler);
+        ARMGPRegister usedRegister = ARMRegister.getR(1);
+        compiler.addInstruction(new mov(usedRegister, ARMRegister.getR(0)));
+        rightOperand.codeGenInstARM(compiler);
+        this.codeGenOperationsARM(usedRegister, ARMRegister.getR(0), compiler);
     }
 
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex){
