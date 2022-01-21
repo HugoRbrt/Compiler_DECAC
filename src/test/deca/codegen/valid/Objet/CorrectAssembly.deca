@@ -4,7 +4,7 @@
 //      the other is a void function that displays a string
 //
 // Result:
-//      22 vla les flics
+//      22 vla les flics!!
 //
 // History:
 //      created on 17/1/2022
@@ -14,12 +14,13 @@ class A {
     int x;
 
     int beginning(int a)
-    asm ( "LOAD R2, R1
-           WINT
-           RTS" );
+    asm (
+"LOAD #22, R0
+RTS
+" );
 
-    void end()
-    asm ( "WSTR \" vla les flics\"" );
+    void end() asm ( "WSTR \" vla les flics\"
+                     " );
 }
 
 
@@ -27,4 +28,5 @@ class A {
     A a = new A();
     print(a.beginning(22));
     a.end();
+    println("!!");
 }

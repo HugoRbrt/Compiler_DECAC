@@ -13,7 +13,7 @@ class A {
 
     void function()
     asm ( "svc #0
-           RTS" );
+RTS" );
 
     int y;
 }
