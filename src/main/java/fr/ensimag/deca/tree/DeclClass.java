@@ -45,6 +45,10 @@ public class DeclClass extends AbstractDeclClass {
         return superClass;
     }
 
+    public SymbolTable.Symbol getClassName() {
+        return className.getName();
+    }
+
     /**
      * Contextual class declaration check. First checks whether the superclass exists, then checks
      * whether the class hasn't already been declared.
