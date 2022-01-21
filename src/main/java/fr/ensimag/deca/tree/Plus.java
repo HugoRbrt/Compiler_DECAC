@@ -24,12 +24,12 @@ public class Plus extends AbstractOpArith {
     }
 
     public void codeGenOperationsARM(ARMRegister Reg1, ARMRegister storedRegister, DecacCompiler compiler) {
-        if(getLeftOperand().getType().isInt() || getRightOperand().getType().isInt()) {
+        if(getType().isInt()) {
             compiler.addInstruction(new add(storedRegister, Reg1, storedRegister));
         } else {
             compiler.addInstruction(new vmov(ARMRegister.s0, Reg1));
             compiler.addInstruction(new vmov(ARMRegister.s1, storedRegister));
-            compiler.addInstruction(new vadd(ARMRegister.s0, ARMRegister.s0, ARMRegister.s1));
+            compiler.addARMBlock("        vadd.f32 s0, s0, s1");
             compiler.addInstruction(new vmov(storedRegister, ARMRegister.s0));
         }
     }
