@@ -4,8 +4,6 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.tools.SymbolTable;
 
-import java.util.List;
-
 /**
  * Class declaration.
  *
@@ -47,13 +45,13 @@ public abstract class AbstractDeclClass extends Tree {
      *
      * @param compiler
      */
-    protected abstract void codeGen(DecacCompiler compiler, List<AbstractDeclClass> list);
+    protected abstract void codeGen(DecacCompiler compiler);
 
     /**
      *
-     * Pass 2 of [CodeGen] return classname
+     * Pass 2 of [CodeGen] return the symbol associated to the className
      *
      * @return
      */
-    abstract public AbstractIdentifier getClassName();
+    abstract public SymbolTable.Symbol getClassName();
 }

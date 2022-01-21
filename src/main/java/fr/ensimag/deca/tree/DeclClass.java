@@ -15,7 +15,6 @@ import net.bytebuddy.implementation.bind.annotation.SuperCall;
 import org.apache.commons.lang.Validate;
 
 import java.io.PrintStream;
-import java.util.List;
 
 /**
  * Declaration of a class (<code>class name extends superClass {members}<code>).
@@ -46,12 +45,8 @@ public class DeclClass extends AbstractDeclClass {
         return superClass;
     }
 
-    public AbstractIdentifier getClassName() {
-        return className;
-    }
-
-    public ListDeclMethod getMethods() {
-        return methods;
+    public SymbolTable.Symbol getClassName() {
+        return className.getName();
     }
 
     /**
@@ -158,13 +153,13 @@ public class DeclClass extends AbstractDeclClass {
         }
     }
 
-    protected void codeGen(DecacCompiler compiler, List<AbstractDeclClass> list){
+    protected void codeGen(DecacCompiler compiler){
         String stringClassName = className.getName().getName();
         compiler.addComment(" --------------------------------------------------");
         compiler.addComment("             Class "+ stringClassName);
         compiler.addComment(" --------------------------------------------------");
         compiler.getstackTable().put(className.getName(), Register.GB);
         fields.codeGen(compiler, className, superClass);
-        methods.codeGen(compiler, stringClassName, fields.getList(), list );
+        methods.codeGen(compiler, stringClassName, fields.getList() );
     }
 }

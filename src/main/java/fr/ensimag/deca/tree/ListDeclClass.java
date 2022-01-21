@@ -97,23 +97,11 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
 
         compiler.getstackTable().clear();
         for (AbstractDeclClass decl: getList()) {
-            //we add every class symbol
-            compiler.getstackTable().put(decl.getClassName().getName(), Register.GB);
-            //we add every method symbol of every class
-            for(AbstractDeclMethod method : ((DeclClass)decl).getMethods().getList()){
-
-                SymbolTable.Symbol[] symbolList = new SymbolTable.Symbol[decl.getClassName().getClassDefinition().getNumberOfMethods()];
-                decl.getClassName().getClassDefinition().getMembers().getSymbolMethod(new SymbolTable(), symbolList, decl.getClassName().getClassDefinition());
-
-                for(SymbolTable.Symbol symbol : symbolList){
-                    symbol.setName(symbol.getName());
-                    compiler.getstackTable().put(symbol, Register.GB);
-                }
-            }
+            compiler.getstackTable().put(decl.getClassName(), Register.GB);
         }
 
         for (AbstractDeclClass decl: getList()) {
-            decl.codeGen(compiler, getList());
+            decl.codeGen(compiler);
         }
     }
 

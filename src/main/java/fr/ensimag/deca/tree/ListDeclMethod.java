@@ -24,27 +24,7 @@ public class ListDeclMethod extends TreeList<AbstractDeclMethod> {
         }
     }
 
-    protected void codeGen(DecacCompiler compiler, String className, List<AbstractDeclField> fieldsList,  List<AbstractDeclClass> list) {
-        compiler.getstackTable().clear();
-        //il faut aussi ajouter toutes les methodes et toutes les classes :
-
-        for (AbstractDeclClass decl: list) {
-            //we add every class symbol
-            compiler.getstackTable().put(decl.getClassName().getName(), Register.GB);
-            //we add every method symbol of every class
-            for(AbstractDeclMethod method : ((DeclClass)decl).getMethods().getList()){
-
-                SymbolTable.Symbol[] symbolList = new SymbolTable.Symbol[decl.getClassName().getClassDefinition().getNumberOfMethods()];
-                decl.getClassName().getClassDefinition().getMembers().getSymbolMethod(new SymbolTable(), symbolList, decl.getClassName().getClassDefinition());
-
-                for(SymbolTable.Symbol symbol : symbolList){
-                    symbol.setName(symbol.getName());
-                    compiler.getstackTable().put(symbol, Register.GB);
-                }
-            }
-        }
-
-
+    protected void codeGen(DecacCompiler compiler, String className, List<AbstractDeclField> fieldsList) {
         for (AbstractDeclMethod method: getList()) {
             int counter = 1;
             for (AbstractDeclField f : fieldsList){
@@ -52,6 +32,11 @@ public class ListDeclMethod extends TreeList<AbstractDeclMethod> {
                 counter++;
             }
             method.codeGen(compiler, className);
+        }
+        int counter = 1;
+        for (AbstractDeclField f : fieldsList){
+            compiler.getstackTable().remove(((DeclField)f).getFieldName().getName());
+            counter++;
         }
     }
 }
