@@ -14,25 +14,22 @@ public class TestContextTools {
 
     @Test
     public void testAssignCompatibleTrue() {
-        EnvironmentType envType = EnvironmentType.getEnvTypes();
         when(t1.isFloat()).thenReturn(true);
         when(t2.isInt()).thenReturn(true);
-        assertTrue(ContextTools.assignCompatible(envType, t1, t2));
+        assertTrue(ContextTools.assignCompatible(t1, t2));
     }
 
     @Test
     public void testAssignCompatibleSubtype() {
-        EnvironmentType envType = EnvironmentType.getEnvTypes();
         when(t2.isInt()).thenReturn(true);
         when(t1.sameType(t2)).thenReturn(true);
-        assertTrue(ContextTools.assignCompatible(envType, t1, t2));
+        assertTrue(ContextTools.assignCompatible(t1, t2));
     }
 
     @Test
     public void testAssignCompatibleFalse() {
-        EnvironmentType envType = EnvironmentType.getEnvTypes();
         when(t2.isInt()).thenReturn(true);
-        assertFalse(ContextTools.assignCompatible(envType, t1, t2));
+        assertFalse(ContextTools.assignCompatible(t1, t2));
     }
 
     @Test

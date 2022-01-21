@@ -24,7 +24,7 @@ public class Cast extends AbstractExpr {
         type.setDefinition(compiler.getEnvTypes().get(type.getName()));
         Type t2 = expression.verifyExpr(compiler, localEnv, currentClass);
         expression.setType(t2);
-        if (!ContextTools.castCompatible(compiler.getEnvTypes(), t2, t1)) {
+        if (!ContextTools.castCompatible(t2, t1)) {
             throw new ContextualError("(RULE 3.39) Illegal cast.", getLocation());
         }
         setType(t1);
