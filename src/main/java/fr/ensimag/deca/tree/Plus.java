@@ -5,7 +5,7 @@ import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.ARMRegister;
 import fr.ensimag.ima.pseudocode.instructions.ADD;
 import fr.ensimag.ima.pseudocode.instructions.BOV;
-import fr.ensimag.ima.pseudocode.instructionsARM.add;
+import fr.ensimag.ima.pseudocode.instructionsARM.*;
 
 /**
  * @author gl49
