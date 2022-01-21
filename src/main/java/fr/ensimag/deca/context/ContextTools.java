@@ -19,7 +19,7 @@ public class ContextTools {
      * @return True if t2 is compatible with t1 for the purpose of assignment.
      * False otherwise.
      */
-    public static boolean assignCompatible(EnvironmentType envType, Type t1, Type t2) {
+    public static boolean assignCompatible(Type t1, Type t2) {
         return (t1.isFloat() && t2.isInt()) || subtype(t2, t1);
     }
 
@@ -31,8 +31,8 @@ public class ContextTools {
      * @return True if t2 is compatible with t1 for the purpose of casting.
      * False otherwise.
      */
-    public static boolean castCompatible(EnvironmentType envType, Type t1, Type t2) {
-        return (assignCompatible(envType, t1, t2) || assignCompatible(envType, t2, t1));
+    public static boolean castCompatible(Type t1, Type t2) {
+        return (assignCompatible(t1, t2) || assignCompatible(t2, t1));
     }
 
     /**

@@ -2,6 +2,10 @@ package fr.ensimag.deca.context;
 
 import fr.ensimag.deca.tree.Location;
 
+/**
+ * Class used to emit formatted warning messages when decac's -w option has
+ * been chosen.
+ */
 public class Warning {
     String message;
     Location location;

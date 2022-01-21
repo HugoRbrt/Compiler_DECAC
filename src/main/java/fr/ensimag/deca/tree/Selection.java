@@ -28,6 +28,24 @@ public class Selection extends AbstractLValue {
         return selectingClass;
     }
 
+    /**
+     * Context check third pass. First checks whether the selectiing identifier
+     * is mapped to a class instance. Then checks whether the selected
+     * identifier is part of the current environment. Finally, if the selected
+     * identifier is mapped to a protected field, checks whether the field is
+     * visible in the current scope.
+     *
+     * @param compiler  (contains the "env_types" attribute)
+     * @param localEnv
+     *            Environment in which the expression should be checked
+     *            (corresponds to the "env_exp" attribute)
+     * @param currentClass
+     *            Definition of the class containing the expression
+     *            (corresponds to the "class" attribute)
+     *             is null in the main bloc.
+     * @return
+     * @throws ContextualError
+     */
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {

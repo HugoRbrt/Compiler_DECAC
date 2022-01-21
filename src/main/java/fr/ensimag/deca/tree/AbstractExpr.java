@@ -87,7 +87,7 @@ public abstract class AbstractExpr extends AbstractInst {
             Type expectedType)
             throws ContextualError {
         Type type2 = this.verifyExpr(compiler, localEnv, currentClass);
-        if (!ContextTools.assignCompatible(compiler.getEnvTypes(), expectedType, type2)) {
+        if (!ContextTools.assignCompatible(expectedType, type2)) {
             throw new ContextualError(
                     "(RULE 3.28) Incompatible type assignment. Lvalue is of type " +
                     expectedType.getName() + ", assigned value is of type " + type2.getName()
