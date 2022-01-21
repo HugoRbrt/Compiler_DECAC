@@ -71,7 +71,7 @@ public class DeclMethod extends AbstractDeclMethod {
             MethodDefinition mdef = (MethodDefinition) def;
             Signature sigToOverride = mdef.getSignature();
             if (!(sigToOverride.equals(sig) && ContextTools.subtype(
-                    compiler.getEnvTypes(), currentType, mdef.getType()))) {
+                    currentType, mdef.getType()))) {
                 throw new ContextualError(
                         "(RULE 2.7) Invalid method override. Signature of '" + m +
                         "' is (" + sigToOverride +").", methodName.getLocation());

@@ -44,7 +44,13 @@ public class Signature {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Signature signature = (Signature) o;
-        return args.equals(signature.args);
+        if (args.size() != signature.args.size()) return false;
+        for (int i = 0; i < args.size() - 1; i++) {
+            if (!args.get(i).equals(signature.args.get(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

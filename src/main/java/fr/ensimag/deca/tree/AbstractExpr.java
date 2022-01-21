@@ -128,7 +128,7 @@ public abstract class AbstractExpr extends AbstractInst {
     }
 
     protected void divideCheck() {
-        // NO OP (overriden in Divide class)
+        // NO OP (overriden in IntLiteral and FloatLiteral class)
     }
 
     /**
