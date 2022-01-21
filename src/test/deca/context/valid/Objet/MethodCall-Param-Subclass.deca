@@ -1,0 +1,21 @@
+// Description:
+//      Passing a method argument that is a subclass of the formal parameter.
+//
+// Results:
+//      (void)
+//
+// History:
+//      created on 20/1/2022
+
+class A {
+    void foo(int x, float y, A a) {}
+}
+
+class B extends A {}
+
+{
+    int x; float y;
+    A a = new A();
+    B b = new B();
+    a.foo(x, y, b);
+}
