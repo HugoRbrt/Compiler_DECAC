@@ -166,4 +166,17 @@ public class TestContextTools {
         when(t1.isInt()).thenReturn(true);
         assertThrows(ContextualError.class, ()-> {ContextTools.typeUnaryNot(compiler, t1, null);});
     }
+
+    @Test
+    public void testTypeInstanceOf() throws ContextualError {
+        when(t1.isClassOrNull()).thenReturn(true);
+        when(t2.isClass()).thenReturn(true);
+        assertTrue(ContextTools.typeInstanceOf(compiler, t1, t2, null).isBoolean());
+    }
+
+    @Test
+    public void testTypeInstanceOfNotClass() {
+        when(t2.isClass()).thenReturn(true);
+        assertThrows(ContextualError.class, ()-> {ContextTools.typeInstanceOf(compiler, t1, t2, null);});
+    }
 }

@@ -30,7 +30,7 @@ public class Return extends AbstractInst {
         */
         if (!returnType.sameType(currentType) && compiler.getEmitWarnings()) {
             Warning warning = new Warning(
-                    "Type of return expression is inconsistent with method return type.",
+                    "Type of return statement is inconsistent with method return type.",
                     getLocation());
             warning.emit();
         }

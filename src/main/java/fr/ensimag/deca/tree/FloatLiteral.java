@@ -1,10 +1,7 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ClassDefinition;
-import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
@@ -42,6 +39,15 @@ public class FloatLiteral extends AbstractExpr {
             ClassDefinition currentClass) {
         setType(compiler.getEnvTypes().get(compiler.getSymbTable().create("float")).getType());
         return compiler.getEnvTypes().get(compiler.getSymbTable().create("float")).getType();
+    }
+
+    @Override
+    protected void divideCheck() {
+        if (value == 0.0) {
+            Warning warning = new Warning(
+                    "Division by zero.", getLocation());
+            warning.emit();
+        }
     }
 
     @Override

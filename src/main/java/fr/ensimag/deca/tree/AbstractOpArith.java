@@ -33,6 +33,9 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
                 getRightOperand().verifyExpr(compiler, localEnv, currentClass);
             }
         }
+        if (compiler.getEmitWarnings()) {
+            getRightOperand().divideCheck();
+        }
         setType(resType);
         return resType;
     }
