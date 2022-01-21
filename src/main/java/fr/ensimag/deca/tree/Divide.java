@@ -12,6 +12,8 @@ import fr.ensimag.ima.pseudocode.instructions.QUO;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.BEQ;
 import fr.ensimag.ima.pseudocode.instructions.BOV;
+import fr.ensimag.ima.pseudocode.instructionsARM.*;
+
 
 /**
  *
@@ -46,7 +48,22 @@ public class Divide extends AbstractOpArith {
     }
 
     public void codeGenOperationsARM(ARMRegister Reg1, ARMRegister storedRegister, DecacCompiler compiler){
-        // TODO
+        
+        if(getType().isInt()) {
+            // quotient todo
+            compiler.addInstruction(new mov(ARMRegister.r2, Reg1));
+            compiler.addInstruction(new mov(ARMRegister.r3, storedRegister));
+            compiler.addInstruction(new mov(ARMRegister.r0, ARMRegister.r2));
+            compiler.addInstruction(new mov(ARMRegister.r1, ARMRegister.r3));
+            compiler.addInstruction(new bl("divide"));
+            compiler.addInstruction(new mov(ARMRegister.r0, ARMRegister.r2));
+        }
+        else {
+            compiler.addInstruction(new vmov(ARMRegister.s0, Reg1));
+            compiler.addInstruction(new vmov(ARMRegister.s1, storedRegister));
+            compiler.addARMBlock("        vdiv.f32 s0, s0, s1");
+            compiler.addInstruction(new vmov(storedRegister, ARMRegister.s0));
+        }
     }
 
 }
