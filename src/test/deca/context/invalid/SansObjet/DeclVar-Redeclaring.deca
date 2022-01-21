@@ -1,0 +1,13 @@
+// Description:
+//     Redeclaring a variable with the same name in the main program.
+//
+// Results:
+//     12:10: (RULE 3.17) Variable has already been declared.
+//
+// History:
+//      created on 21/1/2022
+
+{
+    int x;
+    float x;
+}

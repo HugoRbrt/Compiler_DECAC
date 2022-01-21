@@ -1,0 +1,13 @@
+// Description:
+//     IfThenElse condition not a boolean expression.
+//
+// Results:
+//     12:8: (RULE 3.29) Condition must be a boolean expression: (int)
+//
+// History:
+//      created on 21/1/2022
+
+{
+    int x;
+    if (x) {}
+}

@@ -1,0 +1,18 @@
+// Description:
+//     Method call using a field identifier
+//
+// Results:
+//     Line 25: (RULE 3.41) Invalid method call.
+//
+// History:
+//      created on 21/1/2022
+
+class A {
+    int x;
+    void y() {}
+}
+
+{
+    A a = new A();
+    a.x();
+}

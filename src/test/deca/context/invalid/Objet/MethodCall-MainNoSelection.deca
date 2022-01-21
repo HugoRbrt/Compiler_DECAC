@@ -1,0 +1,17 @@
+// Description:
+//     Calling a method in the main program without a selection from a class instance.
+//
+// Results:
+//     16:4: (RULE 0.1) Method has not been declared.
+//
+// History:
+//      created on 21/1/2022
+
+class A {
+    int m() { int x; return x; }
+}
+
+{
+    int x;
+    m();
+}
