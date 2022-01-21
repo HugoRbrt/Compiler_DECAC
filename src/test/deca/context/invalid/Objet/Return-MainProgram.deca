@@ -1,0 +1,17 @@
+// Description:
+//     Return statement in main program.
+//
+// Results:
+//     16:11: (RULE 3.24) 'return' statement inapplicable in main program.
+//
+// History:
+//      created on 21/1/2022
+
+class A {
+    int m() { int x; return x; }
+}
+
+{
+    int x;
+    return x;
+}
