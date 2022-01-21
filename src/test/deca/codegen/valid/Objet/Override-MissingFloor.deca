@@ -1,0 +1,17 @@
+// Description:
+//      Progral using only two overrides with one missing
+//
+// Result:
+//      2
+//
+// History:
+//      created on 21/1/2022
+
+
+class A { void fun() { println(0); } }
+class B extends A {  }
+class C extends B { void fun() { println(2);}  }
+{
+    C c = new C();
+    c.fun();
+}

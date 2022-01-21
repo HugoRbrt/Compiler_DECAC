@@ -27,12 +27,12 @@ class A {
     A a = new A();
     A other = new A();
 
-    if ( a.equals((Object) (other)) ) {
+    if ( a.equals(other) ) {
         print("OK1 ");
     }
-    
+
     other.setX(2);
-    if ( ! a.equals((Object) (other)) ) {
+    if ( ! a.equals(other) ) {
         print("OK2");
     }
 }

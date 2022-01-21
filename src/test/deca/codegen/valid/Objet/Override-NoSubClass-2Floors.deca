@@ -1,0 +1,18 @@
+// Description:
+//      Progral overriding functions twice
+//      but using only the original method
+//
+// Result:
+//      0
+//
+// History:
+//      created on 21/1/2022
+
+
+class A { void fun() { println(0); } }
+class B extends A { void fun() { println(1);}  }
+class C extends B { void fun() { println(2);}  }
+{
+    A a = new A();
+    a.fun();
+}

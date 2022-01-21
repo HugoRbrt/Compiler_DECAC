@@ -1,0 +1,17 @@
+// Description:
+//      Program with an override but not using it
+//
+// Result:
+//      0
+//
+// History:
+//      created on 21/1/2022
+
+
+class A { void fun() { println(0); } }
+class B extends A { void fun() { println(1);}  }
+
+{
+    A a = new A();
+    a.fun();
+}
