@@ -14,5 +14,5 @@ class B extends A { void fun() { println(1);}  }
 class C extends B { void fun() { println(2);}  }
 {
     C c = new C();
-    ((A) c).fun();
+    ((A) (c)).fun();
 }
