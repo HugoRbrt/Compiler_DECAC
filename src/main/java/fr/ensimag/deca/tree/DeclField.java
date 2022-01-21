@@ -21,7 +21,7 @@ public class DeclField extends AbstractDeclField {
     final private AbstractInitialization initialization;
 
     public DeclField(Visibility visibility, AbstractIdentifier type,
-            AbstractIdentifier fieldName, AbstractInitialization initialization) {
+                     AbstractIdentifier fieldName, AbstractInitialization initialization) {
         Validate.notNull(visibility);
         Validate.notNull(type);
         Validate.notNull(fieldName);
@@ -56,13 +56,13 @@ public class DeclField extends AbstractDeclField {
      */
     @Override
     protected void verifyField(DecacCompiler compiler, EnvironmentExp localEnv,
-            ClassDefinition currentClass, int counter) throws ContextualError {
+                               ClassDefinition currentClass, int counter) throws ContextualError {
         Type currentType = type.verifyType(compiler);
         SymbolTable.Symbol f = fieldName.getName();
         if (currentType.isVoid()) {
             throw new ContextualError(
                     "(RULE 2.5) Field cannot be of type void: \u001B[31mvoid\u001B[0m " +
-                    f, type.getLocation());
+                            f, type.getLocation());
         }
         type.setDefinition(compiler.getEnvTypes().get(type.getName(), type.getLocation()));
         type.setType(currentType);
@@ -86,7 +86,7 @@ public class DeclField extends AbstractDeclField {
 
     @Override
     protected void verifyFieldInitialization(DecacCompiler compiler, EnvironmentExp localEnv,
-            ClassDefinition currentClass) throws ContextualError {
+                                             ClassDefinition currentClass) throws ContextualError {
         initialization.verifyInitialization(compiler, type.getType(), localEnv, currentClass);
     }
 
@@ -120,6 +120,6 @@ public class DeclField extends AbstractDeclField {
     protected void codeGen(DecacCompiler compiler, int fieldCounter){
         initialization.codeGenDeclField(compiler);
         compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.R1));
-        compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(fieldCounter+1, Register.R1)));
+        compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(fieldCounter, Register.R1)));
     }
 }
