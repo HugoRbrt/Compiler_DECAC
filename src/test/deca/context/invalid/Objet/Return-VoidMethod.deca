@@ -1,0 +1,15 @@
+// Description:
+//     Return statement in a method of type void.
+//
+// Results:
+//     11:29: (RULE 3.24) 'return' statement inapplicable in method of return type void.
+//
+// History:
+//      created on 21/1/2022
+
+class A {
+    void m() { int x; return x; }
+}
+
+{
+}

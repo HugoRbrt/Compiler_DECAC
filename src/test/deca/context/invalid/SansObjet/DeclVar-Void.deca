@@ -1,0 +1,12 @@
+// Description:
+//     Declaring a variable of type void.
+//
+// Results:
+//     11:4: (RULE 3.17) Variable cannot be of type void: void x
+//
+// History:
+//      created on 21/1/2022
+
+{
+    void x;
+}
