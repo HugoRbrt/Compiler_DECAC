@@ -12,11 +12,12 @@ class A {
     int x;
 
     int function()
-    asm ( "ADD R0, R1
-           RTS" );
+    asm ( "LOAD #1, R0
+" );
 }
 
 
 {
     A a = new A();
+    int x = a.function();
 }
