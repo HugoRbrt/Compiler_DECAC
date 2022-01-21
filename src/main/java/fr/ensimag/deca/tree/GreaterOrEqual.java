@@ -5,6 +5,8 @@ import fr.ensimag.ima.pseudocode.ARMRegister;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.SLE;
+import fr.ensimag.ima.pseudocode.instructionsARM.movge;
+import fr.ensimag.ima.pseudocode.instructionsARM.movne;
 
 /**
  * Operator "x >= y"
@@ -30,6 +32,7 @@ public class GreaterOrEqual extends AbstractOpIneq {
     }
 
     public void codeGenOperationsARM(ARMRegister Reg1, ARMRegister storedRegister, DecacCompiler compiler){
-        // TODO
+        super.codeGenOperationsARM(Reg1, storedRegister, compiler);
+        compiler.addInstruction(new movge(ARMRegister.r0, 1));
     }
 }

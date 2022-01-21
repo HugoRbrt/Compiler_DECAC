@@ -4,6 +4,9 @@ import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.ARMRegister;
 import fr.ensimag.ima.pseudocode.instructions.SNE;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.ima.pseudocode.instructionsARM.moveq;
+import fr.ensimag.ima.pseudocode.instructionsARM.movle;
+import fr.ensimag.ima.pseudocode.instructionsARM.movne;
 
 /**
  *
@@ -28,6 +31,7 @@ public class NotEquals extends AbstractOpExactCmp {
     }
 
     public void codeGenOperationsARM(ARMRegister Reg1, ARMRegister storedRegister, DecacCompiler compiler){
-        // TODO
+        super.codeGenOperationsARM(Reg1, storedRegister, compiler);
+        compiler.addInstruction(new movne(ARMRegister.r0, 1));
     }
 }

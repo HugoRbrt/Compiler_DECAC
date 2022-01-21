@@ -60,16 +60,12 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
     }
 
     protected void codeGenInst(DecacCompiler compiler){
-        if(rightOperand instanceof StringLiteral){
-            compiler.getIdentMap().setIdentString(((AbstractIdentifier)leftOperand).getName(), ((StringLiteral)rightOperand).getValue());
-        }else{
-            leftOperand.codeGenInst(compiler);
-            GPRegister usedRegister = compiler.getListRegister().getRegister(compiler);
-            compiler.addInstruction(new LOAD(compiler.getListRegister().R0, usedRegister));
-            rightOperand.codeGenInst(compiler);
-            this.codeGenOperations(usedRegister, compiler.getListRegister().R0, compiler);
-            compiler.getListRegister().freeRegister(usedRegister, compiler);
-        }
+        leftOperand.codeGenInst(compiler);
+        GPRegister usedRegister = compiler.getListRegister().getRegister(compiler);
+        compiler.addInstruction(new LOAD(compiler.getListRegister().R0, usedRegister));
+        rightOperand.codeGenInst(compiler);
+        this.codeGenOperations(usedRegister, compiler.getListRegister().R0, compiler);
+        compiler.getListRegister().freeRegister(usedRegister, compiler);
     }
 
     protected void codeGenInstARM(DecacCompiler compiler){

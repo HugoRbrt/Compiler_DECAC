@@ -5,6 +5,8 @@ import fr.ensimag.ima.pseudocode.ARMRegister;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.SLT;
+import fr.ensimag.ima.pseudocode.instructionsARM.movgt;
+import fr.ensimag.ima.pseudocode.instructionsARM.movne;
 
 /**
  *
@@ -29,6 +31,7 @@ public class Greater extends AbstractOpIneq {
     }
 
     public void codeGenOperationsARM(ARMRegister Reg1, ARMRegister storedRegister, DecacCompiler compiler){
-        // TODO
+        super.codeGenOperationsARM(Reg1, storedRegister, compiler);
+        compiler.addInstruction(new movgt(ARMRegister.r0, 1));
     }
 }

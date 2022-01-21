@@ -4,6 +4,9 @@ import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.ARMRegister;
 import fr.ensimag.ima.pseudocode.instructions.SEQ;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.ima.pseudocode.instructionsARM.mov;
+import fr.ensimag.ima.pseudocode.instructionsARM.moveq;
+import fr.ensimag.ima.pseudocode.instructionsARM.movle;
 
 
 /**
@@ -29,6 +32,7 @@ public class Equals extends AbstractOpExactCmp {
     }
 
     public void codeGenOperationsARM(ARMRegister Reg1, ARMRegister storedRegister, DecacCompiler compiler){
-        // TODO
+        super.codeGenOperationsARM(Reg1, storedRegister, compiler);
+        compiler.addInstruction(new moveq(ARMRegister.r0, 1));
     }
 }
