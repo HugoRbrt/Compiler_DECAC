@@ -46,7 +46,7 @@ public class Signature {
         Signature signature = (Signature) o;
         if (args.size() != signature.args.size()) return false;
         for (int i = 0; i < args.size() - 1; i++) {
-            if (!args.get(i).equals(signature.args.get(i))) {
+            if (!ContextTools.subtype(args.get(i), signature.args.get(i))) {
                 return false;
             }
         }
