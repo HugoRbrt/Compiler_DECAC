@@ -87,7 +87,7 @@ public abstract class Type {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Type type = (Type) o;
-        return sameType(type);
+        return ContextTools.subtype(this, type);
     }
 
     @Override

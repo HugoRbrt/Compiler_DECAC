@@ -19,14 +19,14 @@ public class ContextTools {
      * @return
      */
     public static boolean assignCompatible(EnvironmentType envType, Type t1, Type t2) {
-        return (t1.isFloat() && t2.isInt()) || subtype(envType, t2, t1);
+        return (t1.isFloat() && t2.isInt()) || subtype(t2, t1);
     }
 
     public static boolean castCompatible(EnvironmentType envType, Type t1, Type t2) {
         return (assignCompatible(envType, t1, t2) || assignCompatible(envType, t2, t1));
     }
 
-    public static boolean subtype(EnvironmentType envType, Type t2, Type t1) {
+    public static boolean subtype(Type t2, Type t1) {
         if (t1.sameType(t2)) {
             return true;
         }
