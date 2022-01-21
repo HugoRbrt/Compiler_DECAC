@@ -23,7 +23,7 @@ class A {
     }
 }
 
-class B extends A { 
+class B extends A {
 
     boolean equals(Object other) {
 	if (! (other instanceof B)) {
@@ -43,8 +43,8 @@ class B extends A {
     if ( a.equals(b))  { // we have (b instance of A && b.x == a.x)
         print("OK1 ");
     }
-    
-    other.setX(2);
+
+    b.setX(2);
     if ( ! b.equals(a) ) { // we have (! a instance of A)
         print("OK2");
     }

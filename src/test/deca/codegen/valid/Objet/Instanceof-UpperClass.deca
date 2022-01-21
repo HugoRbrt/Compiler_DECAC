@@ -9,13 +9,13 @@
 
 
 class A { }
-class B extends A { }
+class B extends A { int x; }
 class C extends B { }
 
 {
-    A a;
+    C a;
     a = new C();
     if (a instanceof B) {
-        println("OK");
+        println("OK", a.x);
     }
 }
