@@ -80,7 +80,7 @@ public class DeclVar extends AbstractDeclVar {
     }
 
     protected void codeGenDeclVar(DecacCompiler compiler){
-        compiler.getstackTable().put(varName.getName(), Register.GB);
+        compiler.getstackTable().putDeclVar(varName.getName(), Register.GB);
         initialization.codeGenDeclVar(compiler, varName);
     }
     

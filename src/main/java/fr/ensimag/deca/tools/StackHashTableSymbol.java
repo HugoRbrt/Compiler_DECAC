@@ -1,6 +1,8 @@
 package fr.ensimag.deca.tools;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.ima.pseudocode.Label;
@@ -23,6 +25,7 @@ import fr.ensimag.ima.pseudocode.Register;
 public class StackHashTableSymbol {
     private Map<Symbol, RegisterOffset> map = new HashMap<Symbol, RegisterOffset>();
     private Label enfOfCurrentMethod;
+    private List<Symbol> ListDeclVar = new LinkedList<>();
     private int size = 1;
 
     public void setEnfOfCurrentMethod(Label enfOfCurrentMethod) {
@@ -49,6 +52,18 @@ public class StackHashTableSymbol {
     public void put(Symbol name, Register R){
         map.put(name, new RegisterOffset(size, R)); // add 1 to avoid 0(GB) error
         size++;
+    }
+
+    public void putDeclVar(Symbol name, Register R){
+        if(!map.containsKey(name)){
+            ListDeclVar.add(name);
+        }
+        map.put(name, new RegisterOffset(size, R)); // add 1 to avoid 0(GB) error
+        size++;
+    }
+
+    public List<Symbol> getListDeclVar(){
+        return ListDeclVar;
     }
 
     public void put(Symbol name, RegisterOffset R){
