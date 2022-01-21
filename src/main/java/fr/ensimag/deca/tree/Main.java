@@ -5,6 +5,8 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.NullType;
 import fr.ensimag.deca.context.VoidType;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.ARMRegister;
+
 import java.io.PrintStream;
 
 import fr.ensimag.deca.tools.SymbolTable;
@@ -57,9 +59,11 @@ public class Main extends AbstractMain {
         compiler.addARMComment("Beginning of variables declaration");
         declVariables.codeGenListDeclVarARM(compiler);
         compiler.addARMComment("Beginning of main ARM instructions:");
-        compiler.addARMBlock("_start:");
+        compiler.addARMBlock("main:");
+        compiler.addInstruction(new push(ARMRegister.ip, ARMRegister.lr));
         compiler.addInstruction(new bl("_varDeclAssign"));
         insts.codeGenListInstARM(compiler);
+        compiler.addInstruction(new pop(ARMRegister.ip, ARMRegister.pc));
     }
     
     @Override

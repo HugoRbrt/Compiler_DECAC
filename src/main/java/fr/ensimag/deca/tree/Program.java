@@ -64,12 +64,12 @@ public class Program extends AbstractProgram {
     public void codeGenProgramARM(DecacCompiler compiler) {
         // A FAIRE: compléter ce squelette très rudimentaire de code
         compiler.addARMBlock(".text");
-        compiler.addARMBlock(".global _start");
+        compiler.addARMBlock(".global main");
+        compiler.addARMBlock(".extern printf");
         compiler.addARMComment("ARM program");
         //creation of ARM Register
         compiler.setListRegisterARM(new ARMRegister());
         main.codeGenMainARM(compiler);
-        compiler.addInstruction(new b("_end"));
     }
     
 

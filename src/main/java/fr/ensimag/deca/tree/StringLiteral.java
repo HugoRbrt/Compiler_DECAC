@@ -5,9 +5,7 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.ImmediateString;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
-import fr.ensimag.ima.pseudocode.instructionsARM.ldr;
-import fr.ensimag.ima.pseudocode.instructionsARM.mov;
-import fr.ensimag.ima.pseudocode.instructionsARM.svc;
+import fr.ensimag.ima.pseudocode.instructionsARM.*;
 import fr.ensimag.ima.pseudocode.ARMRegister;
 import fr.ensimag.ima.pseudocode.ARMLine;
 import fr.ensimag.ima.pseudocode.Register;
@@ -71,18 +69,12 @@ public class StringLiteral extends AbstractStringLiteral {
     @Override
     protected void codeGenPrintARM(DecacCompiler compiler, boolean printHex) {
         String msgName = "msg"+printCounter;
-        String lenMsgName = "len"+printCounter;
         printCounter++;
-        compiler.addInstruction(new mov(ARMRegister.r0,1));
-        compiler.addInstruction(new ldr(ARMRegister.r1, "="+msgName));
-        compiler.addInstruction(new ldr(ARMRegister.r2, "="+lenMsgName));
-        compiler.add(new ARMLine(".data"));
-        compiler.add(new ARMLine(msgName+":"));
-        compiler.add(new ARMLine(".ascii " +"\"" + value + "\""));
-        compiler.add(new ARMLine(lenMsgName+" = . - "+msgName));
-        compiler.add(new ARMLine(".text"));
-        compiler.addInstruction(new mov(ARMRegister.r7,4));
-        compiler.addInstruction(new svc(0));
+        compiler.addARMBlock(".data");
+        compiler.addARMBlock(msgName + ": " + ".asciz " + "\"" + value + "\"");  //label with name of variable 
+        compiler.addARMBlock(".text");
+        compiler.addInstruction(new ldr(ARMRegister.r0, "=" + msgName));
+        compiler.addInstruction(new bl("printf"));
     }
 
     @Override

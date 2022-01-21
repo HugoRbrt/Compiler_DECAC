@@ -9,7 +9,7 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.ARMLine;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.WINT;
-import fr.ensimag.ima.pseudocode.instructionsARM.mov;
+import fr.ensimag.ima.pseudocode.instructionsARM.*;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.ARMRegister;
 
@@ -48,7 +48,9 @@ public class IntLiteral extends AbstractExpr {
 
     @Override
     protected void codeGenPrintARM(DecacCompiler compiler, boolean printHex) {
-        compiler.add(new ARMLine(".ascii " +"\"" + value + "\""));
+        compiler.addInstruction(new ldr(ARMRegister.r0, "=int"));
+        compiler.addInstruction(new mov(ARMRegister.r1, value));
+        compiler.addInstruction(new bl("printf"));
     }
 
     @Override
