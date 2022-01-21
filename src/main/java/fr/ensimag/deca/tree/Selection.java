@@ -85,7 +85,7 @@ public class Selection extends AbstractLValue {
 
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex) {
         //on recupère l'adresse de l'objet dans R0
-        if(selectingClass instanceof Cast || selectingClass instanceof This){
+        if(selectingClass instanceof Cast || selectingClass instanceof This || selectingClass instanceof Selection){
             selectingClass.codeGenInst(compiler);
         }else{
             RegisterOffset r = compiler.getstackTable().get(compiler.getSymbTable().get(((Identifier)selectingClass).getName().getName()));

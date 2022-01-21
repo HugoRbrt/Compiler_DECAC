@@ -73,7 +73,7 @@ public class Assign extends AbstractBinaryExpr {
             targetObject = compiler.getListRegister().getRegister(compiler);
             AbstractExpr selectingClass = ((Selection) super.getLeftOperand()).getSelectingClass();
             //il manque la cas This et Cast
-            if(selectingClass instanceof This || selectingClass instanceof Cast){
+            if(selectingClass instanceof This || selectingClass instanceof Cast || selectingClass instanceof Selection){
                 selectingClass.codeGenInst(compiler);
                 compiler.addInstruction(new LOAD(Register.R0, targetObject));
             }else{
