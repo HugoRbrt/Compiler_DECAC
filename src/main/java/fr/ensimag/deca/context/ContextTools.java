@@ -10,22 +10,38 @@ import fr.ensimag.deca.tree.Location;
  * @date 10/01/2022
  */
 public class ContextTools {
+
     /**
+     * Checks whether type t2 can be assigned to a reference of type t1.
      *
-     *
-     * @param envType
      * @param t1
      * @param t2
-     * @return
+     * @return True if t2 is compatible with t1 for the purpose of assignment.
+     * False otherwise.
      */
     public static boolean assignCompatible(EnvironmentType envType, Type t1, Type t2) {
         return (t1.isFloat() && t2.isInt()) || subtype(t2, t1);
     }
 
+    /**
+     * Checks whether type t1 can be cast to type t2.
+     *
+     * @param t1
+     * @param t2
+     * @return True if t2 is compatible with t1 for the purpose of casting.
+     * False otherwise.
+     */
     public static boolean castCompatible(EnvironmentType envType, Type t1, Type t2) {
         return (assignCompatible(envType, t1, t2) || assignCompatible(envType, t2, t1));
     }
 
+    /**
+     * Checks whether type t2 is a subtype of type t1.
+     *
+     * @param t2
+     * @param t1
+     * @return True if t2 is a subtype of t1. False otherwise.
+     */
     public static boolean subtype(Type t2, Type t1) {
         if (t1.sameType(t2)) {
             return true;
@@ -41,6 +57,14 @@ public class ContextTools {
         return false;
     }
 
+    /**
+     * Checks whether a binary arithmetic operation uses the proper types.
+     *
+     * @param t1
+     * @param t2
+     * @return The return type of the operation's result.
+     * @throws ContextualError
+     */
     public static Type typeArithOp(DecacCompiler compiler, Type t1, Type t2,
             Location location) throws ContextualError {
         if (t1.isInt() && t2.isInt()) {
@@ -55,6 +79,13 @@ public class ContextTools {
                 ", int or float required.", location);
     }
 
+    /**
+     * Checks whether a binary remainder operation involves two integer types.
+     *
+     * @param t1
+     * @param t2
+     * @throws ContextualError
+     */
     public static Type typeArithModulo(DecacCompiler compiler, Type t1, Type t2,
                                        Location location) throws ContextualError {
         if (t1.isInt() && t2.isInt()) {
@@ -65,6 +96,13 @@ public class ContextTools {
                 (!t1.isInt()? t1.getName(): t2.getName()) + ", int required.", location);
     }
 
+    /**
+     * Checks whether a binary boolean operation involves two boolean values.
+     *
+     * @param t1
+     * @param t2
+     * @throws ContextualError
+     */
     public static Type typeBoolOp(DecacCompiler compiler, Type t1, Type t2,
                                    Location location) throws ContextualError {
         if (!(t1.isBoolean() && t2.isBoolean())) {
@@ -75,6 +113,16 @@ public class ContextTools {
         return compiler.getEnvTypes().get(compiler.getSymbTable().get("boolean")).getType();
     }
 
+    /**
+     * Checks whether a comparison operation op involves compatible types (that is,
+     * either numeric types or boolean types).
+     *
+     * @param op
+     * @param t1
+     * @param t2
+     * @return The return type of the operation's result.
+     * @throws ContextualError
+     */
     public static Type typeCmpOp(DecacCompiler compiler, String op, Type t1, Type t2,
                                   Location location) throws ContextualError {
         if ((t1.isInt() || t1.isFloat()) && (t2.isInt() || t2.isFloat())) {
@@ -118,6 +166,13 @@ public class ContextTools {
                 ", boolean required.", location);
     }
 
+    /**
+     * Checks whether an instanceof operation involves class types.
+     *
+     * @param t1
+     * @param t2
+     * @throws ContextualError
+     */
     public static Type typeInstanceOf(DecacCompiler compiler, Type t1, Type t2,
             Location location) throws ContextualError {
         if (t1.isClassOrNull() && t2.isClass()) {

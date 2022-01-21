@@ -21,6 +21,10 @@ public class MethodBody extends AbstractMethodBody {
         this.insts = insts;
     }
 
+    /**
+     * Context check third pass. Checks the correctness of the method body's
+     * declarations and instructions.
+     */
     @Override
     protected void verifyMethodBody(DecacCompiler compiler, EnvironmentExp localEnv,
                 ClassDefinition currentClass, Type returnType) throws ContextualError {

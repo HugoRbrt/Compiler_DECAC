@@ -50,7 +50,7 @@ public class DeclClass extends AbstractDeclClass {
     }
 
     /**
-     * Contextual class declaration check. First checks whether the superclass exists, then checks
+     * Class declaration context check (first pass). First checks whether the superclass exists, then checks
      * whether the class hasn't already been declared.
      *
      * @param compiler contains the predefined EnvironmentType.
@@ -75,6 +75,13 @@ public class DeclClass extends AbstractDeclClass {
         className.setType(envT.get(nameSymb).getType());
     }
 
+    /**
+     * Context check second pass. Checks field declarations (NOT initializations)
+     * and method signatures.
+     *
+     * @throws ContextualError exceptions passed on from throws in invalid fields
+     * or methods.
+     */
     @Override
     protected void verifyClassMembers(DecacCompiler compiler)
             throws ContextualError {
@@ -90,7 +97,10 @@ public class DeclClass extends AbstractDeclClass {
             m.verifyMethod(compiler, cl.getMembers(), cl, cl.getNumberOfMethods());
         }
     }
-    
+
+    /**
+     * Context check third pass. Checks field initializations and method bodies.
+     */
     @Override
     protected void verifyClassBody(DecacCompiler compiler) throws ContextualError {
         ClassDefinition cl = (ClassDefinition) compiler.getEnvTypes().get(className.getName());
