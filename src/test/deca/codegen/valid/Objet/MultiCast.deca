@@ -2,7 +2,8 @@
 //    Twisted example with multiple casts
 //
 // Results:
-//    1
+//    10
+//    10
 //
 // History:
 // Created on 20/1/2022
@@ -31,4 +32,5 @@ class D extends C { int z = 1; }
     A a = (A) ((B) ((C) ((D) (d))));
 
     println(a.x);
+    print(((A) ((B) ((C) ((D) (d))))).x);
 }

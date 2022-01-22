@@ -2,7 +2,9 @@
 //      Program doing operations on fields
 //
 // Result:
-//      OK1 OK2 OK3 OK4
+//      5
+//      <
+//      6
 //
 // History:
 //      created on 17/1/2022
@@ -23,8 +25,8 @@ class B {
     B b = new B();
 
     println(a.x + b.y);
-    if (a.b) {
-        print("OK");
+    if (!a.b) {
+        print("<");
     }
 
     println(a.x * b.y);
