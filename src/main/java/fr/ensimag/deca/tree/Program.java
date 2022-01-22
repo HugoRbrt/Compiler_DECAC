@@ -5,6 +5,7 @@ import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.ima.pseudocode.instructions.HALT;
+import fr.ensimag.ima.pseudocode.instructionsARM.b;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
@@ -59,7 +60,7 @@ public class Program extends AbstractProgram {
         // after analysis of the program, we generate the TSTO instruction
         int d1 = compiler.getCodeAnalyzer().getNeededStackSize();
         int d2 = compiler.getCodeAnalyzer().getNbDeclaredVariables();
-        if(!compiler.getCompilerOptions().getArmBool()){
+        if (!compiler.getCompilerOptions().getArmBool()) {
             compiler.getErrorManager().setTstoArg(d1);
             compiler.getErrorManager().setAddspArg(d2);
 
@@ -67,6 +68,16 @@ public class Program extends AbstractProgram {
             compiler.getErrorManager().genCodeErrorManager(compiler);
         }
         classes.codeGen(compiler);
+    }
+    public void codeGenProgramARM(DecacCompiler compiler) {
+        // A FAIRE: compléter ce squelette très rudimentaire de code
+        compiler.addARMBlock(".text");
+        compiler.addARMBlock(".global main");
+        compiler.addARMBlock(".extern printf");
+        compiler.addARMComment("ARM program");
+        //creation of ARM Register
+        compiler.setListRegisterARM(new ARMRegister());
+        main.codeGenMainARM(compiler);
     }
 
     @Override

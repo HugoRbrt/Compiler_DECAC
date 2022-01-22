@@ -5,9 +5,8 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.ImmediateString;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
-import fr.ensimag.ima.pseudocode.Register;
-import fr.ensimag.ima.pseudocode.AbstractLine;
-import java.util.LinkedList;
+import fr.ensimag.ima.pseudocode.instructionsARM.*;
+import fr.ensimag.ima.pseudocode.ARMRegister;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 
@@ -19,6 +18,7 @@ import org.apache.commons.lang.Validate;
  */
 public class StringLiteral extends AbstractStringLiteral {
     private static int i;
+    private static int printCounter=0;
 
     @Override
     public String getValue() {
@@ -60,6 +60,17 @@ public class StringLiteral extends AbstractStringLiteral {
     @Override
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex) {
         compiler.addInstruction(new WSTR(new ImmediateString(value)));
+    }
+
+    @Override
+    protected void codeGenPrintARM(DecacCompiler compiler, boolean printHex) {
+        String msgName = "msg"+printCounter;
+        printCounter++;
+        compiler.addARMBlock(".data");
+        compiler.addARMBlock(msgName + ": " + ".asciz " + "\"" + value + "\"");  //label with name of variable 
+        compiler.addARMBlock(".text");
+        compiler.addInstruction(new ldr(ARMRegister.r0, "=" + msgName));
+        compiler.addInstruction(new bl("printf"));
     }
 
     @Override

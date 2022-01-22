@@ -3,6 +3,8 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.ARMRegister;
+
 import java.io.PrintStream;
 
 import fr.ensimag.deca.tools.SymbolTable;
@@ -46,6 +48,18 @@ public class Main extends AbstractMain {
         declVariables.codeGenListDeclVar(compiler);
         insts.codeGenListInst(compiler);
         compiler.addInstruction(new HALT());
+    }
+
+    @Override
+    protected void codeGenMainARM(DecacCompiler compiler) {
+        compiler.addARMComment("Beginning of variables declaration");
+        declVariables.codeGenListDeclVarARM(compiler);
+        compiler.addARMComment("Beginning of main ARM instructions:");
+        compiler.addARMBlock("main:");
+        compiler.addInstruction(new push(ARMRegister.ip, ARMRegister.lr));
+        compiler.addInstruction(new bl("_varDeclAssign"));
+        insts.codeGenListInstARM(compiler);
+        compiler.addInstruction(new pop(ARMRegister.ip, ARMRegister.pc));
     }
 
     @Override

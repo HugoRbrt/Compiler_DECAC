@@ -5,6 +5,7 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.WINT;
+import fr.ensimag.ima.pseudocode.instructionsARM.*;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
 
 import java.io.PrintStream;
@@ -44,8 +45,14 @@ public class IntLiteral extends AbstractExpr {
 
     @Override
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex) {
-        compiler.addInstruction(new LOAD(new ImmediateInteger(value),compiler.getListRegister().R1));
+        compiler.addInstruction(new LOAD(new ImmediateInteger(value), compiler.getListRegister().R1));
         compiler.addInstruction(new WINT());
+    }
+
+    protected void codeGenPrintARM(DecacCompiler compiler, boolean printHex) {
+        compiler.addInstruction(new ldr(ARMRegister.r0, "=int"));
+        compiler.addInstruction(new mov(ARMRegister.r1, value));
+        compiler.addInstruction(new bl("printf"));
     }
 
     @Override
@@ -70,6 +77,11 @@ public class IntLiteral extends AbstractExpr {
 
     public void codeGenInst(DecacCompiler compiler){
         compiler.addInstruction(new LOAD(new ImmediateInteger(value), compiler.getListRegister().R0));
+    }
+
+    public void codeGenInstARM(DecacCompiler compiler){
+        compiler.getListRegisterARM();
+        compiler.addInstruction(new mov(ARMRegister.getR(0), value));
     }
 
 }

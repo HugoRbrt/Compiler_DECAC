@@ -83,7 +83,39 @@ public class DeclVar extends AbstractDeclVar {
         compiler.getstackTable().putDeclVar(varName.getName(), Register.GB);
         initialization.codeGenDeclVar(compiler, varName);
     }
+
+    protected void codeGenDeclVarARM(DecacCompiler compiler){
+        // Absolument identique à la fonction pour IMA mais avec initialisation propre à ARM.
+        if(varName.getDefinition().getType().isString()){//si on veut declarer un string, il faut juste creer le symbol en java
+            String value="";
+            if(initialization instanceof Initialization){
+                value = ((StringLiteral)((Initialization)initialization).getExpression()).getValue();
+            }
+            compiler.getIdentMap().setIdentString(((AbstractIdentifier)varName).getName(),value);
+        }else{
+            initialization.codeGenDeclVarARM(compiler, varName);
+        }
+    }
     
+    /*
+     * Allocate place in ARM memory
+     */
+    protected void codeGenDeclVarAllocARM(DecacCompiler compiler){
+        if(!varName.getDefinition().getType().isString()){//si on veut declarer un string, il faut juste creer le symbol en java
+            if (varName.getDefinition().getType().isBoolean()) {
+                compiler.addARMBlock(varName.getName().getName() + ": " + ".int 0");  //label with name of variable   
+            }
+            if (varName.getDefinition().getType().isInt()) {
+                compiler.addARMBlock(varName.getName().getName() + ": " + ".int 0");  //label with name of variable   
+            }
+            if (varName.getDefinition().getType().isFloat()) {
+                compiler.addARMBlock(varName.getName().getName() + ": " + ".float 0");  //label with name of variable   
+            }
+        }    
+    }
+
+
+
     @Override
     protected
     void iterChildren(TreeFunction f) {
