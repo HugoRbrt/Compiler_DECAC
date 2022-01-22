@@ -12,4 +12,7 @@ exitnum=$(($exitnum + $?))
 ./exec-tests-Objet.sh
 exitnum=$(($exitnum + $?))
 
+./exec-tests-provided.sh
+exitnum=$(($exitnum + $?))
+
 exit $exitnum

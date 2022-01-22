@@ -3,14 +3,10 @@ cd "$(dirname "$0")"|| exit 1
 
 exitnum=0
 
-./allin-SansObjet.sh
+./exec-tests-provided.sh
 exitnum=$(($exitnum + $?))
 
-./allin-Objet.sh
+./regression-tests-provided.sh
 exitnum=$(($exitnum + $?))
-
-./allin-provided.sh
-exitnum=$(($exitnum + $?))
-
 
 exit $exitnum
