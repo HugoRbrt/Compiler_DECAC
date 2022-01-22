@@ -23,5 +23,5 @@ class E extends D {
     C c = new C();
     D d = new D();
     E e = new E();
-    print("c.x=", c.x, "d.x=", d.x, "e.x=", e.x);
+    print("c.x=", c.x, ", d.x=", d.x, ", e.x=", e.x);
 }

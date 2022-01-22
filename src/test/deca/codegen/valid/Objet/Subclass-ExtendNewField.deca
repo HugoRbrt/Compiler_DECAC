@@ -18,5 +18,5 @@ class D extends C {
 {
     C c = new C();
     D d = new D();
-    print("c.x=", c.x, "d.x=", d.x);
+    print("c.x=", c.x, ", d.x=", d.x);
 }
