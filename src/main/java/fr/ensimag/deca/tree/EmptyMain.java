@@ -30,6 +30,11 @@ public class EmptyMain extends AbstractMain {
         compiler.addInstruction(new HALT());
     }
 
+    @Override
+    protected void codeGenMainARM(DecacCompiler compiler) {
+        compiler.addARMComment("EMPTY MAIN HERE");
+    }
+
     /**
      * Contains no real information => nothing to check.
      */

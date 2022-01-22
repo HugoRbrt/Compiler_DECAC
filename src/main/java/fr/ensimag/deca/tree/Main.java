@@ -10,6 +10,7 @@ import java.io.PrintStream;
 import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.ima.pseudocode.instructions.HALT;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructionsARM.*;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 import fr.ensimag.ima.pseudocode.*;
@@ -50,7 +51,6 @@ public class Main extends AbstractMain {
         compiler.addInstruction(new HALT());
     }
 
-    @Override
     protected void codeGenMainARM(DecacCompiler compiler) {
         compiler.addARMComment("Beginning of variables declaration");
         declVariables.codeGenListDeclVarARM(compiler);

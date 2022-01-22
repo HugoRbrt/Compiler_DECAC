@@ -85,16 +85,7 @@ public class DeclVar extends AbstractDeclVar {
     }
 
     protected void codeGenDeclVarARM(DecacCompiler compiler){
-        // Absolument identique à la fonction pour IMA mais avec initialisation propre à ARM.
-        if(varName.getDefinition().getType().isString()){//si on veut declarer un string, il faut juste creer le symbol en java
-            String value="";
-            if(initialization instanceof Initialization){
-                value = ((StringLiteral)((Initialization)initialization).getExpression()).getValue();
-            }
-            compiler.getIdentMap().setIdentString(((AbstractIdentifier)varName).getName(),value);
-        }else{
-            initialization.codeGenDeclVarARM(compiler, varName);
-        }
+        initialization.codeGenDeclVarARM(compiler, varName);
     }
     
     /*

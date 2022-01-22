@@ -94,22 +94,18 @@ public abstract class  AbstractBinaryExpr extends AbstractExpr {
     }
 
     protected void codeGenPrintARM(DecacCompiler compiler, boolean printHex){
-        if(rightOperand instanceof StringLiteral){
-            compiler.getIdentMap().setIdentString(((AbstractIdentifier)leftOperand).getName(), ((StringLiteral)rightOperand).getValue());
-        }else{
-            codeGenInstARM(compiler);
-            if(getType().isInt()) {
-                compiler.addInstruction(new mov(ARMRegister.r1, ARMRegister.r0));
-                compiler.addInstruction(new ldr(ARMRegister.r0, "=int"));  
-            }
-            else {
-                compiler.addInstruction(new vmov(ARMRegister.s0, ARMRegister.r0));
-                compiler.addARMBlock("        vcvt.f64.f32 d0, s0");
-                compiler.addInstruction(new vmov(ARMRegister.r2, ARMRegister.r3, ARMRegister.d0));
-                compiler.addInstruction(new ldr(ARMRegister.r0, "=flottant"));  
-            }
-            compiler.addInstruction(new bl("printf"));
+        codeGenInstARM(compiler);
+        if(getType().isInt()) {
+            compiler.addInstruction(new mov(ARMRegister.r1, ARMRegister.r0));
+            compiler.addInstruction(new ldr(ARMRegister.r0, "=int"));
         }
+        else {
+            compiler.addInstruction(new vmov(ARMRegister.s0, ARMRegister.r0));
+            compiler.addARMBlock("        vcvt.f64.f32 d0, s0");
+            compiler.addInstruction(new vmov(ARMRegister.r2, ARMRegister.r3, ARMRegister.d0));
+            compiler.addInstruction(new ldr(ARMRegister.r0, "=flottant"));
+        }
+        compiler.addInstruction(new bl("printf"));
     }
 
     abstract void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler);

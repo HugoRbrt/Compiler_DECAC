@@ -12,7 +12,7 @@ import fr.ensimag.ima.pseudocode.ARMLine;
  * @author Ensimag
  * @date 01/01/2022
  */
-public class ARMProgram extends GenericProgram{
+public class ARMProgram extends GenericProgram {
 
     @Override
     public void addComment(String s) {

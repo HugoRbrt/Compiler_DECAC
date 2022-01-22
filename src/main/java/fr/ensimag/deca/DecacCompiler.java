@@ -13,13 +13,8 @@ import fr.ensimag.deca.tools.CodeAnalyzer;
 import fr.ensimag.deca.tree.AbstractProgram;
 import fr.ensimag.deca.tree.Location;
 import fr.ensimag.deca.tree.LocationException;
-import fr.ensimag.ima.pseudocode.AbstractLine;
-import fr.ensimag.ima.pseudocode.IMAProgram;
-import fr.ensimag.ima.pseudocode.GenericProgram;
-import fr.ensimag.ima.pseudocode.Instruction;
-import fr.ensimag.ima.pseudocode.Label;
-import fr.ensimag.ima.pseudocode.DVal;
-import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -28,6 +23,9 @@ import java.io.PrintStream;
 import java.util.Objects;
 import java.lang.Runnable;
 
+import fr.ensimag.ima.pseudocode.ARMProgram;
+import fr.ensimag.ima.pseudocode.GenericProgram;
+import fr.ensimag.ima.pseudocode.IMAProgram;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.commons.lang.exception.ExceptionUtils;
@@ -147,6 +145,13 @@ public class DecacCompiler implements Runnable {
         program.addComment(comment);
     }
 
+    /**
+     * @see fr.ensimag.ima.pseudocode.IMAProgram#addComment(java.lang.String)
+     */
+
+    public void addARMComment(String comment) {
+        program.addComment(comment);
+    }
 
     /**
      * @see
@@ -173,7 +178,16 @@ public class DecacCompiler implements Runnable {
     public void addInstruction(Instruction instruction, String comment) {
         program.addInstruction(instruction, comment);
     }
-    
+
+    /**
+     * @see fr.ensimag.ima.pseudocode.IMAProgram#addOther(fr.ensimag.ima.pseudocode.Instruction),
+     * * java.lang.String
+     */
+    public void addARMBlock(String other) {
+        ARMProgram armpP = (ARMProgram) program;
+        armpP.addARMBlock(other);
+    }
+
     /**
      * New instruction to add at the beginning of the program
      */

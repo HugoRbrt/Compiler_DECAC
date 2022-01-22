@@ -11,11 +11,4 @@ public class UnaryInstructionToReg extends UnaryInstruction {
         super(op);
     }
 
-<<<<<<< HEAD
-=======
-    public UnaryInstructionToReg(GPRegister op) {
-        super(op);
-    }
-
->>>>>>> SansObjetARM
 }
