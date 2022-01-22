@@ -511,7 +511,7 @@ literal returns[AbstractExpr tree]
         char[] charArray = $fd.text.toCharArray();
         boolean strictlyPos = false;
         for (char c: charArray) {
-            if (c != '0' && c != '.') {
+            if (c != '0' && c != '.' && c != 'e' && c != '+' && c != '-') {
                 strictlyPos = true;
                 break;
             }
