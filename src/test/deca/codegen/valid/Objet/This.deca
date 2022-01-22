@@ -1,0 +1,25 @@
+// Description:
+//    Tests with the this operator to
+//    desambiguate the grammar
+//
+// Results:
+//    OK1 OK1
+//
+// History:
+// Created on 20/1/2022
+
+
+class x {
+    
+    int y = 1;
+    void x(int x) { println("OK", x); }
+    void fun(int y) { this.y = y+2; println("OK", this.y); }
+
+}
+
+
+{
+    x x = new x();
+    x.x(1);
+    x.fun(-1);
+}
