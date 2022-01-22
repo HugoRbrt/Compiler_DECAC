@@ -40,6 +40,9 @@ public class ARMFunctionManager {
         compiler.addARMBlock("flottant: .asciz \"%f\"");
         compiler.addARMBlock("int: .asciz \"%i\"");
         compiler.addARMBlock("newline: .asciz \"\\n\"");
+        compiler.addARMBlock(".text");
+        compiler.addARMBlock("end:");
+        compiler.addInstruction(new pop(ARMRegister.ip, ARMRegister.pc));
     }
 
     public void genCodeDivideProgram(DecacCompiler compiler) {

@@ -9,9 +9,7 @@ import fr.ensimag.ima.pseudocode.instructions.REM;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.BEQ;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
-import fr.ensimag.ima.pseudocode.instructionsARM.mov;
-import fr.ensimag.ima.pseudocode.instructionsARM.push;
-import fr.ensimag.ima.pseudocode.instructionsARM.bl;
+import fr.ensimag.ima.pseudocode.instructionsARM.*;
 
 /**
  *
@@ -48,11 +46,15 @@ public class Modulo extends AbstractOpArith {
     }
 
     public void codeGenOperationsARM(ARMRegister Reg1, ARMRegister storedRegister, DecacCompiler compiler){
-        compiler.addInstruction(new mov(ARMRegister.getR(0), Reg1));
-        compiler.addInstruction(new mov(ARMRegister.getR(1), storedRegister));
-        compiler.addInstruction(new mov(ARMRegister.getR(3), ARMRegister.lr));
-        compiler.addInstruction(new push(ARMRegister.getR(3)));
-        compiler.addInstruction(new bl("_divide"));
-        compiler.addInstruction(new mov(ARMRegister.getR(0), ARMRegister.getR(2)));
+        if(!getType().isInt()) {
+            compiler.addInstruction(new b("input_output_error"));
+        }   
+            compiler.addInstruction(new cmp(storedRegister, 0));
+            compiler.addInstruction(new beq("division_by_zero"));
+            compiler.addInstruction(new mov(ARMRegister.r2, Reg1));
+            compiler.addInstruction(new mov(ARMRegister.r3, storedRegister));
+            compiler.addInstruction(new mov(ARMRegister.r0, ARMRegister.r2));
+            compiler.addInstruction(new mov(ARMRegister.r1, ARMRegister.r3));
+            compiler.addInstruction(new bl("divide"));
     }
 }

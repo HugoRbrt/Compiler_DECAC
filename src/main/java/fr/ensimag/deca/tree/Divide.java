@@ -50,7 +50,8 @@ public class Divide extends AbstractOpArith {
     public void codeGenOperationsARM(ARMRegister Reg1, ARMRegister storedRegister, DecacCompiler compiler){
         
         if(getType().isInt()) {
-            // quotient todo
+            compiler.addInstruction(new cmp(storedRegister, 0));
+            compiler.addInstruction(new beq("division_by_zero"));
             compiler.addInstruction(new mov(ARMRegister.r2, Reg1));
             compiler.addInstruction(new mov(ARMRegister.r3, storedRegister));
             compiler.addInstruction(new mov(ARMRegister.r0, ARMRegister.r2));
@@ -59,6 +60,8 @@ public class Divide extends AbstractOpArith {
             compiler.addInstruction(new mov(ARMRegister.r0, ARMRegister.r2));
         }
         else {
+            compiler.addInstruction(new cmp(storedRegister, 0));
+            compiler.addInstruction(new beq("division_by_zero"));
             compiler.addInstruction(new vmov(ARMRegister.s0, Reg1));
             compiler.addInstruction(new vmov(ARMRegister.s1, storedRegister));
             compiler.addARMBlock("        vdiv.f32 s0, s0, s1");

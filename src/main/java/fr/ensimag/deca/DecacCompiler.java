@@ -6,6 +6,7 @@ import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
 import fr.ensimag.deca.codegen.ErrorManager;
+import fr.ensimag.deca.codegen.ARMErrorManager;
 import fr.ensimag.deca.codegen.ARMFunctionManager;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.SymbolTable;
@@ -69,6 +70,7 @@ public class DecacCompiler implements Runnable {
     private StackHashTableSymbol stackTable = new StackHashTableSymbol();
     private CodeAnalyzer codeAnalyzer = new CodeAnalyzer();
     private ErrorManager errorManager = new ErrorManager();
+    private ARMErrorManager armErrorManager = new ARMErrorManager();
     private ARMFunctionManager armFunctionManager = new ARMFunctionManager();
     private StringIdentMap stringIdentMap = new StringIdentMap();
 
@@ -369,6 +371,7 @@ public class DecacCompiler implements Runnable {
 
         else {
             armFunctionManager.genCodeFunctionManager(this);
+            armErrorManager.genCodeErrorManagerARM(this);
         }
         
         LOG.debug("Generated assembly code:" + nl + program.display());
