@@ -1,0 +1,33 @@
+// Description:
+//      Program with two assembly methods
+//      one of them returns an int and must use the RTS instruction
+//      the other is a void function that displays a string
+//      (we bypass the loading of the argument in R2)
+//
+// Result:
+//      22 vla les flics!!
+//
+// History:
+//      created on 17/1/2022
+
+
+class A {
+    int x;
+
+    int beginning(int a)
+    asm (
+"
+RTS
+" );
+
+    void end() asm ( "WSTR \" vla les flics\"
+                     " );
+}
+
+
+{
+    A a = new A();
+    print(a.beginning(22));
+    a.end();
+    println("!!");
+}

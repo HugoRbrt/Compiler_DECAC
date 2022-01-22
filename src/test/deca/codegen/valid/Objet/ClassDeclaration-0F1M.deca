@@ -2,7 +2,7 @@
 //      Class with no field but a method
 //
 // Result:
-//      3.1400e+01 is the opposite of -3.1400e+01
+//      3.14000e+00 is the opposite of -3.14000e+00
 //
 // History:
 //      created on 17/1/2022
