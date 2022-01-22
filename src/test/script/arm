@@ -1,6 +1,6 @@
 # /bin/sh
 
-# Author : Paul
+# Author : gl49, Paul
 # Initial version : 10/1/2022
 # Script to replace the long use of Arm cross compilation
 # So that we can execute ARM programs as easily as IMA ones
@@ -9,6 +9,6 @@
 # Please export this executable in your path to use it easily after that
 
 filename="$1"
-arm-linux-gnueabihf-as $filename.s -o $filename.o && arm-linux-gnueabihf-ld -static $filename.o -o $filename &&
+arm-linux-gnueabihf-as -march="armv6+fp" -mfloat-abi=soft -g $filename.s -o $filename.o -Wall && arm-linux-gnueabihf-gcc -static -g $filename.o -o $filename -lc &&
 ./$filename &&
-rm $filename.o $filename
+rm $filename.o
