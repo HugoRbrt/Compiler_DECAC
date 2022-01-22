@@ -17,14 +17,16 @@
    |  ||     ||  +> [13, 4] Identifier (void)
    |  ||     ||  +> [13, 9] Identifier (test)
    |  ||     ||  +> ListDeclParam [List with 0 elements]
-   |  ||     ||  +> ListDeclVar [List with 0 elements]
-   |  ||     ||  `> ListInst [List with 0 elements]
+   |  ||     ||  `> [13, 16] MethodBody
+   |  ||     ||     +> ListDeclVar [List with 0 elements]
+   |  ||     ||     `> ListInst [List with 0 elements]
    |  ||     []> [15, 4] DeclMethod
    |  ||         +> [15, 4] Identifier (void)
    |  ||         +> [15, 9] Identifier (test2)
    |  ||         +> ListDeclParam [List with 0 elements]
-   |  ||         +> ListDeclVar [List with 0 elements]
-   |  ||         `> ListInst [List with 0 elements]
+   |  ||         `> [15, 17] MethodBody
+   |  ||            +> ListDeclVar [List with 0 elements]
+   |  ||            `> ListInst [List with 0 elements]
    |  []> [19, 0] DeclClass
    |      +> [19, 6] Identifier (B)
    |      +> [19, 8] Identifier (Object)

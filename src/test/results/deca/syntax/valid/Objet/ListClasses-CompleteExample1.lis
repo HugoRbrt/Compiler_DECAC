@@ -18,17 +18,18 @@
    |             +> [15, 4] Identifier (void)
    |             +> [15, 9] Identifier (m)
    |             +> ListDeclParam [List with 0 elements]
-   |             +> ListDeclVar [List with 1 elements]
-   |             |  []> [16, 10] DeclVar
-   |             |      +> [16, 8] Identifier (A)
-   |             |      +> [16, 10] Identifier (a)
-   |             |      `> [16, 12] Initialization
-   |             |         `> [16, 14] New
-   |             |            `> [16, 18] Identifier (A)
-   |             `> ListInst [List with 1 elements]
-   |                []> [17, 8] Println
-   |                    `> ListExpr [List with 1 elements]
-   |                       []> [17, 17] Selection
-   |                           +> [17, 16] Identifier (a)
-   |                           `> [17, 18] Identifier (x)
+   |             `> [15, 13] MethodBody
+   |                +> ListDeclVar [List with 1 elements]
+   |                |  []> [16, 10] DeclVar
+   |                |      +> [16, 8] Identifier (A)
+   |                |      +> [16, 10] Identifier (a)
+   |                |      `> [16, 12] Initialization
+   |                |         `> [16, 14] New
+   |                |            `> [16, 18] Identifier (A)
+   |                `> ListInst [List with 1 elements]
+   |                   []> [17, 8] Println
+   |                       `> ListExpr [List with 1 elements]
+   |                          []> [17, 17] Selection
+   |                              +> [17, 16] Identifier (a)
+   |                              `> [17, 18] Identifier (x)
    `> EmptyMain
