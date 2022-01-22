@@ -21,7 +21,7 @@ public class Warning {
         int i = sb.indexOf((", "));
         sb.setCharAt(i, ':'); sb.deleteCharAt(i+1);
         System.err.println(
-                "[\u001B[31mWARNING\u001B[0m]" + location.getFilename() + " " +
-                sb + ":" + message);
+                "[\u001B[31mWARNING\u001B[0m]" + location.getFilename() + ":" +
+                sb + ": " + message);
     }
 }

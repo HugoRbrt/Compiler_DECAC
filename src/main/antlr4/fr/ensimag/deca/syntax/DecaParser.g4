@@ -26,6 +26,7 @@ options {
 @header {
     import fr.ensimag.deca.tree.*;
     import java.io.PrintStream;
+    import java.math.*;
     import org.apache.log4j.Logger;
 }
 
@@ -501,18 +502,32 @@ literal returns[AbstractExpr tree]
             $tree = new IntLiteral(Integer.parseInt($INT.text));
         } catch (NumberFormatException e) {
             System.err.println(tmploc.getFilename() + ":" + tmploc.getLine()
-                + ":" + tmploc.getPositionInLine() + ": Int literal out of expected range");
+                + ":" + tmploc.getPositionInLine() + ": Int literal out of expected range.");
             throw e;
         }
         LOG.trace($tree);
         }
     | fd=FLOAT {
-        try {
-            $tree = new FloatLiteral(Float.parseFloat($fd.text));
-        } catch (NumberFormatException e) {
+        char[] charArray = $fd.text.toCharArray();
+        boolean strictlyPos = false;
+        for (char c: charArray) {
+            if (c != '0' && c != '.') {
+                strictlyPos = true;
+                break;
+            }
+        }
+        if (strictlyPos && Float.parseFloat($fd.text) == 0) {
             System.err.println(tmploc.getFilename() + ":" + tmploc.getLine()
-                + ":" + tmploc.getPositionInLine() + ": Int literal out of expected range");
-            throw e;
+                + ":" + tmploc.getPositionInLine() + ": Float literal underflow.");
+            throw new NumberFormatException();
+        } else {
+            try {
+                $tree = new FloatLiteral(Float.parseFloat($fd.text));
+            } catch (NumberFormatException e) {
+                System.err.println(tmploc.getFilename() + ":" + tmploc.getLine()
+                    + ":" + tmploc.getPositionInLine() + ": Float literal out of expected range.");
+                    throw e;
+                }
         }
         LOG.trace($tree);
         }
