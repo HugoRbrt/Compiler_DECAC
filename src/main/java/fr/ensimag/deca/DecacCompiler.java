@@ -67,8 +67,11 @@ public class DecacCompiler implements Runnable {
     public DecacCompiler(CompilerOptions compilerOptions, File source) {
         super();
         this.compilerOptions = compilerOptions;
-
-        program = new IMAProgram();
+        if(Objects.isNull(this.compilerOptions) || !this.compilerOptions.getArmBool()){
+            program = new IMAProgram();
+        }else{
+            program = new ARMProgram();
+        }
 
         this.source = source;
 
@@ -252,14 +255,14 @@ public class DecacCompiler implements Runnable {
         String sourceFile = source.getAbsolutePath();
         String[] tmp = sourceFile.split("\\.");
         String destFile = tmp[0];
-        for (int i = 1; i < tmp.length-1; i++) {
-            destFile += "." +tmp[i];
+        for (int i = 1; i < tmp.length - 1; i++) {
+            destFile += "." + tmp[i];
         }
-        /*if(Objects.isNull(this.compilerOptions) || !this.compilerOptions.getArmBool()){*/
-        destFile += ".ass";
-        /*else{
+        if (!this.compilerOptions.getArmBool()) {
+            destFile += ".ass";
+        } else {
             destFile += ".s";
-        }*/
+        }
         LOG.info(" dest:"+ destFile);
         PrintStream err = System.err;
         PrintStream out = System.out;
