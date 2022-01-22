@@ -1,1 +1,1 @@
-src/test/deca/context/invalid/Objet/BadNew.deca:18:10: (RULE 3.42) New instance must be of a class type.
+src/test/deca/context/invalid/Objet/BadNew.deca:18:10: (RULE 3.42) New instance must be of a class type: new [31mint[0m().

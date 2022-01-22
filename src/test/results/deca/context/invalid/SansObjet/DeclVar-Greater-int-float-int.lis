@@ -1,1 +1,1 @@
-src/test/deca/context/invalid/SansObjet/DeclVar-Greater-int-float-int.deca:14:14: (RULE 3.28) Incompatible type assignment.
+src/test/deca/context/invalid/SansObjet/DeclVar-Greater-int-float-int.deca:14:14: (RULE 3.28) Incompatible type assignment. Lvalue is of type int, assigned value is of type boolean.

@@ -9,4 +9,8 @@ exitnum=$(($exitnum + $?))
 ./allin-Objet.sh
 exitnum=$(($exitnum + $?))
 
+./allin-provided.sh
+exitnum=$(($exitnum + $?))
+
+
 exit $exitnum

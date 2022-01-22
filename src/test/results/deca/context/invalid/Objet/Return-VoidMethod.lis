@@ -1,0 +1,1 @@
+src/test/deca/context/invalid/Objet/Return-VoidMethod.deca:11:29: (RULE 3.24) 'return' statement inapplicable in method of return type void.

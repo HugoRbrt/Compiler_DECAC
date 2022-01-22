@@ -1,1 +1,1 @@
-src/test/deca/context/invalid/Objet/BadTypeCall-Var.deca:20:17: (RULE 3.71) Field or method selection applied to expression of non-class type.
+src/test/deca/context/invalid/Objet/BadTypeCall-Var.deca:20:17: (RULE 3.71) Method selection applied to expression of non-class type: ([31mint[0m).foo

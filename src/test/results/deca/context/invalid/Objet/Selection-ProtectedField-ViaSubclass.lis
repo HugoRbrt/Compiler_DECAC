@@ -1,1 +1,1 @@
-src/test/deca/context/invalid/Objet/Selection-ProtectedField-ViaSubclass.deca:18:18: (RULE 3.66) Protected field is not visible in the current scope.
+src/test/deca/context/invalid/Objet/Selection-ProtectedField-ViaSubclass.deca:18:18: (RULE 3.66) Protected field is not visible in the current scope. Field 'x' declared in class A, current scope is class X.

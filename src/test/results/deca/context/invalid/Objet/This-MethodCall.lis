@@ -1,1 +1,1 @@
-src/test/deca/context/invalid/Objet/This-MethodCall.deca:18:13: (RULE 0.1) variable has not been declared.
+src/test/deca/context/invalid/Objet/This-MethodCall.deca:18:13: (RULE 0.1) variable 'fooo' has not been declared.

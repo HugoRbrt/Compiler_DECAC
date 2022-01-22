@@ -1,1 +1,1 @@
-src/test/deca/context/invalid/Objet/And-Field-BadType.deca:21:20: (RULE 3.33) Illegal operand type.
+src/test/deca/context/invalid/Objet/And-Field-BadType.deca:21:20: (RULE 3.33) Illegal operand type: is boolean, boolean required.

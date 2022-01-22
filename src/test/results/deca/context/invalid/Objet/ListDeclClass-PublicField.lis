@@ -1,1 +1,1 @@
-src/test/deca/context/invalid/Objet/ListDeclClass-PublicField.deca:17:11: (RULE 3.65) Field or method selection applied to expression of non-class type.
+src/test/deca/context/invalid/Objet/ListDeclClass-PublicField.deca:17:11: (RULE 3.65) Field selection applied to expression of non-class type: ([31mint[0m).x

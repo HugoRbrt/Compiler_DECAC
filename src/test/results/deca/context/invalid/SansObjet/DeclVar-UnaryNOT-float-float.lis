@@ -1,1 +1,1 @@
-src/test/deca/context/invalid/SansObjet/DeclVar-UnaryNOT-float-float.deca:13:14: (RULE 3.37) Illegal operand type.
+src/test/deca/context/invalid/SansObjet/DeclVar-UnaryNOT-float-float.deca:13:14: (RULE 3.37) Illegal operand type: is float, boolean required.

@@ -1,1 +1,1 @@
-src/test/deca/context/invalid/Objet/MethodCall-DownCast.deca:26:6: (RULE 0.1) variable has not been declared.
+src/test/deca/context/invalid/Objet/MethodCall-DownCast.deca:26:6: (RULE 0.1) variable 'fooB' has not been declared.
