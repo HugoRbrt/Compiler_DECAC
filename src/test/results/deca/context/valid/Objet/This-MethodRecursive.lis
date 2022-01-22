@@ -19,8 +19,9 @@
    |  ||         +> [12, 9] Identifier (foo)
    |  ||         |  definition: method defined at [12, 4], type=void
    |  ||         +> ListDeclParam [List with 0 elements]
-   |  ||         +> ListDeclVar [List with 0 elements]
-   |  ||         `> ListInst [List with 0 elements]
+   |  ||         `> [12, 15] MethodBody
+   |  ||            +> ListDeclVar [List with 0 elements]
+   |  ||            `> ListInst [List with 0 elements]
    |  []> [16, 0] DeclClass
    |      +> [16, 6] Identifier (B)
    |      |  definition: type defined at [16, 0], type=B
@@ -40,22 +41,23 @@
    |             +> [18, 9] Identifier (init)
    |             |  definition: method defined at [18, 4], type=void
    |             +> ListDeclParam [List with 0 elements]
-   |             +> ListDeclVar [List with 0 elements]
-   |             `> ListInst [List with 2 elements]
-   |                []> [19, 16] MethodCall
-   |                ||  type: void
-   |                ||  +> [19, 8] This
-   |                ||  |  type: B
-   |                ||  +> [19, 13] Identifier (foo)
-   |                ||  |  definition: method defined at [12, 4], type=void
-   |                ||  `> ListExpr [List with 0 elements]
-   |                []> [20, 17] MethodCall
-   |                    type: void
-   |                    +> [20, 8] This
-   |                    |  type: B
-   |                    +> [20, 13] Identifier (init)
-   |                    |  definition: method defined at [18, 4], type=void
-   |                    `> ListExpr [List with 0 elements]
+   |             `> [18, 16] MethodBody
+   |                +> ListDeclVar [List with 0 elements]
+   |                `> ListInst [List with 2 elements]
+   |                   []> [19, 16] MethodCall
+   |                   ||  type: void
+   |                   ||  +> [19, 8] This
+   |                   ||  |  type: B
+   |                   ||  +> [19, 13] Identifier (foo)
+   |                   ||  |  definition: method defined at [12, 4], type=void
+   |                   ||  `> ListExpr [List with 0 elements]
+   |                   []> [20, 17] MethodCall
+   |                       type: void
+   |                       +> [20, 8] This
+   |                       |  type: B
+   |                       +> [20, 13] Identifier (init)
+   |                       |  definition: method defined at [18, 4], type=void
+   |                       `> ListExpr [List with 0 elements]
    `> [24, 0] Main
       +> ListDeclVar [List with 0 elements]
       `> ListInst [List with 0 elements]
