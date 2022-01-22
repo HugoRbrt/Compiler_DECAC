@@ -6,13 +6,17 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.ARMRegister;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
-import fr.ensimag.ima.pseudocode.instructions.BEQ;
 import fr.ensimag.ima.pseudocode.instructions.BNE;
 import fr.ensimag.ima.pseudocode.instructions.BRA;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
 import java.io.PrintStream;
+
+import fr.ensimag.ima.pseudocode.instructionsARM.b;
+import fr.ensimag.ima.pseudocode.instructionsARM.bne;
+import fr.ensimag.ima.pseudocode.instructionsARM.cmp;
 import org.apache.commons.lang.Validate;
 
 /**
@@ -49,6 +53,19 @@ public class While extends AbstractInst {
         compiler.addInstruction(new BNE(endWhile));
         body.codeGenListInst(compiler);
         compiler.addInstruction(new BRA(beginWhile));
+        compiler.addLabel(endWhile);
+    }
+
+    @Override
+    protected void codeGenInstARM(DecacCompiler compiler) {
+        Label beginWhile = new Label();
+        Label endWhile = new Label();
+        compiler.addLabel(beginWhile);
+        condition.codeGenInstARM(compiler);
+        compiler.addInstruction(new cmp(ARMRegister.r0, 1));
+        compiler.addInstruction(new bne(endWhile.toString()));
+        body.codeGenListInstARM(compiler);
+        compiler.addInstruction(new b(beginWhile.toString()));
         compiler.addLabel(endWhile);
     }
 

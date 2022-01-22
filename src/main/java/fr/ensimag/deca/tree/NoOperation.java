@@ -29,6 +29,11 @@ public class NoOperation extends AbstractInst {
     }
 
     @Override
+    protected void codeGenInstARM(DecacCompiler compiler) {
+        compiler.addARMComment("No operation here");
+    }
+
+    @Override
     public void decompile(IndentPrintStream s) {
         s.print(";");
     }

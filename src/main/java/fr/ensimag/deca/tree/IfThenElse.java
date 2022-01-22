@@ -2,6 +2,7 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.ima.pseudocode.ARMRegister;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
@@ -13,6 +14,10 @@ import fr.ensimag.ima.pseudocode.instructions.BNE;
 import fr.ensimag.ima.pseudocode.instructions.BRA;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
 import java.io.PrintStream;
+
+import fr.ensimag.ima.pseudocode.instructionsARM.b;
+import fr.ensimag.ima.pseudocode.instructionsARM.bne;
+import fr.ensimag.ima.pseudocode.instructionsARM.cmp;
 import org.apache.commons.lang.Validate;
 
 /**
@@ -58,6 +63,21 @@ public class IfThenElse extends AbstractInst {
         compiler.addInstruction(new BRA(endElse));
         compiler.addLabel(beginElse);
         elseBranch.codeGenListInst(compiler);
+        compiler.addLabel(endElse);
+    }
+
+    @Override
+    protected void codeGenInstARM(DecacCompiler compiler) {
+        Label beginElse = new Label();
+        Label endElse = new Label();
+
+        condition.codeGenInstARM(compiler);
+        compiler.addInstruction(new cmp(ARMRegister.r0, 1));
+        compiler.addInstruction(new bne(beginElse.toString()));
+        thenBranch.codeGenListInstARM(compiler);
+        compiler.addInstruction(new b(endElse.toString()));
+        compiler.addLabel(beginElse);
+        elseBranch.codeGenListInstARM(compiler);
         compiler.addLabel(endElse);
     }
 

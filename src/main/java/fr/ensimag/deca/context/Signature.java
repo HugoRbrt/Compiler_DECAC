@@ -36,7 +36,7 @@ public class Signature {
             sb.append(t).append(", ");
         }
         String sig = sb.toString();
-        return sig.substring(0, sig.length()-2);
+        return sig.length() == 0? sig : sig.substring(0, sig.length()-2);
     }
 
     @Override

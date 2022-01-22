@@ -28,5 +28,14 @@ public class Label extends Operand {
         Validate.isTrue(name.matches("^[a-zA-Z][a-zA-Z0-9_.]*$"), "Invalid label name " + name);
         this.name = name;
     }
+
+    
+    public Label(String name, boolean arm) {
+        super();
+        Validate.isTrue(name.length() <= 1024, "Label name too long, not supported by ARM");
+        Validate.isTrue(name.matches("^[_][a-zA-Z][a-zA-Z0-9_.]*$"), "Invalid label name " + name);
+        this.name = name;
+    }
+
     private String name;
 }

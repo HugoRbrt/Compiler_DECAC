@@ -67,4 +67,8 @@ public class NoInitialization extends AbstractInitialization {
         compiler.addInstruction(new LOAD(new ImmediateInteger(0), Register.R0));
     }
 
+    protected void codeGenDeclVarARM(DecacCompiler compiler, AbstractIdentifier varName) {
+        // nothing to do
+    }
+
 }

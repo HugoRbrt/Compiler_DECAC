@@ -2,6 +2,7 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.ARMRegister;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
@@ -42,8 +43,14 @@ public abstract class AbstractUnaryExpr extends AbstractExpr {
         //compiler.getListRegister().freeRegister(usedRegister, compiler);
     }
 
+    protected void codeGenInstARM(DecacCompiler compiler){
+        operand.codeGenInstARM(compiler);
+        this.codeGenOperationsARM(ARMRegister.r0, compiler);
+    }
+
     abstract void codeGenOperations(GPRegister storedRegister, DecacCompiler compiler);
-    
+
+    abstract void codeGenOperationsARM(ARMRegister storedRegister, DecacCompiler compiler);
 
     @Override
     public void decompile(IndentPrintStream s) {

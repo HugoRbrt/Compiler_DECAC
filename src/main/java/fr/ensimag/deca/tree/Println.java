@@ -1,7 +1,9 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.ima.pseudocode.ARMRegister;
 import fr.ensimag.ima.pseudocode.instructions.WNL;
+import fr.ensimag.ima.pseudocode.instructionsARM.*;
 
 /**
  * @author gl49
@@ -23,6 +25,15 @@ public class Println extends AbstractPrint {
         compiler.addInstruction(new WNL());
     }
 
+    private static boolean armAlreadyLabel = false;
+
+    @Override
+    protected void codeGenInstARM(DecacCompiler compiler) {
+        super.codeGenInstARM(compiler);
+        compiler.addInstruction(new ldr(ARMRegister.r0, "="+"newline"));
+        compiler.addInstruction(new bl("printf"));
+        
+    }
 
     @Override
     String getSuffix() {

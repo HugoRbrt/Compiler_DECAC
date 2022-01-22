@@ -2,9 +2,12 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.ARMRegister;
 import fr.ensimag.ima.pseudocode.instructions.OPP;
 import fr.ensimag.ima.pseudocode.instructions.SUB;
 import fr.ensimag.ima.pseudocode.instructions.BOV;
+import fr.ensimag.ima.pseudocode.instructionsARM.*;
+
 
 /**
  * @author gl49
@@ -25,6 +28,17 @@ public class Minus extends AbstractOpArith {
             compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Float arithmetic overflow")));
         }
         compiler.addInstruction(new OPP(storedRegister, storedRegister));
+    }
+
+    public void codeGenOperationsARM(ARMRegister Reg1, ARMRegister storedRegister, DecacCompiler compiler){
+        if(getType().isInt()) {
+            compiler.addInstruction(new sub(storedRegister, Reg1, storedRegister));
+        } else {
+            compiler.addInstruction(new vmov(ARMRegister.s0, Reg1));
+            compiler.addInstruction(new vmov(ARMRegister.s1, storedRegister));
+            compiler.addARMBlock("        vsub.f32 s0, s0, s1");
+            compiler.addInstruction(new vmov(storedRegister, ARMRegister.s0));
+        }
     }
 
     @Override
