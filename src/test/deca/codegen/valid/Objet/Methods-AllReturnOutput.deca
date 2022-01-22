@@ -3,8 +3,8 @@
 //
 // Result:
 //      equal
-//      1 2.00000e+01
-//      OK1 OK2 OK3²
+//      1 2.00000e+00
+//      OK1 OK2
 //
 // History:
 //      Created on 17/1/2022
@@ -28,27 +28,22 @@ class A {
         return ( (float) (x+y) );
     }
 
-    void signatureVoidWith() {
+    void signatureVoid() {
         print(" OK2");
-    }
-
-    void signatureVoidWithout() {
-        println(" OK3");
     }
 }
 
 {
     A instance = new A();
     A instanceBis = instance.signatureA();
-    if (instance.equals((Object) (instanceBis))) {
+    if (instance.equals(instanceBis)) {
         println("equal");
     } 
     println(instanceBis.signatureInt(1), " ", instance.signatureFloat(2.0));
     if (instance.signatureBoolean(0)) {
         print("OK1");
     }
-    instance.signatureVoidWith();
-    instanceBis.signatureVoidWithout();
+    instance.signatureVoid();
 }
 
 
