@@ -1,1 +1,1 @@
-src/test/deca/context/invalid/Objet/BinaryOP-ProtectedField.deca:21:16: (RULE 3.66) Protected field is not visible in the current scope.
+src/test/deca/context/invalid/Objet/BinaryOP-ProtectedField.deca:21:16: (RULE 3.66) Protected field is not visible in the current scope. Field 'x' declared in class A, current scope is main program.

@@ -1,1 +1,1 @@
-src/test/deca/context/invalid/Objet/This-Main.deca:15:10: (RULE 3.43) 'This' reference outside of class scope.
+src/test/deca/context/invalid/Objet/This-Main.deca:15:10: (RULE 3.43) 'this' reference used outside of class scope.

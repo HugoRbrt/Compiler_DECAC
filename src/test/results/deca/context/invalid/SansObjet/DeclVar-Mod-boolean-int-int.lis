@@ -1,1 +1,1 @@
-src/test/deca/context/invalid/SansObjet/DeclVar-Mod-boolean-int-int.deca:14:18: (RULE 3.28) Incompatible type assignment.
+src/test/deca/context/invalid/SansObjet/DeclVar-Mod-boolean-int-int.deca:14:18: (RULE 3.28) Incompatible type assignment. Lvalue is of type boolean, assigned value is of type int.

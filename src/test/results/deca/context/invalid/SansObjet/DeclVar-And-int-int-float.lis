@@ -1,1 +1,1 @@
-src/test/deca/context/invalid/SansObjet/DeclVar-And-int-int-float.deca:14:14: (RULE 3.33) Illegal operand type.
+src/test/deca/context/invalid/SansObjet/DeclVar-And-int-int-float.deca:14:14: (RULE 3.33) Illegal operand type: is int, boolean required.

@@ -1,1 +1,1 @@
-src/test/deca/context/invalid/SansObjet/DeclVar-Greater-boolean-boolean-boolean.deca:13:18: (RULE 3.33) Illegal operand type.
+src/test/deca/context/invalid/SansObjet/DeclVar-Greater-boolean-boolean-boolean.deca:13:18: (RULE 3.33) Illegal operand type: is boolean, int or float required.

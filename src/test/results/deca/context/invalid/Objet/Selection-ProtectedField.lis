@@ -1,1 +1,1 @@
-src/test/deca/context/invalid/Objet/Selection-ProtectedField.deca:17:15: (RULE 3.66) Selecting class not a subclass of current class.
+src/test/deca/context/invalid/Objet/Selection-ProtectedField.deca:17:15: (RULE 3.66) Selecting class is not a subclass of the current class. Selecting class is A, current class is B.

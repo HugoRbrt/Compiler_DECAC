@@ -1,1 +1,1 @@
-src/test/deca/context/invalid/Objet/Void-Field.deca:11:3: (RULE 2.5) Field cannot be void type.
+src/test/deca/context/invalid/Objet/Void-Field.deca:11:3: (RULE 2.5) Field cannot be of type void: [31mvoid[0m x

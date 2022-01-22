@@ -1,0 +1,1 @@
+src/test/deca/context/invalid/SansObjet/DeclVar-Void.deca:11:4: (RULE 3.17) Variable cannot be of type void: [31mvoid[0m x

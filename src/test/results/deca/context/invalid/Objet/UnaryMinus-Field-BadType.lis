@@ -1,1 +1,1 @@
-src/test/deca/context/invalid/Objet/UnaryMinus-Field-BadType.deca:21:19: (RULE 3.37) Illegal operand type.
+src/test/deca/context/invalid/Objet/UnaryMinus-Field-BadType.deca:21:19: (RULE 3.37) Illegal operand type: is A, int or float required.

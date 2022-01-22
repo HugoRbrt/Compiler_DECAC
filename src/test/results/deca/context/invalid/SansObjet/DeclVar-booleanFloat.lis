@@ -1,1 +1,1 @@
-src/test/deca/context/invalid/SansObjet/DeclVar-booleanFloat.deca:11:16: (RULE 3.28) Incompatible type assignment.
+src/test/deca/context/invalid/SansObjet/DeclVar-booleanFloat.deca:11:16: (RULE 3.28) Incompatible type assignment. Lvalue is of type boolean, assigned value is of type float.

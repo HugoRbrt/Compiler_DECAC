@@ -1,0 +1,1 @@
+src/test/deca/context/invalid/SansObjet/IfThenElse-Condition-NoBoolean.deca:12:8: (RULE 3.29) Condition must be a boolean expression: ([31mint[0m)

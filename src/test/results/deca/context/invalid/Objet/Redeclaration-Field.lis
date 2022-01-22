@@ -1,1 +1,1 @@
-src/test/deca/context/invalid/Objet/Redeclaration-Field.deca:14:18: (RULE 2.4) Method or field has already been declared.
+src/test/deca/context/invalid/Objet/Redeclaration-Field.deca:14:18: (RULE 2.4) Method or field 'x' has already been declared.
