@@ -10,7 +10,7 @@ import fr.ensimag.ima.pseudocode.ARMGPRegister;
  */
 public class str extends ARMBinaryInstructionStringToReg {
 
-    public str(ARMGPRegister op1, String op2) {
+    public str(ARMRegister op1, String op2) {
         super(op1, op2);
     }
 }

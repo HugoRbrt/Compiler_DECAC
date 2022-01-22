@@ -30,7 +30,7 @@ public class NoOperation extends AbstractInst {
 
     @Override
     protected void codeGenInstARM(DecacCompiler compiler) {
-        throw new UnsupportedOperationException("not yet implemented");
+        compiler.addARMComment("No operation here");
     }
 
     @Override

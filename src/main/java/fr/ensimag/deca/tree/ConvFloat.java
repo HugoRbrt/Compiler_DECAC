@@ -38,6 +38,10 @@ public class ConvFloat extends AbstractUnaryExpr {
     public void codeGenOperations(GPRegister storedRegister, DecacCompiler compiler){
         // Nothing to do
     }
+    public void codeGenOperationsARM(ARMRegister storedRegister, DecacCompiler compiler){
+        // Nothing to do
+    }
+
 
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex){
         codeGenInst(compiler);

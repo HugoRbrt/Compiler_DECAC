@@ -7,11 +7,14 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.Definition;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.ARMLine;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.ARMRegister;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
+import fr.ensimag.ima.pseudocode.instructionsARM.ldr;
+import fr.ensimag.ima.pseudocode.instructionsARM.str;
 
 /**
  * Assignment, i.e. lvalue = expr.
@@ -68,6 +71,7 @@ public class Assign extends AbstractBinaryExpr {
     }
 
     public void codeGenOperationsARM(ARMRegister Reg1, ARMRegister storedRegister, DecacCompiler compiler){
-        // TODO
+        compiler.addInstruction(new ldr(ARMRegister.r2, "="+((Identifier)getLeftOperand()).getName().getName()));
+        compiler.addInstruction(new str(storedRegister, "[r2]"));
     }
 }

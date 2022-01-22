@@ -1,6 +1,6 @@
 package fr.ensimag.ima.pseudocode.instructionsARM;
+import fr.ensimag.ima.pseudocode.ARMUnaryInstructionString;
 
-import fr.ensimag.ima.pseudocode.*;
 
 
 /**
