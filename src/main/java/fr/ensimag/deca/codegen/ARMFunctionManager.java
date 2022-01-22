@@ -40,6 +40,8 @@ public class ARMFunctionManager {
         compiler.addARMBlock("flottant: .asciz \"%f\"");
         compiler.addARMBlock("int: .asciz \"%i\"");
         compiler.addARMBlock("newline: .asciz \"\\n\"");
+        compiler.addARMBlock("tmpint" + ": " + ".int 0");  //temporary label to have an address to load the result of readint
+        compiler.addARMBlock("tmpfloat" + ": " + ".float 0");  //temporary label to have an address to load the result of readfloat
         compiler.addARMBlock(".text");
         compiler.addARMBlock("end:");
         compiler.addInstruction(new pop(ARMRegister.ip, ARMRegister.pc));

@@ -10,6 +10,8 @@ import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.RFLOAT;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
 import fr.ensimag.ima.pseudocode.instructions.BOV;
+import fr.ensimag.ima.pseudocode.instructionsARM.*;
+import fr.ensimag.ima.pseudocode.ARMRegister;
 
 import java.io.PrintStream;
 
@@ -38,6 +40,20 @@ public class ReadFloat extends AbstractReadExpr {
         codeGenInst(compiler);
         compiler.addInstruction(new LOAD(compiler.getListRegister().R0, compiler.getListRegister().R1));
         super.codeGenPrint(compiler, printHex);
+    }
+
+    public void codeGenInstARM(DecacCompiler compiler) {
+        compiler.addInstruction(new ldr(ARMRegister.r0, "=flottant"));
+        compiler.addInstruction(new ldr(ARMRegister.r1, "=tmpfloat"));
+        compiler.addInstruction(new bl("scanf"));
+        compiler.addInstruction(new ldr(ARMRegister.r1, "=tmpfloat"));
+        compiler.addInstruction(new ldr(ARMRegister.r0, "[r1]"));
+    }
+
+    protected void codeGenPrintARM(DecacCompiler compiler, boolean printHex){
+        codeGenInstARM(compiler);
+        compiler.addInstruction(new ldr(ARMRegister.r0, "=tmpfloat"));
+        super.codeGenPrintARM(compiler, printHex);
     }
 
     @Override
