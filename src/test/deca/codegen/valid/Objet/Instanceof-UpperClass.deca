@@ -2,7 +2,7 @@
 //      Program verifying if instanceof is well designed for a subclass
 //
 // Result:
-//      OK
+//      OK1
 //
 // History:
 //      created on 17/1/2022
@@ -10,7 +10,7 @@
 
 class A { }
 class B extends A { int x; }
-class C extends B { }
+class C extends B { int x = 1;}
 
 {
     C a;

@@ -44,7 +44,6 @@ class B extends A {
         print("OK1 ");
     }
 
-    b.setX(2);
     if ( ! b.equals(a) ) { // we have (! a instance of A)
         print("OK2");
     }
