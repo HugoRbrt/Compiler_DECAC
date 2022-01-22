@@ -30,7 +30,7 @@ public class ARMBinaryInstructionStringToReg extends Instruction {
         s.print(operand2);
     }
 
-    public ARMBinaryInstructionStringToReg(ARMGPRegister op1, String op2) {
+    public ARMBinaryInstructionStringToReg(ARMRegister op1, String op2) {
         Validate.notNull(op1);
         Validate.notNull(op2);
         this.operand1 = op1;

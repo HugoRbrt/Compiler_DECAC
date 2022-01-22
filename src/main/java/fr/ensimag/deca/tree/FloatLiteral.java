@@ -4,16 +4,14 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.ima.pseudocode.ARMRegister;
+import fr.ensimag.ima.pseudocode.*;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.ima.pseudocode.ARMLine;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
 import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
 import fr.ensimag.ima.pseudocode.instructionsARM.*;
-import fr.ensimag.ima.pseudocode.ImmediateFloat;
-import fr.ensimag.ima.pseudocode.LabelARM;
+
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
@@ -60,7 +58,7 @@ public class FloatLiteral extends AbstractExpr {
 
     @Override
     protected void codeGenPrintARM(DecacCompiler compiler, boolean printHex) {
-        LabelARM tmplabel = new LabelARM();
+        Label tmplabel = new Label();
         compiler.addARMBlock(".data");
         compiler.addARMBlock(tmplabel + ": " + ".float " + value);  //label with name of variable 
         compiler.addARMBlock(".text");
@@ -98,7 +96,7 @@ public class FloatLiteral extends AbstractExpr {
     }
 
     public void codeGenInstARM(DecacCompiler compiler){
-        LabelARM tmplabel = new LabelARM();
+        Label tmplabel = new Label();
         compiler.addARMBlock(".data");
         compiler.addARMBlock(tmplabel + ": " + ".float " + value);  //label with name of variable 
         compiler.addARMBlock(".text");

@@ -8,5 +8,6 @@
 //    cree le 12/01/2022
 
 {
-    boolean y = 1.9 > 2;
+    int x = (int) (5.0);
+    print(x);
 }
