@@ -79,6 +79,8 @@ public class Program extends AbstractProgram {
         //creation of ARM Register
         compiler.setListRegisterARM(new ARMRegister());
         main.codeGenMainARM(compiler);
+        compiler.getArmFunctionManager().genCodeFunctionManager(compiler);
+        compiler.getArmErrorManager().genCodeErrorManagerARM(compiler);
     }
 
     @Override

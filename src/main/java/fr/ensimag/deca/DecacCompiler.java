@@ -228,6 +228,14 @@ public class DecacCompiler implements Runnable {
         return ListRegisterARM;
     }
 
+    public ARMFunctionManager getArmFunctionManager() {
+        return armFunctionManager;
+    }
+
+    public ARMErrorManager getArmErrorManager() {
+        return armErrorManager;
+    }
+
 
     /**
      * The main program. Every instruction generated will eventually end up here.
@@ -370,28 +378,16 @@ public class DecacCompiler implements Runnable {
         }
 
         addComment("start main program");
-        if(Objects.isNull(this.compilerOptions) || !this.compilerOptions.getArmBool()){
+        if(!this.compilerOptions.getArmBool()){
             prog.codeGenProgram(this);
         }else{
             prog.codeGenProgramARM(this);
         }
         
         addComment("end main program");
-        
-        // after analysis of the program, we generate the TSTO instruction
-        int d1 = codeAnalyzer.getNeededStackSize();
-        int d2 = codeAnalyzer.getNbDeclaredVariables();
-        if(Objects.isNull(this.compilerOptions) || !this.compilerOptions.getArmBool()){
-            errorManager.setTstoArg(d1);
-            errorManager.setAddspArg(d2);
-        
-            errorManager.addTstoCheck(this);
-            errorManager.genCodeErrorManager(this);
-        }
 
-        else {
-            armFunctionManager.genCodeFunctionManager(this);
-            armErrorManager.genCodeErrorManagerARM(this);
+        if(this.compilerOptions.getArmBool()){
+
         }
         
         LOG.debug("Generated assembly code:" + nl + program.display());
@@ -462,5 +458,6 @@ public class DecacCompiler implements Runnable {
     public void resetCodeAnalyzer() {
         codeAnalyzer = new CodeAnalyzer();
     }
-    
+
+
 }
