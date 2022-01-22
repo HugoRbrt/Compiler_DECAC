@@ -3,8 +3,6 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.deca.tools.SymbolTable;
-import fr.ensimag.ima.pseudocode.Label;
 import java.io.PrintStream;
 import java.util.Iterator;
 
@@ -17,7 +15,6 @@ import org.apache.commons.lang.Validate;
  * @date 01/01/2022
  */
 public abstract class AbstractPrint extends AbstractInst {
-    private static int printCounter=0;
 
     private boolean printHex;
     private ListExpr arguments = new ListExpr();
@@ -50,6 +47,13 @@ public abstract class AbstractPrint extends AbstractInst {
     protected void codeGenInst(DecacCompiler compiler) {
         for (AbstractExpr a : getArguments().getList()) {
             a.codeGenPrint(compiler, printHex);
+        }
+    }
+
+    @Override
+    protected void codeGenInstARM(DecacCompiler compiler) {
+        for (AbstractExpr a : getArguments().getList()) {
+            a.codeGenPrintARM(compiler, printHex);
         }
     }
 

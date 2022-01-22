@@ -29,4 +29,7 @@ public abstract class AbstractInitialization extends Tree {
     protected abstract void codeGenDeclVar(DecacCompiler compiler, AbstractIdentifier varName);
 
     protected abstract void codeGenDeclField(DecacCompiler compiler);
+
+    protected abstract void codeGenDeclVarARM(DecacCompiler compiler, AbstractIdentifier varName);
+
 }

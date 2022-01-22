@@ -7,14 +7,19 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.ARMRegister;
+import fr.ensimag.ima.pseudocode.ARMGPRegister;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.POP;
 import fr.ensimag.ima.pseudocode.instructions.WINT;
 import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
 import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
+import fr.ensimag.ima.pseudocode.instructionsARM.*;
 import fr.ensimag.ima.pseudocode.ImmediateString;
 import fr.ensimag.deca.tree.FloatLiteral;
 import fr.ensimag.deca.tree.IntLiteral;
+import fr.ensimag.ima.pseudocode.instructionsARM.mov;
+
 
 /**
  * Binary expressions.
@@ -54,13 +59,23 @@ public abstract class  AbstractBinaryExpr extends AbstractExpr {
         this.rightOperand = rightOperand;
     }
 
-    protected void codeGenInst(DecacCompiler compiler){
+    protected void codeGenInst(DecacCompiler compiler) {
         leftOperand.codeGenInst(compiler);
         GPRegister usedRegister = compiler.getListRegister().getRegister(compiler);
+
         compiler.addInstruction(new LOAD(Register.R0, usedRegister));
         rightOperand.codeGenInst(compiler);
         this.codeGenOperations(usedRegister, Register.R0, compiler);
         compiler.getListRegister().freeRegister(usedRegister, compiler);
+
+    }
+
+    protected void codeGenInstARM(DecacCompiler compiler){
+        leftOperand.codeGenInstARM(compiler);
+        ARMGPRegister usedRegister = ARMRegister.getR(1);
+        compiler.addInstruction(new mov(usedRegister, ARMRegister.getR(0)));
+        rightOperand.codeGenInstARM(compiler);
+        this.codeGenOperationsARM(usedRegister, ARMRegister.getR(0), compiler);
     }
 
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex){
@@ -78,8 +93,24 @@ public abstract class  AbstractBinaryExpr extends AbstractExpr {
         }
     }
 
+    protected void codeGenPrintARM(DecacCompiler compiler, boolean printHex){
+        codeGenInstARM(compiler);
+        if(getType().isInt()) {
+            compiler.addInstruction(new mov(ARMRegister.r1, ARMRegister.r0));
+            compiler.addInstruction(new ldr(ARMRegister.r0, "=int"));
+        }
+        else {
+            compiler.addInstruction(new vmov(ARMRegister.s0, ARMRegister.r0));
+            compiler.addARMBlock("        vcvt.f64.f32 d0, s0");
+            compiler.addInstruction(new vmov(ARMRegister.r2, ARMRegister.r3, ARMRegister.d0));
+            compiler.addInstruction(new ldr(ARMRegister.r0, "=flottant"));
+        }
+        compiler.addInstruction(new bl("printf"));
+    }
+
     abstract void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler);
 
+    abstract void codeGenOperationsARM(ARMRegister Reg1, ARMRegister storedRegister, DecacCompiler compiler);
 
     @Override
     public void decompile(IndentPrintStream s) {

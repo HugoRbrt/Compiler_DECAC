@@ -17,10 +17,10 @@ import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.ima.pseudocode.ImmediateString;
 import java.io.PrintStream;
 import java.util.Objects;
-
+import fr.ensimag.ima.pseudocode.instructionsARM.*;
+import fr.ensimag.ima.pseudocode.ARMRegister;
 import fr.ensimag.ima.pseudocode.instructions.*;
 import org.apache.commons.lang.Validate;
-import org.apache.log4j.Logger;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
 
@@ -268,6 +268,30 @@ public class Identifier extends AbstractIdentifier {
         }
     }
 
+    protected void codeGenPrintARM(DecacCompiler compiler, boolean printHex){
+        /*
+        if (getDefinition().isExpression()) {
+            // Non testé
+            compiler.addInstruction(new mov(ARMRegister.r0,1));
+            compiler.addInstruction(new ldr(ARMRegister.r1, "=" + this.name.toString()));
+        }
+        */  
+        // Ici on ne gère pas les expressions qui sont en fait déjà géré par ARM car les variables sont déclarés dans la section data
+        // il suffit donc de récupérer le nom de la variable directement. Pas besoin de passer par la StackHashTable. 
+        if (definition.getType().isInt()) {
+            compiler.addInstruction(new ldr(ARMRegister.r0, "=int"));
+            compiler.addInstruction(new ldr(ARMRegister.r1, "=" + this.name.toString()));
+            compiler.addInstruction(new ldr(ARMRegister.r1, "[r1]"));
+        } else {
+            compiler.addInstruction(new ldr(ARMRegister.r1, "=" + this.name.toString()));
+            compiler.addInstruction(new vldr(ARMRegister.s0, "[r1]"));
+            compiler.addARMBlock("        vcvt.f64.f32 d0, s0");
+            compiler.addInstruction(new vmov(ARMRegister.r2, ARMRegister.r3, ARMRegister.d0));
+            compiler.addInstruction(new ldr(ARMRegister.r0, "=flottant"));        
+        }
+        compiler.addInstruction(new bl("printf"));
+    }
+
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
         if(getDefinition().isExpression()){
@@ -278,6 +302,15 @@ public class Identifier extends AbstractIdentifier {
             }else{
                 compiler.addInstruction(new LOAD(R, Register.R0));
             }
+        }
+    }
+
+    @Override
+    protected void codeGenInstARM(DecacCompiler compiler) {
+        if(getDefinition().isExpression()){
+            compiler.addInstruction(new ldr(ARMRegister.r0, "=" + this.name.toString()));
+            compiler.addInstruction(new ldr(ARMRegister.r0, "[r0]"));
+  
         }
     }
 }

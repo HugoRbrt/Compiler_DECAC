@@ -83,7 +83,30 @@ public class DeclVar extends AbstractDeclVar {
         compiler.getstackTable().putDeclVar(varName.getName(), Register.GB);
         initialization.codeGenDeclVar(compiler, varName);
     }
+
+    protected void codeGenDeclVarARM(DecacCompiler compiler){
+        initialization.codeGenDeclVarARM(compiler, varName);
+    }
     
+    /*
+     * Allocate place in ARM memory
+     */
+    protected void codeGenDeclVarAllocARM(DecacCompiler compiler){
+        if(!varName.getDefinition().getType().isString()){//si on veut declarer un string, il faut juste creer le symbol en java
+            if (varName.getDefinition().getType().isBoolean()) {
+                compiler.addARMBlock(varName.getName().getName() + ": " + ".int 0");  //label with name of variable   
+            }
+            if (varName.getDefinition().getType().isInt()) {
+                compiler.addARMBlock(varName.getName().getName() + ": " + ".int 0");  //label with name of variable   
+            }
+            if (varName.getDefinition().getType().isFloat()) {
+                compiler.addARMBlock(varName.getName().getName() + ": " + ".float 0");  //label with name of variable   
+            }
+        }    
+    }
+
+
+
     @Override
     protected
     void iterChildren(TreeFunction f) {

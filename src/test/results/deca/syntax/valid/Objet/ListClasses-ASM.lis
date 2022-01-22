@@ -1,0 +1,18 @@
+`> [10, 0] Program
+   +> ListDeclClass [List with 1 elements]
+   |  []> [10, 0] DeclClass
+   |      +> [10, 6] Identifier (A)
+   |      +> [10, 8] Identifier (Object)
+   |      +> ListDeclField [List with 0 elements]
+   |      `> ListDeclMethod [List with 1 elements]
+   |         []> [11, 4] DeclMethod
+   |             +> [11, 4] Identifier (int)
+   |             +> [11, 8] Identifier (assemble)
+   |             +> ListDeclParam [List with 0 elements]
+   |             `> [11, 19] MethodAsmBody
+   |                `> [12, 8] StringLiteral (
+        ADD R0, R1
+        BADINST R2, R0
+        LOAD 1(GB), R0
+        )
+   `> EmptyMain

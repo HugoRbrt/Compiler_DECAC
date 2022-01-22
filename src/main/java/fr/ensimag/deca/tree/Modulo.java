@@ -3,11 +3,13 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.ARMRegister;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.instructions.REM;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.BEQ;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructionsARM.*;
 
 /**
  *
@@ -43,5 +45,18 @@ public class Modulo extends AbstractOpArith {
         }
         compiler.addInstruction(new REM(storedRegister, Reg1));
         compiler.addInstruction(new LOAD(Reg1, storedRegister));
+    }
+
+    public void codeGenOperationsARM(ARMRegister Reg1, ARMRegister storedRegister, DecacCompiler compiler){
+        if(!getType().isInt()) {
+            compiler.addInstruction(new b("input_output_error"));
+        }   
+            compiler.addInstruction(new cmp(storedRegister, 0));
+            compiler.addInstruction(new beq("division_by_zero"));
+            compiler.addInstruction(new mov(ARMRegister.r2, Reg1));
+            compiler.addInstruction(new mov(ARMRegister.r3, storedRegister));
+            compiler.addInstruction(new mov(ARMRegister.r0, ARMRegister.r2));
+            compiler.addInstruction(new mov(ARMRegister.r1, ARMRegister.r3));
+            compiler.addInstruction(new bl("divide"));
     }
 }

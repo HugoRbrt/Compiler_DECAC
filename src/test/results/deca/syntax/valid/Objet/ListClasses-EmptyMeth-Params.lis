@@ -36,14 +36,15 @@
    |  ||     ||  |  []> [14, 52] DeclParam
    |  ||     ||  |      +> [14, 46] Identifier (float)
    |  ||     ||  |      `> [14, 52] Identifier (f)
-   |  ||     ||  +> ListDeclVar [List with 0 elements]
-   |  ||     ||  `> ListInst [List with 2 elements]
-   |  ||     ||     []> [15, 8] Print
-   |  ||     ||     ||  `> ListExpr [List with 1 elements]
-   |  ||     ||     ||     []> [15, 14] Identifier (x)
-   |  ||     ||     []> [16, 8] Print
-   |  ||     ||         `> ListExpr [List with 1 elements]
-   |  ||     ||            []> [16, 14] Identifier (z)
+   |  ||     ||  `> [14, 55] MethodBody
+   |  ||     ||     +> ListDeclVar [List with 0 elements]
+   |  ||     ||     `> ListInst [List with 2 elements]
+   |  ||     ||        []> [15, 8] Print
+   |  ||     ||        ||  `> ListExpr [List with 1 elements]
+   |  ||     ||        ||     []> [15, 14] Identifier (x)
+   |  ||     ||        []> [16, 8] Print
+   |  ||     ||            `> ListExpr [List with 1 elements]
+   |  ||     ||               []> [16, 14] Identifier (z)
    |  ||     []> [18, 4] DeclMethod
    |  ||         +> [18, 4] Identifier (void)
    |  ||         +> [18, 9] Identifier (test2)
@@ -54,11 +55,12 @@
    |  ||         |  []> [18, 26] DeclParam
    |  ||         |      +> [18, 22] Identifier (int)
    |  ||         |      `> [18, 26] Identifier (f)
-   |  ||         +> ListDeclVar [List with 0 elements]
-   |  ||         `> ListInst [List with 1 elements]
-   |  ||            []> [19, 8] Print
-   |  ||                `> ListExpr [List with 1 elements]
-   |  ||                   []> [19, 14] Identifier (f)
+   |  ||         `> [18, 29] MethodBody
+   |  ||            +> ListDeclVar [List with 0 elements]
+   |  ||            `> ListInst [List with 1 elements]
+   |  ||               []> [19, 8] Print
+   |  ||                   `> ListExpr [List with 1 elements]
+   |  ||                      []> [19, 14] Identifier (f)
    |  []> [23, 0] DeclClass
    |      +> [23, 6] Identifier (B)
    |      +> [23, 8] Identifier (Object)
@@ -90,11 +92,12 @@
    |             |  []> [27, 37] DeclParam
    |             |      +> [27, 33] Identifier (int)
    |             |      `> [27, 37] Identifier (u)
-   |             +> ListDeclVar [List with 1 elements]
-   |             |  []> [28, 14] DeclVar
-   |             |      +> [28, 8] Identifier (float)
-   |             |      +> [28, 14] Identifier (x)
-   |             |      `> [28, 16] Initialization
-   |             |         `> [28, 18] Int (0)
-   |             `> ListInst [List with 0 elements]
+   |             `> [27, 40] MethodBody
+   |                +> ListDeclVar [List with 1 elements]
+   |                |  []> [28, 14] DeclVar
+   |                |      +> [28, 8] Identifier (float)
+   |                |      +> [28, 14] Identifier (x)
+   |                |      `> [28, 16] Initialization
+   |                |         `> [28, 18] Int (0)
+   |                `> ListInst [List with 0 elements]
    `> EmptyMain

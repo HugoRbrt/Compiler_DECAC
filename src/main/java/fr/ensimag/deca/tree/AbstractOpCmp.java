@@ -1,9 +1,12 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.*;
+import fr.ensimag.ima.pseudocode.ARMRegister;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
+import fr.ensimag.ima.pseudocode.instructionsARM.mov;
+import fr.ensimag.ima.pseudocode.instructionsARM.vmov;
 
 /**
  *
@@ -35,5 +38,13 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
 
     public void codeGenOperations(Register Reg1, Register storedRegister, DecacCompiler compiler){
         compiler.addInstruction(new CMP(Reg1, storedRegister));
+    }
+
+    public void codeGenOperationsARM(ARMRegister Reg1, ARMRegister storedRegister, DecacCompiler compiler){
+        compiler.addInstruction(new vmov(ARMRegister.s0, Reg1));
+        compiler.addInstruction(new vmov(ARMRegister.s1, storedRegister));
+        compiler.addInstruction(new mov(ARMRegister.r0, 0));
+        compiler.addARMBlock("        vcmp.f32 s0, s1");
+        compiler.addARMBlock("        vmrs APSR_nzcv, fpscr"); // copy fpcsr to fpcsr to read flags
     }
 }

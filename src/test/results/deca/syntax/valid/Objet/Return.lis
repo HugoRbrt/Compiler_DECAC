@@ -9,10 +9,11 @@
    |             +> [11, 4] Identifier (int)
    |             +> [11, 8] Identifier (foo)
    |             +> ListDeclParam [List with 0 elements]
-   |             +> ListDeclVar [List with 0 elements]
-   |             `> ListInst [List with 1 elements]
-   |                []> [12, 8] Return
-   |                    `> [12, 15] Int (2)
+   |             `> [11, 14] MethodBody
+   |                +> ListDeclVar [List with 0 elements]
+   |                `> ListInst [List with 1 elements]
+   |                   []> [12, 8] Return
+   |                       `> [12, 15] Int (2)
    `> [16, 0] Main
       +> ListDeclVar [List with 1 elements]
       |  []> [17, 6] DeclVar

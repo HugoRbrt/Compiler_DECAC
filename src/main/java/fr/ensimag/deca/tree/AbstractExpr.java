@@ -140,8 +140,21 @@ public abstract class AbstractExpr extends AbstractInst {
         throw new UnsupportedOperationException("not yet implemented");
     }
 
+    /**
+     * Generate code to print the expression in ARM
+     *
+     * @param compiler
+     */
+    protected void codeGenPrintARM(DecacCompiler compiler, boolean printHex) {
+        throw new UnsupportedOperationException("not yet implemented");
+    }
+
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
+        throw new UnsupportedOperationException("not yet implemented");
+    }
+
+    protected void codeGenInstARM(DecacCompiler compiler) {
         throw new UnsupportedOperationException("not yet implemented");
     }
 

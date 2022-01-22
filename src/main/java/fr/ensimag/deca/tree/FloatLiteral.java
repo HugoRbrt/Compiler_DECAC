@@ -4,13 +4,16 @@ import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.deca.context.ClassDefinition;
+import fr.ensimag.ima.pseudocode.*;
+import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
 import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
-import fr.ensimag.ima.pseudocode.ImmediateFloat;
+import fr.ensimag.ima.pseudocode.instructionsARM.*;
+
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
-import org.apache.log4j.Logger;
 
 /**
  * Single precision, floating-point literal
@@ -62,6 +65,21 @@ public class FloatLiteral extends AbstractExpr {
     }
 
     @Override
+    protected void codeGenPrintARM(DecacCompiler compiler, boolean printHex) {
+        Label tmplabel = new Label();
+        compiler.addARMBlock(".data");
+        compiler.addARMBlock(tmplabel + ": " + ".float " + value);  //label with name of variable 
+        compiler.addARMBlock(".text");
+        compiler.addInstruction(new ldr(ARMRegister.r0, "=" + tmplabel));
+        compiler.addInstruction(new vldr(ARMRegister.s0, "[r0]"));
+        //compiler.addInstruction(new vcvt(ARMRegister.d0, ARMRegister.s0));
+        compiler.addARMBlock("        vcvt.f64.f32 d0, s0");
+        compiler.addInstruction(new vmov(ARMRegister.r2, ARMRegister.r3, ARMRegister.d0));
+        compiler.addInstruction(new ldr(ARMRegister.r0, "=flottant"));        
+        compiler.addInstruction(new bl("printf"));
+    }
+
+    @Override
     public void decompile(IndentPrintStream s) {
         s.print(java.lang.Float.toHexString(value));
     }
@@ -84,5 +102,16 @@ public class FloatLiteral extends AbstractExpr {
     public void codeGenInst(DecacCompiler compiler){
         compiler.addInstruction(new LOAD(new ImmediateFloat(value), compiler.getListRegister().R0));
     }
+
+    public void codeGenInstARM(DecacCompiler compiler){
+        Label tmplabel = new Label();
+        compiler.addARMBlock(".data");
+        compiler.addARMBlock(tmplabel + ": " + ".float " + value);  //label with name of variable 
+        compiler.addARMBlock(".text");
+        compiler.addInstruction(new ldr(ARMRegister.r0, "=" + tmplabel));
+        compiler.addInstruction(new vldr(ARMRegister.s0, "[r0]"));
+        compiler.addInstruction(new vmov(ARMRegister.r0, ARMRegister.s0));
+    }
+      
 
 }

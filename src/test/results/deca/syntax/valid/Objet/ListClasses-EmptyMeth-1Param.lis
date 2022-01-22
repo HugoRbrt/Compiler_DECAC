@@ -21,8 +21,9 @@
    |  ||     ||  |  []> [13, 18] DeclParam
    |  ||     ||  |      +> [13, 14] Identifier (int)
    |  ||     ||  |      `> [13, 18] Identifier (x)
-   |  ||     ||  +> ListDeclVar [List with 0 elements]
-   |  ||     ||  `> ListInst [List with 0 elements]
+   |  ||     ||  `> [13, 21] MethodBody
+   |  ||     ||     +> ListDeclVar [List with 0 elements]
+   |  ||     ||     `> ListInst [List with 0 elements]
    |  ||     []> [15, 4] DeclMethod
    |  ||         +> [15, 4] Identifier (void)
    |  ||         +> [15, 9] Identifier (test2)
@@ -30,8 +31,9 @@
    |  ||         |  []> [15, 19] DeclParam
    |  ||         |      +> [15, 15] Identifier (int)
    |  ||         |      `> [15, 19] Identifier (y)
-   |  ||         +> ListDeclVar [List with 0 elements]
-   |  ||         `> ListInst [List with 0 elements]
+   |  ||         `> [15, 22] MethodBody
+   |  ||            +> ListDeclVar [List with 0 elements]
+   |  ||            `> ListInst [List with 0 elements]
    |  []> [19, 0] DeclClass
    |      +> [19, 6] Identifier (B)
    |      +> [19, 8] Identifier (Object)
@@ -52,6 +54,7 @@
    |             |  []> [22, 22] DeclParam
    |             |      +> [22, 14] Identifier (boolean)
    |             |      `> [22, 22] Identifier (x)
-   |             +> ListDeclVar [List with 0 elements]
-   |             `> ListInst [List with 0 elements]
+   |             `> [22, 25] MethodBody
+   |                +> ListDeclVar [List with 0 elements]
+   |                `> ListInst [List with 0 elements]
    `> EmptyMain

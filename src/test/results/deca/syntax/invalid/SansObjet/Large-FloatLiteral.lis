@@ -1,6 +1,6 @@
 Exception in thread "main" java.lang.IllegalArgumentException: literal values cannot be infinite
 	at org.apache.commons.lang.Validate.isTrue(Validate.java:136)
-	at fr.ensimag.deca.tree.FloatLiteral.<init>(FloatLiteral.java:33)
+	at fr.ensimag.deca.tree.FloatLiteral.<init>(FloatLiteral.java:31)
 	at fr.ensimag.deca.syntax.DecaParser.literal(DecaParser.java:2419)
 	at fr.ensimag.deca.syntax.DecaParser.primary_expr(DecaParser.java:2302)
 	at fr.ensimag.deca.syntax.DecaParser.select_expr(DecaParser.java:2044)

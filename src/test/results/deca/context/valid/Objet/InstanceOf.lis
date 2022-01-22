@@ -19,11 +19,12 @@
    |  ||         +> [12, 8] Identifier (foo)
    |  ||         |  definition: method defined at [12, 4], type=int
    |  ||         +> ListDeclParam [List with 0 elements]
-   |  ||         +> ListDeclVar [List with 0 elements]
-   |  ||         `> ListInst [List with 1 elements]
-   |  ||            []> [13, 8] Return
-   |  ||                `> [13, 15] Int (1)
-   |  ||                   type: int
+   |  ||         `> [12, 14] MethodBody
+   |  ||            +> ListDeclVar [List with 0 elements]
+   |  ||            `> ListInst [List with 1 elements]
+   |  ||               []> [13, 8] Return
+   |  ||                   `> [13, 15] Int (1)
+   |  ||                      type: int
    |  []> [17, 0] DeclClass
    |      +> [17, 6] Identifier (B)
    |      |  definition: type defined at [17, 0], type=B
