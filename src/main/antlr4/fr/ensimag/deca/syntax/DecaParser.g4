@@ -515,6 +515,7 @@ literal returns[AbstractExpr tree]
                 strictlyPos = true;
                 break;
             }
+            if (c == 'e') { break; }
         }
         if (strictlyPos && Float.parseFloat($fd.text) == 0) {
             System.err.println(tmploc.getFilename() + ":" + tmploc.getLine()
