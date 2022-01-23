@@ -1,5 +1,7 @@
-package fr.ensimag.ima.pseudocode;
+package fr.ensimag.ima;
 
+
+import fr.ensimag.ima.pseudocode.*;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.LinkedList;

@@ -1,8 +1,5 @@
 package fr.ensimag.ima.pseudocode;
 
-import fr.ensimag.ima.pseudocode.ARMProgram;
-import fr.ensimag.ima.pseudocode.Line;
-
 import java.io.PrintStream;
 
 
