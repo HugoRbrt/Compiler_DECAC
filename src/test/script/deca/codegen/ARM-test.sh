@@ -33,6 +33,12 @@ NC='\033[0m'
 test_arm() {
     # $1 = first argument : name of files without extension
 
+    # We dont treat overflow (arithmetic not stack) for ARM
+    if echo "$1" | grep -q -e "OV" -e "Overflow"
+        then
+            return
+    fi
+
     $DECAC -a "$TESTPATH"/$1.deca 2>&1
 
     # Checks if a new result file was created.
