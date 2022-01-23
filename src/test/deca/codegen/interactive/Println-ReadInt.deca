@@ -1,0 +1,13 @@
+// Description:
+//      Interactive test to print whatever int is read
+//
+// Results:
+//      non determined
+//
+// History:
+//      created on 14/1/2021
+
+{
+    int x;
+    println(readInt());
+}

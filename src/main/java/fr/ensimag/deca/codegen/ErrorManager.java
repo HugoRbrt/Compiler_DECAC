@@ -46,7 +46,7 @@ public class ErrorManager {
         Label nullReferenceLabel = new Label("null_dereferencing");
         errorMap.put("Null dereferencing", nullReferenceLabel);
         Label ioErrorLabel = new Label("input_output_error");
-        errorMap.put("Input/Output", ioErrorLabel);
+        errorMap.put("Input/Output Error", ioErrorLabel);
         Label heapOverflowLabel = new Label("heap_overflow");
         errorMap.put("Heap Overflow", heapOverflowLabel);
         Label floatArithmeticOverflow = new Label("float_arithmetic_overflow");

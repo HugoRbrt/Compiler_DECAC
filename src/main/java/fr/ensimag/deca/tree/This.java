@@ -62,7 +62,7 @@ public class This extends AbstractExpr {
         compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.R0));
         compiler.addInstruction(new CMP(new NullOperand(), Register.R0));
         if (!compiler.getCompilerOptions().getNoCheck()) {
-            compiler.addInstruction(new BEQ(compiler.getErrorManager().getErrorLabel("null_dereferencing")));
+            compiler.addInstruction(new BEQ(compiler.getErrorManager().getErrorLabel("Null dereferencing")));
         }
     }
 

@@ -1,0 +1,13 @@
+// Description:
+//      Interactive test to print whatever float is read
+//
+// Results:
+//      non determined
+//
+// History:
+//      created on 14/1/2021
+
+{
+    int x;
+    println(readFloat());
+}
