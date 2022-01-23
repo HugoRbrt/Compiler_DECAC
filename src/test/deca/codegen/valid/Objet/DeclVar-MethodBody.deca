@@ -1,0 +1,42 @@
+// Description:
+//      Class having two functions but one declaring variables
+//      given its arguments
+//
+// Result:
+//      p.x=3 p.y=3
+//      OK
+//
+// History:
+//      created on 17/1/2022
+
+class P {
+    int x;
+    int y;
+
+    void move(int a, int b, boolean bool) {
+	int c = a + b;
+	boolean d = !(bool);
+	
+	if (d) {
+        	x = x + c;
+        	y = y + c;
+	}
+	
+    }
+
+    void verifyBoolean(boolean d) {
+	    boolean e = true;
+	    boolean g = !d;
+
+	    if (e == g) {
+		    println("OK");
+	    }
+    }
+}
+
+{
+    P p = new P();
+    p.move(1, 2, false);
+    p.verifyBoolean(false);
+    println("p.x=", p.x, " p.y=", p.y);
+}
