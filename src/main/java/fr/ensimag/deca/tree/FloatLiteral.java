@@ -30,10 +30,12 @@ public class FloatLiteral extends AbstractExpr {
     private float value;
 
     public FloatLiteral(float value) {
-        Validate.isTrue(!Float.isInfinite(value),
-                "literal values cannot be infinite");
-        Validate.isTrue(!Float.isNaN(value),
-                "literal values cannot be NaN");
+        if (Float.isInfinite(value)) {
+            throw new NumberFormatException("float literal out of expected range.");
+        }
+        if (Float.isNaN(value)) {
+            throw new NumberFormatException("float literal is NaN.");
+        }
         this.value = value;
     }
 

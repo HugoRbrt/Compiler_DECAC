@@ -39,25 +39,25 @@ public class ErrorManager {
 
     public ErrorManager() {
         // adding all necessary errors to the error map
-        Label stackOverflowLabel = new Label("stack_overflow");
+        Label stackOverflowLabel = new Label("stack overflow");
         errorMap.put("Stack overflow , a real one", stackOverflowLabel);
-        Label divByZeroLabel = new Label("division_by_zero");
+        Label divByZeroLabel = new Label("division by zero");
         errorMap.put("Division by zero", divByZeroLabel);
-        Label nullReferenceLabel = new Label("null_dereferencing");
+        Label nullReferenceLabel = new Label("null dereferencing");
         errorMap.put("null_dereferencing", nullReferenceLabel);
-        Label ioErrorLabel = new Label("input_output_error");
+        Label ioErrorLabel = new Label("input output error");
         errorMap.put("input_output", ioErrorLabel);
-        //Label heapOverflowLabel = new Label("heap_overflow");
-        //errorMap.put("heap_overflow", heapOverflowLabel);
-        Label floatArithmeticOverflow = new Label("float_arithmetic_overflow");
+        Label heapOverflowLabel = new Label("heap overflow");
+        errorMap.put("heap_overflow", heapOverflowLabel);
+        Label floatArithmeticOverflow = new Label("float arithmetic overflow");
         errorMap.put("Float arithmetic overflow", floatArithmeticOverflow);
-        //Label noReturnLabel = new Label("no_return");
-        //errorMap.put("no_return", noReturnLabel);
-        Label impossibleConversionLabel = new Label("impossible_conversion");
+        Label noReturnLabel = new Label("no return");
+        errorMap.put("no_return", noReturnLabel);
+        Label impossibleConversionLabel = new Label("illegal cast");
         errorMap.put("impossible_conversion", impossibleConversionLabel);
-        Label noInitializationAccessLabel = new Label("not_initialized_variable_access");
+        Label noInitializationAccessLabel = new Label("not initialized variable access");
         errorMap.put("not_initialized_access", noInitializationAccessLabel);
-        Label incorrectAssemblerLabel = new Label("incorrect_assembler");
+        Label incorrectAssemblerLabel = new Label("incorrect assembler");
         errorMap.put("incorrect_assembler", incorrectAssemblerLabel);
 
     }

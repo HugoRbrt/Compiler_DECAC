@@ -5,6 +5,7 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.instructions.ADDSP;
 import fr.ensimag.ima.pseudocode.instructionsARM.*;
 import fr.ensimag.ima.pseudocode.ARMRegister; 
 import org.apache.log4j.Logger;
@@ -49,6 +50,19 @@ public class ListDeclVar extends TreeList<AbstractDeclVar> {
         for (AbstractDeclVar i : getList()) {
             i.codeGenDeclVar(compiler);
         }
+    }
+
+    public void codeGenListDeclLocalVar(DecacCompiler compiler) {
+        int counter = 1;
+        compiler.addInstruction(new ADDSP(getList().size()));
+        for (AbstractDeclVar i : getList()) {
+            i.codeGenDeclLocalVar(compiler, counter);
+            counter++;
+        }
+    }
+
+    public int getNumberLocalVariable(){
+        return getList().size();
     }
 
     public void codeGenListDeclVarARM(DecacCompiler compiler) {

@@ -49,4 +49,8 @@ public class MethodAsmBody extends AbstractMethodBody {
             compiler.add(new InlinePortion("\t" + asmInst));
         }
     }
+
+    public int getNumberLocalVariables(){
+        return 0;
+    }
 }
