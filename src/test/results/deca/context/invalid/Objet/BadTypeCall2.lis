@@ -1,1 +1,1 @@
-src/test/deca/context/invalid/Objet/BadTypeCall2.deca:19:17: (RULE 3.72) Invalid parameter list: signature of 'foo' is ().
+src/test/deca/context/invalid/Objet/BadTypeCall2.deca:19:17: (RULE 3.72) Invalid argument list: signature of 'foo' is ().

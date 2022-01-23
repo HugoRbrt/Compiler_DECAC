@@ -1,7 +1,7 @@
-Exception in thread "main" java.lang.IllegalArgumentException: literal values cannot be infinite
-	at org.apache.commons.lang.Validate.isTrue(Validate.java:136)
-	at fr.ensimag.deca.tree.FloatLiteral.<init>(FloatLiteral.java:33)
-	at fr.ensimag.deca.syntax.DecaParser.literal(DecaParser.java:2434)
+src/test/deca/syntax/invalid/SansObjet/Large-FloatLiteral.deca:11:13: float literal out of expected range.
+Exception in thread "main" java.lang.NumberFormatException: float literal out of expected range.
+	at fr.ensimag.deca.tree.FloatLiteral.<init>(FloatLiteral.java:34)
+	at fr.ensimag.deca.syntax.DecaParser.literal(DecaParser.java:2435)
 	at fr.ensimag.deca.syntax.DecaParser.primary_expr(DecaParser.java:2303)
 	at fr.ensimag.deca.syntax.DecaParser.select_expr(DecaParser.java:2045)
 	at fr.ensimag.deca.syntax.DecaParser.unary_expr(DecaParser.java:1976)
