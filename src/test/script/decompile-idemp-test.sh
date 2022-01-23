@@ -14,6 +14,11 @@ PATH=src/test/script/launchers:"$PATH"
 TESTPATH1=src/test/deca/syntax/valid/SansObjet
 TESTPATH2=src/test/deca/context/valid/SansObjet
 TESTPATH3=src/test/deca/codegen/valid/SansObjet
+TESTPATH4=src/test/deca/syntax/valid/Objet
+TESTPATH5=src/test/deca/context/valid/Objet
+TESTPATH6=src/test/deca/codegen/valid/Objet
+TESTPATH7=src/test/deca/codegen/invalid/SansObjet
+TESTPATH8=src/test/deca/codegen/invalid/Objet
 TMP=src/test/tmp
 
 exitnum=0
@@ -55,5 +60,36 @@ do
     file=$(basename "$deca_file" ".deca")
     test_decompile "$file" "$TESTPATH3"
 done
+
+for deca_file in "$TESTPATH4"/*.deca
+do
+    file=$(basename "$deca_file" ".deca")
+    test_decompile "$file" "$TESTPATH4"
+done
+
+for deca_file in "$TESTPATH5"/*.deca
+do
+    file=$(basename "$deca_file" ".deca")
+    test_decompile "$file" "$TESTPATH5"
+done
+
+for deca_file in "$TESTPATH6"/*.deca
+do
+    file=$(basename "$deca_file" ".deca")
+    test_decompile "$file" "$TESTPATH6"
+done
+
+for deca_file in "$TESTPATH7"/*.deca
+do
+    file=$(basename "$deca_file" ".deca")
+    test_decompile "$file" "$TESTPATH7"
+done
+
+for deca_file in "$TESTPATH8"/*.deca
+do
+    file=$(basename "$deca_file" ".deca")
+    test_decompile "$file" "$TESTPATH8"
+done
+
 
 exit $exitnum
