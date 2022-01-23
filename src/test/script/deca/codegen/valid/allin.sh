@@ -9,6 +9,9 @@ exitnum=$(($exitnum + $?))
 ./exec-tests-SansObjet.sh
 exitnum=$(($exitnum + $?))
 
+./exec-tests-ARM-SansObjet.sh
+exitnum=$(($exitnum + $?))
+
 ./exec-tests-Objet.sh
 exitnum=$(($exitnum + $?))
 

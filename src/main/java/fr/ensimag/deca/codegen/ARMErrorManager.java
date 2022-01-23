@@ -21,7 +21,7 @@ import java.util.HashMap;
 /**
  * Initial version : 13/1/2022
  * @author gl49
- * Class used to generate all the code relative to Errors in IMA
+ * Class used to generate all the code relative to Errors in ARM
  * programs' execution
  */
 
@@ -79,9 +79,10 @@ public class ARMErrorManager {
     private void genCodeErrorARM(Label label, String msg, DecacCompiler compiler) {
         compiler.addARMBlock(".data");
         compiler.addARMComment("- Error message --");
-        compiler.addARMBlock(label + "_msg" + ": " + ".asciz " + "\"" + msg + "\"");  //label with name of variable 
+        compiler.addARMBlock(label + "_msg" + ": " + ".asciz " + "\"" + msg + "\\n\"");  //label with name of variable
         compiler.addARMBlock(".text");
-        compiler.addARMBlock(label + ": ");  //label with name of variable 
+        compiler.addARMBlock(label + ": ");  //label with name of variable
+        compiler.addInstruction(new push(ARMRegister.lr));
         compiler.addInstruction(new ldr(ARMRegister.r0, "=" + label + "_msg"));
         compiler.addInstruction(new bl("printf"));
         compiler.addInstruction(new b("end"));

@@ -30,10 +30,12 @@ public class FloatLiteral extends AbstractExpr {
     private float value;
 
     public FloatLiteral(float value) {
-        Validate.isTrue(!Float.isInfinite(value),
-                "literal values cannot be infinite");
-        Validate.isTrue(!Float.isNaN(value),
-                "literal values cannot be NaN");
+        if (Float.isInfinite(value)) {
+            throw new NumberFormatException("float literal out of expected range.");
+        }
+        if (Float.isNaN(value)) {
+            throw new NumberFormatException("float literal is NaN.");
+        }
         this.value = value;
     }
 
@@ -72,7 +74,6 @@ public class FloatLiteral extends AbstractExpr {
         compiler.addARMBlock(".text");
         compiler.addInstruction(new ldr(ARMRegister.r0, "=" + tmplabel));
         compiler.addInstruction(new vldr(ARMRegister.s0, "[r0]"));
-        //compiler.addInstruction(new vcvt(ARMRegister.d0, ARMRegister.s0));
         compiler.addARMBlock("        vcvt.f64.f32 d0, s0");
         compiler.addInstruction(new vmov(ARMRegister.r2, ARMRegister.r3, ARMRegister.d0));
         compiler.addInstruction(new ldr(ARMRegister.r0, "=flottant"));        

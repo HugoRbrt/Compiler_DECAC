@@ -502,7 +502,7 @@ literal returns[AbstractExpr tree]
             $tree = new IntLiteral(Integer.parseInt($INT.text));
         } catch (NumberFormatException e) {
             System.err.println(tmploc.getFilename() + ":" + tmploc.getLine()
-                + ":" + tmploc.getPositionInLine() + ": Int literal out of expected range.");
+                + ":" + tmploc.getPositionInLine() + ": int literal out of expected range.");
             throw e;
         }
         LOG.trace($tree);
@@ -519,14 +519,14 @@ literal returns[AbstractExpr tree]
         }
         if (strictlyPos && Float.parseFloat($fd.text) == 0) {
             System.err.println(tmploc.getFilename() + ":" + tmploc.getLine()
-                + ":" + tmploc.getPositionInLine() + ": Float literal underflow.");
+                + ":" + tmploc.getPositionInLine() + ": float literal underflow.");
             throw new NumberFormatException();
         } else {
             try {
                 $tree = new FloatLiteral(Float.parseFloat($fd.text));
             } catch (NumberFormatException e) {
                 System.err.println(tmploc.getFilename() + ":" + tmploc.getLine()
-                    + ":" + tmploc.getPositionInLine() + ": Float literal out of expected range.");
+                    + ":" + tmploc.getPositionInLine() + ": float literal out of expected range.");
                     throw e;
                 }
         }

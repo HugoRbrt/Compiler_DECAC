@@ -53,16 +53,39 @@ public class Divide extends AbstractOpArith {
     }
 
     public void codeGenOperationsARM(ARMRegister Reg1, ARMRegister storedRegister, DecacCompiler compiler){
-        
+
+
         if(getType().isInt()) {
+            // here we use a function that we wrote ourselves so we need to pass absolute values
+            // and then negate the result if needed
+
             compiler.addInstruction(new cmp(storedRegister, 0));
             compiler.addInstruction(new beq("division_by_zero"));
+
+            // save the original numbers
+            ARMRegister old_reg1 = compiler.getListRegisterARM().getRegister(compiler);
+            compiler.addInstruction(new mov(old_reg1, Reg1));
+            ARMRegister old_reg2 = compiler.getListRegisterARM().getRegister(compiler);
+            compiler.addInstruction(new mov(old_reg2, storedRegister));
+
+            // pass the absolute values of the operands
+            compiler.addInstruction(new cmp(storedRegister, 0));
+            compiler.addInstruction(new neglt(storedRegister, storedRegister));
+            compiler.addInstruction(new cmp(Reg1, 0));
+            compiler.addInstruction(new neglt(Reg1, Reg1));
             compiler.addInstruction(new mov(ARMRegister.r2, Reg1));
+            // passing arguments into the divide built-in function
             compiler.addInstruction(new mov(ARMRegister.r3, storedRegister));
             compiler.addInstruction(new mov(ARMRegister.r0, ARMRegister.r2));
             compiler.addInstruction(new mov(ARMRegister.r1, ARMRegister.r3));
             compiler.addInstruction(new bl("divide"));
             compiler.addInstruction(new mov(ARMRegister.r0, ARMRegister.r2));
+            // re negating the result if needed
+            compiler.addInstruction(new cmp(old_reg2, 0));
+            compiler.addInstruction(new neglt(ARMRegister.r0, ARMRegister.r0));
+            compiler.addInstruction(new cmp(old_reg1, 0));
+            compiler.addInstruction(new neglt(ARMRegister.r0, ARMRegister.r0));
+
         }
         else {
             compiler.addInstruction(new cmp(storedRegister, 0));
@@ -70,6 +93,9 @@ public class Divide extends AbstractOpArith {
             compiler.addInstruction(new vmov(ARMRegister.s0, Reg1));
             compiler.addInstruction(new vmov(ARMRegister.s1, storedRegister));
             compiler.addARMBlock("        vdiv.f32 s0, s0, s1");
+            if (!compiler.getCompilerOptions().getNoCheck()) {
+                compiler.addInstruction(new bvs("float_arithmetic_overflow"));
+            }
             compiler.addInstruction(new vmov(storedRegister, ARMRegister.s0));
         }
     }
