@@ -137,15 +137,12 @@ public class Cast extends AbstractExpr {
             compiler.addInstruction(new ldr(ARMRegister.r0, "=int"));
             compiler.addInstruction(new bl("printf"));
         }
-        else if(type.getDefinition().getType().isFloat()){
+        else {
             compiler.addInstruction(new vmov(ARMRegister.s0, ARMRegister.r0));
             compiler.addARMBlock("        vcvt.f64.f32 d0, s0");
             compiler.addInstruction(new vmov(ARMRegister.r2, ARMRegister.r3, ARMRegister.d0));
             compiler.addInstruction(new ldr(ARMRegister.r0, "=flottant"));
             compiler.addInstruction(new bl("printf"));
-        }
-        else{
-            compiler.addInstruction(new b("impossible_conversion"));
         }
     }
 
