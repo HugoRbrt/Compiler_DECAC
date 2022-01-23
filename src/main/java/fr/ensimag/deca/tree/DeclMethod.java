@@ -73,8 +73,9 @@ public class DeclMethod extends AbstractDeclMethod {
             if (!(sigToOverride.equals(sig) && ContextTools.subtype(
                     currentType, mdef.getType()))) {
                 throw new ContextualError(
-                        "(RULE 2.7) Invalid method override. Signature of '" + m +
-                        "' is (" + sigToOverride +").", methodName.getLocation());
+                        "(RULE 2.7) Invalid method override. Signature of '"
+                        + m + "' is (" + sigToOverride +"), return type is " +
+                        mdef.getType().getName() + ".", methodName.getLocation());
             }
             counter = mdef.getIndex();
         } else {

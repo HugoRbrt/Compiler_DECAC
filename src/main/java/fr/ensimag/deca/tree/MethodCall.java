@@ -57,7 +57,8 @@ public class MethodCall extends AbstractExpr {
         Type returnType = methodName.verifyExpr(compiler, classEnv, currentClass);
         if (!classEnv.get(m).isMethod()) {
             throw new ContextualError(
-                    "(RULE 3.41) Invalid method call.", getLocation());
+                    "(RULE 3.41) Invalid method call: " + m + " is not a method.",
+                    getLocation());
         }
         Signature sig = new Signature();
         for (AbstractExpr arg: methodArgs.getList()) {
@@ -66,7 +67,7 @@ public class MethodCall extends AbstractExpr {
         MethodDefinition mdef = methodName.getMethodDefinition();
         if (!mdef.getSignature().equals(sig)) {
             throw new ContextualError(
-                    "(RULE 3.72) Invalid parameter list: signature of '" +
+                    "(RULE 3.72) Invalid argument list: signature of '" +
                     m + "' is (" + mdef.getSignature() +").", getLocation());
         }
         setType(returnType);
