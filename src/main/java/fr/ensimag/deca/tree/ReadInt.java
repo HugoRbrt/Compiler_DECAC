@@ -6,10 +6,7 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.ima.pseudocode.instructions.LOAD;
-import fr.ensimag.ima.pseudocode.instructions.RINT;
-import fr.ensimag.ima.pseudocode.instructions.WSTR;
-import fr.ensimag.ima.pseudocode.instructions.BOV;
+import fr.ensimag.ima.pseudocode.instructions.*;
 import fr.ensimag.ima.pseudocode.instructionsARM.*;
 import fr.ensimag.ima.pseudocode.ARMRegister;
 
@@ -33,7 +30,7 @@ public class ReadInt extends AbstractReadExpr {
     public void codeGenInst(DecacCompiler compiler) {
         compiler.addInstruction(new RINT());
         if (!compiler.getCompilerOptions().getNoCheck()) {
-            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("input_output")));
+            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Input/Output Error")));
         }
         compiler.addInstruction(new LOAD(compiler.getListRegister().R1, compiler.getListRegister().R0));
     }
@@ -41,7 +38,7 @@ public class ReadInt extends AbstractReadExpr {
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex){
         codeGenInst(compiler);
         compiler.addInstruction(new LOAD(compiler.getListRegister().R0, compiler.getListRegister().R1));
-        super.codeGenPrint(compiler, printHex);
+        compiler.addInstruction(new WINT());
     }
 
     public void codeGenInstARM(DecacCompiler compiler) {

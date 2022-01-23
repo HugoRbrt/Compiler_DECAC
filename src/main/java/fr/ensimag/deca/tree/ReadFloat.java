@@ -6,9 +6,7 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.ima.pseudocode.instructions.LOAD;
-import fr.ensimag.ima.pseudocode.instructions.RFLOAT;
-import fr.ensimag.ima.pseudocode.instructions.BOV;
+import fr.ensimag.ima.pseudocode.instructions.*;
 import fr.ensimag.ima.pseudocode.instructionsARM.*;
 import fr.ensimag.ima.pseudocode.ARMRegister;
 import java.io.PrintStream;
@@ -31,7 +29,7 @@ public class ReadFloat extends AbstractReadExpr {
     public void codeGenInst(DecacCompiler compiler) {
         compiler.addInstruction(new RFLOAT());
         if (!compiler.getCompilerOptions().getNoCheck()) {
-            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("input_output")));
+            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Input/Output Error")));
         }
         compiler.addInstruction(new LOAD(compiler.getListRegister().R1, compiler.getListRegister().R0));
     }
@@ -39,7 +37,12 @@ public class ReadFloat extends AbstractReadExpr {
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex){
         codeGenInst(compiler);
         compiler.addInstruction(new LOAD(compiler.getListRegister().R0, compiler.getListRegister().R1));
-        super.codeGenPrint(compiler, printHex);
+        if (printHex) {
+            compiler.addInstruction(new WFLOATX());
+        } else {
+            compiler.addInstruction(new WFLOAT());
+        }
+
     }
 
     public void codeGenInstARM(DecacCompiler compiler) {

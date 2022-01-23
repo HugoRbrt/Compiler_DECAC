@@ -153,7 +153,7 @@ public class DeclMethod extends AbstractDeclMethod {
 
         compiler.add(tstoline);
         if (!compiler.getCompilerOptions().getNoCheck()) {
-            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Stack overflow , a real one")));
+            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Stack overflow")));
         }
         int counter = -3;
         for(AbstractDeclParam p : declParameters.getList()){

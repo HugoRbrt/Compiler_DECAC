@@ -72,7 +72,7 @@ public class Cast extends AbstractExpr {
                 compiler.addLabel(beginElse);
                 //else instructions
                 if (!compiler.getCompilerOptions().getNoCheck()) {
-                    compiler.addInstruction(new BRA(compiler.getErrorManager().getErrorLabel("impossible_conversion")));
+                    compiler.addInstruction(new BRA(compiler.getErrorManager().getErrorLabel("Illegal cast")));
                 }
                 compiler.addLabel(endElse);
             }
@@ -125,7 +125,7 @@ public class Cast extends AbstractExpr {
             }
         }
         else{
-            compiler.addInstruction(new BRA(compiler.getErrorManager().getErrorLabel("impossible_conversion")));
+            compiler.addInstruction(new BRA(compiler.getErrorManager().getErrorLabel("Illegal cast")));
         }
     }
 
