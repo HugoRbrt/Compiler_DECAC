@@ -25,6 +25,6 @@ public class Warning {
 //                sb + ": " + message);
         System.err.println(
                 "[\u001B[31mWARNING\u001B[0m]" + location.getFilename() + ":" +
-                location.getLine() + ": " + location.getPositionInLine() + ":" + message);
+                location.getLine() + ":" + location.getPositionInLine() + ": " + message);
     }
 }
