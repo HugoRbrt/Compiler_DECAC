@@ -30,6 +30,9 @@ public class Multiply extends AbstractOpArith {
             compiler.addInstruction(new vmov(ARMRegister.s0, Reg1));
             compiler.addInstruction(new vmov(ARMRegister.s1, storedRegister));
             compiler.addARMBlock("        vmul.f32 s0, s0, s1");
+            if (!compiler.getCompilerOptions().getNoCheck()) {
+                compiler.addInstruction(new bvs("float_arithmetic_overflow"));
+            }
             compiler.addInstruction(new vmov(storedRegister, ARMRegister.s0));
         }
     }
