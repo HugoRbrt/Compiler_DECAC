@@ -25,5 +25,3 @@ class A {
 
     println(a.function(3, 3.0, false, other), " ", a.function(3, 3.0, true, other));
 }
-
-
