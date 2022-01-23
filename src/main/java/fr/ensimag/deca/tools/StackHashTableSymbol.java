@@ -27,6 +27,7 @@ public class StackHashTableSymbol {
     private Map<Symbol, RegisterOffset> Classmap = new HashMap<Symbol, RegisterOffset>();
     private Label enfOfCurrentMethod;
     private List<Symbol> ListDeclVar = new LinkedList<>();
+    private List<Symbol> ListLocalDeclVar = new LinkedList<>();
     private int size = 1;
 
     public void setEnfOfCurrentMethod(Label enfOfCurrentMethod) {
@@ -75,8 +76,20 @@ public class StackHashTableSymbol {
         size++;
     }
 
+    public void putLocalDeclVar(Symbol name, RegisterOffset R){
+        if(!map.containsKey(name)){
+            ListLocalDeclVar.add(name);
+        }
+        map.put(name, R); // add 1 to avoid 0(GB) error
+        size++;
+    }
+
     public List<Symbol> getListDeclVar(){
         return ListDeclVar;
+    }
+
+    public List<Symbol> getListLocalDeclVar(){
+        return ListLocalDeclVar;
     }
 
     public void put(Symbol name, RegisterOffset R){
@@ -88,6 +101,14 @@ public class StackHashTableSymbol {
             throw new IllegalArgumentException("symbol " + name.getName() + " not found in StackHashTableSymbol");
         }
         map.remove(name);
+    }
+
+    public void ClearListDeclVar(){
+        ListDeclVar.clear();
+    }
+
+    public void ClearListLocalDeclVar(){
+        ListLocalDeclVar.clear();
     }
 
     public void clear(){

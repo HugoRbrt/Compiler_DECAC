@@ -45,6 +45,13 @@ public abstract class AbstractDeclVar extends Tree {
     protected abstract void codeGenDeclVar(DecacCompiler compiler);
 
     /**
+     * Generate assembly code for the IMA instruction.
+     *
+     * @param compiler
+     */
+    protected abstract void codeGenDeclLocalVar(DecacCompiler compiler, int indexOfDeclVar);
+
+    /**
      * Generate assembly code for the ARM instruction.
      *
      * @param compiler

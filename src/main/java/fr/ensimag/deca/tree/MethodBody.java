@@ -41,8 +41,13 @@ public class MethodBody extends AbstractMethodBody {
     @Override
     protected void codeGenMethodBody(DecacCompiler compiler) {
         compiler.addComment("             Method Body");
-        declVariables.codeGenListDeclVar(compiler);
+        declVariables.codeGenListDeclLocalVar(compiler);
         insts.codeGenListInst(compiler);
+    }
+
+    @Override
+    public int getNumberLocalVariables() {
+        return declVariables.getNumberLocalVariable();
     }
 
     @Override

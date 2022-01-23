@@ -167,10 +167,16 @@ public class DeclMethod extends AbstractDeclMethod {
             compiler.addInstruction(new ERROR());
         }
         compiler.addLabel(endOfMethod);
+        compiler.addInstruction(new SUBSP(block.getNumberLocalVariables()));
         compiler.addInstruction(new RTS());
         tstoline.setInstruction(new TSTO(compiler.getCodeAnalyzer().getNeededStackSize())); // on recupere de codeAnalyzer le vrai nombre et on le set
         for(AbstractDeclParam p : declParameters.getList()){
             compiler.getstackTable().remove(p.getName());
         }
+        //we delete every local variables which are in the method
+        for( SymbolTable.Symbol s: compiler.getstackTable().getListLocalDeclVar()){
+            compiler.getstackTable().remove(s);
+        }
+        compiler.getstackTable().ClearListLocalDeclVar();
     }
 }

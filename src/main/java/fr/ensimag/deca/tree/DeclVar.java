@@ -4,10 +4,13 @@ import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.ADDSP;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.deca.tree.Initialization;
 import java.io.PrintStream;
+
+import fr.ensimag.ima.pseudocode.instructions.PUSH;
 import org.apache.commons.lang.Validate;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 
@@ -81,6 +84,11 @@ public class DeclVar extends AbstractDeclVar {
 
     protected void codeGenDeclVar(DecacCompiler compiler){
         compiler.getstackTable().putDeclVar(varName.getName(), Register.GB);
+        initialization.codeGenDeclVar(compiler, varName);
+    }
+
+    protected void codeGenDeclLocalVar(DecacCompiler compiler, int indexOfDeclVar){
+        compiler.getstackTable().putLocalDeclVar(varName.getName(), new RegisterOffset(indexOfDeclVar, Register.LB));
         initialization.codeGenDeclVar(compiler, varName);
     }
 

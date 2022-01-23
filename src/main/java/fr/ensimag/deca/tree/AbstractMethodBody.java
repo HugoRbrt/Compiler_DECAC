@@ -12,4 +12,6 @@ public abstract class AbstractMethodBody extends Tree {
             ClassDefinition currentClass, Type returnType) throws ContextualError;
 
     protected abstract void codeGenMethodBody(DecacCompiler compiler);
+
+    protected abstract int getNumberLocalVariables();
 }
