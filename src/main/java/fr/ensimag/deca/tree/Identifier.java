@@ -252,7 +252,12 @@ public class Identifier extends AbstractIdentifier {
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex){
         if (getDefinition().isExpression()) {
             RegisterOffset R = compiler.getstackTable().get(this.getName());
-            compiler.addInstruction(new LOAD(R, Register.R1));
+            if(Objects.isNull(R.getRegister())){
+                compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.R0));
+                compiler.addInstruction(new LOAD(new RegisterOffset(R.getOffset(), Register.R0), Register.R1));
+            }else{
+                compiler.addInstruction(new LOAD(R, Register.R1));
+            }
         }
         if (definition.getType().isInt()) {
             compiler.addInstruction(new WINT());
