@@ -1,4 +1,4 @@
-package fr.ensimag.ima;
+package fr.ensimag.ima.pseudocode;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

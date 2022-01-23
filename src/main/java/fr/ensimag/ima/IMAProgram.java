@@ -1,8 +1,11 @@
-package fr.ensimag.ima;
+package fr.ensimag.ima.pseudocode;
+import fr.ensimag.ima.pseudocode.instructions.ADDSP;
+import fr.ensimag.ima.pseudocode.instructions.TSTO;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
 
-import fr.ensimag.ima.pseudocode.Line;
-
-
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.LinkedList;
 
 
 /**

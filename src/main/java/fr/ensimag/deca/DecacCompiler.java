@@ -23,9 +23,9 @@ import java.io.PrintStream;
 import java.util.Objects;
 import java.lang.Runnable;
 
-import fr.ensimag.ima.ARMProgram;
-import fr.ensimag.ima.GenericProgram;
-import fr.ensimag.ima.IMAProgram;
+import fr.ensimag.ima.pseudocode.ARMProgram;
+import fr.ensimag.ima.pseudocode.GenericProgram;
+import fr.ensimag.ima.pseudocode.IMAProgram;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.commons.lang.exception.ExceptionUtils;
