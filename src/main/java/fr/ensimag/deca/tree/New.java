@@ -52,7 +52,7 @@ public class New extends AbstractExpr {
         GPRegister r = compiler.getListRegister().getRegister(compiler);
         compiler.addInstruction(new NEW(instantiation.getClassDefinition().getNumberOfFields()+1, r));
         if (!compiler.getCompilerOptions().getNoCheck()) {
-            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Stack overflow")));
+            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Heap Overflow")));
         }
         compiler.addInstruction(new LEA(compiler.getstackTable().getClass(instantiation.getName()), Register.R0));
         //comment obtenir k ?
