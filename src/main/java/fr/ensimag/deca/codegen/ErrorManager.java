@@ -98,7 +98,7 @@ public class ErrorManager {
         // Start point for the program
         compiler.addFirstInstruction(new ADDSP(addspArg));
         if (!compiler.getCompilerOptions().getNoCheck()) {
-            compiler.addFirstInstruction(new BOV(errorMap.get("Stack overflow , a real one")));
+            compiler.addFirstInstruction(new BOV(errorMap.get("Stack overflow")));
             compiler.addFirstInstruction(new TSTO(tstoArg));
         }
     }
