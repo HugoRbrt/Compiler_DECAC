@@ -169,7 +169,7 @@ public class CompilerOptions {
 
     protected void displayUsage() {
         System.out.println("\033[1;95m    Usage : decac [[-p | -v] [-n] [-a | -r X] [-d]*" + 
-                " [-P] [-w] <fichier deca>...] | [-b]\u001B[m");
+                " [-P] [-w] <deca file>...] | [-b]\u001B[m");
         System.out.println(); 
         System.out.println("\033[96m-b  (banner): prints the team banner");
         System.out.println("-p  (parse): stops at the tree building step and " +

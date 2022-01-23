@@ -1,1 +1,1 @@
-ERROR: impossible_conversion
+ERROR: Illegal cast

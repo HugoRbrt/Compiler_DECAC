@@ -13,5 +13,7 @@ cd invalid
 exitnum=$(($exitnum + $?))
 cd ..
 
+./Codegen-test.sh perf provided
+
 
 exit $exitnum

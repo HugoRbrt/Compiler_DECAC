@@ -1,1 +1,1 @@
-src/test/deca/context/invalid/Objet/ReDeclaration-Parent-Meth2.deca:17:12: (RULE 2.7) Invalid method override. Signature of 'x' is ().
+src/test/deca/context/invalid/Objet/ReDeclaration-Parent-Meth2.deca:17:12: (RULE 2.7) Invalid method override. Signature of 'x' is (), return type is int.

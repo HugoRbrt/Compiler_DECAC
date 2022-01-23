@@ -509,15 +509,16 @@ literal returns[AbstractExpr tree]
         }
     | fd=FLOAT {
         char[] charArray = $fd.text.toCharArray();
-        boolean strictlyPos = false;
+        boolean nonZero = false;
         for (char c: charArray) {
-            if (c != '0' && c != '.' && c != 'e' && c != '+' && c != '-') {
-                strictlyPos = true;
+            if (c != '0' && c != '.' && c != 'e' && c != '+'
+                    && c != '-' && c != 'p' && c != 'x' && c != 'f') {
+                nonZero = true;
                 break;
             }
-            if (c == 'e') { break; }
+            if (c == 'e' || c == 'p') { break; }
         }
-        if (strictlyPos && Float.parseFloat($fd.text) == 0) {
+        if (nonZero && Float.parseFloat($fd.text) == 0) {
             System.err.println(tmploc.getFilename() + ":" + tmploc.getLine()
                 + ":" + tmploc.getPositionInLine() + ": float literal underflow.");
             throw new NumberFormatException();

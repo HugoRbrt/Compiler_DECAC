@@ -1,1 +1,1 @@
-src/test/deca/context/invalid/Objet/MethodCall-InvalidMethodCall-CError.deca:17:7: (RULE 3.41) Invalid method call.
+src/test/deca/context/invalid/Objet/MethodCall-InvalidMethodCall-CError.deca:17:7: (RULE 3.41) Invalid method call: x is not a method.
