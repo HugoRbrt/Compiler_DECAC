@@ -19,6 +19,7 @@ TESTPATH=src/test/deca/codegen/"$1"/"$2"
 RESPATH=src/test/results/deca/codegen/"$1"/"$2"
 TMP=src/test/tmp
 DECAC=src/main/bin/decac
+ARMexec=src/test/script/ARM-exec.sh
 
 exitnum=0
 
@@ -49,9 +50,7 @@ test_arm() {
            exitnum=$(($exitnum + 1))
            return
         else
-            arm-linux-gnueabihf-as -march="armv6+fp"  -mfloat-abi=soft  -mfpu=softvfp -g $TESTPATH/$1.s -o $TESTPATH/$1.o || exit 1
-            arm-linux-gnueabihf-gcc  -mfloat-abi=hard -g $TESTPATH/$1.o -o $TESTPATH/$1 -lc -static || exit 1
-            ./$TESTPATH/$1 >  $TMP/$1.ARMrestmp
+             $ARMexec "$TESTPATH"/$1.s >  $TMP/$1.ARMrestmp
     fi
 
 
@@ -73,7 +72,6 @@ test_arm() {
             echo "${GREEN}[EXPECTED OUTPUT] : $1 ${NC}"
             rm $TMP/$1.ARMrestmp
             rm $TESTPATH/$1.s
-            rm $TESTPATH/$1.o
             rm $TESTPATH/$1
     fi
 
