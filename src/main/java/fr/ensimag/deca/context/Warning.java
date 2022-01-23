@@ -16,12 +16,15 @@ public class Warning {
     }
 
     public void emit() {
-        StringBuilder sb = new StringBuilder(location.toString());
-        sb.deleteCharAt(0); sb.deleteCharAt(sb.length()-1);
-        int i = sb.indexOf((", "));
-        sb.setCharAt(i, ':'); sb.deleteCharAt(i+1);
+//        StringBuilder sb = new StringBuilder(location.toString());
+//        sb.deleteCharAt(0); sb.deleteCharAt(sb.length()-1);
+//        int i = sb.indexOf((", "));
+//        sb.setCharAt(i, ':'); sb.deleteCharAt(i+1);
+//        System.err.println(
+//                "[\u001B[31mWARNING\u001B[0m]" + location.getFilename() + ":" +
+//                sb + ": " + message);
         System.err.println(
                 "[\u001B[31mWARNING\u001B[0m]" + location.getFilename() + ":" +
-                sb + ": " + message);
+                location.getLine() + ": " + location.getPositionInLine() + ":" + message);
     }
 }
