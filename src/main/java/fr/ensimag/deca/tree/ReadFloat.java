@@ -55,8 +55,11 @@ public class ReadFloat extends AbstractReadExpr {
 
     protected void codeGenPrintARM(DecacCompiler compiler, boolean printHex){
         codeGenInstARM(compiler);
-        compiler.addInstruction(new ldr(ARMRegister.r0, "=tmpfloat"));
-        super.codeGenPrintARM(compiler, printHex);
+        compiler.addInstruction(new vmov(ARMRegister.s0, ARMRegister.r0));
+        compiler.addARMBlock("        vcvt.f64.f32 d0, s0");
+        compiler.addInstruction(new vmov(ARMRegister.r2, ARMRegister.r3, ARMRegister.d0));
+        compiler.addInstruction(new ldr(ARMRegister.r0, "=flottant"));
+        compiler.addInstruction(new bl("printf"));
     }
 
     @Override
