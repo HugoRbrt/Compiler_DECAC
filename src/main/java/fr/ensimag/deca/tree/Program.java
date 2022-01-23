@@ -71,10 +71,10 @@ public class Program extends AbstractProgram {
         classes.codeGen(compiler);
     }
     public void codeGenProgramARM(DecacCompiler compiler) {
-        // A FAIRE: compléter ce squelette très rudimentaire de code
         compiler.addARMBlock(".text");
         compiler.addARMBlock(".global main");
         compiler.addARMBlock(".extern printf");
+        compiler.addARMBlock(".extern scanf");
         compiler.addARMComment("ARM program");
         //creation of ARM Register
         compiler.setListRegisterARM(new ARMRegister());
