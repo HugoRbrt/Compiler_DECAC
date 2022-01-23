@@ -56,7 +56,7 @@ test_codegen() {
     DIFF=$(diff $TMP/$1.restmp $RESPATH/$1.res)
     if [ "$DIFF" != "" ]
         then
-            echo "${RED}[UNEXPECTED OUTUT] : $1 ${NC}"
+            echo "${RED}[UNEXPECTED OUTPUT] : $1 ${NC}"
             exitnum=$(($exitnum + 1))
         else
             echo "${GREEN}[EXPECTED OUTPUT] : $1 ${NC}"
