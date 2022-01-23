@@ -6,6 +6,7 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.*;
 import fr.ensimag.ima.pseudocode.instructions.*;
 import fr.ensimag.deca.context.Type;
+import fr.ensimag.ima.pseudocode.instructionsARM.*;
 
 import java.io.PrintStream;
 
@@ -85,6 +86,27 @@ public class Cast extends AbstractExpr {
         }
     }
 
+    protected void codeGenInstARM(DecacCompiler compiler){
+        expression.codeGenInstARM(compiler);
+        // we only add the instruction if the cast is really needed
+        if (!type.getDefinition().getType().sameType(expression.getType())) {
+            compiler.addInstruction(new vmov(ARMRegister.s0, ARMRegister.r0));
+            if(type.getDefinition().getType().isInt()){
+                compiler.addARMBlock("        vcvt.s32.f32 s1, s0");
+                if (!compiler.getCompilerOptions().getNoCheck()) {
+                    compiler.addInstruction(new bvs("float_arithmetic_overflow"));
+                }
+            }
+            else if(type.getDefinition().getType().isFloat()){
+                compiler.addARMBlock("        vcvt.f32.s32 s1, s0");
+                if (!compiler.getCompilerOptions().getNoCheck()) {
+                   compiler.addInstruction(new bvs("float_arithmetic_overflow"));
+                }
+            }
+            compiler.addInstruction(new vmov(ARMRegister.r0, ARMRegister.s1));
+        }
+    }
+
     public void codeGenOperations(GPRegister storedRegister, DecacCompiler compiler){
         // Nothing to do
     }
@@ -103,7 +125,27 @@ public class Cast extends AbstractExpr {
             }
         }
         else{
-            compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("impossible_conversion")));
+            compiler.addInstruction(new BRA(compiler.getErrorManager().getErrorLabel("impossible_conversion")));
+        }
+    }
+
+    protected void codeGenPrintARM(DecacCompiler compiler, boolean printHex){
+        codeGenInstARM(compiler);
+        compiler.addInstruction(new LOAD(Register.R0, Register.R1));
+        if(type.getDefinition().getType().isInt()){
+            compiler.addInstruction(new mov(ARMRegister.r1, ARMRegister.r0));
+            compiler.addInstruction(new ldr(ARMRegister.r0, "=int"));
+            compiler.addInstruction(new bl("printf"));
+        }
+        else if(type.getDefinition().getType().isFloat()){
+            compiler.addInstruction(new vmov(ARMRegister.s0, ARMRegister.r0));
+            compiler.addARMBlock("        vcvt.f64.f32 d0, s0");
+            compiler.addInstruction(new vmov(ARMRegister.r2, ARMRegister.r3, ARMRegister.d0));
+            compiler.addInstruction(new ldr(ARMRegister.r0, "=flottant"));
+            compiler.addInstruction(new bl("printf"));
+        }
+        else{
+            compiler.addInstruction(new b("impossible_conversion"));
         }
     }
 

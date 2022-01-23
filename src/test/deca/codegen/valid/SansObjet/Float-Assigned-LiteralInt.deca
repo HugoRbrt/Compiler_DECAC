@@ -10,6 +10,6 @@
 //    cree le 11/01/2022 
 
 {
-    float x = 2 ;
-    printx(x);
+    float x = (float) (2.0) ;
+    print(x);
 }

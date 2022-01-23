@@ -2,7 +2,7 @@
 //    Casting a same type variable during a declaration
 //
 // Results:
-//     ERROR: float_arithmetic_overflow
+//     33
 //
 // History:
 //    created on 16/01/2022

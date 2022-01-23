@@ -72,10 +72,12 @@ public abstract class  AbstractBinaryExpr extends AbstractExpr {
 
     protected void codeGenInstARM(DecacCompiler compiler){
         leftOperand.codeGenInstARM(compiler);
-        ARMGPRegister usedRegister = ARMRegister.getR(1);
+        ARMGPRegister usedRegister = compiler.getListRegisterARM().getRegister(compiler);
+
         compiler.addInstruction(new mov(usedRegister, ARMRegister.getR(0)));
         rightOperand.codeGenInstARM(compiler);
         this.codeGenOperationsARM(usedRegister, ARMRegister.getR(0), compiler);
+        compiler.getListRegisterARM().freeRegister(usedRegister, compiler);
     }
 
     protected void codeGenPrint(DecacCompiler compiler, boolean printHex){
