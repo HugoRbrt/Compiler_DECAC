@@ -37,23 +37,12 @@ public class ARMErrorManager {
         // adding all necessary errors to the error map
         Label divByZeroLabel = new Label("division_by_zero");
         errorMap.put("Division by zero", divByZeroLabel);
-        //Label nullReferenceLabel = new Label("null_dereferencing");
-        //errorMap.put("null_dereferencing", nullReferenceLabel);
+
         Label ioErrorLabel = new Label("input_output_error");
-        errorMap.put("input_output", ioErrorLabel);
-        //Label heapOverflowLabel = new Label("heap_overflow");
-        //errorMap.put("heap_overflow", heapOverflowLabel);
+        errorMap.put("Input/output Error", ioErrorLabel);
+
         Label floatArithmeticOverflow = new Label("float_arithmetic_overflow");
         errorMap.put("Float arithmetic overflow", floatArithmeticOverflow);
-        //Label noReturnLabel = new Label("no_return");
-        //errorMap.put("no_return", noReturnLabel);
-        Label impossibleConversionLabel = new Label("impossible_conversion");
-        errorMap.put("impossible_conversion", impossibleConversionLabel);
-        Label noInitializationAccessLabel = new Label("not_initialized_variable_access");
-        errorMap.put("not_initialized_access", noInitializationAccessLabel);
-        Label incorrectAssemblerLabel = new Label("incorrect_assembler");
-        errorMap.put("incorrect_assembler", incorrectAssemblerLabel);
-
     }
 
 
