@@ -51,8 +51,9 @@ public class ReadInt extends AbstractReadExpr {
 
     protected void codeGenPrintARM(DecacCompiler compiler, boolean printHex){
         codeGenInstARM(compiler);
-        compiler.addInstruction(new ldr(ARMRegister.r0, "=tmpint"));
-        super.codeGenPrintARM(compiler, printHex);
+        compiler.addInstruction(new mov(ARMRegister.r1, ARMRegister.r0));
+        compiler.addInstruction(new ldr(ARMRegister.r0, "=int"));
+        compiler.addInstruction(new bl("printf"));
     }
 
     @Override
