@@ -36,16 +36,16 @@ public class ListDeclField extends TreeList<AbstractDeclField> {
         if (!compiler.getCompilerOptions().getNoCheck()) {
             compiler.addInstruction(new BOV(compiler.getErrorManager().getErrorLabel("Stack overflow , a real one")));
         }
-        //on initialise tout a 0
+        //initialization of every field
         for (AbstractDeclField field: getList()) {
             field.codeGen(compiler, ((DeclField)field).getFieldName().getFieldDefinition().getIndex());
         }
-        // on appel la methode init de la superclasse
+        //we call init method of superclass
         compiler.addInstruction(new LOAD(new RegisterOffset(-2, Register.LB), Register.R1));
         compiler.addInstruction(new PUSH(Register.R1));
         compiler.addInstruction(new BSR(new Label("init."+superClass)));
         compiler.addInstruction(new SUBSP(1));
-        //on reinitialize uniquement les champ qui ont une initialization
+        //reinitialization of field with initialization
         for (AbstractDeclField field: getList()) {
             if(field.getInit() instanceof Initialization){
                 field.codeGen(compiler, ((DeclField)field).getFieldName().getFieldDefinition().getIndex());

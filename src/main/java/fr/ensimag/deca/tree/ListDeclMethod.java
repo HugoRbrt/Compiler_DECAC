@@ -18,7 +18,6 @@ public class ListDeclMethod extends TreeList<AbstractDeclMethod> {
     }
 
     protected void codeGenTable(DecacCompiler compiler, SymbolTable.Symbol classSymbol) {
-        //on ajoute la classe de object :
         for (AbstractDeclMethod method: getList()) {
             method.codeGenTable(compiler, classSymbol);
         }
@@ -26,10 +25,8 @@ public class ListDeclMethod extends TreeList<AbstractDeclMethod> {
 
     protected void codeGen(DecacCompiler compiler, String className, List<AbstractDeclField> fieldsList) {
         for (AbstractDeclMethod method: getList()) {
-            int counter = 1;
             for (AbstractDeclField f : fieldsList){
-                compiler.getstackTable().put(((DeclField)f).getFieldName().getName(), new RegisterOffset(counter, null));
-                counter++;
+                compiler.getstackTable().put(((DeclField)f).getFieldName().getName(), new RegisterOffset(((DeclField)f).getFieldName().getFieldDefinition().getIndex(), null));
             }
             method.codeGen(compiler, className);
         }
