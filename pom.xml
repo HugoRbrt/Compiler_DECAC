@@ -268,7 +268,18 @@
                         <goals>
                             <goal>exec</goal>
                         </goals>
+		    </execution>
+		    <execution>
+                        <id>Parallelism-tests</id>
+                        <configuration>
+                            <executable>./src/test/script/time-parallel.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
                     </execution>
+
                     <execution>
                         <id>all-tests</id>
                         <configuration>
