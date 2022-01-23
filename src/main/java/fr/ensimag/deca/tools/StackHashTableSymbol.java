@@ -24,6 +24,7 @@ import fr.ensimag.ima.pseudocode.Register;
  */
 public class StackHashTableSymbol {
     private Map<Symbol, RegisterOffset> map = new HashMap<Symbol, RegisterOffset>();
+    private Map<Symbol, RegisterOffset> Classmap = new HashMap<Symbol, RegisterOffset>();
     private Label enfOfCurrentMethod;
     private List<Symbol> ListDeclVar = new LinkedList<>();
     private int size = 1;
@@ -52,6 +53,18 @@ public class StackHashTableSymbol {
     public void put(Symbol name, Register R){
         map.put(name, new RegisterOffset(size, R)); // add 1 to avoid 0(GB) error
         size++;
+    }
+
+    public void putClass(Symbol name, Register R){
+        Classmap.put(name, new RegisterOffset(size, R)); // add 1 to avoid 0(GB) error
+        size++;
+    }
+
+    public RegisterOffset getClass(Symbol name) {
+        if (!Classmap.containsKey(name)) {
+            throw new IllegalArgumentException("symbol " + name.getName() + " not found in ClassStackHashTableSymbol");
+        }
+        return Classmap.get(name);
     }
 
     public void putDeclVar(Symbol name, Register R){

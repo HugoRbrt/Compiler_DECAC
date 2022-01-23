@@ -145,10 +145,10 @@ public class DeclClass extends AbstractDeclClass {
 
     protected void codeGenTable(DecacCompiler compiler){
         compiler.addComment("construction of Method Table for "+className.getName().getName());
-        RegisterOffset superClassAdress = compiler.getstackTable().get(superClass.getName());
-        compiler.getstackTable().put(className.getName(), Register.GB);
+        RegisterOffset superClassAdress = compiler.getstackTable().getClass(superClass.getName());
+        compiler.getstackTable().putClass(className.getName(), Register.GB);
         compiler.addInstruction(new LEA(superClassAdress, Register.R0));
-        compiler.addInstruction(new STORE(Register.R0, compiler.getstackTable().get(className.getName())));
+        compiler.addInstruction(new STORE(Register.R0, compiler.getstackTable().getClass(className.getName())));
         compiler.incrMethodsTableSize(2);
 
         SymbolTable.Symbol[] symbolList = new SymbolTable.Symbol[className.getClassDefinition().getNumberOfMethods()];

@@ -53,7 +53,7 @@ public class InstanceOf extends AbstractExpr {
         Label end = new Label();
         expr.codeGenInst(compiler);
         compiler.addInstruction(new LOAD(new RegisterOffset(0, Register.R0), Register.R0));
-        compiler.addInstruction(new LEA(  compiler.getstackTable().get( comparedTo.getName()) , Register.R1));
+        compiler.addInstruction(new LEA(  compiler.getstackTable().getClass( comparedTo.getName()) , Register.R1));
         compiler.addLabel(start);
         compiler.addInstruction(new CMP(Register.R0, Register.R1));
         compiler.addInstruction(new BEQ(success));

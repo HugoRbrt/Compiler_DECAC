@@ -64,8 +64,8 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
         compiler.addInstruction(new LOAD(new NullOperand(), Register.R0));
 
         Symbol objectSymbol = compiler.getSymbTable().get("Object");
-        compiler.getstackTable().put(objectSymbol, Register.GB);
-        compiler.addInstruction(new STORE(Register.R0, compiler.getstackTable().get(objectSymbol)));
+        compiler.getstackTable().putClass(objectSymbol, Register.GB);
+        compiler.addInstruction(new STORE(Register.R0, compiler.getstackTable().getClass(objectSymbol)));
 
         Symbol equalsObjectSymbol = compiler.getSymbTable().create("code.Object.equals");
         compiler.getstackTable().put(equalsObjectSymbol, Register.GB);
