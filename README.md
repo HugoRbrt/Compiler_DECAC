@@ -27,4 +27,6 @@ Les fichiers ```.ass``` générés par défaut peuvent être exécutés par
 de decac. (i.e. ```decac -a <file1.deca> <file2.deca> ...```).
 
 Les fichiers ```.s``` générés par défaut peuvent être exécutés par
-```arm <file.s>``` (à supposer que l'environnement ARM ait bien été installé).
+```ARM-exec.sh <filename-without-.s>``` (à supposer que l'environnement ARM ait bien été installé).
+
+En revanche, nous avons choisi de laisser l'exécutable généré.
