@@ -169,6 +169,17 @@ public class Register extends DVal {
     }
     
     /**
+     * Reinitializes the registers in terms of charge.
+     * It is useful to clean the static field R
+     */
+    public void freeAllRegisters() {
+        for (int k = 2; k < maxIndex; k++) {
+            R[k].setNbPushOnRegister(0);
+            R[k].free();
+        }
+    }
+    
+    /**
      * Use all registers and put their PUSH counts to 0.
      * This method will be used by the code generation for functions
      */
