@@ -388,10 +388,6 @@ public class DecacCompiler implements Runnable {
         }
         
         addComment("end main program");
-
-        if(this.compilerOptions.getArmBool()){
-
-        }
         
         LOG.debug("Generated assembly code:" + nl + program.display());
         LOG.info("Output file assembly file is: " + destName);
