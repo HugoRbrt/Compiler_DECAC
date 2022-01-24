@@ -24,16 +24,8 @@ public class Return extends AbstractInst {
                     "(RULE 3.24) 'return' statement inapplicable in method of return type void."),
                     returnExpr.getLocation());
         }
-        Type currentType = returnExpr.verifyExpr(compiler, localEnv, currentClass);
-        returnExpr.setType(currentType);
-        /* Not required by specification: print warning.
-        */
-        if (!returnType.sameType(currentType) && compiler.getEmitWarnings()) {
-            Warning warning = new Warning(
-                    "Type of return statement is inconsistent with method return type.",
-                    getLocation());
-            warning.emit();
-        }
+        returnExpr = returnExpr.verifyRValue(compiler, localEnv, currentClass, returnType);
+        returnExpr.setType(returnType);
     }
 
     @Override
