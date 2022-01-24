@@ -131,7 +131,6 @@ public class Cast extends AbstractExpr {
 
     protected void codeGenPrintARM(DecacCompiler compiler, boolean printHex){
         codeGenInstARM(compiler);
-        compiler.addInstruction(new LOAD(Register.R0, Register.R1));
         if(type.getDefinition().getType().isInt()){
             compiler.addInstruction(new mov(ARMRegister.r1, ARMRegister.r0));
             compiler.addInstruction(new ldr(ARMRegister.r0, "=int"));
