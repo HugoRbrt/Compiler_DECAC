@@ -65,7 +65,7 @@ public class MethodCall extends AbstractExpr {
             sig.add(arg.verifyExpr(compiler, localEnv, currentClass));
         }
         MethodDefinition mdef = methodName.getMethodDefinition();
-        if (!mdef.getSignature().equals(sig)) {
+        if (!sig.equals(mdef.getSignature())) {
             throw new ContextualError(
                     "(RULE 3.72) Invalid argument list: signature of '" +
                     m + "' is (" + mdef.getSignature() +").", getLocation());
