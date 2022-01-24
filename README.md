@@ -9,7 +9,7 @@ comme montré dans le poly-projet-GL.pdf à la section 3.1 du chapitre
 
 Pour la compilation à destination de ARM, il faudra préalablement lancer
 l'installation du compilateur croisé grâce à la ligne de commande :
-```sudo apt-get arm-linux-gnueabihf```.
+```sudo apt-get arm-linux-gnueabihf``` et ```sudo apt-get qemu-user```.
 
 ## Utilisation du compilateur
 
