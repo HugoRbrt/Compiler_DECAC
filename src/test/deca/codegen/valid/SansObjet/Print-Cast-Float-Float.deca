@@ -1,0 +1,12 @@
+// Description:
+//    Printing a result of a cast from int to float.
+// 
+// Results:
+//     2.0
+// 
+// Historique: 
+//    cree le 12/01/2022 
+
+{
+    print((float) (2.0)) ;
+}
