@@ -1,5 +1,7 @@
 package fr.ensimag.deca.context;
 
+import fr.ensimag.deca.DecacCompiler;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -20,6 +22,8 @@ public class Signature {
     public void add(Type t) {
         args.add(t);
     }
+
+    public Type get(int i) { return args.get(i); }
     
     public Type paramNumber(int n) {
         return args.get(n);
@@ -45,8 +49,8 @@ public class Signature {
         if (o == null || getClass() != o.getClass()) return false;
         Signature signature = (Signature) o;
         if (args.size() != signature.args.size()) return false;
-        for (int i = 0; i < args.size() - 1; i++) {
-            if (!ContextTools.subtype(args.get(i), signature.args.get(i))) {
+        for (int i = 0; i < args.size(); i++) {
+            if (!ContextTools.assignCompatible(signature.args.get(i), args.get(i))) {
                 return false;
             }
         }

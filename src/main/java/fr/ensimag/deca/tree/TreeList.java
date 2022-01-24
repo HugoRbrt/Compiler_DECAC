@@ -44,6 +44,8 @@ public abstract class TreeList<TreeType extends Tree> extends Tree {
         return Collections.unmodifiableList(list);
     }
 
+    public List<TreeType> getModifiableList() { return list; }
+
     public TreeType set(int index, TreeType element) {
         return list.set(index, element);
     }

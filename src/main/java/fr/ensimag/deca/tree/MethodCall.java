@@ -70,6 +70,12 @@ public class MethodCall extends AbstractExpr {
                     "(RULE 3.72) Invalid argument list: signature of '" +
                     m + "' is (" + mdef.getSignature() +").", getLocation());
         }
+        for (int i = 0; i < methodArgs.getList().size(); i++) {
+            methodArgs.getModifiableList().set(i,
+                    methodArgs.getList().get(i).verifyRValue(
+                            compiler, localEnv, currentClass, mdef.getSignature().get(i)));
+            methodArgs.getModifiableList().get(i).verifyExpr(compiler, localEnv, currentClass);
+        }
         setType(returnType);
         return returnType;
     }
