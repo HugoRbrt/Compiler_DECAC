@@ -3,17 +3,22 @@ gl49, 01/01/2022.
 
 ## Mise en place de l'environnement
 
-Le PATH doit être bien positionné sur le répertoire ```src/main/bin/```
-et sur ```src/test/script/```.
+Pour la compilation à destination de IMA, le PATH doit être configuré
+comme montré dans le poly-projet-GL.pdf à la section 3.1 du chapitre
+[Séance Machine].
 
-On pourra installer l'émulateur de ARM choisi avec la commande suivante:
+Pour la compilation à destination de ARM, il faudra préalablement lancer
+l'installation du compilateur croisé grâce à la ligne de commande :
 ```sudo apt-get arm-linux-gnueabihf```.
 
 ## Utilisation du compilateur
 
-- Pour lancer le compilateur decac, sur un ou plusieurs fichiers .deca,
+- Pour lancer le compilateur decac à destination de IMA, sur un ou plusieurs fichiers .deca,
 on utilise la commande :
-```decac <file1.deca> <file2.deca> ...```.
+```decac <fichier1.deca> <fichier2.deca> ...```.
+
+Les options sont décrites dans le manuel utilisateur situés dans le
+répertoire ```docs```.
 
 Les fichiers ```.ass``` générés par défaut peuvent être exécutés par
 ```ima <file.ass>```.
@@ -22,8 +27,4 @@ Les fichiers ```.ass``` générés par défaut peuvent être exécutés par
 de decac. (i.e. ```decac -a <file1.deca> <file2.deca> ...```).
 
 Les fichiers ```.s``` générés par défaut peuvent être exécutés par
-```arm <file.s>```.
-
-
-
-
+```arm <file.s>``` (à supposer que l'environnement ARM ait bien été installé).
