@@ -69,6 +69,7 @@ public class Program extends AbstractProgram {
             compiler.getErrorManager().genCodeErrorManager(compiler);
         }
         classes.codeGen(compiler);
+        compiler.getListRegister().freeAllRegisters();
     }
     public void codeGenProgramARM(DecacCompiler compiler) {
         compiler.addARMBlock(".text");

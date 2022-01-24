@@ -1,6 +1,8 @@
-*.listmp
 *.lis
+*.listmp
 *.ass
 *.asstmp
 *.res
 *.restmp
+*.s
+*.ARMrestmp

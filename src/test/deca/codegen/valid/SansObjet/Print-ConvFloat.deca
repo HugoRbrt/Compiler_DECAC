@@ -1,0 +1,12 @@
+// Description:
+//    Printing a result of an addition between int and float to introduce a ConvFloat in a print.
+// 
+// Results:
+//     5.0
+// 
+// Historique: 
+//    cree le 12/01/2022 
+
+{
+    print( 2 + 3.0) ;
+}
