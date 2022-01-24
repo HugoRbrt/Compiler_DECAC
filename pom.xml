@@ -280,6 +280,16 @@
                         </goals>
                     </execution>
                     <execution>
+                        <id>ARM-tests</id>
+                        <configuration>
+                            <executable>./src/test/script/deca/codegen/ARM-allin.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                    <execution>
                         <id>Idempotence-tests</id>
                         <configuration>
                             <executable>./src/test/script/decompile-idemp-test.sh</executable>
