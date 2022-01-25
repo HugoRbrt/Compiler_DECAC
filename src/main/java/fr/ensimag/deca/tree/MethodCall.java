@@ -65,16 +65,24 @@ public class MethodCall extends AbstractExpr {
             sig.add(arg.verifyExpr(compiler, localEnv, currentClass));
         }
         MethodDefinition mdef = methodName.getMethodDefinition();
-        if (!sig.equals(mdef.getSignature())) {
+        boolean goodCall = true;
+        if (methodArgs.size() != mdef.getSignature().size()) {
             throw new ContextualError(
                     "(RULE 3.72) Invalid argument list: signature of '" +
-                    m + "' is (" + mdef.getSignature() +").", getLocation());
-        }
-        for (int i = 0; i < methodArgs.getList().size(); i++) {
-            methodArgs.getModifiableList().set(i,
-                    methodArgs.getList().get(i).verifyRValue(
-                            compiler, localEnv, currentClass, mdef.getSignature().get(i)));
-            methodArgs.getModifiableList().get(i).verifyExpr(compiler, localEnv, currentClass);
+                    m + "' is (" + mdef.getSignature() + ").", getLocation());
+        } else {
+            try {
+                for (int i = 0; i < methodArgs.getList().size(); i++) {
+                    methodArgs.getModifiableList().set(i,
+                            methodArgs.getList().get(i).verifyRValue(
+                                    compiler, localEnv, currentClass, mdef.getSignature().get(i)));
+                    methodArgs.getModifiableList().get(i).verifyExpr(compiler, localEnv, currentClass);
+                }
+            } catch (ContextualError e) {
+                throw new ContextualError(
+                        "(RULE 3.72) Invalid argument list: signature of '" +
+                        m + "' is (" + mdef.getSignature() + ").", getLocation());
+            }
         }
         setType(returnType);
         return returnType;
