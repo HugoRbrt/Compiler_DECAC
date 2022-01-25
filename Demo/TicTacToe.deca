@@ -1,0 +1,233 @@
+#include "ListeChaineeInt.deca"
+
+class Board {
+    Liste l1 = new Liste();
+    Liste l2 = new Liste();
+    Liste l3 = new Liste();
+
+    Liste taken1 = new Liste();
+    Liste taken2= new Liste();
+    Liste taken3 = new Liste();
+    int cpteur = 1;
+
+    void initListe(Liste l, boolean mark) {
+        int x = 0;
+        Cellule tmp;
+        while(x<3) {
+            tmp = new Cellule();
+            if(mark) {
+                tmp.setVal(cpteur);
+                cpteur = cpteur + 1;
+            }
+            l.enfile(tmp);
+            x = x+1;
+        }
+    }
+
+    void init() {
+        this.initListe(l1, true);
+        this.initListe(l2, true);
+        this.initListe(l3, true);
+        this.initListe(taken1, false);
+        this.initListe(taken2, false);
+        this.initListe(taken3, false);
+    }
+
+    void showListe(Liste l, Liste marked) {
+        int index = 0 ;
+        print("       |");
+        while(index < l.taille) {
+            print(" ");
+            this.printVal(marked.get(index), l.get(index));
+            print(" |");
+            index = index + 1;
+        }
+        println("       ") ;
+    }
+
+    void showBoard() {
+        println("       |---|---|---|       ") ;
+        this.showListe(l1, taken1);
+        println("       |-----------|       ") ;
+        this.showListe(l2, taken2);
+        println("       |-----------|       ") ;
+        this.showListe(l3, taken3);
+        println("       |---|---|---|       ") ;
+    }
+
+    boolean checkPlace(int numb, int mark) {
+        Liste tochange;
+        Liste tomark;
+        Cellule tmp;
+
+        int line = (numb-1) / 3;
+        int col = (numb-1) % 3;
+        if(line > 3 || line < 0) {
+            println("Bad input choice");
+            return false;
+        }
+        else if(col > 3 || col < 0) {
+            println("Bad input choice");
+            return false;
+        }
+        if(line == 0) {
+            tochange = l1;
+            tomark = taken1;
+        } else if (line == 1) {
+            tochange = l2;
+            tomark = taken2;
+        } else {
+            tochange = l3;
+            tomark = taken3;
+        }
+        if (mark != -1) {
+            if(tomark.get(col) == 1) {
+                println("Case déjà remplie");
+                return false;
+            }
+            tochange.setAt(col, mark);
+            tomark.setAt(col, 1);
+        }
+
+        return true;
+    }
+
+
+
+    void printVal(int used, int value) {
+        //println("Used:", used);
+        //println("Value:", value);
+        if(used == 0) {
+            print(value);
+        } else {
+            if(value == 0) {
+                print("X");
+            } else {
+                print("O");
+            }
+        }
+    }
+
+    boolean checkDiag(int mark) {
+        if(this.taken1.get(0) == 1 && this.l1.get(0) == mark &&
+            this.taken2.get(1) == 1 && this.l2.get(1) == mark &&
+                this.taken3.get(2) == 1 && this.l3.get(2) == mark) {
+            print("K3K");
+            return true;
+        }
+        if(this.taken1.get(2) == 1 && this.l1.get(2) == mark &&
+                this.taken2.get(1) == 1 && this.l2.get(1) == mark &&
+                    this.taken3.get(0) == 1 && this.l3.get(0) == mark) {
+            return true;
+        }
+        return false;
+    }
+
+    boolean checkLineWin(Liste l, Liste taken, int mark) {
+        if(taken.get(0) == 1 && l.get(0) == mark &&
+                taken.get(1) == 1 && l.get(1) == mark &&
+                    taken.get(2) == 1 && l.get(2) == mark) {
+            return true;
+        }
+        return false;
+    }
+
+    boolean checkColWin(int col, int mark) {
+        if(this.taken1.get(col) == 1 && this.l3.get(col) == mark &&
+                this.taken2.get(col) == 1 && this.l2.get(col) == mark &&
+                    this.taken3.get(col) == 1 && this.l3.get(col) == mark) {
+            return true;
+        }
+        return false;
+    }
+
+    boolean checkAllLines(int mark) {
+        boolean tmp = checkLineWin(l1, taken1, mark);
+        boolean tmp1 = checkLineWin(l2, taken2, mark);
+        boolean tmp2 = checkLineWin(l3, taken3, mark);
+        boolean tmp3 = tmp || tmp1 || tmp2 ;
+        return tmp3;
+    }
+
+    boolean checkAllCol(int mark) {
+        boolean tmp = checkColWin(0, mark);
+        boolean tmp1 = checkColWin(1, mark);
+        boolean tmp2 = checkColWin(2, mark);
+        boolean tmp3 = tmp || tmp1 || tmp2 ;
+        return tmp3;
+    }
+
+    boolean checkWin(int mark) {
+        boolean tmp = checkDiag(mark);
+        boolean tmp1 = checkAllLines(mark);
+        boolean tmp2 = checkAllCol(mark);
+        boolean tmp3 = tmp || tmp1 || tmp2 ;
+        return tmp3 ;
+    }
+
+    void demandeChoix() {
+        int input ;
+        int lin,colo;
+        this.showBoard();
+        println("Choisissez parmi les nombre vous voyez dans le tableau: ");
+        input = readInt();
+        while (!this.checkPlace(input, -1)) {
+            println("Ressayez: ");
+            input = readInt();
+        }
+        lin = input;
+        println("Merci, maintenant choisissez un signe (0: \"X\" et 1:\"O\") ");
+        input = readInt();
+        while (input != 0 && input != 1) {
+
+            if(input == -1) {
+                this.taken1.printAll();
+                this.taken2.printAll();
+                this.taken3.printAll();
+                this.l1.printAll();
+                this.l2.printAll();
+                this.l3.printAll();
+            }
+            println("Bad input, Ressayez: ");
+            input = readInt();
+        }
+        this.checkPlace(lin, input);
+
+    }
+
+
+
+}
+
+{
+    boolean win0;
+    boolean win1;
+    Board board = new Board();
+    board.init();
+    win0 = board.checkWin(0);
+    win1 = board.checkWin(1);
+
+    while(!win0) {
+        while(!win1) {
+            board.demandeChoix();
+            win0 = board.checkWin(0);
+            win1 = board.checkWin(1);
+            if(win0) {
+                win1 = true;
+            }
+        }
+        win0 = true;
+    }
+
+    board.showBoard();
+    if(board.checkWin(1)) {
+        print("Le vainceur est celui qui joue à: ");
+        board.printVal(1, 1);
+        println();
+    }
+    if(board.checkWin(0)) {
+        print("Le vainceur est celui qui joue à: ");
+        board.printVal(1, 0);
+        println();
+    }
+}
