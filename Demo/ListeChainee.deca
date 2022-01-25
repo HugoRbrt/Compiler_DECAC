@@ -1,8 +1,8 @@
 class Cellule {
-    int value = 0;
+    float value = 0;
     Cellule next = null;
 
-    void setVal(int val) {
+    void setVal(float val) {
         this.value = val;
     }
 }
@@ -86,7 +86,7 @@ class Liste {
          println();
     }
 
-    void setAt(int i, int val) {
+    void setAt(int i, float val) {
         Cellule current;
         int cpteur = 0;
         if(i >= taille || i < 0) {
@@ -101,7 +101,7 @@ class Liste {
         }
     }
 
-    int get(int i) {
+    float get(int i) {
         Cellule current;
         int cpteur = 0;
         if(i >= taille || i < 0) {

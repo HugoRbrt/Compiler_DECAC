@@ -2,13 +2,13 @@
 
 class Sort {
     Liste quickSort(Liste l) {
-        int pivot = 0;
+        float pivot = 0;
         Liste petit = new Liste();
         Liste grand = new Liste();
         Liste sorted_small = new Liste();
         Liste sorted_big = new Liste();
         Liste result = new Liste();
-        int curr_value = 0;
+        float curr_value = 0;
         int index = 0;
         Cellule tmp;
 
