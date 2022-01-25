@@ -1,0 +1,27 @@
+#include "QuickSort.deca"
+
+
+{
+    int input;
+    Cellule tmp;
+    Liste nombres = new Liste();
+    Liste res = new Liste();
+    Sort s = new Sort();
+
+    println("Bonjour, aujourd'hui on va trier ! (des entiers)");
+    println("Inserer tout ce que vous voulez comme entiers un par un (-1 pour arreter)");
+    input = readInt();
+    while(input != -1) {
+        tmp = new Cellule();
+        tmp.setVal(input);
+        nombres.enfile(tmp);
+        println("Merci, encore un? (-1 sinon)");
+        input = readInt();
+    }
+    println("Tous les nombres sont enregistrés, voici la liste courante:");
+    nombres.printAll();
+    res = s.quickSort(nombres);
+    println("Voici la liste après le tri (quick sort):");
+    res.printAll();
+
+}
