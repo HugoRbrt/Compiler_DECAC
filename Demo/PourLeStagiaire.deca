@@ -1,13 +1,3 @@
-// Erreur lexicale ou caractère : accent aigu
-
-
-// Erreur syntaxique : le missing-colon OU oubli de ) OU println("salut"  + "hello") 
-
-// Erreur contextuelle : protected (appel de b.x alors que a.x est protected)
-
-// Erreur codegen : oubli d'un return (utiliser -w)
-
-
 class Employé {
 	protected int salaire = 2000;
 
