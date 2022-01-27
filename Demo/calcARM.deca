@@ -1,0 +1,85 @@
+{
+	int c = 0; // entier de commande
+	float res_f = 0; // résultat flottant
+	int res_e = 0; // résultat entier
+	int p = 0; // paramètre de choix entier ou flottant
+	int e = 0; // opérande de calcul entière
+	float f = 0; // opérande de calcul flottante
+	
+	println("Fonctionnement de la calculatrice ARM");
+	println("Afficher le résultat -> 0");
+	println("Addition -> 1");
+	println("Multiplication -> 2");
+	println("Division -> 3");
+	println("Modulo -> 4");
+	
+	println("Choisissez le format du résultat : entier -> 0, flottant -> 1"); 
+	p = readInt();
+
+
+	println("Entrer l'opération souhaitée, ou afficher le résultat en tapant 0");
+	c = readInt();
+
+	while (c != 0) {
+		//Addition
+		if (c == 1) {
+			if (p == 0) {
+				println("Entrer un entier à additionner");
+				e = readInt();
+				res_e = res_e + e;
+			}
+			if (p == 1) {
+				println("Entrer un flottant à additionner");
+				f = readFloat();
+				res_f = res_f + f;
+			}
+		}
+	
+		//Multiplication
+		if (c == 2) {
+			if (p == 0) {
+				println("Entrer un entier");
+				e = readInt();
+				res_e = res_e * e;
+			}
+			if (p == 1) {
+				println("Entrer un flottant");
+				f = readFloat();
+				res_f = res_f * f;
+			}
+		}
+	
+		//Division 
+		if (c == 3) {
+			if (p == 0) {
+				println("Entrer un entier");
+				e = readInt();
+				res_e = res_e / e;
+			}
+			if (p == 1) {
+				println("Entrer un flottant");
+				f = readFloat();
+				res_f = res_f / f;
+			}
+		}
+	
+		//Modulo 
+		if (c == 3) {
+			if (p == 0) {
+				println("Entrer un entier");
+				e = readInt();
+				res_e = res_e % e;
+			}
+			else {
+				println("Pas possible avec des flottants");
+			}
+		}
+	}
+	
+	if (p == 0) {
+		println("Résultat entier:", res_e);
+	}
+	else {
+		println("Résultat flottant", res_f);
+	}
+}
