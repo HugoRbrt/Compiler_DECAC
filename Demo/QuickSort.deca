@@ -1,14 +1,14 @@
-#include "ListeChaineeFloat.deca"
+#include "ListeChaineeInt.deca"
 
 class Sort {
     Liste quickSort(Liste l) {
-        float pivot = 0;
+        int pivot = 0;
         Liste petit = new Liste();
         Liste grand = new Liste();
         Liste sorted_small = new Liste();
         Liste sorted_big = new Liste();
         Liste result = new Liste();
-        float curr_value = 0;
+        int curr_value = 0;
         int index = 0;
         Cellule tmp;
 

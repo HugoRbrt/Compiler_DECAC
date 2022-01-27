@@ -2,7 +2,7 @@
 
 
 {
-    float input;
+    int input;
     Cellule tmp;
     Liste nombres = new Liste();
     Liste res = new Liste();
@@ -10,13 +10,13 @@
 
     println("Bonjour, aujourd'hui on va trier ! (des entiers)");
     println("Inserer tout ce que vous voulez comme entiers un par un (-1 pour arreter)");
-    input = readFloat();
+    input = readInt();
     while(input != -1.0) {
         tmp = new Cellule();
         tmp.setVal(input);
         nombres.enfile(tmp);
         println("Merci, encore un? (-1 sinon)");
-        input = readFloat();
+        input = readInt();
     }
     println("Tous les nombres sont enregistrés, voici la liste courante:");
     nombres.printAll();
