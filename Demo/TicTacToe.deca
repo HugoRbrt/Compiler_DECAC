@@ -132,7 +132,7 @@ class Board {
     }
 
     boolean checkColWin(int col, int mark) {
-        if(this.taken1.get(col) == 1 && this.l3.get(col) == mark &&
+        if(this.taken1.get(col) == 1 && this.l1.get(col) == mark &&
                 this.taken2.get(col) == 1 && this.l2.get(col) == mark &&
                     this.taken3.get(col) == 1 && this.l3.get(col) == mark) {
             return true;
@@ -194,6 +194,23 @@ class Board {
 
     }
 
+    boolean draw() {
+        int index = 0;
+        while( index < 3 ) {
+            if (this.taken1.get(index) == 0) {
+                return false;
+            }
+            if (this.taken2.get(index) == 0) {
+                return false;
+            }
+            if (this.taken3.get(index) == 0) {
+                return false;
+            }
+            index = index + 1;
+        }
+        return true;
+    }
+
 
 
 }
@@ -201,15 +218,18 @@ class Board {
 {
     boolean win0;
     boolean win1;
+    boolean dra;
     Board board = new Board();
     board.init();
     win0 = board.checkWin(0);
     win1 = board.checkWin(1);
+    dra = board.draw();
 
-    while(!win0 && !win1) {
-            board.demandeChoix();
-            win0 = board.checkWin(0);
-            win1 = board.checkWin(1);
+    while(!win0 && !win1 && !dra) {
+        board.demandeChoix();
+        win0 = board.checkWin(0);
+        win1 = board.checkWin(1);
+        dra = board.draw();
     }
 
     board.showBoard();
@@ -218,9 +238,12 @@ class Board {
         board.printVal(1, 1);
         println();
     }
-    if(board.checkWin(0)) {
-        print("Le vainqueur est le joueur de signe ");
+    else if(board.checkWin(0)) {
+        print("Le vainceur est celui qui joue à: ");
         board.printVal(1, 0);
         println();
+    }
+    else if(dra) {
+        println("Match Nul ");
     }
 }

@@ -1,0 +1,25 @@
+class Employé {
+	protected int salaire = 2000;
+
+	void setSalaire(int nouveauSalaire) {
+		this.salaire = nouveauSalaire;
+	}
+}
+
+
+class Blackrock {
+	Employe Troy = new Employe();
+
+	int augmenteSalaire(int prime) {
+		int nouveauSalaire = this.employe.salaire + prime;
+	}
+}
+
+{
+	Blackrock blackrock = new Blackrock();
+	blackrock.Troy.setSalaire(10000);
+
+	println("Le prochain salaire de l'employé choisi sera:" +  blackrock.augmenteSalaire(500));
+}	
+
+
