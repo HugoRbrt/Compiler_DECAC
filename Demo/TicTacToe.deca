@@ -112,7 +112,6 @@ class Board {
         if(this.taken1.get(0) == 1 && this.l1.get(0) == mark &&
             this.taken2.get(1) == 1 && this.l2.get(1) == mark &&
                 this.taken3.get(2) == 1 && this.l3.get(2) == mark) {
-            print("K3K");
             return true;
         }
         if(this.taken1.get(2) == 1 && this.l1.get(2) == mark &&
@@ -169,7 +168,7 @@ class Board {
         int input ;
         int lin,colo;
         this.showBoard();
-        println("Choisissez parmi les nombre vous voyez dans le tableau: ");
+        println("Choisissez parmi les nombres vous voyez dans le tableau: ");
         input = readInt();
         while (!this.checkPlace(input, -1)) {
             println("Ressayez: ");
@@ -188,7 +187,7 @@ class Board {
                 this.l2.printAll();
                 this.l3.printAll();
             }
-            println("Bad input, Ressayez: ");
+            println("Bad input, Réessayez: ");
             input = readInt();
         }
         this.checkPlace(lin, input);
@@ -207,26 +206,20 @@ class Board {
     win0 = board.checkWin(0);
     win1 = board.checkWin(1);
 
-    while(!win0) {
-        while(!win1) {
+    while(!win0 && !win1) {
             board.demandeChoix();
             win0 = board.checkWin(0);
             win1 = board.checkWin(1);
-            if(win0) {
-                win1 = true;
-            }
-        }
-        win0 = true;
     }
 
     board.showBoard();
     if(board.checkWin(1)) {
-        print("Le vainceur est celui qui joue à: ");
+        print("Le vainqueur est le joueur de signe ");
         board.printVal(1, 1);
         println();
     }
     if(board.checkWin(0)) {
-        print("Le vainceur est celui qui joue à: ");
+        print("Le vainqueur est le joueur de signe ");
         board.printVal(1, 0);
         println();
     }
