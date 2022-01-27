@@ -64,7 +64,7 @@
 		}
 	
 		//Modulo 
-		if (c == 3) {
+		if (c == 4) {
 			if (p == 0) {
 				println("Entrer un entier");
 				e = readInt();
@@ -74,12 +74,19 @@
 				println("Pas possible avec des flottants");
 			}
 		}
+		if(p==0) {
+		    println("Resultat courant: ", res_e);
+		} else {
+		    println("Resultat courant: ", res_f);
+		}
+		println("Arrêter (0) ou poursuivre (choisir l'operation) ?");
+		c = readInt();
 	}
 	
 	if (p == 0) {
-		println("Résultat entier:", res_e);
+		println("Résultat entier: ", res_e);
 	}
 	else {
-		println("Résultat flottant", res_f);
+		println("Résultat flottant: ", res_f);
 	}
 }
