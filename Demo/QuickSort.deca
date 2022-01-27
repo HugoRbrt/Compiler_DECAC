@@ -1,0 +1,68 @@
+#include "ListeChaineeFloat.deca"
+
+class Sort {
+    Liste quickSort(Liste l) {
+        float pivot = 0;
+        Liste petit = new Liste();
+        Liste grand = new Liste();
+        Liste sorted_small = new Liste();
+        Liste sorted_big = new Liste();
+        Liste result = new Liste();
+        float curr_value = 0;
+        int index = 0;
+        Cellule tmp;
+
+        if(l.taille < 2) {
+            return l;
+        }
+
+        pivot = l.get(l.taille/2);
+        while (index < l.taille) {
+            curr_value = l.get(index);
+            tmp = new Cellule();
+            tmp.setVal(curr_value);
+            if(index != l.taille/2) {
+                if (curr_value <= pivot) {
+                    petit.empile(tmp);
+                } else {
+                    grand.empile(tmp);
+                }
+            }
+            index = index + 1;
+        }
+        tmp = new Cellule();
+        tmp.setVal(pivot);
+        sorted_small = this.quickSort(petit);
+        sorted_big = this.quickSort(grand);
+        sorted_small.enfile(tmp);
+        result = sorted_small.extendList(sorted_big);
+        return result;
+    }
+}
+
+/*
+{
+    Liste inv = new Liste();
+    Liste sorted = new Liste();
+    Sort s = new Sort();
+
+    Cellule c1 = new Cellule();
+    Cellule c2 = new Cellule();
+    Cellule c3 = new Cellule();
+    Cellule c4 = new Cellule();
+    Cellule c5 = new Cellule();
+    c1.setVal(10);
+    c2.setVal(20);
+    c3.setVal(30);
+    c4.setVal(40);
+    inv.empile(c1);
+    inv.empile(c2);
+    inv.empile(c3);
+    inv.empile(c4);
+
+    sorted = s.quickSort(inv);
+    inv.printAll();
+    sorted.printAll();
+
+}
+*/

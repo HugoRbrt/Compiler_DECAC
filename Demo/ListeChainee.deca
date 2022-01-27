@@ -1,0 +1,178 @@
+class Cellule {
+    float value = 0;
+    Cellule next = null;
+
+    void setVal(float val) {
+        this.value = val;
+    }
+}
+
+class Liste {
+    Cellule tete = null;
+    Cellule queue = null;
+    int taille = 0;
+
+    void empile(Cellule C) {
+        if(this.tete == null) {
+            this.tete = C;
+            this.queue = C;
+        } else {
+            C.next = this.tete;
+            this.tete = C;
+        }
+        this.taille = this.taille + 1;
+    }
+
+    void enfile(Cellule C) {
+        if(this.tete == null) {
+            this.tete = C;
+            this.queue = C;
+        } else {
+            this.queue.next = C;
+            this.queue = C;
+            C.next = null;
+        }
+        this.taille = this.taille + 1;
+    }
+
+    Cellule pop() {
+        Cellule tmp = null;
+        if(this.tete == null) {
+            println("Liste vide");
+        } else {
+            tmp = this.tete;
+            this.tete = (this.tete).next;
+            if(this.tete == null) {
+                this.queue = null;
+            }
+            this.taille = this.taille - 1;
+        }
+        return tmp;
+    }
+
+    Cellule dequeue() {
+        Cellule tmp = null ;
+        Cellule current = this.tete;
+        Cellule prec = null;
+        if(current == null) {
+            println("Liste vide");
+            return tmp;
+        }
+        while (current != this.queue) {
+            prec = current;
+            current = current.next;
+        }
+        if (prec == null) {
+            tmp = current;
+            this.tete = null;
+            this.queue = null;
+        } else {
+            tmp = this.queue;
+            this.queue = prec;
+            this.queue.next = null;
+        }
+        this.taille = this.taille - 1;
+        return tmp;
+    }
+
+    void printAll() {
+         Cellule current = this.tete ;
+         int cpteur = 1;
+         while(current != null) {
+             println("Valeur de cellule ", cpteur, " : ", current.value);
+             current = current.next;
+             cpteur = cpteur + 1;
+         }
+         println();
+    }
+
+    void setAt(int i, float val) {
+        Cellule current;
+        int cpteur = 0;
+        if(i >= taille || i < 0) {
+            println("Index out of range");
+        } else {
+            current  = this.tete;
+            while(cpteur < i) {
+                current = current.next;
+                cpteur = cpteur + 1;
+            }
+            current.value = val;
+        }
+    }
+
+    float get(int i) {
+        Cellule current;
+        int cpteur = 0;
+        if(i >= taille || i < 0) {
+            println("Index out of range");
+            return -1;
+        } else {
+            current  = this.tete;
+            while(cpteur < i) {
+                current = current.next;
+                cpteur = cpteur + 1;
+            }
+            return current.value;
+        }
+    }
+
+    Liste extendList(Liste l2) {
+        if(l2.tete != null) {
+            if(this.tete == null) {
+                this.tete = l2.tete;
+            }
+            this.queue.next = l2.tete;
+            this.queue = l2.queue;
+            taille = taille + l2.taille;
+        }
+        return this;
+    }
+
+    Liste appendList(Liste l2) {
+        return l2.extendList(this);
+    }
+
+}
+
+/*
+{
+    Liste l1 = new Liste();
+    Liste l2 = new Liste();
+    Liste l = new Liste();
+
+    Cellule c1 = new Cellule();
+    Cellule c2 = new Cellule();
+    Cellule c3 = new Cellule();
+    Cellule c4 = new Cellule();
+    Cellule d1 = new Cellule();
+    Cellule d2 = new Cellule();
+    Cellule d3 = new Cellule();
+    Cellule d4 = new Cellule();
+
+    c1.setVal(10);
+    c2.setVal(20);
+    c3.setVal(30);
+    c4.setVal(40);
+
+    d1.setVal(10);
+    d2.setVal(20);
+    d3.setVal(30);
+    d4.setVal(40);
+
+    l1.empile(c1);
+    l1.enfile(c2);
+    l1.empile(c3);
+    l1.enfile(c4);
+
+    l2.empile(d1);
+    l2.enfile(d2);
+    l2.empile(d3);
+    l2.enfile(d4);
+
+
+    l = l1.extendList(l2);
+    l.printAll();
+
+}
+*/

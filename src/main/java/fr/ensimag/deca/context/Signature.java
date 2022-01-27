@@ -50,7 +50,7 @@ public class Signature {
         Signature signature = (Signature) o;
         if (args.size() != signature.args.size()) return false;
         for (int i = 0; i < args.size(); i++) {
-            if (!ContextTools.assignCompatible(signature.args.get(i), args.get(i))) {
+            if (!args.get(i).sameType(signature.args.get(i))) {
                 return false;
             }
         }

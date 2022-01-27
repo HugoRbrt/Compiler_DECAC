@@ -129,7 +129,8 @@ public class ContextTools {
             return compiler.getEnvTypes().get(compiler.getSymbTable().get("boolean")).getType();
         }
         if (op.equals("==") || op.equals("!=")) {
-            if (!(t1.isBoolean() && t2.isBoolean())) {
+            boolean class_condition = (t1.isClass() || t1.isNull()) ||  (t2.isClass() || t2.isNull());
+            if (!(t1.isBoolean() && t2.isBoolean()) && !class_condition) {
                 throw new ContextualError(
                         "(RULE 3.33) " + (!((t1.isBoolean() || t1.isInt() || t1.isFloat()) &&
                         (t2.isBoolean() || t2.isInt() || t2.isFloat()))? "Illegal operand type." :
